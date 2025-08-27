@@ -1,3 +1,4 @@
-class UnidadMedida{
-    
+export enum UnidadMedida{
+    KG="kg",
+    ML="Ml"
 }
