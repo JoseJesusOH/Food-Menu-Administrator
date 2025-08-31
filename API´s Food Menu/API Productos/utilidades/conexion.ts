@@ -1,8 +1,8 @@
 
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-
-export const Conexion = new DataSource({
+import { Categoria } from "../modelos/categoria";
+export  const Conexion = new DataSource({
     type: "mysql",
     host: "localhost",
     port: 3306,
@@ -11,7 +11,7 @@ export const Conexion = new DataSource({
     database: "api_productos",  
     synchronize: true,
     logging: true,
-    entities: [],
+entities: [Categoria],
     subscribers: [],
     migrations: [],
 })
