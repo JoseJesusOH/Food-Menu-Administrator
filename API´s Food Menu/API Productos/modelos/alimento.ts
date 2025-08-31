@@ -1,9 +1,18 @@
-import { Categoria } from "../modelos/categoria"
+import { Categoria } from "./categoria"
+import "reflect-metadata"
+import { Entity, Column, PrimaryGeneratedColumn ,Generated} from "typeorm"
+
+@Entity("categoria")
 export class Alimento {
+        @Column()
+    @Generated("uuid")
     private alimentoID: Number;
     private nombre: String;
     private categoria: Categoria;
+        @Column()
+    @Generated("uuid")
     private alimentoUUID: String;
+
     getAlimentoID(): Number {
         return this.alimentoID;
     }
