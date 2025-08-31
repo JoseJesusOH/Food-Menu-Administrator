@@ -1,4 +1,4 @@
-import {Categoria} from "../modelos/categoria"
+import {Categoria} from "./categoria"
 export class Producto{
   private productoID: Number
   private nombre: String;
