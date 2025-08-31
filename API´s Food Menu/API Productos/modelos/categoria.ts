@@ -5,16 +5,16 @@ import { Entity, Column, PrimaryGeneratedColumn ,Generated} from "typeorm"
 export class Categoria {
     
     @PrimaryGeneratedColumn()
-    private categoriaID: Number;
+     categoriaID: Number;
     
     @Column({
         length: 100,
     })
-    private nombre: String;
+     nombre: String;
 
     @Column()
     @Generated("uuid")
-    private categoriaUUID: String;
+     categoriaUUID: String;
 
     getCategoriaID(): Number {
         return this.categoriaID;
