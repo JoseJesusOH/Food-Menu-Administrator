@@ -8,16 +8,19 @@ import {
 
 @Entity("proveedores")
 export class Proveedor {
-
-    @PrimaryGeneratedColumn()
+ 
+    @PrimaryGeneratedColumn({
+        name:"proveedor_id"
+    })
     private proveedorID: Number;
 
-    @Column()
+    @Column({name:"proveedor_uuid"})
     @Generated("uuid")
     private proveedorUUID: String;
 
     @Column({
         length: 100
+        ,name:"nombre"
     })
     private nombre: String;
 
