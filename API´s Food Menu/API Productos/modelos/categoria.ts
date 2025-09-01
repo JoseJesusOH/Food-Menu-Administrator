@@ -4,15 +4,20 @@ import { Entity, Column, PrimaryGeneratedColumn, Generated,FindManyOptions } fro
 @Entity("categorias")
 export class Categoria {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({
+        name:"categoria_id"
+    })
     private categoriaID: Number;
 
     @Column({
         length: 100,
+        name:"nombre"
     })
     private nombre: String;
 
-    @Column()
+    @Column({
+        name:"categoria_uuid"
+    })
     @Generated("uuid")
     private categoriaUUID: String;
  
