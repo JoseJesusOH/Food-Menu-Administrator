@@ -1,32 +1,63 @@
-import {Sucursal} from "../modelos/sucursal"
-export class Proveedor{
+import { Sucursal } from "../modelos/sucursal"
+import { ProductoProveedor } from "../modelos/productoProveedor"
+
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne,
+    JoinColumn, OneToMany
+} from "typeorm"
+
+@Entity("proveedores")
+export class Proveedor {
+
+    @PrimaryGeneratedColumn()
     private proveedorID: Number;
+
+    @Column()
+    @Generated("uuid")
     private proveedorUUID: String;
+
+    @Column({
+        length: 100
+    })
     private nombre: String;
+
+    @OneToMany(() => Sucursal, (Sucursal) => Sucursal.getProveedor)
     private sucursales: Sucursal[];
-    getProveedorID():Number{
+
+   @OneToMany(() => ProductoProveedor, (ProductoProveedor) => ProductoProveedor.getProveedor)
+    private productoProveedores:ProductoProveedor[];
+    
+    setProductoProveedores(productoProveedores:ProductoProveedor[]){
+        this.productoProveedores=productoProveedores;
+    }
+
+    getProductoProveedores():ProductoProveedor[]{
+        return this.productoProveedores;
+    }
+
+    getProveedorID(): Number {
         return this.proveedorID;
     }
-    setProveedorID(proveedorID:Number):void{
-        this.proveedorID=proveedorID;
+    setProveedorID(proveedorID: Number): void {
+        this.proveedorID = proveedorID;
     }
-    getProveedorUUID():String{
+    getProveedorUUID(): String {
         return this.proveedorUUID;
     }
-    setProveedorUUID(proveedorUUID:String):void{
-        this.proveedorUUID=proveedorUUID;
+    setProveedorUUID(proveedorUUID: String): void {
+        this.proveedorUUID = proveedorUUID;
     }
-    getNombre():String{
+    getNombre(): String {
         return this.nombre;
     }
-setNombre(nombre:String):void{
-    this.nombre=nombre;
-}
-setScurusales(sucursales:Sucursal[]):void{
-  this.sucursales=sucursales;
-}
-    getSucursales(){
- return this.sucursales;
+    setNombre(nombre: String): void {
+        this.nombre = nombre;
+    }
+    setScurusales(sucursales: Sucursal[]): void {
+        this.sucursales = sucursales;
+    }
+    getSucursales() {
+        return this.sucursales;
     }
 
 }
