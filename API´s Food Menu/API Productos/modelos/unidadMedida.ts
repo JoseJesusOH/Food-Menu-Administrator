@@ -1,4 +1,5 @@
 export enum UnidadMedida{
     KG="kg",
-    ML="Ml"
+    ML="Ml",
+    SIN="NOT"
 }
