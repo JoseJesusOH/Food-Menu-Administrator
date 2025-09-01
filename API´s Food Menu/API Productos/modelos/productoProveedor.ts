@@ -21,4 +21,29 @@ export class ProductoProveedor {
     @ManyToOne(() => Producto, (Producto) => Producto.getProductoProveedores)
     private producto: Producto;
 
+    setProveedor(proveedor: Proveedor): void {
+        this.proveedor = proveedor;
+    }
+    getProveedor(): Proveedor {
+        return this.proveedor;
+    }
+    setProducto(producto: Producto): void {
+        this.producto = producto;
+    }
+    getProducto(): Producto {
+        return this.producto;
+    }
+    setProductoProveedorID(productoProveedorID: Number): void {
+        this.productoProveedorID = productoProveedorID;
+    }
+    getProductoProveedorID(): Number {
+        return this.productoProveedorID;
+    }
+
+    setProductoProveedorUUID(productoProveedorUUID: String): void {
+        this.productoProveedorUUID = productoProveedorUUID;
+    }
+    getProductoProveedorUUID(): String {
+        return this.productoProveedorUUID;
+    }
 }
