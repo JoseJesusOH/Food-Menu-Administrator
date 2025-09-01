@@ -1,17 +1,37 @@
 import { Categoria } from "./categoria"
+import { ProductoAlimento } from "./productoAlimento"
 import "reflect-metadata"
-import { Entity, Column, PrimaryGeneratedColumn ,Generated} from "typeorm"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn
+} from "typeorm"
 
-@Entity("categoria")
+@Entity("alimentos")
 export class Alimento {
-        @Column()
-    @Generated("uuid")
+
+    @PrimaryGeneratedColumn()
     private alimentoID: Number;
+
+    @Column()
     private nombre: String;
+
+    @OneToOne(() => Categoria)
+    @JoinColumn()
     private categoria: Categoria;
-        @Column()
+
+    @Column()
     @Generated("uuid")
     private alimentoUUID: String;
+
+    @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getAlimento)
+    private productoAlimento: ProductoAlimento[];
+
+    setProductoAlimentos(productoAlimento: ProductoAlimento[]): void {
+        this.productoAlimento = productoAlimento;
+    }
+    getProductoAlimentos(): ProductoAlimento[] {
+        return this.productoAlimento;
+    }
 
     getAlimentoID(): Number {
         return this.alimentoID;
@@ -28,14 +48,14 @@ export class Alimento {
     getCategoria(): Categoria {
         return this.categoria;
     }
-    setCategoria(categoria:Categoria):void{
-        this.categoria=categoria;
+    setCategoria(categoria: Categoria): void {
+        this.categoria = categoria;
     }
-    getAlimentoUUID():String{
+    getAlimentoUUID(): String {
         return this.alimentoUUID;
     }
-    setAlimentoUUID(alimentoUUID:String):void{
-        this.alimentoUUID=alimentoUUID;
+    setAlimentoUUID(alimentoUUID: String): void {
+        this.alimentoUUID = alimentoUUID;
     }
 
 }
