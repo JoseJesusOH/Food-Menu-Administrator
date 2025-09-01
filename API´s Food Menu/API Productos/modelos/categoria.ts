@@ -1,21 +1,21 @@
 import "reflect-metadata"
-import { Entity, Column, PrimaryGeneratedColumn ,Generated} from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, Generated,FindManyOptions } from "typeorm"
 
-@Entity("categoria")
+@Entity("categorias")
 export class Categoria {
-    
+
     @PrimaryGeneratedColumn()
-     categoriaID: Number;
-    
+    private categoriaID: Number;
+
     @Column({
         length: 100,
     })
-     nombre: String;
+    private nombre: String;
 
     @Column()
     @Generated("uuid")
-     categoriaUUID: String;
-
+    private categoriaUUID: String;
+ 
     getCategoriaID(): Number {
         return this.categoriaID;
     }
