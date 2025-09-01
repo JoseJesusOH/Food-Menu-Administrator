@@ -3,23 +3,30 @@ import { ProductoAlimento } from "./productoAlimento"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
-    JoinColumn
+    JoinColumn,
+    ForeignKey
 } from "typeorm"
 
 @Entity("alimentos")
 export class Alimento {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({
+        name:"alimento_id"
+    })
     private alimentoID: Number;
 
-    @Column()
+    @Column({
+        name:"nombre"
+    })
     private nombre: String;
 
     @OneToOne(() => Categoria)
-    @JoinColumn()
+    @JoinColumn({name:"categoria_id" ,foreignKeyConstraintName:"categoria_alimento_IDFK"})
     private categoria: Categoria;
 
-    @Column()
+    @Column({
+        name:"alimento_uuid"
+    })
     @Generated("uuid")
     private alimentoUUID: String;
 
