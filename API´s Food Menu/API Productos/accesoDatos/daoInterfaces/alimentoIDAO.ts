@@ -1,4 +1,5 @@
-import { Alimento } from "../../modelos/Alimento"
+import { Alimento } from "../../modelos/alimento"
+
 export interface AlimentoIDAO {
     getAlimentos(): Alimento[];
     getAlimentoByID(alimentoID: Number): Alimento;
