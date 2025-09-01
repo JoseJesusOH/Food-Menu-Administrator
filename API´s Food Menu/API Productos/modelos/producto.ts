@@ -10,19 +10,20 @@ import { ProductoAlimento } from "./productoAlimento";
 @Entity("productos")
 export class Producto {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({name:"producto_id"})
   private productoID: Number
 
   @Column({
+    name:"nombre",
     length: 100
   })
   private nombre: String;
 
   @OneToOne(() => Categoria)
-  @JoinColumn()
+  @JoinColumn({name:"categoria_id"})
   private categoria: Categoria;
 
-  @Column()
+  @Column({name:"producto_uuid"})
   @Generated("uuid")
   private productoUUID: String
 
