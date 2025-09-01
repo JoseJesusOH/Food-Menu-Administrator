@@ -7,29 +7,38 @@ import {
 @Entity("sucursales")
 export class Sucursal {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    name:"sucursal_id"
+  })
+  
   private sucursalID: Number;
 
-  @Column()
+  @Column({
+    name:"sucursal_uuid"
+  })
   @Generated("uuid")
   private sucursalUUID: String;
 
   @Column({
     length: 100
+    ,name:"nombre"
   })
   private nombre: String
 
   @Column({
-    length: 100
+    length: 100,
+    name:"direccion"
   })
   private direccion: String
 
   @Column({
-    length: 100
+    length: 100,
+    name:"telefono"
   })
   private telefono: String
 
   @ManyToOne(() => Proveedor, (Proveedor) => Proveedor.getSucursales)
+  @JoinColumn({name:"proveedor_id" ,foreignKeyConstraintName:"sucursal_proveedor_idfk"})
   private proveedor: Proveedor;
 
   setProveedor(proveedor: Proveedor): void {
