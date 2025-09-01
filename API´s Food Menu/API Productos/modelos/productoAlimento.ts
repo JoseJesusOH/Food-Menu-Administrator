@@ -10,32 +10,43 @@ import {
 
 @Entity("producto_alimentos")
 export class ProductoAlimento {
-    @PrimaryGeneratedColumn()
+    
+    @PrimaryGeneratedColumn({
+        name:"producto_alimento_id"
+    })
     private productoAlimentoID: Number;
-    @Column()
+
+    @Column({
+    name:"producto_alimento_uuid"
+    })
     @Generated("uuid")
     private productoAlimentoUUID: String;
 
     @Column({
-        type: "double"
+        type: "double",
+        name:"cantidad_minima"
     })
     private cantidadMinima: Number;
 
     @Column({
-        type: "double"
+        type: "double",
+        name:"cantidad_maxima"
     })
     private cantidadMaxima: Number;
 
       @ManyToOne(() => Producto, (Producto) => Producto.getProductoAlimentos)
-    private producto: Producto;
+          @JoinColumn({name:"producto_id" ,foreignKeyConstraintName:"producto_alimento_producto_idfk"})
+      private producto: Producto;
 
       @ManyToOne(() => Alimento, (Alimento) => Alimento.getProductoAlimentos)
+            @JoinColumn({name:"alimento_id" ,foreignKeyConstraintName:"producto_alimento_alimento_idfk"})
     private alimento: Alimento;
 
     @Column({
         type: "enum",
         enum: UnidadMedida,
         default: UnidadMedida.SIN,
+        name:"unidad_medida"
     })
     private unidadMedida: UnidadMedida
 
