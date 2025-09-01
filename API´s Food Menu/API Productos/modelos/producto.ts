@@ -1,31 +1,74 @@
-import {Categoria} from "./categoria"
-export class Producto{
+import { Categoria } from "./categoria"
+import { ProductoProveedor } from "../modelos/productoProveedor"
+
+import {
+  Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne,
+  JoinColumn, ManyToOne, OneToMany
+} from "typeorm"
+import { ProductoAlimento } from "./productoAlimento";
+
+@Entity("productos")
+export class Producto {
+
+  @PrimaryGeneratedColumn()
   private productoID: Number
+
+  @Column({
+    length: 100
+  })
   private nombre: String;
+
+  @OneToOne(() => Categoria)
+  @JoinColumn()
   private categoria: Categoria;
+
+  @Column()
+  @Generated("uuid")
   private productoUUID: String
-  getProductoID():Number{
+
+  @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getProducto)
+  private productoAlimento: ProductoAlimento[];
+
+  @OneToMany(() => ProductoProveedor, (ProductoProveedor) => ProductoProveedor.getProducto)
+  private productoProveedores: ProductoProveedor[];
+
+  setProductoProveedores(productoProveedores: ProductoProveedor[]) {
+    this.productoProveedores = productoProveedores;
+  }
+
+  getProductoProveedores(): ProductoProveedor[] {
+    return this.productoProveedores;
+  }
+
+  setProductoAlimentos(productoAlimento: ProductoAlimento[]): void {
+    this.productoAlimento = productoAlimento;
+  }
+  getProductoAlimentos(): ProductoAlimento[] {
+    return this.productoAlimento;
+  }
+
+  getProductoID(): Number {
     return this.productoID;
   }
-  setProductoID(productoID:Number):void{
-    this.productoID=productoID;
+  setProductoID(productoID: Number): void {
+    this.productoID = productoID;
   }
-  getNombre():String{
+  getNombre(): String {
     return this.nombre;
   }
-  setNombre(nombre:String):void{
-    this.nombre=nombre;
+  setNombre(nombre: String): void {
+    this.nombre = nombre;
   }
-  getCategoria():Categoria{
+  getCategoria(): Categoria {
     return this.categoria;
   }
-  setCategoria(categoria:Categoria):void{
-    this.categoria=categoria;
+  setCategoria(categoria: Categoria): void {
+    this.categoria = categoria;
   }
-  getProductoUUID():String{
+  getProductoUUID(): String {
     return this.productoUUID;
   }
-  setProductoUUID(productoUUID:String):void{
-    this.productoUUID=productoUUID;
+  setProductoUUID(productoUUID: String): void {
+    this.productoUUID = productoUUID;
   }
 }
