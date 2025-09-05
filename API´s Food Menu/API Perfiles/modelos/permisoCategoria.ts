@@ -1,32 +1,55 @@
-import {Categoria} from "./categoria"
-import {Permiso} from "./permiso"
-export class PermisoCategoria{
+import { Categoria } from "./categoria"
+import { Permiso } from "./permiso"
+
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn,
+    ForeignKey
+} from "typeorm"
+
+@Entity("permiso_categorias")
+export class PermisoCategoria {
+
+    @PrimaryGeneratedColumn({
+        name: "permiso_categoria_id"
+    })
     private permisoCategoriaID: Number;
-    private permisoCategoriaUUID:String;
-    private categoria:Categoria;
-    private permiso:Permiso;
-    setPermisoCategoriaID(permisoCategoriaID:Number):void{
-        this.permisoCategoriaID=permisoCategoriaID
+
+    @Column({
+        name: "permiso_categoria_uuid"
+    })
+    @Generated("uuid")
+    private permisoCategoriaUUID: String;
+
+
+    private categoria: Categoria;
+
+    private permiso: Permiso;
+
+
+    setPermisoCategoriaID(permisoCategoriaID: Number): void {
+        this.permisoCategoriaID = permisoCategoriaID
     }
-    getPermisoCategoriaID():Number{
+    getPermisoCategoriaID(): Number {
         return this.permisoCategoriaID
     }
-    setPermisoCategoriaUUID(permisoCategoriaUUID:String):void{
-        this.permisoCategoriaUUID=permisoCategoriaUUID
+    setPermisoCategoriaUUID(permisoCategoriaUUID: String): void {
+        this.permisoCategoriaUUID = permisoCategoriaUUID
     }
-    getPermisoCategoriaUUID():String{
+    getPermisoCategoriaUUID(): String {
         return this.permisoCategoriaUUID
     }
-    setCategoria(categoria:Categoria):void{
-        this.categoria=categoria
+    setCategoria(categoria: Categoria): void {
+        this.categoria = categoria
     }
-    getCategoria():Categoria{
+    getCategoria(): Categoria {
         return this.categoria
     }
-    setPermiso(permiso:Permiso):void{
-        this.permiso=permiso
+    setPermiso(permiso: Permiso): void {
+        this.permiso = permiso
     }
-    getPermiso():Permiso{
+    getPermiso(): Permiso {
         return this.permiso
     }
 
