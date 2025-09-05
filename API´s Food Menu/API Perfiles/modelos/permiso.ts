@@ -1,31 +1,57 @@
-import {PermisoCategoria} from "./permisoCategoria"
-export class Permiso{
-    private permisoID:Number;
-    private permisoUUID:String;
-    private nombre:String;
+import { PermisoCategoria } from "./permisoCategoria"
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn,
+    ForeignKey
+} from "typeorm"
+
+@Entity("permisos")
+export class Permiso {
+
+    @PrimaryGeneratedColumn({
+        name: "permiso_id"
+    })
+    private permisoID: Number;
+
+
+    @Column({
+        name: "permiso_uuid"
+    })
+    @Generated("uuid")
+    private permisoUUID: String;
+
+    @Column({
+        name: "nombre",
+        length: 100
+    })
+    private nombre: String;
+
+
     private permisoCategorias: PermisoCategoria[];
-    setPermisoID(permisoID:Number):void{
-        this.permisoID=permisoID
+
+    setPermisoID(permisoID: Number): void {
+        this.permisoID = permisoID
     }
-    getPermisoID():Number{
+    getPermisoID(): Number {
         return this.permisoID
     }
-    setPermisoUUID(permisoUUID:String):void{
-        this.permisoUUID=permisoUUID
+    setPermisoUUID(permisoUUID: String): void {
+        this.permisoUUID = permisoUUID
     }
-    getPermisoUUID():String{
+    getPermisoUUID(): String {
         return this.permisoUUID
     }
-    setNombre(nombre:String):void{
-        this.nombre=nombre
+    setNombre(nombre: String): void {
+        this.nombre = nombre
     }
-    getNombre():String{
+    getNombre(): String {
         return this.nombre
     }
-    setPermisoCategorias(permisoCategorias:PermisoCategoria[]):void{
-        this.permisoCategorias=permisoCategorias
+    setPermisoCategorias(permisoCategorias: PermisoCategoria[]): void {
+        this.permisoCategorias = permisoCategorias
     }
-    getPermisoCategorias():PermisoCategoria[]{
+    getPermisoCategorias(): PermisoCategoria[] {
         return this.permisoCategorias
     }
 }
