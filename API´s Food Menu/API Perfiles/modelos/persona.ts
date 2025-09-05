@@ -1,13 +1,62 @@
 import { Direccion } from "./dirección"
+
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn,
+    ForeignKey
+} from "typeorm"
+
+@Entity("personas")
 export class Persona {
+    @PrimaryGeneratedColumn({
+        name: "persona_id"
+    })
     private personaID: Number;
+
+    @Column({
+        name: "persona_uuid"
+    })
+    @Generated("uuid")
     private personaUUID: String;
+
+    @Column({
+        name: "nombre",
+        length: 100
+    })
     private nombre: String;
+
+    @Column({
+        name: "apellido_paterno",
+        length: 100
+    })
     private apellidoPaterno: String;
+
+    @Column({
+        name: "apellido_materno",
+        length: 100
+    })
     private apellidoMaterno: String;
+
+    @Column({
+        name: "curp",
+        length: 20
+    })
     private CURP: String;
+
+    @Column({
+        name: "nss",
+        length: 20
+    })
     private NSS: String;
+
+    @Column({
+        name: "rfc",
+        length: 20
+    })
     private RFC: String;
+
+
     private direcciones: Direccion[];
 
     setPersonaID(personaID: Number): void {
