@@ -26,6 +26,7 @@ export class Categoria {
     })
     private nombre: String;
 
+    @OneToMany(() => PermisoCategoria, (PermisoCategoria) => PermisoCategoria.getCategoria)
     private permisoCategorias: PermisoCategoria[];
 
     setCategoriaID(categoriaID: Number): void {
