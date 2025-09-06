@@ -2,7 +2,7 @@ import { Persona } from "./persona"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
-    JoinColumn,
+    JoinColumn,ManyToOne,
     ForeignKey
 } from "typeorm"
 
@@ -38,7 +38,8 @@ export class Direccion {
     })
     private asentamiento: String;
 
-
+ @ManyToOne(() => Persona, (Persona) => Persona.getDirecciones)
+          @JoinColumn({name:"persona_id" ,foreignKeyConstraintName:"persona_direccion_idfk"})
     private persona: Persona;
 
 
