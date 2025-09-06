@@ -39,6 +39,8 @@ export class Usuario {
     })
     private correo: String;
 
+      @OneToOne(() => Persona)
+    @JoinColumn({name:"persona_id" ,foreignKeyConstraintName:"usuario_persona_IDFK"})
     private persona: Persona;
 
     setUsuarioID(usuarioID: Number): void {
