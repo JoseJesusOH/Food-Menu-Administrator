@@ -4,7 +4,7 @@ import { Permiso } from "./permiso"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
-    JoinColumn,
+    JoinColumn,ManyToOne,
     ForeignKey
 } from "typeorm"
 
@@ -22,9 +22,12 @@ export class PermisoCategoria {
     @Generated("uuid")
     private permisoCategoriaUUID: String;
 
-
+ @ManyToOne(() => Categoria, (Categoria) => Categoria.getPermisoCategorias)
+          @JoinColumn({name:"categoria_id" ,foreignKeyConstraintName:"permiso_categoria_categoria_idfk"})
     private categoria: Categoria;
 
+     @ManyToOne(() => Permiso, (Permiso) => Permiso.getPermisoCategorias)
+          @JoinColumn({name:"permiso_id" ,foreignKeyConstraintName:"permiso_categoria_permiso_idfk"})
     private permiso: Permiso;
 
 
