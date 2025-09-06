@@ -1,0 +1,24 @@
+{
+ "name": "api-perfiles",
+ "version": "1.0.0",
+ "description": "API de Perfiles con TypeScript y TypeORM",
+ "main": "dist/app.js",
+ "scripts": {
+  "start": "node dist/app.js",
+  "dev": "ts-node app.ts",
+  "build": "tsc"
+ },
+ "dependencies": {
+  "cors": "^2.8.5",
+  "mysql": "^2.18.1",
+  "reflect-metadata": "^0.2.2",
+  "sqlite3": "^5.1.7",
+  "typeorm": "^0.3.26"
+ },
+ "devDependencies": {
+  "@types/express": "^5.0.3",
+  "@types/node": "^24.3.0",
+  "ts-node": "^10.9.2",
+  "typescript": "^5.9.2"
+ }
+}
