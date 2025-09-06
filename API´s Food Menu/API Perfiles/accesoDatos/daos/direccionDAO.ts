@@ -1,4 +1,4 @@
-import { Direccion } from "../../modelos/dirección";
+import { Direccion } from "../../modelos/direccion";
 import {DireccionIDAO} from "../daosInterfaces/direccionIDAO"
 export class DireccionDAO implements DireccionIDAO{
     getDirecciones(): Direccion[] {
