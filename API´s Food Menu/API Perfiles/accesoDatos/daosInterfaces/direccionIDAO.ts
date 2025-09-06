@@ -1,4 +1,4 @@
-import {Direccion} from "../../modelos/dirección"
+import {Direccion} from "../../modelos/direccion"
 export interface DireccionIDAO {
     getDirecciones():Direccion[];
     getDireccionByID(direccionID:Number):Direccion;
