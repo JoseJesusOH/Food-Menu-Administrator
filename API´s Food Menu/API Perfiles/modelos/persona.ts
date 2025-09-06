@@ -56,7 +56,7 @@ export class Persona {
     })
     private RFC: String;
 
-
+  @OneToMany(() => Direccion, (Direccion) => Direccion.getPersona)
     private direcciones: Direccion[];
 
     setPersonaID(personaID: Number): void {
