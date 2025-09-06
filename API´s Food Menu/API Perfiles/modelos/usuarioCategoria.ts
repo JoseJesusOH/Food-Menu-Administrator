@@ -23,7 +23,11 @@ export class UsuarioCategoria {
 
 
     private usuario: Usuario;
+    
     private categoria: Categoria;
+
+
+
     setUsuarioCategoriaID(usuarioCategoriaID: Number): void {
         this.usuarioCategoriaID = usuarioCategoriaID
     }
