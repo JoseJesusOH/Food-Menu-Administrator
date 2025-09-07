@@ -1,4 +1,4 @@
-import {ProductoAlimento} from "../../modelos/productoAlimento"
+import {ProductoAlimento} from "../../modelos/producto-alimento"
 export interface ProductoAlimentoIDAO{
     getProductoAlimentosByIDAlimento(alimentoID:Number):ProductoAlimento[];
     agregarProductoAlimento(productoAlimento:ProductoAlimento):Boolean;
