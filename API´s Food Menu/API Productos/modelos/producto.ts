@@ -10,7 +10,7 @@ import {
  * Importaciones de clases requeridaas Categoria, ProductoProveedor,ProductoAlimento con respecto a las relaciones
  */
 import { Categoria } from "./categoria"
-import { ProductoCompania } from "./producto-proveedor"
+import { ProductoCompania } from "./producto-compania"
 import { ProductoAlimento } from "./producto-alimento";
 
 @Entity("productos")

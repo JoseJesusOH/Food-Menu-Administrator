@@ -1,5 +1,5 @@
 import { CentroProductivo } from "../modelos/centro-productivo"
-import { ProductoCompania } from "./producto-proveedor"
+import { ProductoCompania } from "./producto-compania"
 
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
