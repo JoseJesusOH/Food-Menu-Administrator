@@ -4,9 +4,9 @@ import { DataSource } from "typeorm"
 import { Categoria } from "../modelos/categoria";
 import { Alimento } from "../modelos/alimento";
 import { Producto } from "../modelos/producto";
-import { ProductoAlimento } from "../modelos/productoAlimento";
-import { ProductoProveedor } from "../modelos/productoProveedor";
-import { Proveedor } from "../modelos/proveedor";
+import { ProductoAlimento } from "../modelos/producto-alimento";
+import { ProductoCompania } from "../modelos/producto-compania";
+import { Compania } from "../modelos/compania";
 import { Sucursal } from "../modelos/sucursal";
 
 
@@ -19,7 +19,7 @@ export const Conexion = new DataSource({
     database: "api_productos",
     synchronize: true,
     logging: true,
-    entities: [Categoria, Alimento, Producto, ProductoAlimento, ProductoProveedor, Proveedor, Sucursal],
+    entities: [Categoria, Alimento, Producto, ProductoAlimento, ProductoCompania, Compania, Sucursal],
     subscribers: [],
     migrations: [],
 })
