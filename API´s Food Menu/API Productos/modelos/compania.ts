@@ -1,11 +1,16 @@
-import { CentroProductivo } from "../modelos/centro-productivo"
-import { ProductoCompania } from "./producto-compania"
 
+/**
+ * Importaciones TypeORM
+ */
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
     OneToMany
 } from "typeorm"
-
+/**
+ * Importaciones de relaciones requeridas CentroProductivo, ProductoCompania
+ */
+import { CentroProductivo } from "../modelos/centro-productivo"
+import { ProductoCompania } from "./producto-compania"
 @Entity("proveedores")
 export class Compania {
 
