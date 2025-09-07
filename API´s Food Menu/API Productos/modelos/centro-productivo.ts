@@ -1,8 +1,15 @@
-import { Compania } from "./compania"
+/**
+ * Importaciones TypeORM
+ */
 import {
   Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne,
   JoinColumn, ManyToOne, OneToMany
 } from "typeorm"
+
+/**
+ * Importaciones de relacion requeridad con modelo Compania
+ */
+import { Compania } from "./compania"
 
 @Entity("sucursales")
 export class CentroProductivo {
