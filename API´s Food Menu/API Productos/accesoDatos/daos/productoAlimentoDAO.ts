@@ -1,4 +1,4 @@
-import { ProductoAlimento } from "../../modelos/productoAlimento";
+import { ProductoAlimento } from "../../modelos/producto-alimento";
 import { ProductoAlimentoIDAO } from "../daoInterfaces/productoAlimentoIDAO";
 export class ProductoAlimentoDAO implements ProductoAlimentoIDAO{
     getProductoAlimentosByIDAlimento(alimentoID: Number): ProductoAlimento[] {
