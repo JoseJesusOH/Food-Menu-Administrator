@@ -1,9 +1,9 @@
-import {Proveedor} from "../../modelos/proveedor"
+import {Compania} from "../../modelos/compania"
 export interface ProveedorIDAO{
-    getProveedores():Proveedor[];
-    getProveedorByID(proveedorID:Number):Proveedor;
-    getProveedorByUUID(proveedorUUID:String):Proveedor;
-    agregarProveedor(proveedor:Proveedor):Boolean;
-    actualizarProveedor(proveedor:Proveedor):Boolean;
+    getProveedores():Compania[];
+    getProveedorByID(proveedorID:Number):Compania;
+    getProveedorByUUID(proveedorUUID:String):Compania;
+    agregarProveedor(proveedor:Compania):Boolean;
+    actualizarProveedor(proveedor:Compania):Boolean;
     eliminarProveedorByID(proveedorID:Number):Boolean;
 }
