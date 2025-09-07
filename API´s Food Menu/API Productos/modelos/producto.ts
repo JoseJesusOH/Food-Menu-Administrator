@@ -1,17 +1,23 @@
-import { Categoria } from "./categoria"
-import { ProductoProveedor } from "../modelos/productoProveedor"
-
+/**
+ * Importaciones TypeORM
+ */
 import {
   Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne,
-  JoinColumn, ManyToOne, OneToMany
+  JoinColumn, OneToMany
 } from "typeorm"
-import { ProductoAlimento } from "./productoAlimento";
+
+/**
+ * Importaciones de clases requeridaas Categoria, ProductoProveedor,ProductoAlimento con respecto a las relaciones
+ */
+import { Categoria } from "./categoria"
+import { ProductoCompania } from "./producto-proveedor"
+import { ProductoAlimento } from "./producto-alimento";
 
 @Entity("productos")
 export class Producto {
 
   @PrimaryGeneratedColumn({name:"producto_id"})
-  private productoID: Number
+  private productoId: Number
 
   @Column({
     name:"nombre",
@@ -25,20 +31,20 @@ export class Producto {
 
   @Column({name:"producto_uuid"})
   @Generated("uuid")
-  private productoUUID: String
+  private productoUuid: String
 
   @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getProducto)
   private productoAlimento: ProductoAlimento[];
 
-  @OneToMany(() => ProductoProveedor, (ProductoProveedor) => ProductoProveedor.getProducto)
-  private productoProveedores: ProductoProveedor[];
+  @OneToMany(() => ProductoCompania, (ProductoCompania) => ProductoCompania.getProducto)
+  private productoCompanias: ProductoCompania[];
 
-  setProductoProveedores(productoProveedores: ProductoProveedor[]) {
-    this.productoProveedores = productoProveedores;
+  setProductoCompanias(productoCompanias: ProductoCompania[]) {
+    this.productoCompanias = productoCompanias;
   }
 
-  getProductoProveedores(): ProductoProveedor[] {
-    return this.productoProveedores;
+  getProductoCompanias(): ProductoCompania[] {
+    return this.productoCompanias;
   }
 
   setProductoAlimentos(productoAlimento: ProductoAlimento[]): void {
@@ -48,11 +54,11 @@ export class Producto {
     return this.productoAlimento;
   }
 
-  getProductoID(): Number {
-    return this.productoID;
+  getProductoId(): Number {
+    return this.productoId;
   }
-  setProductoID(productoID: Number): void {
-    this.productoID = productoID;
+  setProductoId(productoId: Number): void {
+    this.productoId = productoId;
   }
   getNombre(): String {
     return this.nombre;
@@ -66,10 +72,10 @@ export class Producto {
   setCategoria(categoria: Categoria): void {
     this.categoria = categoria;
   }
-  getProductoUUID(): String {
-    return this.productoUUID;
+  getProductoUuid(): String {
+    return this.productoUuid;
   }
-  setProductoUUID(productoUUID: String): void {
-    this.productoUUID = productoUUID;
+  setProductoUuid(productoUuid: String): void {
+    this.productoUuid = productoUuid;
   }
 }
