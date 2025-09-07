@@ -1,19 +1,19 @@
-import { Proveedor } from "../../modelos/proveedor";
+import { Compania } from "../../modelos/compania";
 import { ProveedorIDAO } from "../daoInterfaces/proveedorIDAO";
 export class ProveedorDAO implements ProveedorIDAO{
-    getProveedores(): Proveedor[] {
+    getProveedores(): Compania[] {
         throw new Error("Method not implemented.");
     }
-    getProveedorByID(proveedorID: Number): Proveedor {
+    getProveedorByID(proveedorID: Number): Compania {
         throw new Error("Method not implemented.");
     }
-    getProveedorByUUID(proveedorUUID: String): Proveedor {
+    getProveedorByUUID(proveedorUUID: String): Compania {
         throw new Error("Method not implemented.");
     }
-    agregarProveedor(proveedor: Proveedor): Boolean {
+    agregarProveedor(proveedor: Compania): Boolean {
         throw new Error("Method not implemented.");
     }
-    actualizarProveedor(proveedor: Proveedor): Boolean {
+    actualizarProveedor(proveedor: Compania): Boolean {
         throw new Error("Method not implemented.");
     }
     eliminarProveedorByID(proveedorID: Number): Boolean {
