@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { Conexion } from "../API Productos/utilidades/conexion"
+import { Conexion } from "./utilities/conexion"
 import { Categoria } from "./modelos/categoria"
 async function pruebas() {
 
