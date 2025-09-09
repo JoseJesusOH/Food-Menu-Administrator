@@ -1,14 +1,23 @@
-import { Producto } from "./producto"
-import { Alimento } from "./alimento"
-import { UnidadMedida } from "./unidad-medida"
-
+/**
+ * Importaciones TypeORM
+ */
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
     JoinColumn, ManyToOne
 } from "typeorm"
 
-@Entity("producto_alimentos")
+/**
+ * Importaciones requeridas con respespecto a las relaciones
+ */
+import { Producto } from "./producto"
+import { Alimento } from "./alimento"
+import { UnidadMedida } from "./unidad-medida"
+
+/**
+ * Entidas que representa la relación de muchos a muchos de ProductoAlimentos
+ */
+@Entity("productos_alimentos")
 export class ProductoAlimento {
 
     @PrimaryGeneratedColumn({
@@ -45,7 +54,7 @@ export class ProductoAlimento {
     @Column({
         type: "enum",
         enum: UnidadMedida,
-        default: UnidadMedida.SIN,
+        default: UnidadMedida.OT,
         name: "unidad_medida"
     })
     private unidadMedida: UnidadMedida
