@@ -1,5 +1,5 @@
 import { Compania } from "../../modelos/compania";
-import { CompaniaIDAO } from "../daoInterfaces/compania.dao";
+import { CompaniaIDAO } from "../interfaces/compania.dao";
 
 export class CompaniaDAO implements CompaniaIDAO{
     getCompanias(): Compania[] {

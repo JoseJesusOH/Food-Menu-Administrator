@@ -1,5 +1,5 @@
 import { ProductoAlimento } from "../../modelos/producto-alimento";
-import { ProductoAlimentoIDAO } from "../daoInterfaces/producto-alimento.dao";
+import { ProductoAlimentoIDAO } from "../interfaces/producto-alimento.dao";
 export class ProductoAlimentoDAO implements ProductoAlimentoIDAO{
     getProductosAlimentosByIdAlimento(alimentoId: Number): ProductoAlimento[] {
         throw new Error("Method not implemented.");

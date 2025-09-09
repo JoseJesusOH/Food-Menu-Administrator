@@ -1,5 +1,5 @@
 import { CentroProductivo } from "../../modelos/centro-productivo";
-import { CentroProductivoIDAO } from "../daoInterfaces/centro-productivo.dao";
+import { CentroProductivoIDAO } from "../interfaces/centro-productivo.dao";
 export class CentroProductivoDAO implements CentroProductivoIDAO{
     getCentrosProductivos(): CentroProductivo[] {
         throw new Error("Method not implemented.");

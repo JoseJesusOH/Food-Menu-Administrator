@@ -1,5 +1,5 @@
 import { Alimento } from "../../modelos/alimento";
-import { AlimentoIDAO } from "../daoInterfaces/alimento.dao";
+import { AlimentoIDAO } from "../interfaces/alimento.dao";
 export class AlimentoDAO implements AlimentoIDAO{
     getAlimentos(): Alimento[] {
         throw new Error("Method not implemented.");
