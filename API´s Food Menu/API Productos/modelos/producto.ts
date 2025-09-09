@@ -141,9 +141,19 @@ export class Producto {
   setCategoria(categoria: Categoria): void {
     this.categoria = categoria;
   }
+
+  /**
+   * Devuelve el identificador UUID del producto
+   * @returns UUID del producto
+   */
   getProductoUuid(): String {
     return this.productoUuid;
   }
+
+  /**
+   * Asigna el identificador UUID al producto
+   * @param productoUuid UUID del producto
+   */
   setProductoUuid(productoUuid: String): void {
     this.productoUuid = productoUuid;
   }
