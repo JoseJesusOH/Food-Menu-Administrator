@@ -10,8 +10,8 @@ import {
 /**
  * Importaciones de clases requeridas Categoria, ProductoAlimento con respecto a las relaciones.
  */
-import { Categoria } from "./categoria"
-import { ProductoAlimento } from "./producto-alimento"
+import { Categoria } from "./categoria.entity"
+import { ProductoAlimento } from "./producto-alimento.entity"
 
 
 /**

@@ -10,7 +10,7 @@ import {
  * Importaciones de relaciones requeridas CentroProductivo, ProductoCompania
  */
 import { CentroProductivo } from "../modelos/centro-productivo"
-import { ProductoCompania } from "./producto-compania"
+import { ProductoCompania } from "./producto-compania.entity"
 /**
  * Entidad que representa una compañia en la base de datos
  */

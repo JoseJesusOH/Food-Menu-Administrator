@@ -9,9 +9,9 @@ import {
 /**
  * Importaciones de clases requeridaas Categoria, ProductoProveedor,ProductoAlimento con respecto a las relaciones
  */
-import { Categoria } from "./categoria"
-import { ProductoCompania } from "./producto-compania"
-import { ProductoAlimento } from "./producto-alimento";
+import { Categoria } from "./categoria.entity"
+import { ProductoCompania } from "./producto-compania.entity"
+import { ProductoAlimento } from "./producto-alimento.entity";
 /**
  * Entidad representativas de un producto en la base de datos
  */

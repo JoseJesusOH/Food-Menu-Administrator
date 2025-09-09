@@ -10,9 +10,9 @@ import {
 /**
  * Importaciones requeridas con respespecto a las relaciones
  */
-import { Producto } from "./producto"
-import { Alimento } from "./alimento"
-import { UnidadMedida } from "./unidad-medida"
+import { Producto } from "./producto.entity"
+import { Alimento } from "./alimento.entity"
+import { UnidadMedida } from "./unidad-medida.enum"
 
 /**
  * Entidas que representa la relación de muchos a muchos de ProductoAlimentos

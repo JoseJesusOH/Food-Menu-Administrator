@@ -9,8 +9,8 @@ import {
 /**
  * Importaciones requeridas respectivas Producto, Compania
  */
-import { Producto } from "./producto"
-import { Compania } from "./compania"
+import { Producto } from "./producto.entity"
+import { Compania } from "./compania.entity"
 
 @Entity("productos_proveedores")
 export class ProductoCompania {

@@ -9,7 +9,7 @@ import {
 /**
  * Importaciones de relacion requeridad con modelo Compania
  */
-import { Compania } from "./compania"
+import { Compania } from "./compania.entity"
 
 /**
  * Entidad que representa un CentroProductivo en la base de datos.
