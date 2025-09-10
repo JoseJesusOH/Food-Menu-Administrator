@@ -1,4 +1,4 @@
-import { CentroProductivo } from "../../modelos/centro-productivo";
+import { CentroProductivo } from "../../entities/centro-productivo.entity";
 import { CentroProductivoIDAO } from "../interfaces/centro-productivo.dao";
 export class CentroProductivoDAO implements CentroProductivoIDAO{
     getCentrosProductivos(): CentroProductivo[] {
