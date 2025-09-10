@@ -1,4 +1,4 @@
-import { Alimento } from "../../modelos/alimento"
+import { Alimento } from "../../entities/alimento.entity"
 
 export interface AlimentoIDAO {
     getAlimentos(): Alimento[];
