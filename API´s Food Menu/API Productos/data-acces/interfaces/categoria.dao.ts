@@ -1,4 +1,4 @@
-import { Categoria } from "../../modelos/categoria"
+import { Categoria } from "../../entities/categoria.entity"
 export interface CategoriaIDAO {
   getCategorias(): Categoria[];
   getCategoriaById(categoriaID: Number): Categoria;
