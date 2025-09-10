@@ -1,4 +1,4 @@
-import {ProductoCompania} from "../../modelos/producto-compania"
+import {ProductoCompania} from "../../entities/producto-compania.entity"
 export interface ProductoCompaniaIDAO{
     getProductosCompaniasByIdAlimento(productoCompaniaId:Number):ProductoCompania[];
     agregarProductoCompania(productoCompania:ProductoCompania):Boolean;
