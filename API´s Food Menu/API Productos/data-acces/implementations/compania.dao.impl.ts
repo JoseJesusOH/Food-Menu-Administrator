@@ -1,4 +1,4 @@
-import { Compania } from "../../modelos/compania";
+import { Compania } from "../../entities/compania.entity";
 import { CompaniaIDAO } from "../interfaces/compania.dao";
 
 export class CompaniaDAO implements CompaniaIDAO{
