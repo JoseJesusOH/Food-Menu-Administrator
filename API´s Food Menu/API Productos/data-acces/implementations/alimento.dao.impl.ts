@@ -1,4 +1,4 @@
-import { Alimento } from "../../modelos/alimento";
+import { Alimento } from "../../entities/alimento.entity";
 import { AlimentoIDAO } from "../interfaces/alimento.dao";
 export class AlimentoDAO implements AlimentoIDAO{
     getAlimentos(): Alimento[] {
