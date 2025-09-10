@@ -1,4 +1,4 @@
-import {ProductoAlimento} from "../../modelos/producto-alimento"
+import {ProductoAlimento} from "../../entities/producto-alimento.entity"
 export interface ProductoAlimentoIDAO{
     getProductosAlimentosByIdAlimento(alimentoId:Number):ProductoAlimento[];
     agregarProductoAlimento(productoAlimento:ProductoAlimento):Boolean;
