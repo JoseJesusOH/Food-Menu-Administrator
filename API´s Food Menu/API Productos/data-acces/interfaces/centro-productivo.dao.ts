@@ -1,4 +1,4 @@
-import {CentroProductivo} from "../../modelos/centro-productivo"
+import {CentroProductivo} from "../../entities/centro-productivo.entity"
 export interface CentroProductivoIDAO{
     getCentrosProductivos():CentroProductivo[];
     getCentroProductivoById(centroProductivoId:Number):CentroProductivo;
