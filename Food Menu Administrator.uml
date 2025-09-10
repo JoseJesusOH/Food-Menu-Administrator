@@ -23716,7 +23716,7 @@
 <XPD:OBJ name="DiagramView" type="UMLDeploymentDiagramView" guid="WY3GK2G9gEmLI3p4fWPY4AAA">
 <XPD:REF name="Model">kFLEtYgS4064VPz2BRQM9AAA</XPD:REF>
 <XPD:REF name="Diagram">kFLEtYgS4064VPz2BRQM9AAA</XPD:REF>
-<XPD:ATTR name="#OwnedViews" type="integer">23</XPD:ATTR>
+<XPD:ATTR name="#OwnedViews" type="integer">25</XPD:ATTR>
 <XPD:OBJ name="OwnedViews[0]" type="UMLNodeView" guid="Uy9eOhA0oEeDU4ywJJ5T+wAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
@@ -24932,9 +24932,67 @@
 <XPD:REF name="Model">0GN7x/jU00iaxxDCFeGQJgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
+<XPD:OBJ name="OwnedViews[23]" type="UMLNodeView" guid="46P5f+hDaE22N1bd8IB1wQAA">
+<XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
+<XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">36</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">1124</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">129</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">55</XPD:ATTR>
+<XPD:REF name="Model">IXnXe78ku0iCvXX47IttpgAA</XPD:REF>
+<XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="ReaYjjpTPEGdrUM4Y8C6wgAA">
+<XPD:OBJ name="NameLabel" type="LabelView" guid="VQ/AAKI+t0S2U/ngzVSfzAAA">
+<XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Cliente Web - Inver</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="LabelView" guid="wIyQA6fuPUSS6yhCWe8zbQAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="LabelView" guid="aBQFQ8cciESLcMkxN4v83gAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
-<XPD:ATTR name="#OwnedElements" type="integer">23</XPD:ATTR>
+<XPD:OBJ name="DeployedComponentCompartment" type="UMLDeployedComponentCompartmentView" guid="K5S2y13dkEi6w7mXBO4OxAAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">IXnXe78ku0iCvXX47IttpgAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="DeployedArtifactCompartment" type="UMLDeployedArtifactCompartmentView" guid="ZeWagOp+DE2Okzwom7PnVQAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">IXnXe78ku0iCvXX47IttpgAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedViews[24]" type="UMLNodeView" guid="dFfXiHESkEGOzFraOW3qDAAA">
+<XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
+<XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">276</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">1004</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">101</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">55</XPD:ATTR>
+<XPD:REF name="Model">RU2vmH0ywE2asMCMAz6QPAAA</XPD:REF>
+<XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="pwNh5TmFr024X+xhr9zavAAA">
+<XPD:OBJ name="NameLabel" type="LabelView" guid="wHiKompvME6ylp/eVlEgjQAA">
+<XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Kum, Deukkyu</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="StereotypeLabel" type="LabelView" guid="Vp+ASGqWCUuqFdMfP3mufQAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+</XPD:OBJ>
+<XPD:OBJ name="PropertyLabel" type="LabelView" guid="/e447eCh1k2Uj7ikYTsaNAAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="DeployedComponentCompartment" type="UMLDeployedComponentCompartmentView" guid="kOaberRJp0CYuU0K1QvcCgAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">RU2vmH0ywE2asMCMAz6QPAAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="DeployedArtifactCompartment" type="UMLDeployedArtifactCompartmentView" guid="s0KOdYwnKUyRMEOCAMf7wgAA">
+<XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
+<XPD:REF name="Model">RU2vmH0ywE2asMCMAz6QPAAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:OBJ>
+</XPD:OBJ>
+<XPD:ATTR name="#OwnedElements" type="integer">25</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLNode" guid="+EHsG3x6T0GjutR4utcDAgAA">
 <XPD:ATTR name="Name" type="string">Sistema Movil Android</XPD:ATTR>
 <XPD:REF name="Namespace">vGo6nWInUEurp9OHyFAf4gAA</XPD:REF>
@@ -25343,6 +25401,22 @@
 <XPD:REF name="Views[2]">vNhtlpuap0G4mZKWdCX02QAA</XPD:REF>
 <XPD:REF name="Views[3]">K0UYGDwCvUO9R639e3h14gAA</XPD:REF>
 </XPD:OBJ>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[23]" type="UMLNode" guid="IXnXe78ku0iCvXX47IttpgAA">
+<XPD:ATTR name="Name" type="string">Cliente Web - Inver</XPD:ATTR>
+<XPD:REF name="Namespace">vGo6nWInUEurp9OHyFAf4gAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">46P5f+hDaE22N1bd8IB1wQAA</XPD:REF>
+<XPD:REF name="Views[1]">K5S2y13dkEi6w7mXBO4OxAAA</XPD:REF>
+<XPD:REF name="Views[2]">ZeWagOp+DE2Okzwom7PnVQAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="OwnedElements[24]" type="UMLNode" guid="RU2vmH0ywE2asMCMAz6QPAAA">
+<XPD:ATTR name="Name" type="string">Kum, Deukkyu</XPD:ATTR>
+<XPD:REF name="Namespace">vGo6nWInUEurp9OHyFAf4gAA</XPD:REF>
+<XPD:ATTR name="#Views" type="integer">3</XPD:ATTR>
+<XPD:REF name="Views[0]">dFfXiHESkEGOzFraOW3qDAAA</XPD:REF>
+<XPD:REF name="Views[1]">kOaberRJp0CYuU0K1QvcCgAA</XPD:REF>
+<XPD:REF name="Views[2]">s0KOdYwnKUyRMEOCAMf7wgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
 </XPD:OBJ>
