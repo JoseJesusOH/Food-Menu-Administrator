@@ -1,4 +1,4 @@
-import { Producto } from "../../modelos/producto";
+import { Producto } from "../../entities/producto.entity";
 import { ProductoIDAO } from "../interfaces/producto.dao";
 export class ProductoDAO implements ProductoIDAO{
     getProductos(): Producto[] {
