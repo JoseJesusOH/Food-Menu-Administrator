@@ -1,4 +1,4 @@
-import { ProductoCompania } from "../../modelos/producto-compania";
+import { ProductoCompania } from "../../entities/producto-compania.entity";
 import { ProductoCompaniaIDAO } from "../interfaces/producto-compania.dao";
 export class ProductoCompaniaDAO implements ProductoCompaniaIDAO{
     getProductosCompaniasByIdAlimento(productoCompaniaId: Number): ProductoCompania[] {
