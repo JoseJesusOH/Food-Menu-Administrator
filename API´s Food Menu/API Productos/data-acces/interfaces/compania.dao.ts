@@ -1,4 +1,4 @@
-import { Compania } from "../../modelos/compania"
+import { Compania } from "../../entities/compania.entity"
 export interface CompaniaIDAO {
   getCompanias(): Compania[];
   getCompaniaById(companiaID: Number): Compania;
