@@ -8,11 +8,24 @@ import { ProductoCompania } from "@entity/producto-compania.entity"
 export interface ProductoCompaniaIDAO {
 
     /**
-     * Obtiene todos los productos compañias de la base de datos por el ID del producto compañia
-     * @param productoCompaniaId ID del producto compañia
+     * Obtiene un producto compañia por su UUID
+     * @param productoCompaniaUuid UUID del producto compañia a buscar
+     * @returns Producto compañia encontrado
+     */
+    getProductoCompaniaByUuid(productoCompaniaUuid: String): ProductoCompania;
+
+    /**
+     * Obtiene un producto compañia por su ID
+     * @param productoCompaniaId ID del producto compañia a buscar
+     * @returns Producto compañia encontrado
+     */
+    getProductoCompaniaById(productoCompaniaId: Number): ProductoCompania;
+    /**
+     * Obtiene todos los productos compañias de la base de datos por el ID del producto
+     * @param productoId ID del producto
      * @returns Lista de productos compañias
      */
-    getProductosCompaniasById(productoCompaniaId: Number): ProductoCompania[];
+    getProductosCompaniasByIdProducto(productoId: Number): ProductoCompania[];
 
     /**
      * Obtiene todos los productos compañias de la base de datos por el ID de la compañia
