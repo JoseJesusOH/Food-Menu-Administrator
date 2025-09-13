@@ -1,5 +1,5 @@
-import { Categoria } from "./categoria"
-import { Usuario } from "./usuario"
+import { Categoria } from "./categoria.entity"
+import { Usuario } from "./usuario.entity"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,

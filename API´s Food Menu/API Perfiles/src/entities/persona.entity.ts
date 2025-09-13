@@ -1,4 +1,4 @@
-import { Direccion } from "./direccion"
+import { Direccion } from "./direccion.entity"
 
 import "reflect-metadata"
 import {

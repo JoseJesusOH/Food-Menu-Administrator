@@ -1,5 +1,5 @@
-import { Categoria } from "./categoria"
-import { Permiso } from "./permiso"
+import { Categoria } from "./categoria.entity"
+import { Permiso } from "./permiso.entity"
 
 import "reflect-metadata"
 import {

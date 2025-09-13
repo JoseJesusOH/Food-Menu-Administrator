@@ -1,4 +1,4 @@
-import { Persona } from "./persona"
+import { Persona } from "./persona.entity"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,

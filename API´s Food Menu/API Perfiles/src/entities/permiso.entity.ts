@@ -1,4 +1,4 @@
-import { PermisoCategoria } from "./permisoCategoria"
+import { PermisoCategoria } from "./permiso-categoria.entity"
 import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
@@ -6,19 +6,20 @@ import {
     ForeignKey
 } from "typeorm"
 
-@Entity("categorias")
-export class Categoria {
+@Entity("permisos")
+export class Permiso {
 
     @PrimaryGeneratedColumn({
-        name: "categoria_id"
+        name: "permiso_id"
     })
-    private categoriaID: Number;
+    private permisoID: Number;
+
 
     @Column({
-        name: "categoria_uuid"
+        name: "permiso_uuid"
     })
     @Generated("uuid")
-    private categoriaUUID: String;
+    private permisoUUID: String;
 
     @Column({
         name: "nombre",
@@ -26,22 +27,20 @@ export class Categoria {
     })
     private nombre: String;
 
-    @OneToMany(() => PermisoCategoria, (PermisoCategoria) => PermisoCategoria.getCategoria)
+    @OneToMany(() => PermisoCategoria, (PermisoCategoria) => PermisoCategoria.getPermiso)
     private permisoCategorias: PermisoCategoria[];
 
-    setCategoriaID(categoriaID: Number): void {
-        this.categoriaID = categoriaID
+    setPermisoID(permisoID: Number): void {
+        this.permisoID = permisoID
     }
-
-    getCategoriaID(): Number {
-        return this.categoriaID
+    getPermisoID(): Number {
+        return this.permisoID
     }
-
-    setCategoriaUUID(categoriaUUID: String): void {
-        this.categoriaUUID = categoriaUUID
+    setPermisoUUID(permisoUUID: String): void {
+        this.permisoUUID = permisoUUID
     }
-    getCategoriaUUID(): String {
-        return this.categoriaUUID
+    getPermisoUUID(): String {
+        return this.permisoUUID
     }
     setNombre(nombre: String): void {
         this.nombre = nombre
