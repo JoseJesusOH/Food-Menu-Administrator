@@ -12,6 +12,27 @@ export interface ProductoAlimentoIDAO{
      * @returns Lista de productos alimentos
      */
     getProductosAlimentosByIdAlimento(alimentoId:Number):ProductoAlimento[];
+
+  /**
+   *  Obtiene un producto alimento por su ID
+   * @param productoAlimentoId ID del producto alimento a buscar
+   * @returns ProductoAlimento con el ID especificado
+   */
+    getProductoAlimentoById(productoAlimentoId:Number):ProductoAlimento;
+
+    /**
+     * Obtiene un producto alimento por su UUID
+     * @param productoAlimentoUuid UUID del producto alimento a buscar
+     * @returns ProductoAlimento con el UUID especificado
+     */
+    getProductoAlimentoByUuid(productoAlimentoUuid:String):ProductoAlimento;
+
+    /**
+     * Obtiene todos los productos alimentos de la base de datos por el ID del producto
+     * @param productoId ID del producto
+     * @returns Lista de productos alimentos
+     */
+    getProductosAlimentosByIdProducto(productoId:Number):ProductoAlimento[];
     /**
      * Agrega un nuevo producto alimento a la base de datos
      * @param productoAlimento ProductoAlimento a agregar
