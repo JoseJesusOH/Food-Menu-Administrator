@@ -7,6 +7,7 @@ import { Categoria } from "@entity/categoria.entity"
  */
 export interface CategoriaIDAO {
   /**
+   * Devuelve todas las categorias existentes en la base de datos
    * @returns Arreglo con todas las categorias
    */
   getCategorias(): Categoria[];
