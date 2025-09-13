@@ -1,5 +1,11 @@
+/**
+ * Importaciones requeridas para la interfaz ProductoIDAO, entidad Producto.
+ */
 import {Producto} from "@entity/producto.entity"
 
+/**
+ * Interfaz para el acceso a datos de Producto
+ */
 export interface ProductoIDAO{
     /**
      * Obtiene todos los productos
@@ -13,13 +19,6 @@ export interface ProductoIDAO{
      * @returns Producto con el ID especificado
      */
     getProductoById(productoId:Number):Producto;
-
-    /**
-     *  Obtiene un producto por su nombre
-     * @param productoNombre Nombre del producto a buscar
-     * @returns Producto con el nombre especificado
-     */
-    getProductoByNombre(productoNombre:String):Producto;
 
     /**
      * Obtiene un producto por su UUID
