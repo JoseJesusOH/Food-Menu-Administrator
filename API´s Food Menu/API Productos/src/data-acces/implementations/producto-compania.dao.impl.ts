@@ -6,7 +6,30 @@ import { ProductoCompaniaIDAO } from "@data.dao/producto-compania.dao";
 /**
  * Implementación del DAO de ProductoCompania.
  */
-export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
+export class ProductoCompaniaDAO implements ProductoCompaniaIDAO{
+
+    /**
+     * Metodo que obtiene un ProductoCompania por su UUID.
+     */
+    getProductoCompaniaByUuid(productoCompaniaUuid: String): ProductoCompania {
+        throw new Error("Method not implemented.");
+    }
+
+    /**
+     * Metodo que obtiene un ProductoCompania por su ID.
+     */
+    getProductoCompaniaById(productoCompaniaId: Number): ProductoCompania {
+        throw new Error("Method not implemented.");
+    }
+
+    /**
+     * Metodo que obtiene los ProductoCompania por su ID de producto.
+     */
+    getProductosCompaniasByIdProducto(productoId: Number): ProductoCompania[] {
+        throw new Error("Method not implemented.");
+    }
+
+    
     /**
      * Metodo que obtiene los ProductoCompania por su ID de producto compañia.
      */
@@ -21,13 +44,13 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
         throw new Error("Method not implemented.");
     }
 
-    /**
-    * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
-    */
+     /**
+     * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
+     */
     getProductosCompaniasByUuidCompania(companiaUuid: String): ProductoCompania[] {
         throw new Error("Method not implemented.");
     }
-
+            
     /**
      * Metodo que agrega un ProductoCompania.
      */
@@ -36,20 +59,19 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
         throw new Error("Method not implemented.");
     }
 
-    /**
-     * Metodo que actualiza un ProductoCompania.
-     */
+/**
+ * Metodo que actualiza un ProductoCompania.
+ */
 
     actualizarProductoCompania(productoCompania: ProductoCompania): Boolean {
         throw new Error("Method not implemented.");
     }
-
-    /** 
+    /**
      * Metodo que elimina un ProductoCompania por su ID.
      */
     eliminarProductoCompaniaById(productoCompaniaId: Number): Boolean {
         throw new Error("Method not implemented.");
     }
-
-
+   
+    
 }
