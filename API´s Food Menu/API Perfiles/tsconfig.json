@@ -1,6 +1,39 @@
-{  
+{
     "compilerOptions": {
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "baseUrl": "src",
+        "paths": {
+            "@controller/*": [
+                "controllers/*"
+            ],
+            "@data.dao/*": [
+                "data-acces/interfaces/*"
+            ],
+            "@data.impl/*": [
+                "data-acces/implementations/*"
+            ],
+               "@dto/*": [
+                "dtos/*"
+            ],
+            "@entity/*": [
+                "entities/*"
+            ],
+              "@middleware/*": [
+                "middlewares/*"
+            ],
+                   "@route/*": [
+                "routes/*"
+            ],
+            "@service.dao/*": [
+                "services/interfaces/*"
+            ],
+            "@service.impl/*": [
+                "services/implementations/*"
+            ],
+             "@utility/*": [
+                "utilities/*"
+            ]
+        }
     },
 }
