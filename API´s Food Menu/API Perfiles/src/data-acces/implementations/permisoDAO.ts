@@ -1,5 +1,5 @@
 import { Permiso } from "../../modelos/permiso";
-import {PermisoIDAO} from "../interfaces/permisoIDAO"
+import {PermisoIDAO} from "../interfaces/permiso.dao"
 export class PermisoDAO implements PermisoIDAO{
     getPermisos(): Permiso[] {
         throw new Error("Method not implemented.");
