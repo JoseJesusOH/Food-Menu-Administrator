@@ -1,81 +1,164 @@
-import { Persona } from "./persona.entity"
+
+/**
+ * Importaciones TypeORM requeridas
+ */
 import "reflect-metadata"
 import {
-    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
-    JoinColumn,ManyToOne,
-    ForeignKey
+    Entity, Column, PrimaryGeneratedColumn, Generated,
+    JoinColumn, ManyToOne
 } from "typeorm"
 
+/**
+ * Importaciones de la entidad Persona requerida para la relacion
+ */
+import { Persona } from "./persona.entity"
+/**
+ * Entidad Direccion     
+ *  
+ */
 @Entity("direcciones")
 export class Direccion {
 
+    /**
+     *   Identificador de la direccion
+     * 
+     */
     @PrimaryGeneratedColumn({
         name: "direccion_id"
     })
-    private direccionID: Number;
+    private direccionId: Number;
 
+    /**
+     * Identificador UUID de la direccion
+     */
     @Column({
         name: "direccion_uuid"
     })
     @Generated("uuid")
-    private direccionUUID: String;
+    private direccionUuid: String;
 
+    /**
+     * Calle de la direccion
+     */
     @Column({
         name: "calle",
         length: 100
     })
     private calle: String;
 
+    /**
+     * Numero de la direccion
+     */
     @Column({
         name: "numero",
         length: 100
     })
     private numero: String;
 
+    /**
+     * Colonia Direccion
+     */
     @Column({
         name: "asentamiento",
         length: 100
     })
     private asentamiento: String;
 
- @ManyToOne(() => Persona, (Persona) => Persona.getDirecciones)
-          @JoinColumn({name:"persona_id" ,foreignKeyConstraintName:"persona_direccion_idfk"})
+    /**
+     * Persona asociada a la dirección
+     */
+    @ManyToOne(() => Persona, (Persona) => Persona.getDirecciones)
+    @JoinColumn({ name: "persona_id", foreignKeyConstraintName: "persona_direccion_idfk" })
     private persona: Persona;
 
+    /**
+     *  Establece el identificador de la direccion
+     * @param direccionId Identificador de la direccion
+     * 
+     */
+    setDireccionId(direccionId: Number): void {
+        this.direccionId = direccionId
+    }
+    /**
+     *  Obtiene el identificador de la direccion
+     * @returns Identificador de la direccion
+     */
+    getDireccionId(): Number {
+        return this.direccionId
+    }
 
-    setDireccionID(direccionID: Number): void {
-        this.direccionID = direccionID
+    /**
+     * Asigna el UUID de la direccion
+     * @param direccionUuid UUID de la direccion
+     */
+    setDireccionUuid(direccionUuid: String): void {
+        this.direccionUuid = direccionUuid
     }
-    getDireccionID(): Number {
-        return this.direccionID
+    /**
+     * Devuelve el identificador UUID de la direccion
+     * @returns UUID de la direccion
+     */
+    getDireccionUuid(): String {
+        return this.direccionUuid
     }
-    setDireccionUUID(direccionUUID: String): void {
-        this.direccionUUID = direccionUUID
-    }
-    getDireccionUUID(): String {
-        return this.direccionUUID
-    }
+    /**
+     * Asigna la calle donde esta la direccion o domicilio de la persona
+     * @param calle Calle de la direccion
+     */
     setCalle(calle: String): void {
         this.calle = calle
     }
+    /**
+     * Devuelve la calle de la direccion
+     * @returns Calle de la direccion
+     */
     getCalle(): String {
         return this.calle
     }
+    /**
+     * Asigna el numero de la direccion
+     * @param numero Numero de la calle 
+     */
     setNumero(numero: String): void {
         this.numero = numero
     }
+
+    /**
+     * 
+     * @returns Devuelve el numero de la direccion
+     */
     getNumero(): String {
         return this.numero
     }
+
+    /**
+     * Asigna el asentamiento de la direccion
+     * @param asentamiento Asentamiento de la direccion
+     */
     setAsentamiento(asentamiento: String): void {
         this.asentamiento = asentamiento
     }
+
+    /**
+     * Devuelve el asentamiento de la direccion
+     * @returns Devuelve el asentamiento de la direccion
+     */
     getAsentamiento(): String {
         return this.asentamiento
     }
+
+    /**
+     * Asigna la persona a la direccion
+     * @param persona Asigna la persona a la direccion
+     */
     setPersona(persona: Persona): void {
         this.persona = persona
     }
+
+    /**
+     * Devuelve la persona asociada a la direccion
+     * @returns Devuelve la persona asociada a la direccion
+     */
     getPersona(): Persona {
         return this.persona
     }
