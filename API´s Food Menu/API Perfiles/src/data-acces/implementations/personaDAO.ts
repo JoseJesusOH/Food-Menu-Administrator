@@ -1,5 +1,5 @@
-import { Persona } from "../../modelos/persona";
-import {PersonaIDAO} from "../interfaces/persona.dao"
+import { Persona } from "@entity/persona.entity";
+import {PersonaIDAO} from "@data.dao/persona.dao"
 export class PersonaDAO implements PersonaIDAO{
     getPersonas(): Persona[] {
         throw new Error("Method not implemented.");
