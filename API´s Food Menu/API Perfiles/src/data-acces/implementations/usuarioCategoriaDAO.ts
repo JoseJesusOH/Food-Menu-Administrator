@@ -1,5 +1,5 @@
-import { UsuarioCategoria } from "../../modelos/usuarioCategoria";
-import {UsuarioCategoriaIDAO} from "../interfaces/usuario-categoria.dao"
+import { UsuarioCategoria } from "@entity/usuario-categoria.entity";
+import {UsuarioCategoriaIDAO} from "@data.dao/usuario-categoria.dao"
 export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
     getUsuarioCategorias(): UsuarioCategoria[] {
         throw new Error("Method not implemented.");
