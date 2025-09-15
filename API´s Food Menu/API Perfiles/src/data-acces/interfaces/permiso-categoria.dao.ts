@@ -1,4 +1,4 @@
-import {PermisoCategoria} from "../../modelos/permisoCategoria"
+import {PermisoCategoria} from "@entity/permiso-categoria.entity"
 export interface PermisoCategoriaIDAO {
     getPermisoCategorias():PermisoCategoria[];
     getPermisoCategoriaByID(permisoCategoriaID:Number):PermisoCategoria;
