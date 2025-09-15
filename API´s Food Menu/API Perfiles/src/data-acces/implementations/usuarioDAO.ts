@@ -1,5 +1,5 @@
-import { Usuario } from "../../modelos/usuario";
-import { UsuarioIDAO } from "../interfaces/usuario.dao";
+import { Usuario } from "@entity/usuario.entity";
+import { UsuarioIDAO } from "@data.dao/usuario.dao";
 
 export class UsuarioDAO implements UsuarioIDAO{
     getUsuarios(): Usuario[] {
