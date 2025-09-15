@@ -1,13 +1,13 @@
 
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import {Categoria} from "../modelos/categoria"
-import {Direccion} from "../modelos/direccion"
-import {Permiso} from "../modelos/permiso"
-import {PermisoCategoria} from "../modelos/permisoCategoria"
-import {Persona} from "../modelos/persona"
-import {Usuario} from "../modelos/usuario"
-import {UsuarioCategoria} from "../modelos/usuarioCategoria"
+import {Categoria} from "@entity/categoria.entity"
+import {Direccion} from "@entity/direccion.entity"
+import {Permiso} from "@entity/permiso.entity"
+import {PermisoCategoria} from "@entity/permiso-categoria.entity"
+import {Persona} from "@entity/persona.entity"
+import {Usuario} from "@entity/usuario.entity"
+import {UsuarioCategoria} from "@entity/usuario-categoria.entity"
 
 
 export const Conexion = new DataSource({
