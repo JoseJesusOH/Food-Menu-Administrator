@@ -1,5 +1,5 @@
-import { Categoria } from "../../modelos/categoria";
-import {CategoriaIDAO} from "../interfaces/categoria.dao"
+import { Categoria } from "@entity/categoria.entity";
+import {CategoriaIDAO} from "@data.dao/categoria.dao"
 export class CategoriaDAO implements CategoriaIDAO{
     getCategorias(): Categoria[] {
         throw new Error("Method not implemented.");
