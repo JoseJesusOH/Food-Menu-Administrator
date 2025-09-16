@@ -1,5 +1,5 @@
-import { PermisoCategoria } from "../../modelos/permisoCategoria";
-import {PermisoCategoriaIDAO} from "../interfaces/permiso-categoria.dao"
+import { PermisoCategoria } from "@entity/permiso-categoria.entity";
+import {PermisoCategoriaIDAO} from "@data.dao/permiso-categoria.dao"
 export class PermisoCategoriaDAO implements PermisoCategoriaIDAO{
     getPermisoCategorias(): PermisoCategoria[] {
         throw new Error("Method not implemented.");
