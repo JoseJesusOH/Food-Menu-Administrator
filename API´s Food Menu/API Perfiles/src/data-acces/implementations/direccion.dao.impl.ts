@@ -1,5 +1,5 @@
-import { Direccion } from "../../modelos/direccion";
-import {DireccionIDAO} from "../interfaces/direccion.dao"
+import { Direccion } from "@entity/direccion.entity"
+import {DireccionIDAO} from "@data.dao/direccion.dao"
 export class DireccionDAO implements DireccionIDAO{
     getDirecciones(): Direccion[] {
         throw new Error("Method not implemented.");
