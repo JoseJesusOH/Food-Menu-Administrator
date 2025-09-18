@@ -11,14 +11,14 @@ export class CompaniaDAO implements CompaniaIDAO {
     /**
      * Metodo que obtiene todas las compañias.
      */
-    getCompanias(): Compania[] {
+    async getCompanias():  Promise<Compania[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que obtiene una compañia por su ID.
      */
-    getCompaniaById(companiaID: Number): Compania {
+    async getCompaniaById(companiaID: Number):  Promise<Compania> {
         throw new Error("Method not implemented.");
     }
 
@@ -26,33 +26,33 @@ export class CompaniaDAO implements CompaniaIDAO {
      * Metodo que obtiene una compañia por su UUID.
      *  
      */
-    getCompaniaByUuid(companiaUuid: String): Compania {
+    async getCompaniaByUuid(companiaUuid: String):  Promise<Compania> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que agrega una nueva compañia.
      */
-    agregarCompania(compania: Compania): Boolean {
+    async agregarCompania(compania: Compania):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que elimina una compañia por su ID.
      */
-    eliminarCompaniaById(companiaId: Number): Boolean {
+    async eliminarCompaniaById(companiaId: Number):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo que elimina una compañia por su UUID.
      */
-    eliminarCompaniaByUuid(companiaUuid: String): Boolean {
+    async eliminarCompaniaByUuid(companiaUuid: String):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo que actualiza una compañia.
      */
-    actualizarCompania(compania: Compania): Boolean {
+    async actualizarCompania(compania: Compania):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
