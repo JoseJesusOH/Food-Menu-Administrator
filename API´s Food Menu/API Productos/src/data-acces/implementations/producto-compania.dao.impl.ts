@@ -6,72 +6,72 @@ import { ProductoCompaniaIDAO } from "@data.dao/producto-compania.dao";
 /**
  * Implementación del DAO de ProductoCompania.
  */
-export class ProductoCompaniaDAO implements ProductoCompaniaIDAO{
+export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
 
     /**
      * Metodo que obtiene un ProductoCompania por su UUID.
      */
-    getProductoCompaniaByUuid(productoCompaniaUuid: String): ProductoCompania {
+    async getProductoCompaniaByUuid(productoCompaniaUuid: String): Promise<ProductoCompania> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que obtiene un ProductoCompania por su ID.
      */
-    getProductoCompaniaById(productoCompaniaId: Number): ProductoCompania {
+    async getProductoCompaniaById(productoCompaniaId: Number): Promise<ProductoCompania> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que obtiene los ProductoCompania por su ID de producto.
      */
-    getProductosCompaniasByIdProducto(productoId: Number): ProductoCompania[] {
+    async getProductosCompaniasByIdProducto(productoId: Number): Promise<ProductoCompania[]> {
         throw new Error("Method not implemented.");
     }
 
-    
+
     /**
      * Metodo que obtiene los ProductoCompania por su ID de producto compañia.
      */
-    getProductosCompaniasById(productoCompaniaId: Number): ProductoCompania[] {
+    async getProductosCompaniasById(productoCompaniaId: Number): Promise<ProductoCompania[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
      */
-    getProductosCompaniasByIdCompania(companiaId: Number): ProductoCompania[] {
+    async getProductosCompaniasByIdCompania(companiaId: Number): Promise<ProductoCompania[]> {
         throw new Error("Method not implemented.");
     }
 
-     /**
-     * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
-     */
-    getProductosCompaniasByUuidCompania(companiaUuid: String): ProductoCompania[] {
+    /**
+    * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
+    */
+    async getProductosCompaniasByUuidCompania(companiaUuid: String): Promise<ProductoCompania[]> {
         throw new Error("Method not implemented.");
     }
-            
+
     /**
      * Metodo que agrega un ProductoCompania.
      */
 
-    agregarProductoCompania(productoCompania: ProductoCompania): Boolean {
+    async agregarProductoCompania(productoCompania: ProductoCompania): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
-/**
- * Metodo que actualiza un ProductoCompania.
- */
+    /**
+     * Metodo que actualiza un ProductoCompania.
+     */
 
-    actualizarProductoCompania(productoCompania: ProductoCompania): Boolean {
+    async actualizarProductoCompania(productoCompania: ProductoCompania): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo que elimina un ProductoCompania por su ID.
      */
-    eliminarProductoCompaniaById(productoCompaniaId: Number): Boolean {
+    async eliminarProductoCompaniaById(productoCompaniaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-   
-    
+
+
 }
