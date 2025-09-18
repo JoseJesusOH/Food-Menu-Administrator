@@ -12,39 +12,39 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
     /**
      * Metodo para obtener todos los centros productivos
      */
-    getCentrosProductivos(): CentroProductivo[] {
+    async getCentrosProductivos():  Promise<CentroProductivo[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener un centro productivo por su ID
      */
-    getCentroProductivoById(centroProductivoId: Number): CentroProductivo {
+    async getCentroProductivoById(centroProductivoId: Number): Promise< CentroProductivo> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para obtener un centro productivo por su UUID
      */
-    getCentroProductivoByUuid(centroProductivoUuid: String): CentroProductivo {
+    async getCentroProductivoByUuid(centroProductivoUuid: String):  Promise<CentroProductivo> {
         throw new Error("Method not implemented.");
     }
     
     /**
      * Metodo para agregar un nuevo centro productivo
      */
-    agregarCentroProductivo(centroProductivo: CentroProductivo): Boolean {
+    async agregarCentroProductivo(centroProductivo: CentroProductivo):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para actualizar un centro productivo
      */
-    actualizarCentroProductivo(centroProductivo: CentroProductivo): Boolean {
+    async actualizarCentroProductivo(centroProductivo: CentroProductivo):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para eliminar un centro productivo por su ID
      */
-    eliminarCentroProductivoById(centroProductivoId: Number): Boolean {
+    async eliminarCentroProductivoById(centroProductivoId: Number):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 }
