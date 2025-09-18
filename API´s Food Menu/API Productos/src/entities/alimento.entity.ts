@@ -26,26 +26,26 @@ import { ProductoAlimento } from "@entity/producto-alimento.entity"
 export class Alimento {
 
     /** Identificador autoincremental del alimento en la base de datos */
-    @PrimaryGeneratedColumn({ name:"alimento_id" })
-    private alimentoId: number;
+    @PrimaryGeneratedColumn({ name: "alimento_id" })
+    alimentoId: number;
 
     /** Nombre del alimento */
-    @Column({ name:"nombre" })
-    private nombre: string;
+    @Column({ name: "nombre" })
+    nombre: string;
 
     /** Relación uno a uno con la categoría */
     @OneToOne(() => Categoria)
-    @JoinColumn({ name:"categoria_id" ,foreignKeyConstraintName:"categoria_alimento_IDFK"})
-    private categoria: Categoria;
+    @JoinColumn({ name: "categoria_id", foreignKeyConstraintName: "categoria_alimento_IDFK" })
+    categoria: Categoria;
 
     /** Identificador único UUID del alimento */
-    @Column({ name:"alimento_uuid" })
+    @Column({ name: "alimento_uuid" })
     @Generated("uuid")
-    private alimentoUuid: string;
+    alimentoUuid: string;
 
     /** Lista de relaciones con productos asociados al alimento */
     @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getAlimento)
-    private productoAlimento: ProductoAlimento[];
+    productoAlimento: ProductoAlimento[];
 
     /**
      * Asigna los productos asociados al alimento.
