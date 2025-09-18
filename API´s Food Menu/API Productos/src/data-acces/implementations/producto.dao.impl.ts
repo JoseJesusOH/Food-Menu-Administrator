@@ -12,49 +12,49 @@ export class ProductoDAO implements ProductoIDAO{
     /**
      * Metodo para obtener todos los productos.
      */ 
-    getProductos(): Producto[] {
+    async getProductos(): Promise<Producto[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener un producto por su ID.
      */
-    getProductoById(productoId: Number): Producto {
+    async getProductoById(productoId: Number): Promise<Producto >{
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener un producto por su nombre.
      */
-    getProductoByNombre(productoNombre: String): Producto {
+    async getProductoByNombre(productoNombre: String): Promise<Producto> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener un producto por su UUID.
      */
-    getProductoByUuid(productoUuid: String): Producto {
+    async getProductoByUuid(productoUuid: String): Promise<Producto> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para agregar un producto.
      */
-    agregarProducto(producto: Producto): Boolean {
+    async agregarProducto(producto: Producto): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para actualizar un producto.
      */
-    actualizarProducto(producto: Producto): Boolean {
+    async actualizarProducto(producto: Producto): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para eliminar un producto por su ID.
      */
-    eliminarProductoById(productoId: Number): Boolean {
+    async eliminarProductoById(productoId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     
