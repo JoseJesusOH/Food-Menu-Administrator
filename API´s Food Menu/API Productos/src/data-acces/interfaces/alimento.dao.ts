@@ -39,12 +39,12 @@ export interface AlimentoIDAO {
      * @param alimento Objeto de tipo Alimento con los nuevos valores.
      * @returns True si la actualización fue exitosa, False en caso contrario.
      */
-    actualizarAlimento(alimento: Alimento): boolean;
+    actualizarAlimento(alimento: Alimento): Promise<Boolean>;
 
     /**
      * Agrega un nuevo alimento a la base de datos.
      * @param alimento Objeto de tipo Alimento a agregar.
      * @returns True si la inserción fue exitosa, False en caso contrario.
      */
-    agregarAlimento(alimento: Alimento): Boolean;
+    agregarAlimento(alimento: Alimento): Promise<Boolean>;
 }
