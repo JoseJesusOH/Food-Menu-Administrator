@@ -23,14 +23,14 @@ export class Compania {
     @PrimaryGeneratedColumn({
         name: "compania_id"
     })
-    private companiaId: Number;
+     companiaId: Number;
 
     /**
      * Identificador UUID de la compania
      */
     @Column({ name: "compania_uuid" })
     @Generated("uuid")
-    private companiaUuid: String;
+     companiaUuid: String;
 
     /**
      * Nombre de la compania
@@ -39,20 +39,20 @@ export class Compania {
         length: 100
         , name: "nombre"
     })
-    private nombre: String;
+     nombre: String;
 
     /**
      * Relacion 1 a muchos de compania con respecto a centro productivo
      */
     @OneToMany(() => CentroProductivo, (CentroProductivo) => CentroProductivo.getCompania)
-    private centroProductivos: CentroProductivo[];
+     centroProductivos: CentroProductivo[];
 
     /**
      * Relación muchos a muchos con respecto a productos y companias donde
      * se representa coon una entidad ProductoCompania
      */
     @OneToMany(() => ProductoCompania, (ProductoCompania) => ProductoCompania.getCompania)
-    private productoCompanias: ProductoCompania[];
+     productoCompanias: ProductoCompania[];
 
     /**
      * Asigna las relaciones de las companias con respecto a producto
