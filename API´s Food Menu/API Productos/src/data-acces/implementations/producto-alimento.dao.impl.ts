@@ -6,41 +6,53 @@ import { ProductoAlimentoIDAO } from "@data.dao/producto-alimento.dao";
 /**
  * Implementación del DAO de ProductoAlimento.
  */
-export class ProductoAlimentoDAO implements ProductoAlimentoIDAO{
-    /**
-     * Metodo que obtiene los ProductoAlimento por su ID de alimento.
-     */
-    getProductosAlimentosByIdAlimento(alimentoId: Number): ProductoAlimento[] {
-        throw new Error("Method not implemented.");
-    }
-    
-    /**
-     * Metodo que obtiene los ProductoAlimento por su UUID de alimento.
-     */
-    getProductosAlimentosByUuidAlimento(alimentoUuid: String): ProductoAlimento[] {
+export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
+    /** 
+     * Obtiene todos los productos-alimentos de un alimento específico 
+    */
+    getProductosAlimentosByIdAlimento(alimentoId: number): Promise<ProductoAlimento[]> {
         throw new Error("Method not implemented.");
     }
 
-    /**
-     * Metodo que obtiene un ProductoAlimento por su ID.
-     * 
-     */
-    agregarProductoAlimento(productoAlimento: ProductoAlimento): Boolean {
+    /** 
+     * Obtiene un producto-alimento por su ID 
+    */
+    getProductoAlimentoById(productoAlimentoId: number): Promise<ProductoAlimento> {
         throw new Error("Method not implemented.");
     }
 
-    /**
-     * Metodo que actualiza un ProductoAlimento.
-     */
-    actualizarProductoAlimento(productoAlimento: ProductoAlimento): Boolean {
+    /** 
+     * Obtiene un producto-alimento por su UUID 
+    */
+    getProductoAlimentoByUuid(productoAlimentoUuid: string): Promise<ProductoAlimento> {
         throw new Error("Method not implemented.");
     }
 
-    /**
-     * Metodo que elimina un ProductoAlimento por su ID.
+    /** 
+     * Obtiene todos los productos-alimentos de un producto específico 
      */
-    eliminarProductoAlimentoById(productoAlimentoId: Number): Boolean {
+    getProductosAlimentosByIdProducto(productoId: number): Promise<ProductoAlimento[]> {
         throw new Error("Method not implemented.");
     }
-    
+
+    /** 
+     * Agrega un nuevo producto-alimento 
+     */
+    agregarProductoAlimento(productoAlimento: ProductoAlimento): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    /** 
+     * Actualiza un producto-alimento existente 
+     */
+    actualizarProductoAlimento(productoAlimento: ProductoAlimento): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
+
+    /** 
+     * Elimina un producto-alimento por su ID 
+     */
+    eliminarProductoAlimentoById(productoAlimentoId: number): Promise<boolean> {
+        throw new Error("Method not implemented.");
+    }
 }
