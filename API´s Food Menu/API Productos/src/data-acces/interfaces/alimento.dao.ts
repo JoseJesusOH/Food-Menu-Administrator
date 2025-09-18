@@ -11,28 +11,28 @@ export interface AlimentoIDAO {
      * Obtiene la lista completa de alimentos almacenados.
      * @returns Un arreglo con todos los alimentos.
      */
-    getAlimentos(): Alimento[];
+    getAlimentos(): Promise<Alimento[]>;
 
     /**
      * Busca un alimento a partir de su identificador numérico.
      * @param alimentoId Identificador numérico del alimento.
      * @returns El alimento correspondiente al ID, o null si no existe.
      */
-    getAlimentoById(alimentoId: Number): Alimento;
+    getAlimentoById(alimentoId: Number): Promise<Alimento>;
 
     /**
      * Busca un alimento a partir de su identificador único (UUID).
      * @param alimentoUuid Identificador UUID del alimento.
      * @returns El alimento correspondiente al UUID, o null si no existe.
      */
-    getAlimentByUuid(alimentoUuid: String): Alimento;
+    getAlimentByUuid(alimentoUuid: String): Promise<Alimento>;
 
     /**
      * Elimina un alimento usando su identificador numérico.
      * @param alimentoId Identificador numérico del alimento.
      * @returns True si el alimento fue eliminado, False en caso contrario.
      */
-    eliminarAlimentoById(alimentoId: Number): Boolean;
+    eliminarAlimentoById(alimentoId: Number): Promise<Boolean>;
 
     /**
      * Actualiza la información de un alimento existente.
