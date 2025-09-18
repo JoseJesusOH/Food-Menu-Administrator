@@ -10,54 +10,54 @@ export class CategoriaDAO implements CategoriaIDAO {
     /**
      * Metodo para obtener todas las categorias
      */
-    getCategorias(): Categoria[] {
+    async getCategorias():  Promise<Categoria[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener una categoria por su ID
      */
-    getCategoriaById(categoriaID: Number): Categoria {
+    async getCategoriaById(categoriaID: Number):  Promise<Categoria> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para obtener una categoria por su UUID
      */
-    getCategoriaByUuid(categoriaUuid: String): Categoria {
+    async getCategoriaByUuid(categoriaUuid: String):  Promise<Categoria> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para obtener una categoria por su nombre
      */
-    getCategoriaByNombre(categoriaNombre: String): Categoria {
+    async getCategoriaByNombre(categoriaNombre: String):  Promise<Categoria> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para agregar una nueva categoria
      */
-    agregarCategoria(categoria: Categoria): Boolean {
+    async agregarCategoria(categoria: Categoria):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para eliminar una categoria por su ID
      */
-    eliminarCategoriaById(categoriaId: Number): Boolean {
+    async eliminarCategoriaById(categoriaId: Number):  Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para eliminar una categoria por su UUID
      */
-    eliminarCategoriaByUuid(categoriaUuid: String): Boolean {
+    async eliminarCategoriaByUuid(categoriaUuid: String): Promise< Boolean> {
         throw new Error("Method not implemented.");
     }
     /**
      * Metodo para actualizar una categoria
      * 
      */
-    actualizarCategoria(categoria: Categoria): Boolean {
+    async actualizarCategoria(categoria: Categoria):  Promise<Boolean >{
         throw new Error("Method not implemented.");
     }
 }
