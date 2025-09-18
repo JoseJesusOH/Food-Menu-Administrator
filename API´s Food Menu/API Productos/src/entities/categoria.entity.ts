@@ -14,21 +14,21 @@ export class Categoria {
     @PrimaryGeneratedColumn({
         name: "categoria_id"
     })
-    private categoriaId: Number;
+     categoriaId: Number;
 
     /** Nombre de la categoria */
     @Column({
         length: 100,
         name: "nombre"
     })
-    private nombre: String;
+     nombre: String;
 
     /** Identificador único UUID de la categoria */
     @Column({
         name: "categoria_uuid"
     })
     @Generated("uuid")
-    private categoriaUuid: String;
+     categoriaUuid: String;
 
     /**
      * Devuelve el identificador interno de la categoria.
