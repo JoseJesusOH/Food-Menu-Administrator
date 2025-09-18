@@ -10,36 +10,36 @@ export interface CategoriaIDAO {
    * Devuelve todas las categorias existentes en la base de datos
    * @returns Arreglo con todas las categorias
    */
-  getCategorias(): Categoria[];
+  getCategorias(): Promise<Categoria[]>;
   /**
    * Devuelve la categoria encontrada con respecto al ID especificado.
    * @param categoriaID ID de la categoria a buscar
    * @returns Categoria Obtenida
    */
-  getCategoriaById(categoriaID: Number): Categoria;
+  getCategoriaById(categoriaID: Number): Promise<Categoria>;
   /**
    * Devuelve la categoria encontrada con respecto al UUID proporcionado
    * @param categoriaUuid UUID de la categoria a buscar
    * @returns Categoria encontrada
    */
-  getCategoriaByUuid(categoriaUuid: String): Categoria;
+  getCategoriaByUuid(categoriaUuid: String): Promise<Categoria>;
 
   /**
    *  Agrega una nueva categoria a la base de datos
    * @param categoria Categoria a agregar
    * @returns Boolean indicando si se agrego o no la categoria
    */
-  agregarCategoria(categoria: Categoria): Boolean;
+  agregarCategoria(categoria: Categoria): Promise<Boolean>;
   /**
    * Elimina una categoria de la base de datos
    * @param categoriaId ID de la categoria a eliminar
    * @returns Boolean indicando si se elimino o no la categoria
    */
-  eliminarCategoriaById(categoriaId: Number): Boolean;
+  eliminarCategoriaById(categoriaId: Number): Promise<Boolean>;
   /**
    * Actualiza una categoria existente en la base de datos
    * @param categoria Categoria a actualizar
    * @returns Boolean indicando si se actualizo o no la categoria
    */
-  actualizarCategoria(categoria: Categoria): Boolean;
+  actualizarCategoria(categoria: Categoria): Promise<Boolean>;
 } 
