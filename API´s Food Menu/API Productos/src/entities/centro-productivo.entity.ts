@@ -23,7 +23,7 @@ export class CentroProductivo {
   @PrimaryGeneratedColumn({
     name:"centro_productivo_id"
   })
-  private centroProductivoId: Number;
+   centroProductivoId: Number;
 
   /**
    * Identificador UUID del centro productivo
@@ -32,7 +32,7 @@ export class CentroProductivo {
     name:"centro_productivo_uuid"
   })
   @Generated("uuid")
-  private centroProductivoUuid: String;
+   centroProductivoUuid: String;
 
   /**
    * Nombre del centro productivo
@@ -41,7 +41,7 @@ export class CentroProductivo {
     length: 100
     ,name:"nombre"
   })
-  private nombre: String
+   nombre: String
 
   /**
    * Direccion del centro productivo
@@ -50,7 +50,7 @@ export class CentroProductivo {
     length: 250,
     name:"direccion"
   })
-  private direccion: String
+   direccion: String
 
   /**
    * Telefono del centro productivo
@@ -59,14 +59,14 @@ export class CentroProductivo {
     length: 20,
     name:"telefono"
   })
-  private telefono: String
+   telefono: String
 
   /**
    * Relacion a compania con respecto al centro productivo
    */
   @ManyToOne(() => Compania, (Compania) => Compania.getCentroProductivos)
   @JoinColumn({name:"compania_id" ,foreignKeyConstraintName:"centro_productivo_compania_idfk"})
-  private compania: Compania;
+   compania: Compania;
   
   /**
    * Asigna la compania a la que perte
