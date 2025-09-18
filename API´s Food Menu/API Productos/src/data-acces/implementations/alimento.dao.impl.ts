@@ -3,46 +3,47 @@
  */
 import { Alimento } from "@entity/alimento.entity";
 import { AlimentoIDAO } from "@data.dao/alimento.dao";
+import {Conexion} from "@utility/conexion"
 export class AlimentoDAO implements AlimentoIDAO{
     /**
      * Metodo que retorna un arreglo de alimentos
      */
-    getAlimentos(): Alimento[] {
+    async  getAlimentos(): Promise<Alimento[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que retorna un alimento por su ID
      */
-    getAlimentoById(alimentoId: Number): Alimento {
+    async getAlimentoById(alimentoId: Number): Promise<Alimento> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que retorna un alimento por su UUID
      */
-    getAlimentByUuid(alimentoUuid: String): Alimento {
+    async     getAlimentByUuid(alimentoUuid: String): Promise<Alimento> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que elimina un alimento por su ID
      */
-    eliminarAlimentoById(alimentoId: Number): Boolean {
+    async eliminarAlimentoById(alimentoId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que actualiza un alimento
      */
-    actualizarAlimento(alimento: Alimento): boolean {
+    async actualizarAlimento(alimento: Alimento): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo que agrega un alimento
      */
-    agregarAlimento(alimento: Alimento): Boolean {
+    async agregarAlimento(alimento: Alimento): Promise<Boolean>{
         throw new Error("Method not implemented.");
     }
    
