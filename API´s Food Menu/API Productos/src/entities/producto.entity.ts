@@ -22,7 +22,7 @@ export class Producto {
    * Identificador autoincremental de producto
    */
   @PrimaryGeneratedColumn({ name: "producto_id" })
-  private productoId: Number
+   productoId: Number
 
   /**
    * Nombre del producto
@@ -32,35 +32,35 @@ export class Producto {
     length: 100,
     nullable:false
   })
-  private nombre: String;
+   nombre: String;
 
   /**
    * Entidad representativa de la relación 1 a 1 con categoria
    */
   @OneToOne(() => Categoria,{nullable:true})
   @JoinColumn({ name: "categoria_id" })
-  private categoria: Categoria | null;
+   categoria: Categoria | null;
 
   /**
    * Identificador UUID de producto
    */
   @Column({ name: "producto_uuid" ,nullable:false})
   @Generated("uuid")
-  private productoUuid: String
+   productoUuid: String
 
   /**
    * Entidad representativa de la relación muchos a muchos Producto a Alimento
    * representados en una entidad ProductoAlimento
    */
   @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getProducto)
-  private productoAlimentos: ProductoAlimento[];
+   productoAlimentos: ProductoAlimento[];
 
   /**
    * Entidad representativa de la relación muchos a muchos Producto a Compania
    * representados en una entidad ProductoCompania
    */
   @OneToMany(() => ProductoCompania, (ProductoCompania) => ProductoCompania.getProducto)
-  private productoCompanias: ProductoCompania[];
+   productoCompanias: ProductoCompania[];
 
   /**
    * Asigna las relaciones establecidas entre producto a compania
