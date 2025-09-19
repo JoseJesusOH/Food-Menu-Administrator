@@ -16,7 +16,7 @@ export interface CategoriaIDAO {
    * @param categoriaID ID de la categoria a buscar
    * @returns Categoria Obtenida
    */
-  getCategoriaById(categoriaID: Number): Promise<Categoria>;
+  getCategoriaById(categoriaId: Number): Promise<Categoria>;
   /** 3
    * Devuelve la categoria encontrada con respecto al UUID proporcionado
    * @param categoriaUuid UUID de la categoria a buscar
