@@ -3,7 +3,7 @@
  */
 import { Producto } from "@entity/producto.entity";
 import { ProductoIDAO } from "@data.dao/producto.dao";
-
+import {Conexion} from "@utility/conexion"
 /**
  * Implementación del DAO de Producto.
  */
@@ -13,7 +13,8 @@ export class ProductoDAO implements ProductoIDAO{
      * Metodo para obtener todos los productos.
      */ 
     async getProductos(): Promise<Producto[]> {
-        throw new Error("Method not implemented.");
+                  const productoRepositorio = Conexion.getRepository(Producto);
+        return productoRepositorio.find()
     }
     /** 2
      * Metodo para obtener un producto por su ID.
