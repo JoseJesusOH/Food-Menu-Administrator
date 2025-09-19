@@ -34,7 +34,8 @@ export class ProductoDAO implements ProductoIDAO {
      * Metodo para agregar un producto.
      */
     async agregarProducto(producto: Producto): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+               const productoRepositorio = Conexion.getRepository(Producto);
+        return (await productoRepositorio.insert(producto)).identifiers.length>0
     }
     /** 5
      * Metodo para actualizar un producto.
