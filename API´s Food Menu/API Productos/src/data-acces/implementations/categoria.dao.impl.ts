@@ -27,7 +27,8 @@ export class CategoriaDAO implements CategoriaIDAO {
      * Metodo para obtener una categoria por su UUID
      */
     async getCategoriaByUuid(categoriaUuid: String):  Promise<Categoria> {
-        throw new Error("Method not implemented.");
+              const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return categoriaRepositorio.findOneBy({categoriaUuid:categoriaUuid})
     }
     /** 4
      * Metodo para agregar una nueva categoria
