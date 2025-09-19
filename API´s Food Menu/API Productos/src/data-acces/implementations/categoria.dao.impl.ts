@@ -3,6 +3,8 @@
  */
 import { Categoria } from "@entity/categoria.entity";
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
+import { Conexion } from "@utility/conexion"
+
 /**
  * Implementacion de los metodos de la interfaz CategoriaIDAO
  */
@@ -11,7 +13,8 @@ export class CategoriaDAO implements CategoriaIDAO {
      * Metodo para obtener todas las categorias
      */
     async getCategorias():  Promise<Categoria[]> {
-        throw new Error("Method not implemented.");
+          const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return categoriaRepositorio.find();
     } 
     /** 2
      * Metodo para obtener una categoria por su ID
