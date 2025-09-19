@@ -29,25 +29,10 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
         throw new Error("Method not implemented.");
     }
 
-
-    /**
-     * Metodo que obtiene los ProductoCompania por su ID de producto compañia.
-     */
-    async getProductosCompaniasById(productoCompaniaId: Number): Promise<ProductoCompania[]> {
-        throw new Error("Method not implemented.");
-    }
-
     /**
      * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
      */
     async getProductosCompaniasByIdCompania(companiaId: Number): Promise<ProductoCompania[]> {
-        throw new Error("Method not implemented.");
-    }
-
-    /**
-    * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
-    */
-    async getProductosCompaniasByUuidCompania(companiaUuid: String): Promise<ProductoCompania[]> {
         throw new Error("Method not implemented.");
     }
 
