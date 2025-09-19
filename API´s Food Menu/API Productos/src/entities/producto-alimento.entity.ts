@@ -25,7 +25,7 @@ export class ProductoAlimento {
     @PrimaryGeneratedColumn({
         name: "producto_alimento_id"
     })
-    private productoAlimentoId: Number;
+     productoAlimentoId: Number;
 
     /**
      * Identificador UUID de la relación entre ProductoAlimento
@@ -34,7 +34,7 @@ export class ProductoAlimento {
         name: "producto_alimento_uuid"
     })
     @Generated("uuid")
-    private productoAlimentoUuid: String;
+     productoAlimentoUuid: String;
 
     /**
      * Cantidad minima de ingrediente que contiene un alimento sobre un producto
@@ -43,7 +43,7 @@ export class ProductoAlimento {
         type: "double",
         name: "cantidad_minima"
     })
-    private cantidadMinima: Number;
+     cantidadMinima: Number;
 
     /**
      * Cantidad maxima de ingredientes que contiene un alimento sobre un producto
@@ -52,21 +52,21 @@ export class ProductoAlimento {
         type: "double",
         name: "cantidad_maxima"
     })
-    private cantidadMaxima: Number;
+     cantidadMaxima: Number;
 
     /**
      * Producto relacionado con alimento en la relación muchos a muchos
      */
     @ManyToOne(() => Producto, (Producto) => Producto.getProductoAlimentos)
     @JoinColumn({ name: "producto_id", foreignKeyConstraintName: "producto_alimento_producto_idfk" })
-    private producto: Producto;
+     producto: Producto;
 
     /**
      * Alimento relacionado con producto en la relación muchos a muchos
      */
     @ManyToOne(() => Alimento, (Alimento) => Alimento.getProductoAlimentos)
     @JoinColumn({ name: "alimento_id", foreignKeyConstraintName: "producto_alimento_alimento_idfk" })
-    private alimento: Alimento;
+     alimento: Alimento;
 
     /**
      * Enum representativo para la forma de medida del alimento y relación
@@ -77,7 +77,7 @@ export class ProductoAlimento {
         default: UnidadMedida.OT,
         name: "unidad_medida"
     })
-    private unidadMedida: UnidadMedida
+     unidadMedida: UnidadMedida
 
     /**
      * Devuelve el enum correspondiente a la unidad de medida
