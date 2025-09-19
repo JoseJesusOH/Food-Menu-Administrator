@@ -9,7 +9,7 @@ import { ProductoCompania } from "@entity/producto-compania.entity";
 import { Compania } from "@entity/compania.entity";
 import { CentroProductivo } from "@entity/centro-productivo.entity";
 
- const Conexion = new DataSource({
+  const Conexion = new DataSource({
     type: "mysql",
     host: "localhost",
     port: 3306,
@@ -22,9 +22,8 @@ import { CentroProductivo } from "@entity/centro-productivo.entity";
     subscribers: [],
     migrations: [],
 })
-
 Conexion.initialize()
   .then(() => console.log("✅ Conexión inicializada"))
   .catch((err) => console.error("❌ Error al inicializar:", err));
 
-export { Conexion };
+export {Conexion};
