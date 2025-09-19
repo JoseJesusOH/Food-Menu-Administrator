@@ -21,7 +21,7 @@ export class ProductoCompania {
     @PrimaryGeneratedColumn({
         name: "producto_compania_id"
     })
-    private productoCompaniaId: Number;
+     productoCompaniaId: Number;
 
     /**
      * Identificador UUID de relación ProductoCompania
@@ -30,21 +30,21 @@ export class ProductoCompania {
         name: "producto_compania_uuid"
     })
     @Generated("uuid")
-    private productoCompaniaUuid: String;
+     productoCompaniaUuid: String;
 
     /**
      * Compania relacionada con respecto a la relación muchos a muchos de CompaniaProducto
      */
     @ManyToOne(() => Compania, (Compania) => Compania.getProductoCompanias)
     @JoinColumn({ name: "compania_id", foreignKeyConstraintName: "producto_compania_compania_idfk" })
-    private compania: Compania;
+     compania: Compania;
 
     /**
      * Producto relacion con respecto a la relación muchos a muchos
      */
     @ManyToOne(() => Producto, (Producto) => Producto.getProductoCompanias)
     @JoinColumn({ name: "producto_id", foreignKeyConstraintName: "producto_compania_producto_idfk" })
-    private producto: Producto;
+     producto: Producto;
 
     /**
      * Asigna la compania establecidad a la relación
