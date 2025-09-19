@@ -27,8 +27,9 @@ export class ProductoDAO implements ProductoIDAO {
      * Metodo para obtener un producto por su UUID.
      */
     async getProductoByUuid(productoUuid: String): Promise<Producto> {
-        throw new Error("Method not implemented.");
-    }
+           const productoRepositorio = Conexion.getRepository(Producto);
+        return productoRepositorio.findOneBy({ productoUuid: productoUuid })
+  }
     /** 4
      * Metodo para agregar un producto.
      */
