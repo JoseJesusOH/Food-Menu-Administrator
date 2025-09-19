@@ -19,8 +19,9 @@ export class CategoriaDAO implements CategoriaIDAO {
     /** 2
      * Metodo para obtener una categoria por su ID
      */
-    async getCategoriaById(categoriaID: Number):  Promise<Categoria> {
-        throw new Error("Method not implemented.");
+    async getCategoriaById(categoriaId: Number):  Promise<Categoria> {
+            const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return categoriaRepositorio.findOneBy({categoriaId:categoriaId})
     }
     /** 3
      * Metodo para obtener una categoria por su UUID
