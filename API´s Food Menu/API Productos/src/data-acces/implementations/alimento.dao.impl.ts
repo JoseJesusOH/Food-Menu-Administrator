@@ -3,31 +3,31 @@
  */
 import { Alimento } from "@entity/alimento.entity";
 import { AlimentoIDAO } from "@data.dao/alimento.dao";
-import {Conexion} from "@utility/conexion"
-export class AlimentoDAO implements AlimentoIDAO{
+import { Conexion } from "@utility/conexion"
+export class AlimentoDAO implements AlimentoIDAO {
     /** 1
      * Metodo que retorna un arreglo de alimentos
      */
-    async  getAlimentos(): Promise<Alimento[]> {
-        const alimentoRepositorio=Conexion.getRepository(Alimento);
+    async getAlimentos(): Promise<Alimento[]> {
+        const alimentoRepositorio = Conexion.getRepository(Alimento);
         return alimentoRepositorio.find();
     }
     /** 2
      * Metodo que retorna un alimento por su ID
      */
     async getAlimentoById(alimentoId: Number): Promise<Alimento> {
-                 const alimentoRepositorio=Conexion.getRepository(Alimento);
+        const alimentoRepositorio = Conexion.getRepository(Alimento);
         return alimentoRepositorio.findOneBy({
-           alimentoId:alimentoId.valueOf()
+            alimentoId: alimentoId.valueOf()
         });
     }
     /** 3
      * Metodo que retorna un alimento por su UUID
      */
-    async     getAlimentByUuid(alimentoUuid: String): Promise<Alimento> {
-                   const alimentoRepositorio=Conexion.getRepository(Alimento);
+    async getAlimentByUuid(alimentoUuid: String): Promise<Alimento> {
+        const alimentoRepositorio = Conexion.getRepository(Alimento);
         return alimentoRepositorio.findOneBy({
-           alimentoUuid:alimentoUuid.valueOf()
+            alimentoUuid: alimentoUuid.valueOf()
         });
     }
     /** 4
@@ -41,13 +41,14 @@ export class AlimentoDAO implements AlimentoIDAO{
      */
     async actualizarAlimento(alimento: Alimento): Promise<Boolean> {
         throw new Error("Method not implemented.");
-    } 
+    }
     /** 6
      * Metodo que agrega un alimento
      */
-    async agregarAlimento(alimento: Alimento): Promise<Boolean>{
-        throw new Error("Method not implemented.");
+    async agregarAlimento(alimento: Alimento): Promise<Boolean> {
+        const alimentoRepositorio = Conexion.getRepository(Alimento);
+        return (await alimentoRepositorio.insert(alimento)).identifiers.length > 0
     }
-   
-   
+
+
 }
