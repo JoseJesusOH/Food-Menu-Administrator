@@ -9,49 +9,37 @@ import { ProductoIDAO } from "@data.dao/producto.dao";
  */
 export class ProductoDAO implements ProductoIDAO{
      
-    /**
+    /** 1
      * Metodo para obtener todos los productos.
      */ 
     async getProductos(): Promise<Producto[]> {
         throw new Error("Method not implemented.");
     }
-
-    /**
+    /** 2
      * Metodo para obtener un producto por su ID.
      */
     async getProductoById(productoId: Number): Promise<Producto >{
         throw new Error("Method not implemented.");
     }
-
-    /**
-     * Metodo para obtener un producto por su nombre.
-     */
-    async getProductoByNombre(productoNombre: String): Promise<Producto> {
-        throw new Error("Method not implemented.");
-    }
-
-    /**
+    /** 3
      * Metodo para obtener un producto por su UUID.
      */
     async getProductoByUuid(productoUuid: String): Promise<Producto> {
         throw new Error("Method not implemented.");
     }
-
-    /**
+    /** 4
      * Metodo para agregar un producto.
      */
     async agregarProducto(producto: Producto): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-
-    /**
+    /** 5
      * Metodo para actualizar un producto.
      */
     async actualizarProducto(producto: Producto): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-
-    /**
+    /** 6
      * Metodo para eliminar un producto por su ID.
      */
     async eliminarProductoById(productoId: Number): Promise<Boolean> {
