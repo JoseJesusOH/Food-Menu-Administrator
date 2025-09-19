@@ -9,7 +9,8 @@ export class AlimentoDAO implements AlimentoIDAO{
      * Metodo que retorna un arreglo de alimentos
      */
     async  getAlimentos(): Promise<Alimento[]> {
-        throw new Error("Method not implemented.");
+        const alimentoRepositorio=Conexion.getRepository(Alimento);
+        return alimentoRepositorio.find();
     }
     /** 2
      * Metodo que retorna un alimento por su ID
