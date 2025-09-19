@@ -34,7 +34,8 @@ export class CategoriaDAO implements CategoriaIDAO {
      * Metodo para agregar una nueva categoria
      */
     async agregarCategoria(categoria: Categoria):  Promise<Boolean> {
-        throw new Error("Method not implemented.");
+                      const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return (await categoriaRepositorio.insert(categoria)).identifiers.length>0
     }
     /** 5
      * Metodo para eliminar una categoria por su ID
