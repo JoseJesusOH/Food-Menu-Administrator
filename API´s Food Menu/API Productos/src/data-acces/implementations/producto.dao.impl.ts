@@ -3,24 +3,25 @@
  */
 import { Producto } from "@entity/producto.entity";
 import { ProductoIDAO } from "@data.dao/producto.dao";
-import {Conexion} from "@utility/conexion"
+import { Conexion } from "@utility/conexion"
 /**
  * Implementación del DAO de Producto.
  */
-export class ProductoDAO implements ProductoIDAO{
-     
+export class ProductoDAO implements ProductoIDAO {
+
     /** 1
      * Metodo para obtener todos los productos.
-     */ 
+     */
     async getProductos(): Promise<Producto[]> {
-                  const productoRepositorio = Conexion.getRepository(Producto);
+        const productoRepositorio = Conexion.getRepository(Producto);
         return productoRepositorio.find()
     }
     /** 2
      * Metodo para obtener un producto por su ID.
      */
-    async getProductoById(productoId: Number): Promise<Producto >{
-        throw new Error("Method not implemented.");
+    async getProductoById(productoId: Number): Promise<Producto> {
+        const productoRepositorio = Conexion.getRepository(Producto);
+        return productoRepositorio.findOneBy({ productoId: productoId.valueOf() })
     }
     /** 3
      * Metodo para obtener un producto por su UUID.
@@ -46,6 +47,6 @@ export class ProductoDAO implements ProductoIDAO{
     async eliminarProductoById(productoId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    
-   
+
+
 }
