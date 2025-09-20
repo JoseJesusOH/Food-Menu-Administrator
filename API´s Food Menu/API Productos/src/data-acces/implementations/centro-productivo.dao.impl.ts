@@ -3,16 +3,32 @@
  */
 import { CentroProductivo } from "@entity/centro-productivo.entity";
 import { CentroProductivoIDAO } from "@data.dao/centro-productivo.dao";
+import { Conexion } from "@utility/conexion";
+import { LoggerAPI } from "@utility/logger";
 /**
  * Implementacion de los metodos de la interfaz CentroProductivoIDAO
  * 
  */
 export class CentroProductivoDAO implements CentroProductivoIDAO{
+     centroProductivoRepositorio = Conexion.getRepository(CentroProductivo);
     /** 1
      * Metodo para obtener todos los centros productivos
      */
     async getCentrosProductivos():  Promise<CentroProductivo[]> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia la busqueda de centros productivos")
+        try{
+            const centrosProductivos=await this.centroProductivoRepositorio.find();
+            if(!centrosProductivos || centrosProductivos.length===0){
+                LoggerAPI.warn(`No se han podido encontrar centros productivos`)
+                return []
+            }else{
+                LoggerAPI.info(`Se han obtenido un total de ${centrosProductivos.length} centros productivos`)
+                return centrosProductivos;
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se produjo error en la busqueda de centros productivos error; ${error}`)
+            throw error;
+        }
     }
     /** 2
      * Metodo para obtener un centro productivo por su ID
