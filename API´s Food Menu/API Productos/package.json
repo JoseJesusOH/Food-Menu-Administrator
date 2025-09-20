@@ -5,7 +5,7 @@
  "main": "dist/app.js",
  "scripts": {
   "start": "node dist/app.js",
-  "dev": "ts-node app.ts",
+  "dev": "ts-node -r tsconfig-paths/register app.ts",
   "build": "tsc"
  },
  "dependencies": {
@@ -19,6 +19,7 @@
   "@types/express": "^5.0.3",
   "@types/node": "^24.3.0",
   "ts-node": "^10.9.2",
+  "tsconfig-paths": "^4.2.0",
   "typescript": "^5.9.2"
  }
 }
