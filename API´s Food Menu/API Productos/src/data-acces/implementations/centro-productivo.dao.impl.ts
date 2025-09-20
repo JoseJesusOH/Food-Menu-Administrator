@@ -72,7 +72,20 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
      * Metodo para agregar un nuevo centro productivo
      */
     async agregarCentroProductivo(centroProductivo: CentroProductivo):  Promise<Boolean> {
-        throw new Error("Method not implemented.");
+       LoggerAPI.info("Se inicia el proceso para agregar un centro productivo en DB")
+       try{
+        const resultado=await this.centroProductivoRepositorio.insert(centroProductivo);
+        if(resultado.identifiers.length>0){
+            LoggerAPI.info("Se ha registrado el centro productivo exitosamente")
+            return new Boolean(true)
+        }else{
+            LoggerAPI.warn("No se ha registrado el centro productivo exitosamente")
+            return new Boolean(false)
+        }
+       }catch(error){
+        LoggerAPI.warn(`Se ha producido un error en el proceso para agregar un centro productivo error ${error}`)
+         throw error;
+       }
     }
     /** 5
      * Metodo para actualizar un centro productivo
