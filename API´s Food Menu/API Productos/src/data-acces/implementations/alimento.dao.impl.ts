@@ -30,10 +30,20 @@ export class AlimentoDAO implements AlimentoIDAO {
      * Metodo que retorna un alimento por su ID
      */
     async getAlimentoById(alimentoId: Number): Promise<Alimento> {
-        const alimentoRepositorio = Conexion.getRepository(Alimento);
-        return alimentoRepositorio.findOneBy({
-            alimentoId: alimentoId.valueOf()
-        });
+        LoggerAPI.info("Se inicia la obtencion del alimento por el id del mismo")
+        try{
+            const alimento=await this.alimentoRepositorio.findOneBy({alimentoId:alimentoId.valueOf()})
+            if(alimento!==null){
+                LoggerAPI.info(`Se ha obtenido el alimento con ID ${alimentoId}`)
+                return alimento;
+            }else{
+                LoggerAPI.warn(`No se ha obtenido un alimento con el id ${alimentoId}`)
+                return null;
+            }
+        }catch(error){
+            LoggerAPI.warn(`Error en la busqueda por id de alimento error; ${error}`)
+            throw error;
+        }
     }
     /** 3
      * Metodo que retorna un alimento por su UUID
