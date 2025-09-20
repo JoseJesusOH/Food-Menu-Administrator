@@ -21,7 +21,9 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
      * Metodo que obtiene un ProductoCompania por su ID.
      */
     async getProductoCompaniaById(productoCompaniaId: Number): Promise<ProductoCompania> {
-        throw new Error("Method not implemented.");
+         const productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
+        return productoCompaniaRepositorio.findOneBy(
+            {productoCompaniaId:productoCompaniaId})
     }
     /** 3
      * Metodo que obtiene los ProductoCompania por su ID de producto.
