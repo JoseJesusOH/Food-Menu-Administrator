@@ -3,16 +3,32 @@
  */
 import { Compania } from "@entity/compania.entity";
 import { CompaniaIDAO } from "@data.dao/compania.dao";
+import { Conexion } from "@utility/conexion";
+import { LoggerAPI } from "@utility/logger";
 
 /**
  * Implementación del DAO de Compañía.
  */
 export class CompaniaDAO implements CompaniaIDAO {
+    companiaRepositorio=Conexion.getRepository(Compania);
     /** 1
      * Metodo que obtiene todas las compañias.
      */
     async getCompanias():  Promise<Compania[]> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia proceso de obtención de companias en DB")
+        try{
+            const companias=await this.companiaRepositorio.find();
+            if(!companias || companias.length===0){ 
+                LoggerAPI.warn("No se han encontrado companias en DB")
+                return []
+            }else{
+                LoggerAPI.info(`Se han encontrado un total de ${companias.length} companias`)
+                return companias;
+             }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error en la busqueda de companias error; ${error}`)
+            throw error;
+        }
     }
     /** 2
      * Metodo que obtiene una compañia por su ID.
