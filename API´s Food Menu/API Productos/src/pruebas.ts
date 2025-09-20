@@ -3,7 +3,6 @@ import { Conexion } from "@utility/conexion"
 import { Categoria } from "@entity/categoria.entity"
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl"
 
-
 async function inicializarBaseDatos() {
   try {
     await Conexion.initialize()
@@ -13,9 +12,9 @@ async function inicializarBaseDatos() {
   }
 }
 
-
 async function pruebas() {
   try {
+    await inicializarBaseDatos();
     /*
     //Funcion para obtener los metada data maps inicilizados
     Conexion.initialize().then(() => {
@@ -30,16 +29,13 @@ async function pruebas() {
     await categoriaRepo.save(categoria2);
     console.log("Guardado");
     */
-    /*
-     //Obtencion categorias
-     await Conexion.initialize();
-     const categoriaRepo = Conexion.getRepository(Categoria);
-     const categorias = await categoriaRepo.find();
-     console.log("Categorias; ", categorias);
-     */
+    //Obtencion categorias
+    const categoriaRepo = Conexion.getRepository(Categoria);
+    const categorias = await categoriaRepo.find();
+    console.log("Categorias; ", categorias);
   } catch (error) {
     console.log(error)
   }
 }
 
-export { pruebas, inicializarBaseDatos as inicializarDataBase };
+export { pruebas }
