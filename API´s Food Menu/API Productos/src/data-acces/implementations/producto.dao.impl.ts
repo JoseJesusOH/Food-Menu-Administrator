@@ -52,8 +52,20 @@ export class ProductoDAO implements ProductoIDAO {
      * Metodo para obtener un producto por su UUID.
      */
     async getProductoByUuid(productoUuid: String): Promise<Producto> {
-        const productoRepositorio = Conexion.getRepository(Producto);
-        return productoRepositorio.findOneBy({ productoUuid: productoUuid })
+        LoggerAPI.info("Se inicia la busqueda del producto por UUID")
+        try{ 
+          const producto=await this.productoRepositorio.findOneBy({productoUuid})
+          if(producto!==null){
+            LoggerAPI.info(`Se ha encontrado el producto con UUID ${productoUuid}`)
+            return producto;
+          }else{
+            LoggerAPI.warn(`No se encontrado un producto con el UUID ${productoUuid}`)
+            return null;
+          }
+        }catch(error){
+        LoggerAPI.warn(`Se ha producido un error en la busqueda por UUID de producto error; ${error}`);
+           throw error;
+        }
     }
     /** 4
      * Metodo para agregar un producto.
