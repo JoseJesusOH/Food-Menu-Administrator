@@ -71,8 +71,21 @@ export class ProductoDAO implements ProductoIDAO {
      * Metodo para agregar un producto.
      */
     async agregarProducto(producto: Producto): Promise<Boolean> {
-        const productoRepositorio = Conexion.getRepository(Producto);
-        return (await productoRepositorio.insert(producto)).identifiers.length > 0
+        LoggerAPI.info("Se inicializa metodo para agregar un producto en DB")
+        try{
+           const resultado=await this.productoRepositorio.insert(producto);
+           if(resultado.identifiers.length>0){
+            LoggerAPI.info("Se ha regfistrado el producto en DB exitosamente")
+            return new Boolean(true)
+           }
+           else{
+            LoggerAPI.warn("No se ha relizado la inserccion del producto")
+            return new Boolean(false)
+           }
+        }catch(error){
+            LoggerAPI.warn(`Se produjo error en el proceso de agregar un producto error ${error}`)
+         throw error;
+        }
     }
     /** 5
      * Metodo para actualizar un producto.
