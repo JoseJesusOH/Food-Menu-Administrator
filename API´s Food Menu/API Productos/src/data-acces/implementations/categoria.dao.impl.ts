@@ -23,11 +23,12 @@ export class CategoriaDAO implements CategoriaIDAO {
         LoggerAPI.warn("No se encontraron categorías en la base de datos");
         // throw new Error("No se encontraron categorías");
         return [];
+      } else {
+        LoggerAPI.info(
+          `Se han obtenido ${categorias.length} categorías exitosamente`
+        );
+        return categorias;
       }
-      LoggerAPI.info(
-        `Se han obtenido ${categorias.length} categorías exitosamente`
-      );
-      return categorias;
     } catch (error) {
       LoggerAPI.error("Error al obtener categorías", { error });
       throw error;
