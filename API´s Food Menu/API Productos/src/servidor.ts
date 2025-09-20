@@ -1,6 +1,11 @@
-
+/**
+ * Importacion de la conexion
+ */
 import { Conexion } from "@utility/conexion"
 
+/**
+ * Variables requeridas 
+ */
 const express = require('express')
 const app = express();
 const PORT = 3000;
@@ -13,6 +18,10 @@ app.get("/", async (req, res) => {
   res.send("Servidor Express con TypeScript funcionando 🚀");
 });
 
+/**
+ * Metodo que inializa el servidor express y manda a llamar la inicializacion 
+ * de la base de datos
+ */
 async function servidorStart() {
   try {
     await inicializarBaseDatos();
@@ -23,7 +32,9 @@ async function servidorStart() {
   } catch (error) {
   }
 }
-
+/**
+ * Metodo paras inicializar la base de datos
+ */
 async function inicializarBaseDatos() {
   try {
     await Conexion.initialize()
@@ -33,4 +44,7 @@ async function inicializarBaseDatos() {
   }
 }
 
+/**
+ * Exportacion del metodo servidorStart
+ */
 export {servidorStart};
