@@ -4,6 +4,7 @@
 import { Categoria } from "@entity/categoria.entity";
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
 import { Conexion } from "@utility/conexion"
+import { LoggerAPI } from "@utility/logger"
 
 /**
  * Implementacion de los metodos de la interfaz CategoriaIDAO
@@ -12,10 +13,25 @@ export class CategoriaDAO implements CategoriaIDAO {
     /** 1
      * Metodo para obtener todas las categorias
      */
-    async getCategorias(): Promise<Categoria[]> {
-        const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return categoriaRepositorio.find();
+ async getCategorias(): Promise<Categoria[]> {
+    LoggerAPI.info("Iniciando obtención de categorías desde DB");
+    try {
+      const categoriaRepositorio = Conexion.getRepository(Categoria);
+      const categorias = await categoriaRepositorio.find();
+      if (!categorias || categorias.length === 0) {
+        LoggerAPI.warn("No se encontraron categorías en la base de datos");
+        // throw new Error("No se encontraron categorías");
+        return [];
+      }
+      LoggerAPI.info(
+        `Se han obtenido ${categorias.length} categorías exitosamente`
+      );
+      return categorias;
+    } catch (error) {
+      LoggerAPI.error("Error al obtener categorías", { error });
+      throw error;
     }
+  }
     /** 2
      * Metodo para obtener una categoria por su ID
      */
