@@ -53,7 +53,20 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
      * Metodo para obtener un centro productivo por su UUID
      */
     async getCentroProductivoByUuid(centroProductivoUuid: String):  Promise<CentroProductivo> {
-        throw new Error("Method not implemented.");
+            LoggerAPI.info("Se procede a obtener el centro productivo por uuid DB")
+        try{
+            const centroProductivo=await this.centroProductivoRepositorio.findOneBy({centroProductivoUuid});
+            if(centroProductivo!==null){
+                LoggerAPI.info(`Se encontro el centro productivo con UUID ${centroProductivoUuid}`)
+                return centroProductivo;
+            }else{
+                LoggerAPI.warn(`No se encontro el centro productivo con UUID ${centroProductivoUuid}`)
+                return null;
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se produjo un error en la busqueda por UUID del centro productivo error; ${error}`)
+            throw error;
+        }
     }
     /** 4
      * Metodo para agregar un nuevo centro productivo
