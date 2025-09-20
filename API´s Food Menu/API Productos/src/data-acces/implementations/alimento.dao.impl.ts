@@ -80,8 +80,20 @@ export class AlimentoDAO implements AlimentoIDAO {
      * Metodo que agrega un alimento
      */
     async agregarAlimento(alimento: Alimento): Promise<Boolean> {
-        const alimentoRepositorio = Conexion.getRepository(Alimento);
-        return (await alimentoRepositorio.insert(alimento)).identifiers.length > 0
+        LoggerAPI.info("Iniciando operación para agregar un alimento")
+        try{
+            const resultado=await this.alimentoRepositorio.insert(alimento);
+            if(resultado.identifiers.length>0){
+                LoggerAPI.info("Se ha agregado el alimento exitosamente")
+                return new Boolean(true);
+            }else{
+                LoggerAPI.warn("No se ha podido agregar el alimento ")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se produjo error en operacion de agregar alimento error: ${error}`)
+            throw error;
+        }
     }
 
 
