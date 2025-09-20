@@ -4,13 +4,27 @@
 import { Alimento } from "@entity/alimento.entity";
 import { AlimentoIDAO } from "@data.dao/alimento.dao";
 import { Conexion } from "@utility/conexion"
+import { LoggerAPI } from "@utility/logger";
 export class AlimentoDAO implements AlimentoIDAO {
+    alimentoRepositorio = Conexion.getRepository(Alimento);
     /** 1
      * Metodo que retorna un arreglo de alimentos
      */
     async getAlimentos(): Promise<Alimento[]> {
-        const alimentoRepositorio = Conexion.getRepository(Alimento);
-        return alimentoRepositorio.find();
+        LoggerAPI.info("Se inicia la busqueda de alimentos de DB")
+        try{
+            const alimentos=await this.alimentoRepositorio.find();
+            if(!alimentos || alimentos.length===0){
+                LoggerAPI.warn("No se han encontrado alimentos en el sistema")
+                return [];
+            }else{
+                LoggerAPI.info(`Se han obtenido las alimentos exitosamente un total de ${alimentos.length}`)
+                return alimentos;
+            }
+        }catch(error){
+            LoggerAPI.warn(`Error al obtenr los alimentos error: ${error}`)
+            throw error;
+        }
     }
     /** 2
      * Metodo que retorna un alimento por su ID
