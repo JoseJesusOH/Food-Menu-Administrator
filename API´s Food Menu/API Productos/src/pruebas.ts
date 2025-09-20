@@ -8,6 +8,7 @@ import "reflect-metadata"
 import { Conexion } from "@utility/conexion"
 import { Categoria } from "@entity/categoria.entity"
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl"
+import { json } from "stream/consumers"
 
 /**
  * Metodo para inializar la base de datos
@@ -41,10 +42,22 @@ async function pruebas() {
     await categoriaRepo.save(categoria2);
     console.log("Guardado");
     */
+    /*
     //Obtencion categorias
     const categoriaRepo = Conexion.getRepository(Categoria);
     const categorias = await categoriaRepo.find();
     console.log("Categorias; ", categorias);
+    */
+    //Pruebas con data Access
+    const categoriaDAO = new CategoriaDAO();
+   // const categoria=new Categoria();
+    //categoria.setNombre("Categoria A")
+    //const resultado=await categoriaDAO.agregarCategoria(categoria);
+    //console.log(`Resultado Agregar: ${resultado}`)
+    //const categorias=await categoriaDAO.getCategorias();
+    //console.log(`Resultado de obtener Categorias ${categorias}`)
+    const categoriaID=await categoriaDAO.getCategoriaById(6);
+    console.log(`Resultado Categoria por ID: ${JSON.stringify(categoriaID)}`)
   } catch (error) {
     console.log(error)
   }
