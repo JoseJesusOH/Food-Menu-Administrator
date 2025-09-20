@@ -12,42 +12,42 @@ export class CategoriaDAO implements CategoriaIDAO {
     /** 1
      * Metodo para obtener todas las categorias
      */
-    async getCategorias():  Promise<Categoria[]> {
-          const categoriaRepositorio = Conexion.getRepository(Categoria);
+    async getCategorias(): Promise<Categoria[]> {
+        const categoriaRepositorio = Conexion.getRepository(Categoria);
         return categoriaRepositorio.find();
-    } 
+    }
     /** 2
      * Metodo para obtener una categoria por su ID
      */
-    async getCategoriaById(categoriaId: Number):  Promise<Categoria> {
-            const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return categoriaRepositorio.findOneBy({categoriaId:categoriaId})
+    async getCategoriaById(categoriaId: Number): Promise<Categoria> {
+        const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return categoriaRepositorio.findOneBy({ categoriaId: categoriaId })
     }
     /** 3
      * Metodo para obtener una categoria por su UUID
      */
-    async getCategoriaByUuid(categoriaUuid: String):  Promise<Categoria> {
-              const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return categoriaRepositorio.findOneBy({categoriaUuid:categoriaUuid})
+    async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
+        const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid })
     }
     /** 4
      * Metodo para agregar una nueva categoria
      */
-    async agregarCategoria(categoria: Categoria):  Promise<Boolean> {
-                      const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return (await categoriaRepositorio.insert(categoria)).identifiers.length>0
+    async agregarCategoria(categoria: Categoria): Promise<Boolean> {
+        const categoriaRepositorio = Conexion.getRepository(Categoria);
+        return (await categoriaRepositorio.insert(categoria)).identifiers.length > 0
     }
     /** 5
      * Metodo para eliminar una categoria por su ID
      */
-    async eliminarCategoriaById(categoriaId: Number):  Promise<Boolean> {
+    async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     /** 8
      * Metodo para actualizar una categoria
      * 
      */
-    async actualizarCategoria(categoria: Categoria):  Promise<Boolean >{
+    async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 }
