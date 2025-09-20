@@ -10,14 +10,14 @@ import { LoggerAPI } from "@utility/logger"
  * Implementacion de los metodos de la interfaz CategoriaIDAO
  */
 export class CategoriaDAO implements CategoriaIDAO {
-    /** 1
+  categoriaRepositorio = Conexion.getRepository(Categoria);
+  /** 1
      * Metodo para obtener todas las categorias
      */
- async getCategorias(): Promise<Categoria[]> {
+  async getCategorias(): Promise<Categoria[]> {
     LoggerAPI.info("Iniciando obtención de categorías desde DB");
     try {
-      const categoriaRepositorio = Conexion.getRepository(Categoria);
-      const categorias = await categoriaRepositorio.find();
+      const categorias = await this.categoriaRepositorio.find();
       if (!categorias || categorias.length === 0) {
         LoggerAPI.warn("No se encontraron categorías en la base de datos");
         // throw new Error("No se encontraron categorías");
@@ -32,38 +32,53 @@ export class CategoriaDAO implements CategoriaIDAO {
       throw error;
     }
   }
-    /** 2
-     * Metodo para obtener una categoria por su ID
-     */
-    async getCategoriaById(categoriaId: Number): Promise<Categoria> {
-        const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return categoriaRepositorio.findOneBy({ categoriaId: categoriaId })
+  /** 2
+   * Metodo para obtener una categoria por su ID
+   */
+  async getCategoriaById(categoriaId: Number): Promise<Categoria> {
+    LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
+    try {
+
+      const categoria = this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
+      if (categoria !== null) {
+        LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
+        return categoria;
+      }
+      else {
+        LoggerAPI.warn("No se encontro la categoria buscada")
+        // throw new Error("No se encontro la categoria buscada")
+        return null;
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presentado en la busqueda por id: ${error}`)
+      throw error;
     }
-    /** 3
-     * Metodo para obtener una categoria por su UUID
-     */
-    async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
-        const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid })
-    }
-    /** 4
-     * Metodo para agregar una nueva categoria
-     */
-    async agregarCategoria(categoria: Categoria): Promise<Boolean> {
-        const categoriaRepositorio = Conexion.getRepository(Categoria);
-        return (await categoriaRepositorio.insert(categoria)).identifiers.length > 0
-    }
-    /** 5
-     * Metodo para eliminar una categoria por su ID
-     */
-    async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
-    }
-    /** 8
-     * Metodo para actualizar una categoria
-     * 
-     */
-    async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
-        throw new Error("Method not implemented.");
-    }
+  }
+  /** 3
+   * Metodo para obtener una categoria por su UUID
+   */
+  async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
+    const categoriaRepositorio = Conexion.getRepository(Categoria);
+    return categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid })
+  }
+  /** 4
+   * Metodo para agregar una nueva categoria
+   */
+  async agregarCategoria(categoria: Categoria): Promise<Boolean> {
+    const categoriaRepositorio = Conexion.getRepository(Categoria);
+    return (await categoriaRepositorio.insert(categoria)).identifiers.length > 0
+  }
+  /** 5
+   * Metodo para eliminar una categoria por su ID
+   */
+  async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
+    throw new Error("Method not implemented.");
+  }
+  /** 8
+   * Metodo para actualizar una categoria
+   * 
+   */
+  async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
+    throw new Error("Method not implemented.");
+  }
 }
