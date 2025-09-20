@@ -34,7 +34,20 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
      * Metodo para obtener un centro productivo por su ID
      */
     async getCentroProductivoById(centroProductivoId: Number): Promise< CentroProductivo> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se procede a obtener el centro productivo por id DB")
+        try{
+            const centroProductivo=await this.centroProductivoRepositorio.findOneBy({centroProductivoId});
+            if(centroProductivo!==null){
+                LoggerAPI.info(`Se encontro el centro productivo con id ${centroProductivoId}`)
+                return centroProductivo;
+            }else{
+                LoggerAPI.warn(`No se encontro el centro productivo con id ${centroProductivoId}`)
+                return null;
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se produjo un error en la busqueda por id del centro productivo error; ${error}`)
+            throw error;
+        }
     }
     /** 3
      * Metodo para obtener un centro productivo por su UUID
