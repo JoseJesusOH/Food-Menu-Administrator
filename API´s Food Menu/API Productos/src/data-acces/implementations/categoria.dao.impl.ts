@@ -38,7 +38,6 @@ export class CategoriaDAO implements CategoriaIDAO {
   async getCategoriaById(categoriaId: Number): Promise<Categoria> {
     LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
     try {
-
       const categoria = this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
       if (categoria !== null) {
         LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
@@ -58,8 +57,20 @@ export class CategoriaDAO implements CategoriaIDAO {
    * Metodo para obtener una categoria por su UUID
    */
   async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
-    const categoriaRepositorio = Conexion.getRepository(Categoria);
-    return categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid })
+    LoggerAPI.info("Iniciando la busqueda de categoria por UUID")
+    try {
+      const categoria = this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
+      if (categoria !== null) {
+        LoggerAPI.info(`Se obtuvo correctamente la categoria con UUID ${categoriaUuid}`)
+        return categoria;
+      } else {
+        LoggerAPI.warn("No se encontro la categoria con el UUID proporcionado")
+        return null;
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presentado durante la busqueda por UUID: ${error}`)
+      throw error;
+    }
   }
   /** 4
    * Metodo para agregar una nueva categoria
