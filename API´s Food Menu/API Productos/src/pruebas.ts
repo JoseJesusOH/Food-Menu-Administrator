@@ -1,8 +1,17 @@
+/**
+ * Importacion TypeORM requerida por el uso de las entidades
+ */
 import "reflect-metadata"
+/**
+ * Importaciones de conexion, entidades y acceso a datos.
+ */
 import { Conexion } from "@utility/conexion"
 import { Categoria } from "@entity/categoria.entity"
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl"
 
+/**
+ * Metodo para inializar la base de datos
+ */
 async function inicializarBaseDatos() {
   try {
     await Conexion.initialize()
@@ -12,6 +21,9 @@ async function inicializarBaseDatos() {
   }
 }
 
+/**
+ * Metodo de ejeucion de pruebas del acceso a datos.
+ */
 async function pruebas() {
   try {
     await inicializarBaseDatos();
@@ -38,4 +50,7 @@ async function pruebas() {
   }
 }
 
+/**
+ * Exportacion del metodo de ejecucion de pruebas
+ */
 export { pruebas }
