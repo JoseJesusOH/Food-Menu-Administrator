@@ -8,7 +8,7 @@ import { Entity, Column, PrimaryGeneratedColumn, Generated } from "typeorm"
  * Entidad que representa una categoria en la base de datos.
  */
 @Entity("categorias")
-export class Categoria {
+ export class Categoria {
 
     /** Identificador autoincremental de la categoria en la base de datos */
     @PrimaryGeneratedColumn({
@@ -78,3 +78,4 @@ export class Categoria {
         this.categoriaUuid = categoriaUuid;
     }
 }
+
