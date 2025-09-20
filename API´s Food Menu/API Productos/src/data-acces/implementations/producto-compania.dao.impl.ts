@@ -3,6 +3,7 @@
  */
 import { ProductoCompania } from "@entity/producto-compania.entity";
 import { ProductoCompaniaIDAO } from "@data.dao/producto-compania.dao";
+import { Conexion } from "@utility/conexion";
 /**
  * Implementación del DAO de ProductoCompania.
  */
@@ -12,7 +13,9 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
      * Metodo que obtiene un ProductoCompania por su UUID.
      */
     async getProductoCompaniaByUuid(productoCompaniaUuid: String): Promise<ProductoCompania> {
-        throw new Error("Method not implemented.");
+        const productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
+        return productoCompaniaRepositorio.findOneBy(
+            {productoCompaniaUuid:productoCompaniaUuid})
     }
     /** 2
      * Metodo que obtiene un ProductoCompania por su ID.
