@@ -5,6 +5,7 @@ import { Categoria } from "@entity/categoria.entity";
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
 import { Conexion } from "@utility/conexion"
 import { LoggerAPI } from "@utility/logger"
+import e = require("express");
 
 /**
  * Implementacion de los metodos de la interfaz CategoriaIDAO
@@ -38,7 +39,7 @@ export class CategoriaDAO implements CategoriaIDAO {
   async getCategoriaById(categoriaId: Number): Promise<Categoria> {
     LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
     try {
-      const categoria = this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
+      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
       if (categoria !== null) {
         LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
         return categoria;
@@ -59,7 +60,7 @@ export class CategoriaDAO implements CategoriaIDAO {
   async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
     LoggerAPI.info("Iniciando la busqueda de categoria por UUID")
     try {
-      const categoria = this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
+      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
       if (categoria !== null) {
         LoggerAPI.info(`Se obtuvo correctamente la categoria con UUID ${categoriaUuid}`)
         return categoria;
@@ -76,8 +77,20 @@ export class CategoriaDAO implements CategoriaIDAO {
    * Metodo para agregar una nueva categoria
    */
   async agregarCategoria(categoria: Categoria): Promise<Boolean> {
-    const categoriaRepositorio = Conexion.getRepository(Categoria);
-    return (await categoriaRepositorio.insert(categoria)).identifiers.length > 0
+    LoggerAPI.info("Se realiza la operacion de agregar categoria en DB")
+    try {
+      const resultado = await this.categoriaRepositorio.insert(categoria)
+      if (resultado.identifiers.length) {
+        LoggerAPI.info(`Se ha registrado la categoria existosamente`)
+        return new Boolean(true);
+      } else {
+        LoggerAPI.warn("No se ha registrado la categoria")
+        return new Boolean(false)
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presenrtado durante la inserccion de categoria: ${error}`)
+      throw error;
+    }
   }
   /** 5
    * Metodo para eliminar una categoria por su ID
