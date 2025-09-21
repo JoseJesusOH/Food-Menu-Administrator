@@ -68,7 +68,21 @@ export class AlimentoDAO implements AlimentoIDAO {
      * Metodo que elimina un alimento por su ID
      */
     async eliminarAlimentoById(alimentoId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el proceso para eliminar alimento por id de DB")
+        try{
+            const resultado=await this.alimentoRepositorio.delete({alimentoId:alimentoId.valueOf()})
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha eliminado el alimento exitosamente.")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No se ha eliminado el alimento")
+                return new Boolean(false)
+            }
+        }
+        catch(error){
+            LoggerAPI.warn(`Se ha producido un error en `)
+            throw error;
+        }
     }
     /** 5
      * Metodo que actualiza un alimento
