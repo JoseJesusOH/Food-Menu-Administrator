@@ -16,7 +16,7 @@ export interface CompaniaIDAO {
    * @param companiaID ID de la compañia a buscar
    * @return Compania encontrada
    */
-  getCompaniaById(companiaID: Number): Promise<Compania>;
+  getCompaniaById(companiaId: Number): Promise<Compania>;
   /** 3
    * Obtiene una compañia por su UUID
    * @param companiaUuid UUID de la compañia a buscar
