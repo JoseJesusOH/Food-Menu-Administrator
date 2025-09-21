@@ -97,7 +97,20 @@ export class ProductoDAO implements ProductoIDAO {
      * Metodo para eliminar un producto por su ID.
      */
     async eliminarProductoById(productoId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia proceso para eliminar producto por id en DB")
+        try{
+            const resultado = await this.productoRepositorio.delete({productoId})
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha eliminado el producto exitosamente")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No se ha eliminado el producto")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido error al eliminar producto por id en DB error; ${error}`)
+            throw error;
+        }
     }
 
 
