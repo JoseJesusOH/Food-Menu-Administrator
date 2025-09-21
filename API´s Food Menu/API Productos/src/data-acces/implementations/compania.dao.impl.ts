@@ -5,6 +5,7 @@ import { Compania } from "@entity/compania.entity";
 import { CompaniaIDAO } from "@data.dao/compania.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
+import e = require("express");
 
 /**
  * Implementación del DAO de Compañía.
@@ -66,7 +67,21 @@ export class CompaniaDAO implements CompaniaIDAO {
      * Metodo que elimina una compañia por su ID.
      */
     async eliminarCompaniaById(companiaId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el proceso para eliminar una compania en DB")
+        try{
+            const resultado=await this.companiaRepositorio.delete({companiaId})
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha eliminado la compania exitosamente")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No se ha eliminado la compania exitosamente")
+                return new Boolean(false)
+            }
+
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error para eliminar una compania`)
+            throw error;
+        }
     }
     /** 6
      * Metodo que actualiza una compañia.
