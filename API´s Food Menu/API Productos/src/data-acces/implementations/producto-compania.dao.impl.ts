@@ -6,6 +6,7 @@ import { ProductoCompaniaIDAO } from "@data.dao/producto-compania.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 import { Compania } from "@entity/compania.entity";
+import { Producto } from "@entity/producto.entity";
 /**
  * Implementación del DAO de ProductoCompania.
  */
@@ -53,7 +54,20 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
      * Metodo que obtiene los ProductoCompania por su ID de producto.
      */
     async getProductosCompaniasByIdProducto(productoId: Number): Promise<ProductoCompania[]> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el proceso para obtener todos los productos compania por id de producto")
+        try {
+            const resultado = await this.productoCompaniaRepositorio.findBy({ producto: new Producto(productoId.valueOf()) })
+            if (resultado.length > 0) {
+                LoggerAPI.info(`Se han encontrado un total de ${resultado.length} productocompanias`)
+                return resultado;
+            } else {
+                LoggerAPI.warn(`No se han encontrado productocompania por el id de la compania ${productoId}`)
+                return []
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener todos los productocompania por id de producto error; ${error}`)
+            throw error;
+        }
     }
     /** 4
      * Metodo que obtiene los ProductoCompania por su UUID de producto compañia.
@@ -67,8 +81,7 @@ export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
                 return resultado;
             } else {
                 LoggerAPI.warn(`No se han encontrado productocompania por el id de la compania ${companiaId}`)
-                return
-                []
+                return []
             }
         } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al obtener todos los productocompania por id de compania error; ${error}`)
