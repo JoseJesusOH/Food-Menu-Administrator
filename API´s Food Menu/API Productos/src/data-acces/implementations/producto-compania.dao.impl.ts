@@ -76,8 +76,21 @@ productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
      * Metodo que elimina un ProductoCompania por su ID.
      */
     async eliminarProductoCompaniaById(productoCompaniaId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    LoggerAPI.info("Se ha iniciado el proceso para eliminar un producto compania por id ")
+    try {  
+         const  resultado=await this.productoCompaniaRepositorio.delete({productoCompaniaId})
+         if(resultado.affected>0){
+            LoggerAPI.info("Se ha eliminado el producto compania exitosamente")
+            return new Boolean(true)
+         }else{
+            LoggerAPI.warn("No se ha eliminado el producto compania")
+            return new Boolean(false)
+         }
+    } catch (error) {
+        LoggerAPI.warn(`Se ha producido un error al eliminar un productocompania por id error; ${error}`)
+       throw error; 
     }
+      }
 
 
 }
