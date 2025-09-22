@@ -117,6 +117,19 @@ export class CategoriaDAO implements CategoriaIDAO {
    * 
    */
   async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
-    throw new Error("Method not implemented.");
+    LoggerAPI.info("Se ha iniciado el proceso para actualizar una categoria con respecto al ID")
+    try {
+      const resultado = await this.categoriaRepositorio.update({ categoriaId: categoria.getCategoriaId() }, categoria);
+      if (resultado.affected > 0) {
+        LoggerAPI.info("Se ha actualizado la categoria correctamente")
+        return new Boolean(true)
+      } else {
+        LoggerAPI.warn("No se ha actualizado la categoria")
+        return new Boolean(false)
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Se ha producido un error al actualizar la categoria `)
+      throw error;
+    }
   }
 }
