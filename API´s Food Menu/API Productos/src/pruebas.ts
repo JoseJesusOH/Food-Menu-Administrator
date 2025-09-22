@@ -50,14 +50,21 @@ async function pruebas() {
     */
     //Pruebas con data Access
     const categoriaDAO = new CategoriaDAO();
-   // const categoria=new Categoria();
-    //categoria.setNombre("Categoria A")
-    //const resultado=await categoriaDAO.agregarCategoria(categoria);
-    //console.log(`Resultado Agregar: ${resultado}`)
-    //const categorias=await categoriaDAO.getCategorias();
-    //console.log(`Resultado de obtener Categorias ${categorias}`)
-    const categoriaID=await categoriaDAO.getCategoriaById(6);
+    const categoria = new Categoria();
+    categoria.setNombre("Categoria A")
+    const resultado = await categoriaDAO.agregarCategoria(categoria);
+    console.log(`Resultado Agregar: ${resultado}`)
+    const categorias = await categoriaDAO.getCategorias();
+    console.log(`Resultado de obtener Categorias ${categorias}`)
+    const categoriaID = await categoriaDAO.getCategoriaById(1);
     console.log(`Resultado Categoria por ID: ${JSON.stringify(categoriaID)}`)
+    categoriaID.setNombre("Categoria B")
+    const categoriaID2 = await categoriaDAO.getCategoriaById(1);
+    console.log(`Resultado Categoria por ID2: ${JSON.stringify(categoriaID2)}`)
+    const categoriaEliminada = await categoriaDAO.eliminarCategoriaById(1);
+    console.log(`Resultado de categoria Eliminada resultado ${categoriaEliminada}`)
+    const categorias2 = await categoriaDAO.getCategorias();
+    console.log(`Resultado de obtener Categorias2 ${categorias2}`)
   } catch (error) {
     console.log(error)
   }
