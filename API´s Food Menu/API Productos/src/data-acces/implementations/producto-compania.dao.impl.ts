@@ -33,9 +33,20 @@ productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
      * Metodo que obtiene un ProductoCompania por su ID.
      */
     async getProductoCompaniaById(productoCompaniaId: Number): Promise<ProductoCompania> {
-         const productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
-        return productoCompaniaRepositorio.findOneBy(
-            {productoCompaniaId:productoCompaniaId})
+        LoggerAPI.info("Se inicia el proceso para obtener un producto compania por id DB")
+        try {
+            const resultado= await this.productoCompaniaRepositorio.findOneBy({productoCompaniaId:productoCompaniaId.valueOf()})
+            if(resultado!==null){
+                 LoggerAPI.info(`Se ha encontrado un producto compania con ID ${productoCompaniaId}`)
+                return resultado;
+            }else{
+                LoggerAPI.warn(`No se ha encontrado un producto compania con ID ${productoCompaniaId}`)
+                return null;
+            }
+        } catch (error) {
+              LoggerAPI.warn(`Se ha producido un error en la busqueda por id de productocompania error; ${error}`)
+              throw error;
+        }
     }
     /** 3
      * Metodo que obtiene los ProductoCompania por su ID de producto.
