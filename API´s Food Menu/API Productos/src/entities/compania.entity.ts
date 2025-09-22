@@ -54,6 +54,14 @@ export class Compania {
     @OneToMany(() => ProductoCompania, (ProductoCompania) => ProductoCompania.getCompania)
      productoCompanias: ProductoCompania[];
 
+  /**
+   * Constructor que inicializa solo el ID
+   */
+  constructor(companiaId?: number) {
+    if (companiaId !== undefined) {
+      this.companiaId = companiaId;
+    }
+  }
     /**
      * Asigna las relaciones de las companias con respecto a producto
      * @param productoCompanias ProductoCompanias relaciones
