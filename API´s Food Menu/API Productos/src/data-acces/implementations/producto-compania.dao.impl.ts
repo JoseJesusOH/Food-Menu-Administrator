@@ -64,7 +64,20 @@ productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
      * Metodo que agrega un ProductoCompania.
      */
     async agregarProductoCompania(productoCompania: ProductoCompania): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se iniia el metodo para agregar un productoCompania en el sistema")
+        try {
+             const resultado=await this.productoCompaniaRepositorio.insert(productoCompania)
+             if(resultado.identifiers.length>0){
+                LoggerAPI.info("Se ha agregado el productoCompania exitosamente")
+                return new Boolean(true)
+             }else{
+                LoggerAPI.warn("No se ha agregado el producto compania")
+                return new Boolean(false)
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al agregar un productocompania error; ${error}`)
+            throw error;
+        }
     }
     /** 6
      * Metodo que actualiza un ProductoCompania.
