@@ -51,20 +51,28 @@ async function pruebas() {
     //Pruebas con data Access
     const categoriaDAO = new CategoriaDAO();
     const categoria = new Categoria();
-    categoria.setNombre("Categoria A")
-    const resultado = await categoriaDAO.agregarCategoria(categoria);
-    console.log(`Resultado Agregar: ${resultado}`)
-    const categorias = await categoriaDAO.getCategorias();
-    console.log(`Resultado de obtener Categorias ${categorias}`)
-    const categoriaID = await categoriaDAO.getCategoriaById(1);
-    console.log(`Resultado Categoria por ID: ${JSON.stringify(categoriaID)}`)
-    categoriaID.setNombre("Categoria B")
-    const categoriaID2 = await categoriaDAO.getCategoriaById(1);
-    console.log(`Resultado Categoria por ID2: ${JSON.stringify(categoriaID2)}`)
-    const categoriaEliminada = await categoriaDAO.eliminarCategoriaById(1);
-    console.log(`Resultado de categoria Eliminada resultado ${categoriaEliminada}`)
-    const categorias2 = await categoriaDAO.getCategorias();
-    console.log(`Resultado de obtener Categorias2 ${categorias2}`)
+    //categoria.setNombre("Categoria A")
+    //const resultado = await categoriaDAO.agregarCategoria(categoria);
+    //console.log(`Resultado Agregar: ${resultado}`)
+    categoria.setNombre("Categoria B")
+    categoria.setCategoriaId(1)
+    categoria.setCategoriaUuid("a01dafb0-94f2-435b-82f2-53a815abe206")
+    const resultado3=await categoriaDAO.actualizarCategoria(categoria)
+    console.log(`Resultado de actualizar; ${resultado3}`)
+    //const categorias = await categoriaDAO.getCategorias();
+    //console.log(`Resultado de obtener Categorias ${categorias}`)
+    //const categoriaID = await categoriaDAO.getCategoriaById(1);
+    //console.log(`Resultado Categoria por ID: ${JSON.stringify(categoriaID)}`)
+    //categoriaID.setNombre("Categoria B")
+    //const categoriaID2 = await categoriaDAO.getCategoriaById(1);
+    //console.log(`Resultado Categoria por ID2: ${JSON.stringify(categoriaID2)}`)
+    //const categoriaEliminada = await categoriaDAO.eliminarCategoriaById(1);
+    //console.log(`Resultado de categoria Eliminada resultado ${categoriaEliminada}`)
+    //const categorias2 = await categoriaDAO.getCategorias();
+    //console.log(`Resultado de obtener Categorias2 ${categorias2}`)
+    //const resultado2 = await categoriaDAO.agregarCategoria(categoria);
+    //console.log(`Resultado2 Agregar2: ${resultado2}`)
+
   } catch (error) {
     console.log(error)
   }

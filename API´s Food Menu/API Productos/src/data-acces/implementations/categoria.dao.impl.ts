@@ -119,7 +119,7 @@ export class CategoriaDAO implements CategoriaIDAO {
   async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
     LoggerAPI.info("Se ha iniciado el proceso para actualizar una categoria con respecto al ID")
     try {
-      const resultado = await this.categoriaRepositorio.update({ categoriaId: categoria.getCategoriaId() }, categoria);
+      const resultado = await this.categoriaRepositorio.update({ categoriaId: categoria.categoriaId.valueOf()}, categoria);
       if (resultado.affected > 0) {
         LoggerAPI.info("Se ha actualizado la categoria correctamente")
         return new Boolean(true)
