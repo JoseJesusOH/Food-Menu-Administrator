@@ -4,18 +4,30 @@
 import { ProductoCompania } from "@entity/producto-compania.entity";
 import { ProductoCompaniaIDAO } from "@data.dao/producto-compania.dao";
 import { Conexion } from "@utility/conexion";
+import { LoggerAPI } from "@utility/logger";
 /**
  * Implementación del DAO de ProductoCompania.
  */
 export class ProductoCompaniaDAO implements ProductoCompaniaIDAO {
-
+productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
     /** 1
      * Metodo que obtiene un ProductoCompania por su UUID.
      */
     async getProductoCompaniaByUuid(productoCompaniaUuid: String): Promise<ProductoCompania> {
-        const productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
-        return productoCompaniaRepositorio.findOneBy(
-            {productoCompaniaUuid:productoCompaniaUuid})
+        LoggerAPI.info("Se ha iniciado el proceso para obtener un producto compania por id")
+        try {
+            const productoCompania=await this.productoCompaniaRepositorio.findOneBy({productoCompaniaUuid})
+            if(productoCompania!==null){
+                LoggerAPI.info(`Se ha encontrado el productocompania con uuid ${productoCompaniaUuid}`)
+                return productoCompania;
+            }else{
+                LoggerAPI.warn(`No se ha encontrado el productocompania con uuid ${productoCompaniaUuid}`)
+               return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener el producto por UUID error ${error}`)
+            throw error
+        }
     }
     /** 2
      * Metodo que obtiene un ProductoCompania por su ID.
