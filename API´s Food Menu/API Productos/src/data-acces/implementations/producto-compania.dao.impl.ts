@@ -70,7 +70,21 @@ productoCompaniaRepositorio = Conexion.getRepository(ProductoCompania);
      * Metodo que actualiza un ProductoCompania.
      */
     async actualizarProductoCompania(productoCompania: ProductoCompania): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se ha iniciado el proceso para actualizar un productoCompania de DB")
+        try {
+             const resultado=await this.productoCompaniaRepositorio.update({productoCompaniaId:productoCompania.getProductoCompaniaId()},productoCompania)
+             if(resultado!==null){
+                LoggerAPI.info(`Se ha actualizado el productocompania exitosamente`)
+                return new Boolean(true);
+             }
+             else{
+                LoggerAPI.warn(`No se ha actualizado el productocompania`)
+                return new Boolean(false)
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar un productoCompania error; ${error}`)
+            throw error;
+        }
     }
     /** 7
      * Metodo que elimina un ProductoCompania por su ID.
