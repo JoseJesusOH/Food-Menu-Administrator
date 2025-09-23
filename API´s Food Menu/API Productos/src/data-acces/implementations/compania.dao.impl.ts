@@ -55,7 +55,20 @@ export class CompaniaDAO implements CompaniaIDAO {
      *  
      */
     async getCompaniaByUuid(companiaUuid: String): Promise<Compania> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia proceso para obtener compania por uuid")
+        try {
+            const compania = await this.companiaRepositorio.findOneBy({ companiaUuid: companiaUuid.valueOf() })
+            if (compania !== null) {
+                LoggerAPI.info(`Se ha obtenido la campania con uuid ${companiaUuid}`)
+                return compania
+            } else {
+                LoggerAPI.warn(`No se ha obtenido la compania con el uuid ${companiaUuid}`)
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error en la busqueda de compania por uuid error; ${error}`)
+            throw error;
+        }
     }
     /** 4
      * Metodo que agrega una nueva compañia.
