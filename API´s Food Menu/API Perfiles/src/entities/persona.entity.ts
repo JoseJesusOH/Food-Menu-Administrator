@@ -23,7 +23,7 @@ export class Persona {
     @PrimaryGeneratedColumn({
         name: "persona_id"
     })
-    private personaId: Number;
+     personaId: Number;
 
     /**
      * UUID de la persona
@@ -32,7 +32,7 @@ export class Persona {
         name: "persona_uuid"
     })
     @Generated("uuid")
-    private personaUuid: String;
+     personaUuid: String;
 
     /**
      * Nombre de la persona
@@ -41,7 +41,7 @@ export class Persona {
         name: "nombre",
         length: 100
     })
-    private nombre: String;
+     nombre: String;
 
     /**
      * Apellido paterno de la persona
@@ -50,7 +50,7 @@ export class Persona {
         name: "apellido_paterno",
         length: 100
     })
-    private apellidoPaterno: String;
+     apellidoPaterno: String;
 
     /**
      * Apellido materno de la persona
@@ -59,7 +59,7 @@ export class Persona {
         name: "apellido_materno",
         length: 100
     })
-    private apellidoMaterno: String;
+     apellidoMaterno: String;
 
     /** 
      * CURP de la persona
@@ -68,7 +68,7 @@ export class Persona {
         name: "curp",
         length: 20
     })
-    private CURP: String;
+     CURP: String;
 
     /**
      * NSS de la persona
@@ -77,7 +77,7 @@ export class Persona {
         name: "nss",
         length: 20
     })
-    private NSS: String;
+     NSS: String;
 
     /**
      * RFC de la persona
@@ -86,13 +86,13 @@ export class Persona {
         name: "rfc",
         length: 20
     })
-    private RFC: String;
+     RFC: String;
 
     /**
      * Relación uno a muchos con la entidad Direccion
      */
   @OneToMany(() => Direccion, (Direccion) => Direccion.getPersona)
-    private direcciones: Direccion[];
+     direcciones: Direccion[];
 
     /**
      *  Asigna el id de la persona
