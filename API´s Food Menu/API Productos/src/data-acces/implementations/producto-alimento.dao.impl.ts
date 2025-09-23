@@ -3,10 +3,13 @@
  */
 import { ProductoAlimento } from "@entity/producto-alimento.entity";
 import { ProductoAlimentoIDAO } from "@data.dao/producto-alimento.dao";
+import { Conexion } from "@utility/conexion";
+import { LoggerAPI } from "@utility/logger";
 /**
  * Implementación del DAO de ProductoAlimento.
  */
 export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
+      productoAlimentoRepositorio=Conexion.getRepository(ProductoAlimento)
     /** 1
      * Obtiene todos los productos-alimentos de un alimento específico 
     */
@@ -16,8 +19,22 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 2
      * Obtiene un producto-alimento por su ID 
     */
-    getProductoAlimentoById(productoAlimentoId: number): Promise<ProductoAlimento> {
-        throw new Error("Method not implemented.");
+    async getProductoAlimentoById(productoAlimentoId: Number): Promise<ProductoAlimento> {
+        LoggerAPI.info("Se inicia el proceso para obtener un productoalimento por ID ")
+        try{
+            const resultado= await this.productoAlimentoRepositorio.findOneBy({productoAlimentoId})
+             if(resultado!=null){
+                LoggerAPI.info(`Se ha obtenido el productoalimento con id ${productoAlimentoId}`)
+                return resultado;
+             }else{
+                        LoggerAPI.info(`No se ha obtenido el productoalimento con id ${productoAlimentoId}`)
+                return null;  
+             }
+        }catch(error)
+        {
+            LoggerAPI.warn(`Se ha producido un error al obtener el producto alimento por id error; ${error}`)
+            throw error;
+        }
     }
     /** 3
      * Obtiene un producto-alimento por su UUID 
