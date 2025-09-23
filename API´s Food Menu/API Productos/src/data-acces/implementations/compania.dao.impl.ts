@@ -74,7 +74,21 @@ export class CompaniaDAO implements CompaniaIDAO {
      * Metodo que agrega una nueva compañia.
      */
     async agregarCompania(compania: Compania): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el proceso para agregar una Compania a DB ")
+        try{
+            const resultado=await this.companiaRepositorio.insert(compania)
+            if(resultado.identifiers.length>0){
+                LoggerAPI.info("Se agregado la compania exitosamente")
+                return new Boolean(true)
+            }
+            else{
+                LoggerAPI.warn("No se ha agregado la compania")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error al agregar la compania a DB error; ${error}`)
+ throw error;
+        }
     }
     /** 5
      * Metodo que elimina una compañia por su ID.
