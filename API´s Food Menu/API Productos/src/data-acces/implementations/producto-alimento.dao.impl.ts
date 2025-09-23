@@ -101,7 +101,20 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 7
      * Elimina un producto-alimento por su ID 
      */
-    eliminarProductoAlimentoById(productoAlimentoId: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async eliminarProductoAlimentoById(productoAlimentoId: number): Promise<Boolean> {
+            LoggerAPI.info("Se inicia el proceso para eliminar un productoalimento ")
+        try {
+            const resultado = await this.productoAlimentoRepositorio.delete({productoAlimentoId})
+            if (resultado.affected > 0) {
+                LoggerAPI.info(`Se ha eliminado el productoalimento exitosamente con id ${productoAlimentoId}`)
+                return new Boolean(true);
+            } else {
+                LoggerAPI.info(`No se ha eliminado el productoalimento con id ${productoAlimentoId} `)
+                return new Boolean(false);
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al eliminar el producto alimento error; ${error}`)
+            throw error;
+        }
     }
 }
