@@ -9,7 +9,7 @@ import { LoggerAPI } from "@utility/logger";
  * Implementación del DAO de ProductoAlimento.
  */
 export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
-      productoAlimentoRepositorio=Conexion.getRepository(ProductoAlimento)
+    productoAlimentoRepositorio = Conexion.getRepository(ProductoAlimento)
     /** 1
      * Obtiene todos los productos-alimentos de un alimento específico 
     */
@@ -21,17 +21,16 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     */
     async getProductoAlimentoById(productoAlimentoId: Number): Promise<ProductoAlimento> {
         LoggerAPI.info("Se inicia el proceso para obtener un productoalimento por ID ")
-        try{
-            const resultado= await this.productoAlimentoRepositorio.findOneBy({productoAlimentoId})
-             if(resultado!=null){
+        try {
+            const resultado = await this.productoAlimentoRepositorio.findOneBy({ productoAlimentoId })
+            if (resultado != null) {
                 LoggerAPI.info(`Se ha obtenido el productoalimento con id ${productoAlimentoId}`)
                 return resultado;
-             }else{
-                        LoggerAPI.info(`No se ha obtenido el productoalimento con id ${productoAlimentoId}`)
-                return null;  
-             }
-        }catch(error)
-        {
+            } else {
+                LoggerAPI.info(`No se ha obtenido el productoalimento con id ${productoAlimentoId}`)
+                return null;
+            }
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al obtener el producto alimento por id error; ${error}`)
             throw error;
         }
@@ -41,17 +40,16 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     */
     async getProductoAlimentoByUuid(productoAlimentoUuid: string): Promise<ProductoAlimento> {
         LoggerAPI.info("Se inicia el proceso para obtener un productoalimento por UUID ")
-        try{
-            const resultado= await this.productoAlimentoRepositorio.findOneBy({productoAlimentoUuid})
-             if(resultado!=null){
+        try {
+            const resultado = await this.productoAlimentoRepositorio.findOneBy({ productoAlimentoUuid })
+            if (resultado != null) {
                 LoggerAPI.info(`Se ha obtenido el productoalimento con uuid ${productoAlimentoUuid}`)
                 return resultado;
-             }else{
-                        LoggerAPI.info(`No se ha obtenido el productoalimento con uuid ${productoAlimentoUuid}`)
-                return null;  
-             }
-        }catch(error)
-        {
+            } else {
+                LoggerAPI.info(`No se ha obtenido el productoalimento con uuid ${productoAlimentoUuid}`)
+                return null;
+            }
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al obtener el producto alimento por uuid error; ${error}`)
             throw error;
         }
@@ -65,8 +63,21 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 5
      * Agrega un nuevo producto-alimento 
      */
-    agregarProductoAlimento(productoAlimento: ProductoAlimento): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async agregarProductoAlimento(productoAlimento: ProductoAlimento): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el proceso para agregar un productoalimento ")
+        try {
+            const resultado = await this.productoAlimentoRepositorio.insert(productoAlimento)
+            if (resultado.identifiers.length > 0) {
+                LoggerAPI.info(`Se ha agregado el productoalimento exitosamente`)
+                return new Boolean(true);
+            } else {
+                LoggerAPI.info(`No se ha obtenido agregado el productoalimento `)
+                return new Boolean(false);
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al agregar el producto alimento error; ${error}`)
+            throw error;
+        }
     }
     /** 6
      * Actualiza un producto-alimento existente 
