@@ -6,6 +6,7 @@ import { CentroProductivoIDAO } from "@data.dao/centro-productivo.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 import { Logger } from "winston";
+import { error } from "console";
 /**
  * Implementacion de los metodos de la interfaz CentroProductivoIDAO
  * 
@@ -111,6 +112,18 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
      * Metodo para eliminar un centro productivo por su ID
      */
     async eliminarCentroProductivoById(centroProductivoId: Number):  Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se ha iniciado el proceso para eliminar el centro productivo por id")
+        try {
+            const resultado=await this.centroProductivoRepositorio.delete({centroProductivoId})
+          if(resultado.affected>0){
+            LoggerAPI.info(`Se ha eliminado el centro productivo con id ${centroProductivoId}`)
+            return new Boolean(true)
+          }else{
+            LoggerAPI.warn(`No se ha eliminado el centro productivo con id ${centroProductivoId}`)
+            return new Boolean(false)
+          }
+        } catch (error) {
+    LoggerAPI.warn(`Se ha producido un error al eliminar el centro productivo error; ${error}`)            
+        }
     }
 }
