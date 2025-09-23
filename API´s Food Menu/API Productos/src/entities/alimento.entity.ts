@@ -47,6 +47,11 @@ export class Alimento {
     @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getAlimento)
     productoAlimento: ProductoAlimento[];
 
+    constructor(alimentoId?: number) {
+        if (alimentoId !== undefined) {
+            this.alimentoId = alimentoId;
+        }
+    }
     /**
      * Asigna los productos asociados al alimento.
      * @param productoAlimento Lista de productos asociados
