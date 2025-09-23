@@ -26,7 +26,7 @@ export class Direccion {
     @PrimaryGeneratedColumn({
         name: "direccion_id"
     })
-    private direccionId: Number;
+     direccionId: Number;
 
     /**
      * Identificador UUID de la direccion
@@ -35,7 +35,7 @@ export class Direccion {
         name: "direccion_uuid"
     })
     @Generated("uuid")
-    private direccionUuid: String;
+     direccionUuid: String;
 
     /**
      * Calle de la direccion
@@ -44,7 +44,7 @@ export class Direccion {
         name: "calle",
         length: 100
     })
-    private calle: String;
+     calle: String;
 
     /**
      * Numero de la direccion
@@ -53,7 +53,7 @@ export class Direccion {
         name: "numero",
         length: 100
     })
-    private numero: String;
+     numero: String;
 
     /**
      * Colonia Direccion
@@ -62,14 +62,14 @@ export class Direccion {
         name: "asentamiento",
         length: 100
     })
-    private asentamiento: String;
+     asentamiento: String;
 
     /**
      * Persona asociada a la dirección
      */
     @ManyToOne(() => Persona, (Persona) => Persona.getDirecciones)
     @JoinColumn({ name: "persona_id", foreignKeyConstraintName: "persona_direccion_idfk" })
-    private persona: Persona;
+     persona: Persona;
 
     /**
      *  Establece el identificador de la direccion
