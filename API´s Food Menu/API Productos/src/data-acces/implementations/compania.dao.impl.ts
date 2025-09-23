@@ -5,8 +5,6 @@ import { Compania } from "@entity/compania.entity";
 import { CompaniaIDAO } from "@data.dao/compania.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
-import e = require("express");
-
 /**
  * Implementación del DAO de Compañía.
  */
@@ -130,5 +128,4 @@ export class CompaniaDAO implements CompaniaIDAO {
             throw error;
         }
     }
-
 }

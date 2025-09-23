@@ -125,6 +125,4 @@ export class AlimentoDAO implements AlimentoIDAO {
             throw error;
         }
     }
-
-
 }
