@@ -24,7 +24,7 @@ export class Permiso {
     @PrimaryGeneratedColumn({
         name: "permiso_id"
     })
-    private permisoId: Number;
+     permisoId: Number;
 
 
     /**
@@ -34,7 +34,7 @@ export class Permiso {
         name: "permiso_uuid"
     })
     @Generated("uuid")
-    private permisoUuid: String;
+     permisoUuid: String;
 
     /**
      * Nombre del permiso
@@ -43,13 +43,13 @@ export class Permiso {
         name: "nombre",
         length: 100
     })
-    private nombre: String;
+     nombre: String;
 
     /**
      * Relación uno a muchos con la entidad PermisoCategoria
      */
     @OneToMany(() => PermisoCategoria, (PermisoCategoria) => PermisoCategoria.getPermiso)
-    private permisoCategorias: PermisoCategoria[];
+     permisoCategorias: PermisoCategoria[];
 
     /**
      * Asigna el id del permiso
