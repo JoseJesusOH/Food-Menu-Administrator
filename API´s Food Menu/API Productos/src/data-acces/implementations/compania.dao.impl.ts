@@ -106,7 +106,7 @@ export class CompaniaDAO implements CompaniaIDAO {
             }
 
         }catch(error){
-            LoggerAPI.warn(`Se ha producido un error para eliminar una compania`)
+            LoggerAPI.warn(`Se ha producido un error para eliminar una compania error; ${error}`)
             throw error;
         }
     }
@@ -114,7 +114,21 @@ export class CompaniaDAO implements CompaniaIDAO {
      * Metodo que actualiza una compañia.
      */
     async actualizarCompania(compania: Compania): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+             LoggerAPI.info("Se inicia el proceso para actualizar una compania en DB")
+        try{
+            const resultado=await this.companiaRepositorio.update({companiaId:compania.getCompaniaId()},compania)
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha actualizado la compania exitosamente")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No se ha actualizado la compania exitosamente")
+                return new Boolean(false)
+            }
+
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error para actualizar una compania error; ${error}`)
+            throw error;
+        }
     }
 
 }
