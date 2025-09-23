@@ -24,7 +24,7 @@ export class PermisoCategoria {
     @PrimaryGeneratedColumn({
         name: "permiso_categoria_id"
     })
-    private permisoCategoriaId: Number;
+     permisoCategoriaId: Number;
 
     /**
      * Identificador UUID de la tabla PermisoCategoria
@@ -33,21 +33,21 @@ export class PermisoCategoria {
         name: "permiso_categoria_uuid"
     })
     @Generated("uuid")
-    private permisoCategoriaUuid: String;
+     permisoCategoriaUuid: String;
 
     /**
      * Relación muchos a uno con la entidad Categoria
      */
     @ManyToOne(() => Categoria, (Categoria) => Categoria.getPermisoCategorias)
     @JoinColumn({ name: "categoria_id", foreignKeyConstraintName: "permiso_categoria_categoria_idfk" })
-    private categoria: Categoria;
+     categoria: Categoria;
 
     /**
      * Relación muchos a uno con la entidad Permiso
      */
     @ManyToOne(() => Permiso, (Permiso) => Permiso.getPermisoCategorias)
     @JoinColumn({ name: "permiso_id", foreignKeyConstraintName: "permiso_categoria_permiso_idfk" })
-    private permiso: Permiso;
+     permiso: Permiso;
 
     /**
      * Metodo que asigna el ID de la tabla PermisoCategoria
