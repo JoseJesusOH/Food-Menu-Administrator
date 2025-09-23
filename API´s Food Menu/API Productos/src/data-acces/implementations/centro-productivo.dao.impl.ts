@@ -5,6 +5,7 @@ import { CentroProductivo } from "@entity/centro-productivo.entity";
 import { CentroProductivoIDAO } from "@data.dao/centro-productivo.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
+import { Logger } from "winston";
 /**
  * Implementacion de los metodos de la interfaz CentroProductivoIDAO
  * 
@@ -91,7 +92,20 @@ export class CentroProductivoDAO implements CentroProductivoIDAO{
      * Metodo para actualizar un centro productivo
      */
     async actualizarCentroProductivo(centroProductivo: CentroProductivo):  Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el proceso para actualizar un centro productivo")
+        try{ 
+            const resultado=await this.centroProductivoRepositorio.update({centroProductivoId:centroProductivo.getCentroProductivoId()},centroProductivo);
+             if(resultado.affected>0){
+                LoggerAPI.info("Se ha actualizado el centro productivo exitosamente")
+         return new Boolean(true)       
+             }else{
+                LoggerAPI.warn("No se ha actualizado el centro productivo exitosamente")
+                return new Boolean(false)
+             }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error al actualizar centro productivo error; ${error}`)
+            throw error; 
+        }
     }
     /** 6
      * Metodo para eliminar un centro productivo por su ID
