@@ -24,7 +24,7 @@ export class Usuario {
     @PrimaryGeneratedColumn({
         name: "usuario_id"
     })
-    private usuarioId: Number;
+     usuarioId: Number;
 
     /**
      * UUID del usuario
@@ -33,7 +33,7 @@ export class Usuario {
         name: "usuario_uuid"
     })
     @Generated("uuid")
-    private usuarioUuid: String;
+     usuarioUuid: String;
 
     /**
      * Nombre del usuario
@@ -42,7 +42,7 @@ export class Usuario {
         name: "usuario",
         length: 100
     })
-    private usuario: String;
+     usuario: String;
 
     /** 
      * Contraseña del usuario
@@ -51,7 +51,7 @@ export class Usuario {
         name: "password",
         length: 100
     })
-    private password: String;
+     password: String;
 
     /**
      * Correo del usuario   
@@ -60,14 +60,14 @@ export class Usuario {
         name: "correo",
         length: 100
     })
-    private correo: String;
+     correo: String;
 
     /**
      * Relacion uno a uno con la entidad Persona
      */
     @OneToOne(() => Persona)
     @JoinColumn({ name: "persona_id", foreignKeyConstraintName: "usuario_persona_IDFK" })
-    private persona: Persona;
+     persona: Persona;
 
 
     /**
