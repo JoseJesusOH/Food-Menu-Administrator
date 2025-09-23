@@ -82,8 +82,21 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 6
      * Actualiza un producto-alimento existente 
      */
-    actualizarProductoAlimento(productoAlimento: ProductoAlimento): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarProductoAlimento(productoAlimento: ProductoAlimento): Promise<Boolean> {
+            LoggerAPI.info("Se inicia el proceso para actualizar un productoalimento ")
+        try {
+            const resultado = await this.productoAlimentoRepositorio.update({productoAlimentoId:productoAlimento.getProductoAlimentoId()},productoAlimento)
+            if (resultado.affected > 0) {
+                LoggerAPI.info(`Se ha actualizado el productoalimento exitosamente`)
+                return new Boolean(true);
+            } else {
+                LoggerAPI.info(`No se ha actualizado el productoalimento `)
+                return new Boolean(false);
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar el producto alimento error; ${error}`)
+            throw error;
+        }
     }
     /** 7
      * Elimina un producto-alimento por su ID 
