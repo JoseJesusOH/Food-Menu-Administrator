@@ -24,7 +24,7 @@ export class Categoria {
     @PrimaryGeneratedColumn({
         name: "categoria_id"
     })
-    private categoriaId: Number;
+     categoriaId: Number;
 
     /**
      * UUID de la categoria
@@ -33,7 +33,7 @@ export class Categoria {
         name: "categoria_uuid"
     })
     @Generated("uuid")
-    private categoriaUuid: String;
+     categoriaUuid: String;
 
     /**
      * Nombre de la categoria
@@ -42,13 +42,13 @@ export class Categoria {
         name: "nombre",
         length: 100
     })
-    private nombre: String;
+     nombre: String;
 
     /**
      * Relación uno a muchos con la entidad PermisoCategoria
      */
     @OneToMany(() => PermisoCategoria, (PermisoCategoria) => PermisoCategoria.getCategoria)
-    private permisoCategorias: PermisoCategoria[];
+     permisoCategorias: PermisoCategoria[];
 
     /**
      * Metodo que asigna el ID de la categoria
