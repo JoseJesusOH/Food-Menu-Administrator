@@ -6,6 +6,7 @@ import { ProductoAlimentoIDAO } from "@data.dao/producto-alimento.dao";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 import { Alimento } from "@entity/alimento.entity";
+import { Producto } from "@entity/producto.entity";
 /**
  * Implementación del DAO de ProductoAlimento.
  */
@@ -57,7 +58,7 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 3
      * Obtiene un producto-alimento por su UUID 
     */
-    async getProductoAlimentoByUuid(productoAlimentoUuid: string): Promise<ProductoAlimento> {
+    async getProductoAlimentoByUuid(productoAlimentoUuid: String): Promise<ProductoAlimento> {
         LoggerAPI.info("Se inicia el proceso para obtener un productoalimento por UUID ")
         try {
             const resultado = await this.productoAlimentoRepositorio.findOneBy({ productoAlimentoUuid })
@@ -76,8 +77,26 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 4
      * Obtiene todos los productos-alimentos de un producto específico 
      */
-    getProductosAlimentosByIdProducto(productoId: number): Promise<ProductoAlimento[]> {
-        throw new Error("Method not implemented.");
+    async getProductosAlimentosByIdProducto(productoId: Number): Promise<ProductoAlimento[]> {
+          LoggerAPI.info("Se inicia el proceso para obtener todos los ProductoAlimento por ID de producto")
+        try {
+            const resultados = await this.productoAlimentoRepositorio.find({
+                where: {
+                    producto: new Producto(productoId.valueOf())
+                }
+            })
+
+            if(resultados.length>0){
+                 LoggerAPI.info(`Se han encontrado un total de ${resultados.length} ProductoCompania`)
+                return resultados;
+            }else{
+                LoggerAPI.info(`No se han encontrado ProductoCompania con el id de producto ${productoId}`)
+                return []
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error en la busqueda de ProductoAlimento por ID producto error; ${error}`)
+            throw error;
+        }
     }
     /** 5
      * Agrega un nuevo producto-alimento 
@@ -120,7 +139,7 @@ export class ProductoAlimentoDAO implements ProductoAlimentoIDAO {
     /** 7
      * Elimina un producto-alimento por su ID 
      */
-    async eliminarProductoAlimentoById(productoAlimentoId: number): Promise<Boolean> {
+    async eliminarProductoAlimentoById(productoAlimentoId: Number): Promise<Boolean> {
         LoggerAPI.info("Se inicia el proceso para eliminar un productoalimento ")
         try {
             const resultado = await this.productoAlimentoRepositorio.delete({ productoAlimentoId })
