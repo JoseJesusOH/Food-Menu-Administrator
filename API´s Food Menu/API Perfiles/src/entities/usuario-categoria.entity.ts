@@ -26,7 +26,7 @@ export class UsuarioCategoria {
     @PrimaryGeneratedColumn({
         name: "usuario_categoria_id"
     })
-    private usuarioCategoriaId: Number;
+     usuarioCategoriaId: Number;
 
     /**
      * UUID de UsuarioCategoria
@@ -35,21 +35,21 @@ export class UsuarioCategoria {
         name: "usuario_categoria_uuid"
     })
     @Generated("uuid")
-    private usuarioCategoriaUuid: String;
+     usuarioCategoriaUuid: String;
 
     /**
      * Relación muchos a uno con la entidad Usuario
      */
           @ManyToOne(() => Categoria, (Categoria) => Categoria.getPermisoCategorias)
         @JoinColumn({ name: "usuario_id", foreignKeyConstraintName: "usuario_categoria_usuario_idfk" })
-   private usuario: Usuario;
+    usuario: Usuario;
     
     /**
      * Relación muchos a uno con la entidad Categoria
      */
          @ManyToOne(() => Categoria, (Categoria) => Categoria.getPermisoCategorias)
         @JoinColumn({ name: "categoria_id", foreignKeyConstraintName: "usuario_categoria_categoria_idfk" })
-    private categoria: Categoria;
+     categoria: Categoria;
 
     /**
      *  Asigna el id de UsuarioCategoria
