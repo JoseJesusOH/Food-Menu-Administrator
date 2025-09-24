@@ -55,25 +55,24 @@ export class CategoriaDAO implements CategoriaIDAO{
     }
   }
 
-    /**
-     * Metodo para agregar una categoria
-     */
-    agregarCategoria(categoria: Categoria): Boolean {
-        throw new Error("Method not implemented.");
+     /** 3
+   * Metodo para obtener una categoria por su UUID
+   */
+  async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
+    LoggerAPI.info("Iniciando la busqueda de categoria por UUID")
+    try {
+      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
+      if (categoria !== null) {
+        LoggerAPI.info(`Se obtuvo correctamente la categoria con UUID ${categoriaUuid}`)
+        return categoria;
+      } else {
+        LoggerAPI.warn("No se encontro la categoria con el UUID proporcionado")
+        return null;
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presentado durante la busqueda por UUID: ${error}`)
+      throw error;
     }
-
-    /**
-     * Metodo para eliminar una categoria por id
-     */
-    eliminarCategoriaByID(categoriaID: Number): Boolean {
-        throw new Error("Method not implemented.");
-    }
-
-    /**
-     * Metodo para actualizar una categoria del sistema. 
-     */
-    actualizarCategoria(categoria: Categoria): Boolean {
-        throw new Error("Method not implemented.");
-    }
+  }
 
 }
