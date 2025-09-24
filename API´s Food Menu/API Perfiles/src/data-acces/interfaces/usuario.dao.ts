@@ -10,33 +10,33 @@ export interface UsuarioIDAO{
      * Método para obtener todos los usuarios
      * @returns Un arreglo de objetos Usuario
      */
-    getUsuarios():Usuario[];
+    getUsuarios(): Promise<Usuario[]> ;
 
     /**
      *  Método para obtener un usuario por su ID
-     * @param usuarioID ID del usuario a buscar
+     * @param usuarioId ID del usuario a buscar
      * @returns Un objeto Usuario si se encuentra, de lo contrario retorna null
      */
-    getUsuarioByID(usuarioID:Number):Usuario;
+    getUsuarioById(usuarioId:Number):Promise<Usuario>;
 
     /**
      *  Método para agregar un nuevo usuario
      * @param usuario Objeto Usuario a agregar
      * @return true si la operación fue exitosa, de lo contrario false
      */
-    agregarUsuario(usuario:Usuario):Boolean;
+    agregarUsuario(usuario:Usuario):Promise<Boolean>;
 
     /**
      *  Método para eliminar un usuario por su ID
-     * @param usuarioID ID del usuario a eliminar
+     * @param usuarioId ID del usuario a eliminar
      * @return true si la operación fue exitosa, de lo contrario false
      */
-    eliminarUsuarioByID(usuarioID:Number):Boolean;
+    eliminarUsuarioById(usuarioId:Number):Promise<Boolean>;
     
     /**
      *  Método para actualizar un usuario existente
      * @param usuario Objeto Usuario con los datos actualizados
      * @return true si la operación fue exitosa, de lo contrario false
      */
-    actualizarUsuario(usuario:Usuario):Boolean;
+    actualizarUsuario(usuario:Usuario):Promise<Boolean>;
 }
