@@ -74,5 +74,23 @@ export class CategoriaDAO implements CategoriaIDAO{
       throw error;
     }
   }
-
+  /** 4
+   * Metodo para agregar una nueva categoria
+   */
+  async agregarCategoria(categoria: Categoria): Promise<Boolean> {
+    LoggerAPI.info("Se realiza la operacion de agregar categoria en DB")
+    try {
+      const resultado = await this.categoriaRepositorio.insert(categoria)
+      if (resultado.identifiers.length) {
+        LoggerAPI.info(`Se ha registrado la categoria existosamente`)
+        return new Boolean(true);
+      } else {
+        LoggerAPI.warn("No se ha registrado la categoria")
+        return new Boolean(false)
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presenrtado durante la inserccion de categoria: ${error}`)
+      throw error;
+    }
+  }
 }
