@@ -2,113 +2,132 @@
  * Importaciones requeridas del sistema modelo Categoria e interface CategoriaIDAO
  */
 import { Categoria } from "@entity/categoria.entity";
-import {CategoriaIDAO} from "@data.dao/categoria.dao"
+import { CategoriaIDAO } from "@data.dao/categoria.dao"
 import { LoggerAPI } from "@utility/logger";
-import { Conexion  } from "@utility/conexion";
+import { Conexion } from "@utility/conexion";
 
 /**
  * Implementaccion correspondiente a la categoria
  */
-export class CategoriaDAO implements CategoriaIDAO{
-   categoriaRepositorio = Conexion.getRepository(Categoria);
-  /** 1
-     * Metodo para obtener todas las categorias
-     */
-  async getCategorias(): Promise<Categoria[]> {
-    LoggerAPI.info("Iniciando obtención de categorías en DB");
-    try {
-      const categorias = await this.categoriaRepositorio.find();
-      if (!categorias || categorias.length === 0) {
-        LoggerAPI.warn("No se encontraron categorías en la base de datos");
-        return [];
-      } else {
-        LoggerAPI.info(
-          `Se han obtenido ${categorias.length} categorías exitosamente`
-        );
-        return categorias;
-      }
-    } catch (error) {
-      LoggerAPI.error("Error al obtener categorías", { error });
-      throw error; 
+export class CategoriaDAO implements CategoriaIDAO {
+    categoriaRepositorio = Conexion.getRepository(Categoria);
+    /** 1
+       * Metodo para obtener todas las categorias
+       */
+    async getCategorias(): Promise<Categoria[]> {
+        LoggerAPI.info("Iniciando obtención de categorías en DB");
+        try {
+            const categorias = await this.categoriaRepositorio.find();
+            if (!categorias || categorias.length === 0) {
+                LoggerAPI.warn("No se encontraron categorías en la base de datos");
+                return [];
+            } else {
+                LoggerAPI.info(
+                    `Se han obtenido ${categorias.length} categorías exitosamente`
+                );
+                return categorias;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener categorías", { error });
+            throw error;
+        }
     }
-  }
 
     /**
      * Metodo para obtener una categoria del sistema por su id
      */
-  async getCategoriaById(categoriaId: Number): Promise<Categoria> {
-    LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
-    try {
-      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
-      if (categoria !== null) {
-        LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
-        return categoria;
-      }
-      else {
-        LoggerAPI.warn("No se encontro la categoria buscada")
-        // throw new Error("No se encontro la categoria buscada")
-        return null;
-      }
-    } catch (error) {
-      LoggerAPI.warn(`Error presentado en la busqueda por id: ${error}`)
-      throw error;
+    async getCategoriaById(categoriaId: Number): Promise<Categoria> {
+        LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
+        try {
+            const categoria = await this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
+            if (categoria !== null) {
+                LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
+                return categoria;
+            }
+            else {
+                LoggerAPI.warn("No se encontro la categoria buscada")
+                // throw new Error("No se encontro la categoria buscada")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error presentado en la busqueda por id: ${error}`)
+            throw error;
+        }
     }
-  }
 
-     /** 3
-   * Metodo para obtener una categoria por su UUID
-   */
-  async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
-    LoggerAPI.info("Iniciando la busqueda de categoria por UUID")
-    try {
-      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
-      if (categoria !== null) {
-        LoggerAPI.info(`Se obtuvo correctamente la categoria con UUID ${categoriaUuid}`)
-        return categoria;
-      } else {
-        LoggerAPI.warn("No se encontro la categoria con el UUID proporcionado")
-        return null;
-      }
-    } catch (error) {
-      LoggerAPI.warn(`Error presentado durante la busqueda por UUID: ${error}`)
-      throw error;
+    /** 3
+  * Metodo para obtener una categoria por su UUID
+  */
+    async getCategoriaByUuid(categoriaUuid: String): Promise<Categoria> {
+        LoggerAPI.info("Iniciando la busqueda de categoria por UUID")
+        try {
+            const categoria = await this.categoriaRepositorio.findOneBy({ categoriaUuid: categoriaUuid });
+            if (categoria !== null) {
+                LoggerAPI.info(`Se obtuvo correctamente la categoria con UUID ${categoriaUuid}`)
+                return categoria;
+            } else {
+                LoggerAPI.warn("No se encontro la categoria con el UUID proporcionado")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error presentado durante la busqueda por UUID: ${error}`)
+            throw error;
+        }
     }
-  }
-  /** 4
-   * Metodo para agregar una nueva categoria
-   */
-  async agregarCategoria(categoria: Categoria): Promise<Boolean> {
-    LoggerAPI.info("Se realiza la operacion de agregar categoria en DB")
-    try {
-      const resultado = await this.categoriaRepositorio.insert(categoria)
-      if (resultado.identifiers.length) {
-        LoggerAPI.info(`Se ha registrado la categoria existosamente`)
-        return new Boolean(true);
-      } else {
-        LoggerAPI.warn("No se ha registrado la categoria")
-        return new Boolean(false)
-      }
-    } catch (error) {
-      LoggerAPI.warn(`Error presenrtado durante la inserccion de categoria: ${error}`)
-      throw error;
-    }
-  }  /** 5
+    /** 4
+     * Metodo para agregar una nueva categoria
+     */
+    async agregarCategoria(categoria: Categoria): Promise<Boolean> {
+        LoggerAPI.info("Se realiza la operacion de agregar categoria en DB")
+        try {
+            const resultado = await this.categoriaRepositorio.insert(categoria)
+            if (resultado.identifiers.length) {
+                LoggerAPI.info(`Se ha registrado la categoria existosamente`)
+                return new Boolean(true);
+            } else {
+                LoggerAPI.warn("No se ha registrado la categoria")
+                return new Boolean(false)
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error presenrtado durante la inserccion de categoria: ${error}`)
+            throw error;
+        }
+    }  /** 5
    * Metodo para eliminar una categoria por su ID
    */
-  async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
-    LoggerAPI.info("Se inicia el metodo para eliminar una categoria por id en DB")
-    try {
-      const resultado = await this.categoriaRepositorio.delete({ categoriaId: categoriaId.valueOf() })
-      if (resultado.affected > 0) {
-        LoggerAPI.info(`Se ha eliminado una categoria con id ${categoriaId}`)
-        return new Boolean(true)
-      } else {
-        LoggerAPI.warn(`No se ha eliminado la categoria con ID ${categoriaId}`)
-        return new Boolean(false)
-      }
-    } catch (error) {
-      LoggerAPI.warn(`Se bha producido un error en la eliminacion de categoria por ID error: ${error}`)
-      throw error;
+    async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para eliminar una categoria por id en DB")
+        try {
+            const resultado = await this.categoriaRepositorio.delete({ categoriaId: categoriaId.valueOf() })
+            if (resultado.affected > 0) {
+                LoggerAPI.info(`Se ha eliminado una categoria con id ${categoriaId}`)
+                return new Boolean(true)
+            } else {
+                LoggerAPI.warn(`No se ha eliminado la categoria con ID ${categoriaId}`)
+                return new Boolean(false)
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se bha producido un error en la eliminacion de categoria por ID error: ${error}`)
+            throw error;
+        }
+    }  /** 8
+   * Metodo para actualizar una categoria
+   * 
+   */
+    async actualizarCategoria(categoria: Categoria): Promise<Boolean> {
+        LoggerAPI.info("Se ha iniciado el proceso para actualizar una categoria con respecto al ID")
+        try {
+            const resultado = await this.categoriaRepositorio.update({ categoriaId: categoria.categoriaId.valueOf() }, categoria);
+            if (resultado.affected > 0) {
+                LoggerAPI.info("Se ha actualizado la categoria correctamente")
+                return new Boolean(true)
+            } else {
+                LoggerAPI.warn("No se ha actualizado la categoria")
+                return new Boolean(false)
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar la categoria `)
+            throw error;
+        }
     }
-  }
 }
