@@ -11,33 +11,33 @@ export interface CategoriaIDAO {
      * Método para obtener todas las categorías.
      * @return Un arreglo de objetos Categoria.
      */
-    getCategorias(): Categoria[];
+    getCategorias(): Promise<Categoria[]>;
 
     /**
      * Método para obtener una categoría por su ID.
-     * @param categoriaID ID de la categoría a buscar.
+     * @param categoriaId ID de la categoría a buscar.
      * @return Un objeto Categoria si se encuentra, de lo contrario retorna null.
      */
-    getCategoriaByID(categoriaID: Number): Categoria;
+    getCategoriaById(categoriaId: Number): Promise<Categoria>;
 
     /**
      * Método para agregar una nueva categoría.
      * @param categoria Objeto Categoria a agregar.
      * @return true si la operación fue exitosa, de lo contrario false.
      */
-    agregarCategoria(categoria: Categoria): Boolean;
+    agregarCategoria(categoria: Categoria): Promise<Boolean>;
 
     /**
      * Método para eliminar una categoría por su ID.
-     * @param categoriaID ID de la categoría a eliminar.
+     * @param categoriaId ID de la categoría a eliminar.
      * @return true si la operación fue exitosa, de lo contrario false.
      */
-    eliminarCategoriaByID(categoriaID: Number): Boolean;
+    eliminarCategoriaById(categoriaId: Number): Promise<Boolean>;
 
     /**
      * Método para actualizar una categoría existente.
      * @param categoria Objeto Categoria con los datos actualizados.
      * @return true si la operación fue exitosa, de lo contrario false.
      */
-    actualizarCategoria(categoria: Categoria): Boolean;
+    actualizarCategoria(categoria: Categoria): Promise<Boolean>;
 }
