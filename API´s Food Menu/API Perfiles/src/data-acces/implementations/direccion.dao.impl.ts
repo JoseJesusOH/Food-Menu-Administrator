@@ -46,11 +46,29 @@ export class DireccionDAO implements DireccionIDAO {
                 return null;
             }
         } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al buscar la direccion por ID del sistema ${error}`)
+            throw error;
+        }
+    }
+    /**
+     * Metodo para obtener la direccion por UUID
+     */
+    async getDireccionByUUid(direccionUuid: String): Promise<Direccion> {
+        LoggerAPI.info("Se inicia el metodo para obtener direccion por UUID")
+        try {
+            const resultado = await this.direccionRepiositorio.findOneBy({ direccionUuid });
+            if (resultado !== null) {
+                LoggerAPI.info(`Se ha encontrado la direccion con UUID ${direccionUuid}`)
+                return resultado;
+            } else {
+                LoggerAPI.warn(`No se ha encontrado la direccion con UUID ${direccionUuid}`)
+                return null;
+            }
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al buscar la direccion por UUID del sistema ${error}`)
             throw error;
         }
     }
-
     /**
      * Metodo para agregar una direccion
      */
