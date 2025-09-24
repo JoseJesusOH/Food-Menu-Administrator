@@ -72,8 +72,21 @@ export class DireccionDAO implements DireccionIDAO {
     /**
      * Metodo para agregar una direccion
      */
-    agregarDireccion(direccion: Direccion): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para agregar una direccion en DB")
+        try{
+            const resultado= await this.direccionRepiositorio.insert(direccion);
+            if(resultado.identifiers.length>0){
+                LoggerAPI.info("Se ha ingresado la direccion exitosamente.")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No sse ha podido ingresar la direccion en DB")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error al agregar la direccion error; ${error}`)
+            throw error;
+        }
     }
 
     /**
