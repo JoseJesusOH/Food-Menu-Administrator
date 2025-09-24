@@ -36,9 +36,24 @@ export class CategoriaDAO implements CategoriaIDAO{
     /**
      * Metodo para obtener una categoria del sistema por su id
      */
-    getCategoriaByID(categoriaID: Number): Categoria {
-        throw new Error("Method not implemented.");
+  async getCategoriaById(categoriaId: Number): Promise<Categoria> {
+    LoggerAPI.info("Iniciando obtención de categoría por id desde DB");
+    try {
+      const categoria = await this.categoriaRepositorio.findOneBy({ categoriaId: categoriaId });
+      if (categoria !== null) {
+        LoggerAPI.info(`Se encontro la categoria buscada con id ${categoriaId}`)
+        return categoria;
+      }
+      else {
+        LoggerAPI.warn("No se encontro la categoria buscada")
+        // throw new Error("No se encontro la categoria buscada")
+        return null;
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Error presentado en la busqueda por id: ${error}`)
+      throw error;
     }
+  }
 
     /**
      * Metodo para agregar una categoria
