@@ -92,5 +92,23 @@ export class CategoriaDAO implements CategoriaIDAO{
       LoggerAPI.warn(`Error presenrtado durante la inserccion de categoria: ${error}`)
       throw error;
     }
+  }  /** 5
+   * Metodo para eliminar una categoria por su ID
+   */
+  async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
+    LoggerAPI.info("Se inicia el metodo para eliminar una categoria por id en DB")
+    try {
+      const resultado = await this.categoriaRepositorio.delete({ categoriaId: categoriaId.valueOf() })
+      if (resultado.affected > 0) {
+        LoggerAPI.info(`Se ha eliminado una categoria con id ${categoriaId}`)
+        return new Boolean(true)
+      } else {
+        LoggerAPI.warn(`No se ha eliminado la categoria con ID ${categoriaId}`)
+        return new Boolean(false)
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Se bha producido un error en la eliminacion de categoria por ID error: ${error}`)
+      throw error;
+    }
   }
 }
