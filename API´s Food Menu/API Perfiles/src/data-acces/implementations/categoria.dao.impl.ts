@@ -15,12 +15,11 @@ export class CategoriaDAO implements CategoriaIDAO{
      * Metodo para obtener todas las categorias
      */
   async getCategorias(): Promise<Categoria[]> {
-    LoggerAPI.info("Iniciando obtención de categorías desde DB");
+    LoggerAPI.info("Iniciando obtención de categorías en DB");
     try {
       const categorias = await this.categoriaRepositorio.find();
       if (!categorias || categorias.length === 0) {
         LoggerAPI.warn("No se encontraron categorías en la base de datos");
-        // throw new Error("No se encontraron categorías");
         return [];
       } else {
         LoggerAPI.info(
@@ -30,7 +29,7 @@ export class CategoriaDAO implements CategoriaIDAO{
       }
     } catch (error) {
       LoggerAPI.error("Error al obtener categorías", { error });
-      throw error;
+      throw error; 
     }
   }
 
