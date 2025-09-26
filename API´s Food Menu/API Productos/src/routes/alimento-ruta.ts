@@ -1,3 +1,4 @@
-class AlimentoRuta{
+import { Router } from "express";
+class AlimentoRouter{
 
 }
