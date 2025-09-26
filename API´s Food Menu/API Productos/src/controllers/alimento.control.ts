@@ -3,6 +3,8 @@ class AlimentoControl{
     }
     actualizarAlimento = async (req,res,next)=>{
     }
-
+    obtenerAlimento = async (req,res,next)=>{
+    }
+    
 }
 export {AlimentoControl}
