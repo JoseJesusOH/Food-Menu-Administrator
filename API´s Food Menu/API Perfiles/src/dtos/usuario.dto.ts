@@ -1,0 +1,3 @@
+class UsuarioDTO{
+    usuario: String;
+}
