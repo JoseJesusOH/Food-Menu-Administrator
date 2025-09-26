@@ -5,6 +5,8 @@ class AlimentoControl{
     }
     obtenerAlimento = async (req,res,next)=>{
     }
+        obtenerAlimentoById = async (req,res,next)=>{
+    }
     
 }
 export {AlimentoControl}
