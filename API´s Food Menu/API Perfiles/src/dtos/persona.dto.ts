@@ -1,0 +1,3 @@
+class PersonaDTO{
+    nombre: String;
+}
