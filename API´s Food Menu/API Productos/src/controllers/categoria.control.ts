@@ -3,5 +3,7 @@ class CategoriaControl{
     }
             eliminarCategoria = async (req, res, next) => {
     }
+            obtenerCategorias = async (req, res, next) => {
+    }
 }
 export {CategoriaControl}
