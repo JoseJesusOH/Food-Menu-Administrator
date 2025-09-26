@@ -1,7 +1,9 @@
-class CompaniaControl{
-        agregarCompania = async (req, res, next) => {
+class CompaniaControl {
+    agregarCompania = async (req, res, next) => {
     }
-          eliminarCompania = async (req, res, next) => {
+    eliminarCompania = async (req, res, next) => {
+    }
+    obtenerCompanias = async (req, res, next) => {
     }
 }
-export {CompaniaControl}
+export { CompaniaControl }
