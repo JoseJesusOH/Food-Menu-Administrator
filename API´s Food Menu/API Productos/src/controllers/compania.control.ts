@@ -1,5 +1,5 @@
-class ProveedorControl{
-        agregarProveedor = async (req, res, next) => {
+class CompaniaControl{
+        agregarCompania = async (req, res, next) => {
     }
 }
-export {ProveedorControl}
+export {CompaniaControl}
