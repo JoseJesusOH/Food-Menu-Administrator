@@ -19,6 +19,11 @@ class ProductoControl {
      */
     actualizarProducto = async (req, res, next) => {
     }
+        /**
+     * Obtiene todos los productos.
+     * Suele responder con un array de productos.
+     * Puede aceptar filtros opcionales desde req.query.
+     */
     obtenerProductos = async (req, res, next) => {
     }
     obtenerProductoById = async (req, res, next) => {
