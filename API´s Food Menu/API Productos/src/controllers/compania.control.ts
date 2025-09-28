@@ -19,6 +19,11 @@ class CompaniaControl {
      */
     obtenerCompanias = async (req, res, next) => {
     }
+    
+    /**
+     * Obtiene una compañía específica por su id.
+     * El id vendría en req.params.id.
+     */
     obtenerCompaniaById = async (req, res, next) => {
     }
     actualizarCompania = async (req, res, next) => {
