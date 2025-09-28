@@ -7,6 +7,7 @@ class CompaniaControl {
     }
     obtenerCompaniaById = async (req, res, next) => {
     }
-
+    actualizarCompania = async (req, res, next) => {
+    }
 }
 export { CompaniaControl }
