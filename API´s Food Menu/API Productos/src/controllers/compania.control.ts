@@ -12,6 +12,11 @@ class CompaniaControl {
      */
     eliminarCompania = async (req, res, next) => {
     }
+       /**
+     * Obtiene todas las compañías.
+     * Suele responder con un array de compañías.
+     * Puede aceptar filtros opcionales desde req.query.
+     */
     obtenerCompanias = async (req, res, next) => {
     }
     obtenerCompaniaById = async (req, res, next) => {
