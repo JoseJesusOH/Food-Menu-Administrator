@@ -26,6 +26,11 @@ class ProductoControl {
      */
     obtenerProductos = async (req, res, next) => {
     }
+
+        /**
+     * Obtiene un producto específico por su id.
+     * El id vendría en req.params.id.
+     */
     obtenerProductoById = async (req, res, next) => {
     }
 }
