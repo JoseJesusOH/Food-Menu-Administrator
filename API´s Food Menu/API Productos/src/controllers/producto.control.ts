@@ -7,5 +7,7 @@ class ProductoControl {
     }
     obtenerProductos = async (req, res, next) => {
     }
+    obtenerProductoById = async (req, res, next) => {
+    }
 }
 export { ProductoControl }
