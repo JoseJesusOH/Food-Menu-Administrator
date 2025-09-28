@@ -7,5 +7,8 @@ class CategoriaControl {
     }
     obtenerCategoriaById = async (req, res, next) => {
     }
+    actualizarCategoria = async (req, res, next) => {
+    }
+
 }
 export { CategoriaControl }
