@@ -3,5 +3,7 @@ class ProductoControl {
     }
     eliminarProducto = async (req, res, next) => {
     }
+    actualizarProducto = async (req, res, next) => {
+    }
 }
 export { ProductoControl }
