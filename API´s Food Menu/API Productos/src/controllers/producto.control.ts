@@ -12,6 +12,11 @@ class ProductoControl {
      */
     eliminarProducto = async (req, res, next) => {
     }
+       /**
+     * Actualiza un producto existente.
+     * Suele recibir el id del producto en req.params.id
+     * y los nuevos datos en req.body.
+     */
     actualizarProducto = async (req, res, next) => {
     }
     obtenerProductos = async (req, res, next) => {
