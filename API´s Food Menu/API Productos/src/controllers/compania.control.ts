@@ -6,6 +6,10 @@ class CompaniaControl {
      */
     agregarCompania = async (req, res, next) => {
     }
+      /**
+     * Elimina una compañía existente.
+     * El id de la compañía se recibe en req.params.id.
+     */
     eliminarCompania = async (req, res, next) => {
     }
     obtenerCompanias = async (req, res, next) => {
