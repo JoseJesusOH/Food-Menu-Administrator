@@ -5,5 +5,7 @@ class ProductoControl {
     }
     actualizarProducto = async (req, res, next) => {
     }
+    obtenerProductos = async (req, res, next) => {
+    }
 }
 export { ProductoControl }
