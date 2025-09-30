@@ -1,4 +1,8 @@
 import {CategoriaDTO} from "@dto/categoria.dto"
-interface ICategoriaService{
+interface CategoriaIServicio{
     getCategorias():CategoriaDTO;
+    agregarCategoria():Boolean;
+    eliminarCategoria(): Boolean;
+    obtenerCategoriaByID():CategoriaDTO;
 }
+export {CategoriaIServicio}
