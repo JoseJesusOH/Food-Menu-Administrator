@@ -5,7 +5,7 @@ import {AlimentoDTO} from "@dto/alimento.dto"
 /**
  * Interfaz que implementara los servicios de Alimento
  */
-interface IAlimentoService{
+interface AlimentoIServicio{
     /**
      * Servicio para obtener todos los alimentos 
      * @returns Alimentos del Sistema 
@@ -33,4 +33,5 @@ interface IAlimentoService{
 /**
  * Exportacion de la interfaz
  */
-export {IAlimentoService}
+export { AlimentoIServicio
+}
