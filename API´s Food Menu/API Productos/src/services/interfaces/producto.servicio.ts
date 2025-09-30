@@ -4,5 +4,6 @@ interface ProductoIService{
     getProductoById(): ProductoDTO;
     agregarProducto():Boolean;
     eliminarProdcto():Boolean;
+    actualizarProducto(): Boolean;
 }
 export {ProductoIService}
