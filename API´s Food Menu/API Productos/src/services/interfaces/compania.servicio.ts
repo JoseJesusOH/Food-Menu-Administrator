@@ -1,4 +1,8 @@
 import { CompaniaDTO } from "@dto/compania.dto"
-interface ICompaniaService {
+interface CompaniaIServicio {
     getCompanias(): CompaniaDTO;
+    agregarCompania():Boolean;
+    eliminarCompania(): Boolean;
+    getCompaniaById(): CompaniaDTO;
 }
+export {CompaniaIServicio}
