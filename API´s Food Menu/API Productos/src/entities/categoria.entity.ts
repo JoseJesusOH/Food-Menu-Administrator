@@ -3,32 +3,40 @@
  */
 import "reflect-metadata"
 import { Entity, Column, PrimaryGeneratedColumn, Generated } from "typeorm"
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 
 /**
  * Entidad que representa una categoria en la base de datos.
  */
 @Entity("categorias")
- export class Categoria {
+export class Categoria {
 
     /** Identificador autoincremental de la categoria en la base de datos */
     @PrimaryGeneratedColumn({
         name: "categoria_id"
     })
-     categoriaId: Number;
+    @Exclude()
+    categoriaId: Number;
 
     /** Nombre de la categoria */
     @Column({
         length: 100,
         name: "nombre"
     })
-     nombre: String;
+    @Expose()
+    nombre: String;
 
     /** Identificador único UUID de la categoria */
     @Column({
         name: "categoria_uuid"
     })
     @Generated("uuid")
-     categoriaUuid: String;
+    @Expose()
+    categoriaUuid: String;
 
     /**
      * Devuelve el identificador interno de la categoria.
