@@ -38,10 +38,10 @@ interface CategoriaIServicio {
 
     /**
      * Obtiene una categoría específica a partir de su UUID.
-     * @param uuid Identificador único de la categoría.
+     * @param categoriaUuid Identificador único de la categoría.
      * @return Objeto CategoriaDTO correspondiente a la categoría buscada.
      */
-    getCategoriaByUuid(uuid: string): Promise<CategoriaDTO>;
+    getCategoriaByUuid(categoriaUuid: string): Promise<CategoriaDTO>;
 }
 
 export { CategoriaIServicio };

@@ -63,8 +63,23 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Busca y devuelve una categoría específica por su UUID.
      */
-    getCategoriaByUuid(): Promise<CategoriaDTO> {
-        throw new Error("Method not implemented.");
+    async getCategoriaByUuid(categoriaUuid:String): Promise<CategoriaDTO> {
+              LoggerAPI.info("Se inicia metodo de servicio para obtener las Categoria")
+        try {
+            const categoria = await this.categoriaDao.getCategoriaByUuid(categoriaUuid)
+            if (!categoria) {
+                LoggerAPI.warn(`No se han encontrado categorias en el sistema`)
+                return null;
+            } else {
+                LoggerAPI.info(`Se han encontrado una categoria con el UUID  ${categoriaUuid}`)
+                let categoriaDTO =new CategoriaDTO();
+                categoriaDTO=instanceToInstance(categoria)
+                return categoriaDTO;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo error en la busqueda de categoria por UUID servicio error; ${error}`)
+            throw error;
+        }
     }
 }
 
