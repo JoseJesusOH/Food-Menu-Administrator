@@ -9,6 +9,7 @@
         "dev": "nodemon --config nodemon.json app.ts"
     },
     "dependencies": {
+        "class-transformer": "^0.5.1",
         "cors": "^2.8.5",
         "express": "^5.1.0",
         "mysql": "^2.18.1",
