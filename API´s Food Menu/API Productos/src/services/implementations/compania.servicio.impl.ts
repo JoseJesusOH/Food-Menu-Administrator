@@ -1,21 +1,39 @@
-    
+// Importa el DTO de compañía
 import { CompaniaDTO } from "@dto/compania.dto";
-import {CompaniaIServicio } from "@service.dao/compania.servicio"
-class CompaniaServicio implements CompaniaIServicio{
-    getCompanias(): Promise<CompaniaDTO[]> {
+
+// Importa la interfaz del servicio de compañía
+import { CompaniaIServicio } from "@service.dao/compania.servicio";
+
+/**
+ * Servicio para manejar operaciones de compañías.
+ * Actualmente los métodos no están implementados.
+ */
+class CompaniaServicio implements CompaniaIServicio {
+
+  // Método para obtener todas las compañías
+  getCompanias(): Promise<CompaniaDTO[]> {
         throw new Error("Method not implemented.");
-    }
-    agregarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
+  }
+
+  // Método para agregar una nueva compañía
+  agregarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
         throw new Error("Method not implemented.");
-    }
-    actualizarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
+  }
+
+  // Método para actualizar los datos de una compañía existente
+  actualizarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
         throw new Error("Method not implemented.");
-    }
-    eliminarCompania(companiaUuid: String): Promise<Boolean> {
+  }
+
+  // Método para eliminar una compañía por su UUID
+  eliminarCompania(companiaUuid: string): Promise<boolean> {
         throw new Error("Method not implemented.");
-    }
-    getCompaniaByUuid(compañiaUuid: String): Promise<CompaniaDTO> {
+  }
+
+  // Método para obtener los datos de una compañía por su UUID
+  getCompaniaByUuid(companiaUuid: string): Promise<CompaniaDTO> {
         throw new Error("Method not implemented.");
-    }
-   
+  }
 }
+
+export { CompaniaServicio };
