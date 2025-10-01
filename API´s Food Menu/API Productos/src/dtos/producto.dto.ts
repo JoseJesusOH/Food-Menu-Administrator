@@ -1,5 +1,4 @@
 class ProductoDTO {
-    private nombre: String;
-    private UUID: String;
+     nombre: String;
 }
 export {ProductoDTO}

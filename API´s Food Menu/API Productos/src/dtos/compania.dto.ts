@@ -1,5 +1,5 @@
 class CompaniaDTO{
-   private nombre: String;
-   private UUID: String;  
+    nombre: String;
+    UUID: String;  
 }
 export {CompaniaDTO}

@@ -1,5 +1,5 @@
  class AlimentoDTO{
-   private nombre: String;
-   private UUID: String;  
+    nombre: String;
+    UUID: String;  
 }
  export {AlimentoDTO}
