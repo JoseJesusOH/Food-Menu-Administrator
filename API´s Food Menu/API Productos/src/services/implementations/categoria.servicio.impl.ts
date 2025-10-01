@@ -11,7 +11,7 @@ import { CategoriaDTO } from "@dto/categoria.dto";
 import { CategoriaIServicio } from "@service.dao/categoria.servicio"
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl";
-import { LoggerAPI } from "@utility/logger"; 
+import { LoggerAPI } from "@utility/logger";
 /**
  * Servicio encargado de la lógica de negocio relacionada con Categorías.
  * Implementa la interfaz CategoriaIServicio.
@@ -21,9 +21,17 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Obtiene todas las categorías disponibles en el sistema.
      */
-    getCategorias(): CategoriaDTO {
-              throw new Error("Method not implemented.");
-    } 
+   async  getCategorias(): Promise<CategoriaDTO> {
+        LoggerAPI.info("Se inicia metodo de servicio para obtener las Categoria")
+      try {
+         const categorias= await this.categoriaDao.getCategorias();
+         const categoriasDTO=new CategoriaDTO[];
+         return categoriasDTO;
+      } catch (error) {
+        LoggerAPI.warn(`Se produjo error en la busqueda de categorias servicio error; ${error}`)
+        throw error;
+      }
+    }
 
     /**
      * Agrega una nueva categoría al sistema.
