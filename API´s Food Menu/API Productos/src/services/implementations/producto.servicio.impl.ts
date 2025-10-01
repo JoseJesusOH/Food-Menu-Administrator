@@ -1,17 +1,21 @@
 import { ProductoDTO } from "@dto/producto.dto";
 import { ProductoIService } from "@service.dao/producto.servicio";
 class ProductoServicio implements ProductoIService{
-    getProductos(): ProductoDTO[] {
+    getProductos(): Promise<ProductoDTO[]> {
         throw new Error("Method not implemented.");
     }
-    getProductoById(): ProductoDTO {
+    getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
         throw new Error("Method not implemented.");
     }
-    agregarProducto(): Boolean {
+    agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    eliminarProdcto(): Boolean {
+    eliminarProdcto(productoUuid: String): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
+    actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        throw new Error("Method not implemented.");
+    }
+   
     
 }
