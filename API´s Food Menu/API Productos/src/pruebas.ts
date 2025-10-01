@@ -88,6 +88,7 @@ async function pruebas() {
       console.log("Plain; ",plain)
       console.log("Categoria DTO; ",categoriaDTO)
       */
+     /*
      //Version 2 instance to instance
            const categoria = new Categoria();
       categoria.setNombre("B")
@@ -96,6 +97,7 @@ async function pruebas() {
       let categoriaDTO =new CategoriaDTO();
       categoriaDTO=instanceToInstance(categoria);
       console.log("Categoria DTO; ",categoriaDTO)
+      */
   } catch (error) {
     console.log(error)
   }
