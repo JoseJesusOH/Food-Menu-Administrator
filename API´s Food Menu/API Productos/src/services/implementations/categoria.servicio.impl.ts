@@ -10,8 +10,9 @@ class CategoriaServicio implements CategoriaIServicio{
     eliminarCategoria(): Boolean {
         throw new Error("Method not implemented.");
     }
-    obtenerCategoriaByID(): CategoriaDTO {
+    getCategoriaByUuid(): CategoriaDTO {
         throw new Error("Method not implemented.");
     }
+    
     
 }
