@@ -14,7 +14,7 @@ interface CategoriaIServicio {
      * Obtiene todas las categorías registradas en el sistema.
      * @return Objeto CategoriaDTO que representa todas las categorías.
      */
-    getCategorias(): CategoriaDTO;
+    getCategorias(): Promise<CategoriaDTO>;
 
     /**
      * Crea una nueva categoría a partir de los datos proporcionados.
