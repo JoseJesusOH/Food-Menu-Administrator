@@ -1,5 +1,5 @@
 class CategoriaDTO{
-   private nombre: String;
-   private categoriaUuid: String;  
+    nombre: String;
+    categoriaUuid: String;  
 }
 export {CategoriaDTO}
