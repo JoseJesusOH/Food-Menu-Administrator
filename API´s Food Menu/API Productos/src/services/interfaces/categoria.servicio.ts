@@ -3,6 +3,6 @@ interface CategoriaIServicio{
     getCategorias():CategoriaDTO;
     agregarCategoria():Boolean;
     eliminarCategoria(): Boolean;
-    obtenerCategoriaByID():CategoriaDTO;
+    getCategoriaByUuid():CategoriaDTO;
 }
 export {CategoriaIServicio}
