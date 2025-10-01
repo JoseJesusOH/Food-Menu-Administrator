@@ -9,7 +9,8 @@ import { Conexion } from "@utility/conexion"
 import { Categoria } from "@entity/categoria.entity"
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl"
 import { json } from "stream/consumers"
-
+import { ClassTransformer, instanceToInstance, instanceToPlain, plainToClass, plainToInstance } from "class-transformer"
+import { CategoriaDTO } from "@dto/categoria.dto"
 /**
  * Metodo para inializar la base de datos
  */
@@ -48,6 +49,7 @@ async function pruebas() {
     const categorias = await categoriaRepo.find();
     console.log("Categorias; ", categorias);
     */
+    /*
     //Pruebas con data Access
     const categoriaDAO = new CategoriaDAO();
     const categoria = new Categoria();
@@ -72,7 +74,28 @@ async function pruebas() {
     //console.log(`Resultado de obtener Categorias2 ${categorias2}`)
     //const resultado2 = await categoriaDAO.agregarCategoria(categoria);
     //console.log(`Resultado2 Agregar2: ${resultado2}`)
-
+     */
+     /*
+    //Pruebas Class- Transformer Version 1 2 metodos;
+      const categoria = new Categoria();
+      categoria.setNombre("B")
+      categoria.setCategoriaId(1);
+      categoria.setCategoriaUuid("asas.-asasa")
+      console.log("Categoria; ",categoria)
+      let categoriaDTO =new CategoriaDTO();
+      const plain=instanceToPlain(categoria)
+      categoriaDTO=plainToInstance(CategoriaDTO,plain);
+      console.log("Plain; ",plain)
+      console.log("Categoria DTO; ",categoriaDTO)
+      */
+     //Version 2 instance to instance
+           const categoria = new Categoria();
+      categoria.setNombre("B")
+      categoria.setCategoriaId(1);
+      categoria.setCategoriaUuid("asas.-asasa")
+      let categoriaDTO =new CategoriaDTO();
+      categoriaDTO=instanceToInstance(categoria);
+      console.log("Categoria DTO; ",categoriaDTO)
   } catch (error) {
     console.log(error)
   }
