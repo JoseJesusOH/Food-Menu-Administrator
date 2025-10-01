@@ -2,17 +2,20 @@
 import { CompaniaDTO } from "@dto/compania.dto";
 import {CompaniaIServicio } from "@service.dao/compania.servicio"
 class CompaniaServicio implements CompaniaIServicio{
-    getCompanias(): CompaniaDTO {
+    getCompanias(): Promise<CompaniaDTO[]> {
         throw new Error("Method not implemented.");
     }
-    agregarCompania(): Boolean {
+    agregarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    eliminarCompania(): Boolean {
+    actualizarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    getCompaniaById(): CompaniaDTO {
+    eliminarCompania(companiaUuid: String): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    
+    getCompaniaByUuid(compañiaUuid: String): Promise<CompaniaDTO> {
+        throw new Error("Method not implemented.");
+    }
+   
 }
