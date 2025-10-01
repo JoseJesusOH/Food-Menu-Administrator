@@ -21,16 +21,22 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Obtiene todas las categorías disponibles en el sistema.
      */
-   async  getCategorias(): Promise<CategoriaDTO> {
+    async getCategorias(): Promise<CategoriaDTO[]> {
         LoggerAPI.info("Se inicia metodo de servicio para obtener las Categoria")
-      try {
-         const categorias= await this.categoriaDao.getCategorias();
-         const categoriasDTO=new CategoriaDTO[];
-         return categoriasDTO;
-      } catch (error) {
-        LoggerAPI.warn(`Se produjo error en la busqueda de categorias servicio error; ${error}`)
-        throw error;
-      }
+        try {
+            const categorias = await this.categoriaDao.getCategorias();
+            if (categorias.length < 0) {
+                LoggerAPI.warn(`No se han encontrado categorias en el sistema`)
+                return [];
+            } else {
+                LoggerAPI.info(`Se han encontrado un total de ${categorias.length}`)
+                const CATEGORIAS_DTO = new CategoriaDTO[1];
+                return CATEGORIAS_DTO;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo error en la busqueda de categorias servicio error; ${error}`)
+            throw error;
+        }
     }
 
     /**
