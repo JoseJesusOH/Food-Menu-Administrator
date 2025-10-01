@@ -12,7 +12,7 @@ import { CategoriaIServicio } from "@service.dao/categoria.servicio"
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl";
 import { LoggerAPI } from "@utility/logger";
-import { instanceToInstance } from "class-transformer";
+import { instanceToInstance,ClassTransformOptions } from "class-transformer";
 /**
  * Servicio encargado de la lógica de negocio relacionada con Categorías.
  * Implementa la interfaz CategoriaIServicio.
@@ -31,9 +31,9 @@ class CategoriaServicio implements CategoriaIServicio {
                 return [];
             } else {
                 LoggerAPI.info(`Se han encontrado un total de ${categorias.length}`)
-                let categoriasDTO = new CategoriaDTO[categorias.length];
+                let categoriasDTO : CategoriaDTO[]=[];
                 categoriasDTO=instanceToInstance(categorias)
-                return categorias;
+                return categoriasDTO;
             }
         } catch (error) {
             LoggerAPI.warn(`Se produjo error en la busqueda de categorias servicio error; ${error}`)
@@ -67,3 +67,5 @@ class CategoriaServicio implements CategoriaIServicio {
         throw new Error("Method not implemented.");
     }
 }
+
+export {CategoriaServicio}
