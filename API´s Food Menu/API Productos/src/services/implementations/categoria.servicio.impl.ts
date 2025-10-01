@@ -9,24 +9,26 @@ import { CategoriaDTO } from "@dto/categoria.dto";
  * Define los métodos que debe implementar la clase de servicio.
  */
 import { CategoriaIServicio } from "@service.dao/categoria.servicio"
-
+import { CategoriaIDAO } from "@data.dao/categoria.dao";
+import { CategoriaDAO } from "@data.impl/categoria.dao.impl";
+import { LoggerAPI } from "@utility/logger"; 
 /**
  * Servicio encargado de la lógica de negocio relacionada con Categorías.
  * Implementa la interfaz CategoriaIServicio.
  */
 class CategoriaServicio implements CategoriaIServicio {
-
+    categoriaDao: CategoriaIDAO = new CategoriaDAO();
     /**
      * Obtiene todas las categorías disponibles en el sistema.
      */
     getCategorias(): CategoriaDTO {
-        throw new Error("Method not implemented.");
-    }
+              throw new Error("Method not implemented.");
+    } 
 
     /**
      * Agrega una nueva categoría al sistema.
      */
-    agregarCategoria(categoriaDTO:CategoriaDTO): Boolean {
+    agregarCategoria(categoriaDTO: CategoriaDTO): Boolean {
         throw new Error("Method not implemented.");
     }
 
