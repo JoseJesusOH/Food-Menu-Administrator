@@ -2,7 +2,7 @@
 import { AlimentoDTO } from "@dto/alimento.dto";
 import {AlimentoIServicio } from "@service.dao/alimento.servicio"
 class AlimentoServicio implements AlimentoIServicio{
-    obtenerAlimentos(): Promise<AlimentoDTO> {
+    obtenerAlimentos(): Promise<AlimentoDTO[]> {
         throw new Error("Method not implemented.");
     }
     agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {

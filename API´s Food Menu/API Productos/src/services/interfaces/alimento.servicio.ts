@@ -10,7 +10,7 @@ interface AlimentoIServicio{
      * Servicio para obtener todos los alimentos 
      * @returns Alimentos del Sistema 
      */
-   obtenerAlimentos():Promise<AlimentoDTO>;
+   obtenerAlimentos():Promise<AlimentoDTO[]>;
    /**
     * Servicio para agregar un alimento
     * @param alimentoDTO Alimento a Registrar
