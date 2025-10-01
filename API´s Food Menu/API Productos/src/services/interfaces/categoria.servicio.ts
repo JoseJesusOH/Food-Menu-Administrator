@@ -21,21 +21,27 @@ interface CategoriaIServicio {
      * @param categoria Datos de la categoría a registrar.
      * @return Boolean indicando si la operación fue exitosa o no.
      */
-    agregarCategoria(categoria: CategoriaDTO): Boolean;
+    agregarCategoria(categoria: CategoriaDTO): Promise<Boolean>;
+    /**
+     * Actualiza una nueva categoría a partir de los datos proporcionados.
+     * @param categoria Datos de la categoría a actualizar.
+     * @return Boolean indicando si la operación fue exitosa o no.
+     */
+    actualizarCategoria(categoria: CategoriaDTO): Promise<Boolean>;
 
     /**
      * Elimina una categoría utilizando su identificador único (UUID).
      * @param uuid Identificador único de la categoría.
      * @return Boolean indicando si la operación de eliminación fue exitosa o no.
      */
-    eliminarCategoria(categoriaUuid: string): Boolean;
+    eliminarCategoria(categoriaUuid: string): Promise<Boolean>;
 
     /**
      * Obtiene una categoría específica a partir de su UUID.
      * @param uuid Identificador único de la categoría.
      * @return Objeto CategoriaDTO correspondiente a la categoría buscada.
      */
-    getCategoriaByUuid(uuid: string): CategoriaDTO;
+    getCategoriaByUuid(uuid: string): Promise<CategoriaDTO>;
 }
 
 export { CategoriaIServicio };
