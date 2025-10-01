@@ -42,21 +42,26 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Agrega una nueva categoría al sistema.
      */
-    agregarCategoria(categoriaDTO: CategoriaDTO): Boolean {
+    agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-
+    /**
+     * Actualiza una  categoría al sistema.
+     */
+    actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
+        throw new Error("Method not implemented.");
+    }
     /**
      * Elimina una categoría existente a partir de su UUID.
      */
-    eliminarCategoria(categoriaUuid: String): Boolean {
+    eliminarCategoria(categoriaUuid: String): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Busca y devuelve una categoría específica por su UUID.
      */
-    getCategoriaByUuid(): CategoriaDTO {
+    getCategoriaByUuid(): Promise<CategoriaDTO> {
         throw new Error("Method not implemented.");
     }
 }
