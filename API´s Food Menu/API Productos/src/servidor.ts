@@ -2,7 +2,6 @@
  * Importacion de la conexion
  */
 import { Conexion } from "@utility/conexion"
-
 /**
  * Variables requeridas 
  */
@@ -13,10 +12,11 @@ const PORT = 3000;
 // Middleware
 app.use(express.json());
 
+
+const categoriaRuta = require("@route/categoria-ruta")
 // Rutas 
-app.get("/", async (req, res) => {
-  res.send("Servidor Express con TypeScript funcionando 🚀");
-});
+app.use("/categorias",categoriaRuta)
+
 
 /**
  * Metodo que inializa el servidor express y manda a llamar la inicializacion 
