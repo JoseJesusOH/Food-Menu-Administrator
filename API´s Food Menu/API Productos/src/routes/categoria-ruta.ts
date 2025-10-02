@@ -15,5 +15,7 @@ router.get("/",categoriaControl.obtenerCategorias);
 router.get("/categoria",categoriaControl.obtenerCategoriaByUuid);
 router.post("/",categoriaControl.agregarCategoria);
 router.delete("/",categoriaControl.eliminarCategoria)
+router.put("/",categoriaControl.actualizarCategoria)
+
 //Exportacion Router
 module.exports = router;
