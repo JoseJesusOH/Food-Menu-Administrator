@@ -11,6 +11,7 @@ import {
  */
 import { Producto } from "@entity/producto.entity"
 import { Compania } from "@entity/compania.entity"
+import { Exclude } from "class-transformer";
 
 @Entity("productos_proveedores")
 export class ProductoCompania {
@@ -21,6 +22,7 @@ export class ProductoCompania {
     @PrimaryGeneratedColumn({
         name: "producto_compania_id"
     })
+    @Exclude()
      productoCompaniaId: Number;
 
     /**
