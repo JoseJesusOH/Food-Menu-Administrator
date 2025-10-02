@@ -3,7 +3,7 @@ import { CategoriaServicio } from "@service.impl/categoria.servicio.impl"
 import { LoggerAPI } from "@utility/logger"
 class CategoriaControl {
 
-     categoriaServicio: CategoriaIServicio = new CategoriaServicio()
+    categoriaServicio: CategoriaIServicio = new CategoriaServicio()
     /**
      * 
      * Crea una nueva categoría.
@@ -28,14 +28,14 @@ class CategoriaControl {
     obtenerCategorias = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control respectivo para el retorno de categorias");
         try {
-            const categorias=await this.categoriaServicio.getCategorias();
-            if(categorias.length>0){
-                res.status(200).send({categorias})
-            }else{
-                res.status(401).send({message:"No hay categorias existentes"})
+            const categorias = await this.categoriaServicio.getCategorias();
+            if (categorias.length > 0) {
+                res.status(200).send({ categorias })
+            } else {
+                res.status(401).send({ message: "No hay categorias existentes" })
             }
         } catch (error) {
-            LoggerAPI.warn(`Se ha presenrtado un error en la obtencion de categorias ${error}`)
+            LoggerAPI.warn(`Se ha presentado un error en la obtencion de categorias ${error}`)
         }
     }
 
@@ -44,17 +44,18 @@ class CategoriaControl {
      * El uuid vendría en req.params.uuid.
      */
     obtenerCategoriaByUuid = async (req, res, next) => {
-            LoggerAPI.info("Se inicia el control respectivo para el retorno de categoria por uuid");
+        LoggerAPI.info("Se inicia el control respectivo para el retorno de categoria por uuid");
         try {
-            const {categoriaUuid}=req;
-            const categoria=await this.categoriaServicio.getCategoriaByUuid(categoriaUuid);
-            if(!categoria){
-                res.status(200).send({categoria})
-            }else{
-                res.status(401).send({message:"No hay categoria con ese  uuid"})
+            const { categoriaUuid } = req.params;
+            const categoria = await this.categoriaServicio.getCategoriaByUuid(categoriaUuid);
+            if (!categoria) {
+                return res.status(200).send({ categoria })
+            } else {
+                return res.status(4004).send({ message: "No hay categoria con ese  uuid" })
             }
         } catch (error) {
             LoggerAPI.warn(`Se ha presenrtado un error en la obtencion de categoria por UUID ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
 
