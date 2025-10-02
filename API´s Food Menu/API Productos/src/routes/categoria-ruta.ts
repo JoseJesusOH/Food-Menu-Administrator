@@ -12,7 +12,9 @@ const categoriaControl = new CategoriaControl()
 
 //Manejo de Router
 router.get("/",categoriaControl.obtenerCategorias);
-router.get("/categoria",categoriaControl.obtenerCategorias);
+router.get("/categoria",categoriaControl.obtenerCategoriaByUuid);
+
+router.post("/",categoriaControl.agregarCategoria);
 
 //Exportacion Router
 module.exports = router;
