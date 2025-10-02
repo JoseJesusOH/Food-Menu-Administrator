@@ -1,5 +1,5 @@
-class CategoriaDTO{
+export class CategoriaDTO {
     nombre: String;
-    categoriaUuid: String;  
+    categoriaUuid: String;
 }
-export {CategoriaDTO}
+
