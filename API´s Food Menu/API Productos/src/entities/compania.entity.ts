@@ -11,6 +11,7 @@ import {
  */
 import { CentroProductivo } from "@entity/centro-productivo.entity"
 import { ProductoCompania } from "@entity/producto-compania.entity"
+import { Exclude } from "class-transformer";
 /**
  * Entidad que representa una compañia en la base de datos
  */
@@ -23,6 +24,7 @@ export class Compania {
     @PrimaryGeneratedColumn({
         name: "compania_id"
     })
+    @Exclude()
      companiaId: Number;
 
     /**
