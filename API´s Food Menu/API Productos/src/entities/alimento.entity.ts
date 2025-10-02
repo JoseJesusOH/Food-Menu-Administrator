@@ -6,7 +6,11 @@ import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
     JoinColumn
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importaciones de clases requeridas Categoria, ProductoAlimento con respecto a las relaciones.
  */
@@ -27,11 +31,12 @@ export class Alimento {
 
     /** Identificador autoincremental del alimento en la base de datos */
     @PrimaryGeneratedColumn({ name: "alimento_id" })
-    alimentoId: number;
+        @Exclude()
+    alimentoId: Number;
 
     /** Nombre del alimento */
     @Column({ name: "nombre" })
-    nombre: string;
+    nombre: String;
 
     /** Relación uno a uno con la categoría */
     @OneToOne(() => Categoria)
@@ -41,13 +46,13 @@ export class Alimento {
     /** Identificador único UUID del alimento */
     @Column({ name: "alimento_uuid" })
     @Generated("uuid")
-    alimentoUuid: string;
+    alimentoUuid: String;
 
     /** Lista de relaciones con productos asociados al alimento */
     @OneToMany(() => ProductoAlimento, (ProductoAlimento) => ProductoAlimento.getAlimento)
     productoAlimento: ProductoAlimento[];
 
-    constructor(alimentoId?: number) {
+    constructor(alimentoId?: Number) {
         if (alimentoId !== undefined) {
             this.alimentoId = alimentoId;
         }
@@ -72,7 +77,7 @@ export class Alimento {
      * Devuelve el identificador interno del alimento.
      * @returns ID del alimento
      */
-    getAlimentoId(): number {
+    getAlimentoId(): Number {
         return this.alimentoId;
     }
 
@@ -88,7 +93,7 @@ export class Alimento {
      * Devuelve el nombre del alimento.
      * @returns Nombre del alimento
      */
-    getNombre(): string {
+    getNombre(): String {
         return this.nombre;
     }
 
@@ -120,7 +125,7 @@ export class Alimento {
      * Devuelve el UUID del alimento.
      * @returns UUID del alimento
      */
-    getAlimentoUuid(): string {
+    getAlimentoUuid(): String {
         return this.alimentoUuid;
     }
 
