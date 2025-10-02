@@ -30,12 +30,13 @@ class CategoriaControl {
         try {
             const categorias = await this.categoriaServicio.getCategorias();
             if (categorias.length > 0) {
-                res.status(200).send({ categorias })
+                return res.status(200).send({ categorias })
             } else {
-                res.status(401).send({ message: "No hay categorias existentes" })
+                return res.status(404).send({ message: "No hay categorias existentes" })
             }
         } catch (error) {
             LoggerAPI.warn(`Se ha presentado un error en la obtencion de categorias ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
 
