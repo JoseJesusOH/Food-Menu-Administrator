@@ -10,6 +10,7 @@ import {
  * Importaciones de relacion requeridad con modelo Compania
  */
 import { Compania } from "@entity/compania.entity"
+import { Exclude } from "class-transformer";
 
 /**
  * Entidad que representa un CentroProductivo en la base de datos.
@@ -23,6 +24,7 @@ export class CentroProductivo {
   @PrimaryGeneratedColumn({
     name:"centro_productivo_id"
   })
+  @Exclude()
    centroProductivoId: Number;
 
   /**
