@@ -97,6 +97,21 @@ class CategoriaControl {
      * y los nuevos datos en req.body.
      */
     actualizarCategoria = async (req, res, next) => {
+           LoggerAPI.info("Se inicia el control respectivo para actualizar una categoria");
+        try {
+            let objeto= JSON.parse(req.body);
+            let categoria=new Categoria();
+            categoria=instanceToInstance(objeto)
+            const categoriaResult = await this.categoriaServicio.actualizarCategoria(categoria)
+            if (categoriaResult) {
+                return res.status(200).send({ message: `La categoria ha sido actualizada` })
+            } else {
+                return res.status(404).send({ message: "No se ha actualizado la categoria" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en actualizar la categoria  ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
     }
 }
 
