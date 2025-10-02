@@ -1,6 +1,8 @@
+import { Categoria } from "@entity/categoria.entity"
 import { CategoriaIServicio } from "@service.dao/categoria.servicio"
 import { CategoriaServicio } from "@service.impl/categoria.servicio.impl"
 import { LoggerAPI } from "@utility/logger"
+import { instanceToInstance, instanceToPlain, plainToInstance } from "class-transformer"
 class CategoriaControl {
 
     categoriaServicio: CategoriaIServicio = new CategoriaServicio()
@@ -11,6 +13,21 @@ class CategoriaControl {
      * y responde con la categoría creada o un mensaje de éxito.
      */
     agregarCategoria = async (req, res, next) => {
+               LoggerAPI.info("Se inicia el control respectivo para agregar una categoria");
+        try {
+            let objeto= JSON.parse(req.body);
+            let categoria=new Categoria();
+            categoria=instanceToInstance(objeto)
+            const categoriaResult = await this.categoriaServicio.agregarCategoria(categoria)
+            if (categoriaResult) {
+                return res.status(200).send({ message: `La categoria ha sido registrada` })
+            } else {
+                return res.status(404).send({ message: "No se ha ingresado la categoria" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en agregar la categoria  ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
     }
 
     /**
@@ -55,7 +72,7 @@ class CategoriaControl {
                 return res.status(4004).send({ message: "No hay categoria con ese  uuid" })
             }
         } catch (error) {
-            LoggerAPI.warn(`Se ha presenrtado un error en la obtencion de categoria por UUID ${error}`)
+            LoggerAPI.warn(`Se ha presentado un error en la obtencion de categoria por UUID ${error}`)
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
