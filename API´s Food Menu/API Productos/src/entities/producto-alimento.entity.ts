@@ -13,7 +13,11 @@ import {
 import { Producto } from "@entity/producto.entity"
 import { Alimento } from "@entity/alimento.entity"
 import { UnidadMedida } from "@entity/unidad-medida.enum"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Entidas que representa la relación de muchos a muchos de ProductoAlimentos
  */
@@ -25,6 +29,7 @@ export class ProductoAlimento {
     @PrimaryGeneratedColumn({
         name: "producto_alimento_id"
     })
+    @Exclude()
      productoAlimentoId: Number;
 
     /**
