@@ -13,6 +13,11 @@ import { Categoria } from "@entity/categoria.entity"
 import { ProductoCompania } from "@entity/producto-compania.entity"
 import { ProductoAlimento } from "@entity/producto-alimento.entity";
 /**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
+/**
  * Entidad representativas de un producto en la base de datos
  */
 @Entity("productos")
@@ -22,6 +27,7 @@ export class Producto {
    * Identificador autoincremental de producto
    */
   @PrimaryGeneratedColumn({ name: "producto_id" })
+  @Exclude()
    productoId: Number
 
   /**
@@ -39,7 +45,7 @@ export class Producto {
    */
   @OneToOne(() => Categoria,{nullable:true})
   @JoinColumn({ name: "categoria_id" })
-   categoria: Categoria | null;
+   categoria: Categoria;
 
   /**
    * Identificador UUID de producto
