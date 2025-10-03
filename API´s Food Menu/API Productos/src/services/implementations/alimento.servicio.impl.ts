@@ -1,4 +1,6 @@
 // Importación del Data Transfer Object (DTO) para la entidad Alimento
+import { AlimentoIDAO } from "@data.dao/alimento.dao";
+import { AlimentoDAO } from "@data.impl/alimento.dao.impl";
 import { AlimentoDTO } from "@dto/alimento.dto";
 
 // Importación de la interfaz que define los métodos del servicio de Alimento
@@ -12,7 +14,7 @@ import { AlimentoIServicio } from "@service.dao/alimento.servicio";
  * Actualmente los métodos no están implementados.
  */
 class AlimentoServicio implements AlimentoIServicio {
-    
+    alimentoDAO: AlimentoIDAO =new AlimentoDAO();
     /** Obtiene la lista de todos los alimentos registrados. */
     obtenerAlimentos(): Promise<AlimentoDTO[]> {
         throw new Error("Method not implemented.");
@@ -24,12 +26,12 @@ class AlimentoServicio implements AlimentoIServicio {
     }
 
     /** Elimina un alimento según su identificador único. */
-    eliminar(alimentoId: Number): Promise<Boolean> {
+    eliminar(alimentoUuid: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /** Busca un alimento específico a partir de su identificador. */
-    obtenerAlimentoById(alimentoId: Number): Promise<AlimentoDTO> {
+    obtenerAlimentoByUuid(alimentoUuid: Number): Promise<AlimentoDTO> {
         throw new Error("Method not implemented.");
     }
 }
