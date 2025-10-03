@@ -5,6 +5,8 @@ import { AlimentoDTO } from "@dto/alimento.dto";
 
 // Importación de la interfaz que define los métodos del servicio de Alimento
 import { AlimentoIServicio } from "@service.dao/alimento.servicio";
+import { LoggerAPI } from "@utility/logger";
+import { instanceToInstance } from "class-transformer";
 
 /**
  * Clase que implementa la interfaz AlimentoIServicio.
@@ -16,8 +18,22 @@ import { AlimentoIServicio } from "@service.dao/alimento.servicio";
 class AlimentoServicio implements AlimentoIServicio {
     alimentoDAO: AlimentoIDAO =new AlimentoDAO();
     /** Obtiene la lista de todos los alimentos registrados. */
-    obtenerAlimentos(): Promise<AlimentoDTO[]> {
-        throw new Error("Method not implemented.");
+    async obtenerAlimentos(): Promise<AlimentoDTO[]> {
+       LoggerAPI.info("Se inica serfvicio para obtener los alimentos")
+       try {
+         const alimentos= await this.alimentoDAO.getAlimentos();
+         if(alimentos.length>0){
+            let alimentosDTO :AlimentoDTO[]=[];
+            alimentosDTO=instanceToInstance(alimentos);
+            return alimentosDTO;
+         }else{
+            LoggerAPI.warn(`No se han encontrado alimentos en el sistema.`)
+            return []
+         }
+       } catch (error) {
+        LoggerAPI.warn(`Se produjo un error al obtener los alimentos en el servicio errror; ${error}`)
+        throw error;
+       }
     }
 
     /** Agrega un nuevo alimento al sistema. */
