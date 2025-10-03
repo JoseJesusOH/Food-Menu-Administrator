@@ -1,8 +1,8 @@
 import { CategoriaDTO } from "@dto/categoria.dto";
 import {ProductoAlimentoDTO} from "@dto/producto-alimento.dto"
 export class AlimentoDTO {
-    nombre: string;
+    nombre: String;
     categoria: CategoriaDTO;
-    alimentoUuid: string;
-    productoAlimentoDTO: ProductoAlimentoDTO[];
+    alimentoUuid: String;
+    productoAlimento: ProductoAlimentoDTO[];
 }
