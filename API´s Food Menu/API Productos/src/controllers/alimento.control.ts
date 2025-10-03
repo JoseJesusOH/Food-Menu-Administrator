@@ -1,4 +1,9 @@
+import { AlimentoIServicio } from "@service.dao/alimento.servicio"
+import { AlimentoServicio } from "@service.impl/alimento.servicio.impl"
+import { LoggerAPI } from "@utility/logger"
+
 class AlimentoControl {
+    alimentoServicio: AlimentoIServicio = new AlimentoServicio()
     /**
      * Crea un nuevo alimento en la base de datos.
      * Normalmente toma los datos del alimento desde req.body
@@ -21,6 +26,20 @@ class AlimentoControl {
      * y responde con un array de alimentos.
      */
     obtenerAlimentos = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control para obtener los alimentos del sistema.");
+        try {
+            const alimentos = await this.alimentoServicio.obtenerAlimentos();
+            if (alimentos.length > 0) {
+                return res.status(202).send({ alimentos })
+
+            } else {
+                return res.status(404).send({ message: "No hay alimento existentes existentes" })
+
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al obtener los alimentos en control error; ${error}`)
+            throw error;
+        }
     }
 
     /**
