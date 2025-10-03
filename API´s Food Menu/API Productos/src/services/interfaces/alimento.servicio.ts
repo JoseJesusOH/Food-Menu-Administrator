@@ -19,16 +19,16 @@ interface AlimentoIServicio{
    agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO>;
     /**
      * Servicio para la eliminación de un alimento
-     * @param alimentoId ID Alimento a eliminar
+     * @param alimentoUuid UUID Alimento a eliminar
      * @returns True si el alimento fue eliminado, false en caso contrario
      */
    eliminar(alimentoId: Number): Promise<Boolean>;
    /**
-    * Servicio para obtener un alimento por ID
-    * @param alimentoId ID Alimento a Obtener
+    * Servicio para obtener un alimento por UUID
+    * @param alimentoUuid UUID Alimento a Obtener
     * @returns Alimento encontrado, null en caso contrario
     */
-   obtenerAlimentoById(alimentoId:Number):Promise<AlimentoDTO>;
+   obtenerAlimentoByUuid(alimentoUuid:Number):Promise<AlimentoDTO>;
 }
 /**
  * Exportacion de la interfaz
