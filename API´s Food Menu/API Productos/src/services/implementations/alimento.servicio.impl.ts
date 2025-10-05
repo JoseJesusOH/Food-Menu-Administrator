@@ -88,7 +88,19 @@ class AlimentoServicio implements AlimentoIServicio {
 
     /** Busca un alimento específico a partir de su identificador. */
     obtenerAlimentoByUuid(alimentoUuid: Number): Promise<AlimentoDTO> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia servicio para obtener un alimento del sistema.")
+        try {
+            const alimento= this.alimentoDAO.obtenerAlimentoByUuid(alimentoUuid);
+            if(alimento){
+                return alimento;
+            }else{
+                LoggerAPI.warn(`No se pudo encontrar el alimento en el sistema.`)
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al obtener el alimento en el servicio errror; ${error}`)
+            throw error;
+        }
     }
 }
 
