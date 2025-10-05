@@ -12,6 +12,7 @@ const alimentoControl = new AlimentoControl
 
 //Manejo de Router
 router.get("/",alimentoControl.obtenerAlimentos);
+router.get("/:id",alimentoControl.obtenerAlimentoById);
 
 //Exportacion Router
 module.exports = router;
