@@ -53,6 +53,22 @@ class AlimentoServicio implements AlimentoIServicio {
         }
      }
 
+     actuaLizarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {
+        LoggerAPI.info("Se inicia servicio para actualizar un alimento del sistema.")
+        try {
+            const alimentoActualizado= this.alimentoDAO.actualizarAlimento(nuevosDatos);
+            if(alimentoActualizado){
+                return alimentoActualizado;
+            }else{
+                LoggerAPI.warn(`No se pudo actualizar el alimento en el sistema.`)
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al actualizar el alimento en el servicio errror; ${error}`)
+            throw error;
+        }
+     }
+
     /** Elimina un alimento según su identificador único. */
     eliminar(alimentoUuid: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
