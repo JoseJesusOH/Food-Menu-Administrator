@@ -36,7 +36,7 @@ class AlimentoControl {
         try {
             const alimentoId = req.params.id; 
             const nuevosDatos = req.body; 
-            const alimentoActualizado = await this.alimentoServicio.actualizarAlimento(alimentoId, nuevosDatos);    
+            const alimentoActualizado = await this.alimentoServicio.(alimentoId, nuevosDatos);    
             if (alimentoActualizado) { 
                 return res.status(200).send({ message: "Alimento actualizado exitosamente", alimento: alimentoActualizado });
             } else {
@@ -75,6 +75,19 @@ class AlimentoControl {
      * El id vendría en req.params.id.
      */
     obtenerAlimentoById = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control para obtener un alimento del sistema por su id.");
+        try {
+            const alimentoId = req.params.id;
+            const alimento = await this.alimentoServicio.obtenerAlimentoById(alimentoId);
+            if (alimento) {
+                return res.status(202).send({ alimento })
+            } else {
+                return res.status(404).send({ message: "No existe un alimento con ese id" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al obtener el alimento por id en control error; ${error}`)
+            throw error;
+        }
     }
 
     /**
