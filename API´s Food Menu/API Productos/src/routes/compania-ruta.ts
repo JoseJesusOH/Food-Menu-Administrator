@@ -14,5 +14,6 @@ router.get("/",productoControl.obtenerCompanias);
 router.get("/:id",productoControl.obtenerCompaniaById);
 router.delete("/:id",productoControl.eliminarCompania);
 router.post("/",productoControl.crearCompania);
+router.put("/:id",productoControl.actualizarCompania);
 //Exportacion Router
 module.exports = router;
