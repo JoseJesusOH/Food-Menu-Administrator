@@ -12,5 +12,6 @@ const productoControl = new ProductoControl()
 //Manejo de Router
 router.get("/",productoControl.obtenerCompanias);
 router.get("/:id",productoControl.obtenerCompaniaById);
+router.delete("/:id",productoControl.eliminarCompania);
 //Exportacion Router
 module.exports = router;
