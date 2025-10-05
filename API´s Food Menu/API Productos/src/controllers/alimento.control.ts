@@ -31,6 +31,21 @@ class AlimentoControl {
      * los nuevos datos en req.body.
      */
     actualizarAlimento = async (req, res, next) => {
+          
+    LoggerAPI.info("Se inicia el control para actualizar un alimento del sistema.");
+        try {
+            const alimentoId = req.params.id; 
+            const nuevosDatos = req.body; 
+            const alimentoActualizado = await this.alimentoServicio.actualizarAlimento(alimentoId, nuevosDatos);    
+            if (alimentoActualizado) { 
+                return res.status(200).send({ message: "Alimento actualizado exitosamente", alimento: alimentoActualizado });
+            } else {
+                return res.status(404).send({ message: "Alimento no encontrado" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al actualizar el alimento en control error; ${error}`)
+            throw error;
+        }
     }
 
     /**
