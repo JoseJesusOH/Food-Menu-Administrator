@@ -95,6 +95,19 @@ class AlimentoControl {
      * El id del alimento se suele recibir en req.params.id.
      */
     eliminarAlimento = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control para eliminar un alimento del sistema.");
+        try {
+            const alimentoId = req.params.id;
+            const eliminado = await this.alimentoServicio.eliminarAlimento(alimentoId);
+            if (eliminado) {
+                return res.status(200).send({ message: "Alimento eliminado exitosamente" });
+            } else {
+                return res.status(404).send({ message: "Alimento no encontrado" });
+            }   
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al eliminar el alimento en control error; ${error}`)
+            throw error;
+        }
     }
 }
 
