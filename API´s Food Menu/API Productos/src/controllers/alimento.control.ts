@@ -10,6 +10,19 @@ class AlimentoControl {
      * y responde con el alimento creado o un mensaje de éxito.
      */
     agregarAlimento = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control para agregar un nuevo alimento al sistema.");
+        try {
+            const alimentoNuevo = req.body; 
+            const alimentoCreado = await this.alimentoServicio.agregarAlimento(alimentoNuevo);
+            if (alimentoCreado) { 
+                return res.status(201).send({ message: "Alimento creado exitosamente", alimento: alimentoCreado });
+            } else {
+                return res.status(400).send({ message: "No se pudo crear el alimento" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al agregar un nuevo alimento en control error; ${error}`)
+            throw error;
+        }
     }
 
     /**
