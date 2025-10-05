@@ -38,8 +38,20 @@ class AlimentoServicio implements AlimentoIServicio {
 
     /** Agrega un nuevo alimento al sistema. */
     agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {
-        throw new Error("Method not implemented.");
-    }
+        LoggerAPI.info("Se inicia servicio para agregar un nuevo alimento al sistema.")
+        try {
+            const alimentoCreado= this.alimentoDAO.crearAlimento(alimentoDTO);
+            if(alimentoCreado){
+                return alimentoCreado;
+            }else{
+                LoggerAPI.warn(`No se pudo crear el alimento en el sistema.`)
+                return null;
+            }   
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al agregar un nuevo alimento en el servicio errror; ${error}`)
+            throw error;
+        }
+     }
 
     /** Elimina un alimento según su identificador único. */
     eliminar(alimentoUuid: Number): Promise<Boolean> {
