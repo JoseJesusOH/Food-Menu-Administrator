@@ -13,5 +13,6 @@ const productoControl = new ProductoControl()
 router.get("/",productoControl.obtenerCompanias);
 router.get("/:id",productoControl.obtenerCompaniaById);
 router.delete("/:id",productoControl.eliminarCompania);
+router.post("/",productoControl.crearCompania);
 //Exportacion Router
 module.exports = router;
