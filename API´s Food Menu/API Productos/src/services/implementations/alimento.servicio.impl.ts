@@ -71,7 +71,19 @@ class AlimentoServicio implements AlimentoIServicio {
 
     /** Elimina un alimento según su identificador único. */
     eliminar(alimentoUuid: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia servicio para eliminar un alimento del sistema.")
+        try {
+            const alimentoEliminado= this.alimentoDAO.eliminarAlimento(alimentoUuid);
+            if(alimentoEliminado){
+                return alimentoEliminado;
+            }else{
+                LoggerAPI.warn(`No se pudo eliminar el alimento en el sistema.`)
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al eliminar el alimento en el servicio errror; ${error}`)
+            throw error;
+        }
     }
 
     /** Busca un alimento específico a partir de su identificador. */
