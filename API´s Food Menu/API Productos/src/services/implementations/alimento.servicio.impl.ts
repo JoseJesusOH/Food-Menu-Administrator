@@ -2,11 +2,12 @@
 import { AlimentoIDAO } from "@data.dao/alimento.dao";
 import { AlimentoDAO } from "@data.impl/alimento.dao.impl";
 import { AlimentoDTO } from "@dto/alimento.dto";
+import { Alimento } from "@entity/alimento.entity";
 
 // Importación de la interfaz que define los métodos del servicio de Alimento
 import { AlimentoIServicio } from "@service.dao/alimento.servicio";
 import { LoggerAPI } from "@utility/logger";
-import { instanceToInstance } from "class-transformer";
+import { instanceToInstance, instanceToPlain, plainToInstance } from "class-transformer";
 
 /**
  * Clase que implementa la interfaz AlimentoIServicio.
@@ -40,7 +41,10 @@ class AlimentoServicio implements AlimentoIServicio {
     agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {
         LoggerAPI.info("Se inicia servicio para agregar un nuevo alimento al sistema.")
         try {
-            const alimentoCreado= this.alimentoDAO.crearAlimento(alimentoDTO);
+            let alimento  = new Alimento();
+            let plain = instanceToPlain(alimentoDTO)
+            alimento=plainToInstance(plain);
+            const alimentoCreado= this.alimentoDAO.agregarAlimento(alimento);
             if(alimentoCreado){
                 return alimentoCreado;
             }else{
@@ -73,7 +77,7 @@ class AlimentoServicio implements AlimentoIServicio {
     eliminar(alimentoUuid: Number): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar un alimento del sistema.")
         try {
-            const alimentoEliminado= this.alimentoDAO.eliminarAlimento(alimentoUuid);
+            const alimentoEliminado= this.alimentoDAO.eliminarAlimentoById(alimentoUuid);
             if(alimentoEliminado){
                 return alimentoEliminado;
             }else{
