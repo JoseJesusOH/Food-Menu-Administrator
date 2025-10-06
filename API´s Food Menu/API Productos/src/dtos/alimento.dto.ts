@@ -4,5 +4,4 @@ export class AlimentoDTO {
     nombre: String;
     categoria: CategoriaDTO;
     alimentoUuid: String;
-    productoAlimento: ProductoAlimentoDTO[];
 }
