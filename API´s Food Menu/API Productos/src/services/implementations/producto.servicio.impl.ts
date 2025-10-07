@@ -37,8 +37,22 @@ class ProductoServicio implements ProductoIService {
     }
 
     /** Busca un producto por su UUID único. */
-    getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
-        
+    async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
+         LoggerAPI.info("Se inicia el metodo para obtener Productos");
+        try {
+             const producto= await this.productoDAO.getProductoByUuid(productoUuid)
+             if(!producto){
+                let productoDTO: ProductoDTO =new ProductoDTO();
+                productoDTO=instanceToInstance(producto);
+                return producto;
+             }else{
+                LoggerAPI.warn("No se han encontrado producto")
+                return null;
+             }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener los productos: " + error);
+            throw error;
+        }  
     }
 
     /** Agrega un nuevo producto al sistema. */
