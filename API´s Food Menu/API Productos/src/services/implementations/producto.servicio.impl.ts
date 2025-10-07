@@ -57,7 +57,21 @@ class ProductoServicio implements ProductoIService {
 
     /** Agrega un nuevo producto al sistema. */
     agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
-        
+         LoggerAPI.info("Se inicia el metodo para agregar un nuevo producto");
+        try {
+              let productoDTOInsert: ProductoDTO =new ProductoDTO();
+              productoDTOInsert=instanceToInstance(productoDTO);
+             const producto= this.productoDAO.agregarProducto(productoDTOInsert);
+             if(producto){
+                return new Promise(true);
+             }else{
+                LoggerAPI.warn("No se ha podido agregar el producto")
+                return false;
+             }
+        } catch (error) {
+            LoggerAPI.error("Error al agregar el producto: " + error);
+            throw error;
+        } 
     }
 
     /** Elimina un producto a partir de su UUID. */
