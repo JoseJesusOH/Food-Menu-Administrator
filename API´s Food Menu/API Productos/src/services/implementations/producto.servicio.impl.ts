@@ -76,7 +76,19 @@ class ProductoServicio implements ProductoIService {
 
     /** Elimina un producto a partir de su UUID. */
     eliminarProdcto(productoUuid: String): Promise<Boolean> {
-       
+            LoggerAPI.info("Se inicia el metodo para eliminar un producto");
+        try {
+             const producto= this.productoDAO.eliminarProdcto(productoUuid);
+                if(producto){
+                return new Promise(true);
+             }else{
+                LoggerAPI.warn("No se ha podido eliminar el producto")
+                return false;
+             }      
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar el producto: " + error);
+            throw error;
+        }
     }
 
     /** Actualiza la información de un producto existente. */
