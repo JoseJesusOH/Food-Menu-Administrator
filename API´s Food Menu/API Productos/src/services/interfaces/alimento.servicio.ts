@@ -28,7 +28,7 @@ interface AlimentoIServicio{
     * @param alimentoUuid UUID Alimento a Obtener
     * @returns Alimento encontrado, null en caso contrario
     */
-   obtenerAlimentoByUuid(alimentoUuid:Number):Promise<AlimentoDTO>;
+   obtenerAlimentoByUuid(alimentoUuid:String):Promise<AlimentoDTO>;
     /**
      * Servicio para actualizar un alimento
      *  @param alimentoId ID del alimento a actualizar
