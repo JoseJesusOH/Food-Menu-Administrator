@@ -38,15 +38,14 @@ class AlimentoServicio implements AlimentoIServicio {
     }
 
     /** Agrega un nuevo alimento al sistema. */
-    agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {
+    async agregarAlimento(alimentoDTO: AlimentoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para agregar un nuevo alimento al sistema.")
         try {
             let alimento  = new Alimento();
-            let plain = instanceToPlain(alimentoDTO)
-            alimento=plainToInstance(plain);
-            const alimentoCreado= this.alimentoDAO.agregarAlimento(alimento);
+            alimento=plainToInstance(Alimento,alimentoDTO);
+            const alimentoCreado= await this.alimentoDAO.agregarAlimento(alimento);
             if(alimentoCreado){
-                return alimentoCreado;
+                return true;
             }else{
                 LoggerAPI.warn(`No se pudo crear el alimento en el sistema.`)
                 return null;
