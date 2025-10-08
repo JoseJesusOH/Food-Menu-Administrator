@@ -98,10 +98,10 @@ class AlimentoServicio implements AlimentoIServicio {
     }
 
     /** Busca un alimento específico a partir de su identificador. */
-    obtenerAlimentoByUuid(alimentoUuid: Number): Promise<AlimentoDTO> {
+   async  obtenerAlimentoByUuid(alimentoUuid: String): Promise<AlimentoDTO> {
         LoggerAPI.info("Se inicia servicio para obtener un alimento del sistema.")
         try {
-            const alimento= this.alimentoDAO.obtenerAlimentoByUuid(alimentoUuid);
+            const alimento= await  this.alimentoDAO.getAlimentByUuid(alimentoUuid);
             if(alimento){
                 return alimento;
             }else{
