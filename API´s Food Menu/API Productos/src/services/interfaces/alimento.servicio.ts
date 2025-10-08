@@ -16,7 +16,7 @@ interface AlimentoIServicio{
     * @param alimentoDTO Alimento a Registrar
     * @returns True si el alimento fue registrado correctamente , false si este no fue registrado
     */
-   agregarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO>;
+   agregarAlimento(alimentoDTO: AlimentoDTO): Promise<Boolean>;
     /**
      * Servicio para la eliminación de un alimento
      * @param alimentoUuid UUID Alimento a eliminar
