@@ -24,8 +24,8 @@ class AlimentoServicio implements AlimentoIServicio {
        try {
          const alimentos= await this.alimentoDAO.getAlimentos();
          if(alimentos.length>0){
-            let alimentosDTO :AlimentoDTO[]=[];
-            alimentosDTO=instanceToInstance(alimentos);
+            let alimentosDTO =[];
+            alimentosDTO=plainToInstance(AlimentoDTO,alimentos);
             return alimentosDTO;
          }else{
             LoggerAPI.warn(`No se han encontrado alimentos en el sistema.`)
