@@ -67,8 +67,24 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Actualiza una  categoría al sistema.
      */
-    actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
+         LoggerAPI.info("Se inicia el metodo para actualizar una nueva categoria"); 
+          try {
+            let categoria=new Categoria ();
+            categoria=plainToInstance(Categoria,categoriaDTO)
+            let resultado= await this.categoriaDao.actualizarCategoria(categoria);
+            if(resultado){
+                LoggerAPI.info(`Se ha actualizado una nueva categoria con exito`);
+                return true;
+            }
+            else{
+                LoggerAPI.warn(`No se ha podido actualizar la nueva categoria`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al actualizar una nueva categoria: ${error}`);
+            throw error;
+        }
     }
     /**
      * Elimina una categoría existente a partir de su UUID.
