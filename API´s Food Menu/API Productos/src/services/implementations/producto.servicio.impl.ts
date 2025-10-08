@@ -42,9 +42,9 @@ class ProductoServicio implements ProductoIService {
         try {
              const producto= await this.productoDAO.getProductoByUuid(productoUuid)
              if(!producto){
-                let productoDTO: ProductoDTO =new ProductoDTO();
-                productoDTO=instanceToInstance(producto);
-                return producto;
+                let productoDTO =new ProductoDTO();
+                productoDTO=plainToInstance(ProductoDTO,producto);
+                return productoDTO;
              }else{
                 LoggerAPI.warn("No se han encontrado producto")
                 return null;
