@@ -32,8 +32,8 @@ class CategoriaServicio implements CategoriaIServicio {
                 return [];
             } else {
                 LoggerAPI.info(`Se han encontrado un total de ${categorias.length}`)
-                let categoriasDTO : CategoriaDTO[]=[];
-                categoriasDTO=instanceToInstance(categorias)
+                let categoriasDTO=[];
+                categoriasDTO=plainToInstance(CategoriaDTO[],categorias)
                 return categoriasDTO;
             }
         } catch (error) {
