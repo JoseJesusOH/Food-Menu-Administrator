@@ -12,7 +12,8 @@ import { CategoriaIServicio } from "@service.dao/categoria.servicio"
 import { CategoriaIDAO } from "@data.dao/categoria.dao";
 import { CategoriaDAO } from "@data.impl/categoria.dao.impl";
 import { LoggerAPI } from "@utility/logger";
-import { instanceToInstance,ClassTransformOptions } from "class-transformer";
+import { instanceToInstance,ClassTransformOptions, plainToInstance } from "class-transformer";
+import { Categoria } from "@entity/categoria.entity";
 /**
  * Servicio encargado de la lógica de negocio relacionada con Categorías.
  * Implementa la interfaz CategoriaIServicio.
@@ -44,8 +45,24 @@ class CategoriaServicio implements CategoriaIServicio {
     /**
      * Agrega una nueva categoría al sistema.
      */
-    agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+   async agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para agregar una nueva categoria");
+        try {
+            let categoria=new Categoria ();
+            categoria=plainToInstance(Categoria,categoriaDTO)
+            let resultado= await this.categoriaDao.agregarCategoria(categoria);
+            if(resultado){
+                LoggerAPI.info(`Se ha agregado una nueva categoria con exito`);
+                return true;
+            }
+            else{
+                LoggerAPI.warn(`No se ha podido agregar la nueva categoria`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al agregar una nueva categoria: ${error}`);
+            throw error;
+        }
     }
     /**
      * Actualiza una  categoría al sistema.

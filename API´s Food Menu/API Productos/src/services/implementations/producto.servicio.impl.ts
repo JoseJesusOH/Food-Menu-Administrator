@@ -99,7 +99,7 @@ class ProductoServicio implements ProductoIService {
               productoDTOUpdate=instanceToInstance(productoDTO);
              const producto= this.productoDAO.actualizarProducto(productoDTOUpdate);
                 if(producto){ 
-                return new Promise(true);
+                return new Boolean(true);
              }else{
                 LoggerAPI.warn("No se ha podido actualizar el producto")
                 return false;
