@@ -1,18 +1,36 @@
 // Importa el DTO de compañía
+import { CompaniaIDAO } from "@data.dao/compania.dao";
+import { CompaniaDAO } from "@data.impl/compania.dao.impl";
 import { CompaniaDTO } from "@dto/compania.dto";
 
 // Importa la interfaz del servicio de compañía
 import { CompaniaIServicio } from "@service.dao/compania.servicio";
-
+import { LoggerAPI } from "@utility/logger";
+import { plainToInstance } from "class-transformer";
 /**
  * Servicio para manejar operaciones de compañías.
  * Actualmente los métodos no están implementados.
  */
 class CompaniaServicio implements CompaniaIServicio {
-
+  companiaDAO: CompaniaIDAO =new CompaniaDAO();
   // Método para obtener todas las compañías
-  getCompanias(): Promise<CompaniaDTO[]> {
-        throw new Error("Method not implemented.");
+  async getCompanias(): Promise<CompaniaDTO[]> {
+      LoggerAPI.info("Se inicia la consulta de todas las compañías en servicio compañía");
+      try {
+           let companias= await this.companiaDAO.getCompanias();
+           if(companias.length>0){
+               let companiaDTOS=[]
+                companiaDTOS=plainToInstance(CompaniaDTO,companias);
+               LoggerAPI.info("Se encontraron compañías en la base de datos");
+               return companiaDTOS;
+           }else {
+            LoggerAPI.warn("No se encontraron compañías en la base de datos");
+            return [];
+           }
+      } catch (error) {
+          LoggerAPI.error("Error al consultar todas las compañías en servicio compañía", error);
+          throw error;
+      }
   }
 
   // Método para agregar una nueva compañía
