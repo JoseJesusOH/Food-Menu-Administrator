@@ -56,15 +56,17 @@ class AlimentoServicio implements AlimentoIServicio {
         }
      }
 
-     actuaLizarAlimento(alimentoDTO: AlimentoDTO): Promise<AlimentoDTO> {
+    async actualizarAlimento(alimentoDTO: AlimentoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar un alimento del sistema.")
         try {
-            const alimentoActualizado= this.alimentoDAO.actualizarAlimento(nuevosDatos);
+            let alimento  = new Alimento();
+            alimento=plainToInstance(Alimento,alimentoDTO);
+            const alimentoActualizado= await this.alimentoDAO.actualizarAlimento(alimento);
             if(alimentoActualizado){
-                return alimentoActualizado;
+                return true;
             }else{
                 LoggerAPI.warn(`No se pudo actualizar el alimento en el sistema.`)
-                return null;
+                return false;
             }
         } catch (error) {
             LoggerAPI.warn(`Se produjo un error al actualizar el alimento en el servicio errror; ${error}`)
