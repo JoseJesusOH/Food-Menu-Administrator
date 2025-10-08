@@ -16,20 +16,20 @@ import { Producto } from "@entity/producto.entity";
  * Actualmente los métodos lanzan un error indicando que no han sido implementados.
  */
 class ProductoServicio implements ProductoIService {
-    productoDAO : ProductoIDAO = new ProductoDAO();
+    productoDAO: ProductoIDAO = new ProductoDAO();
     /** Obtiene la lista de productos disponibles. */
     async getProductos(): Promise<ProductoDTO[]> {
         LoggerAPI.info("Se inicia el metodo para obtener Productos");
         try {
-             const productos= await this.productoDAO.getProductos();
-             if(productos.length>0){
-                let productosDTO=[]
-                productosDTO=plainToInstance(ProductoDTO,productos);
+            const productos = await this.productoDAO.getProductos();
+            if (productos.length > 0) {
+                let productosDTO = []
+                productosDTO = plainToInstance(ProductoDTO, productos);
                 return productos;
-             }else{
+            } else {
                 LoggerAPI.warn("No se han encontrado producto")
                 return [];
-             }
+            }
         } catch (error) {
             LoggerAPI.error("Error al obtener los productos: " + error);
             throw error;
@@ -38,54 +38,60 @@ class ProductoServicio implements ProductoIService {
 
     /** Busca un producto por su UUID único. */
     async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
-         LoggerAPI.info("Se inicia el metodo para obtener Productos");
+        LoggerAPI.info("Se inicia el metodo para obtener Productos");
         try {
-             const producto= await this.productoDAO.getProductoByUuid(productoUuid)
-             if(!producto){
-                let productoDTO =new ProductoDTO();
-                productoDTO=plainToInstance(ProductoDTO,producto);
+            const producto = await this.productoDAO.getProductoByUuid(productoUuid)
+            if (!producto) {
+                let productoDTO = new ProductoDTO();
+                productoDTO = plainToInstance(ProductoDTO, producto);
                 return productoDTO;
-             }else{
+            } else {
                 LoggerAPI.warn("No se han encontrado producto")
                 return null;
-             }
+            }
         } catch (error) {
             LoggerAPI.error("Error al obtener los productos: " + error);
             throw error;
-        }  
+        }
     }
 
     /** Agrega un nuevo producto al sistema. */
     async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
-         LoggerAPI.info("Se inicia el metodo para agregar un nuevo producto");
+        LoggerAPI.info("Se inicia el metodo para agregar un nuevo producto");
         try {
-              let producto =new Producto();
-              producto=plainToInstance(Producto,productoDTO);
-             const productoResult=await this.productoDAO.agregarProducto(producto);
-             if(productoResult){
+            let producto = new Producto();
+            producto = plainToInstance(Producto, productoDTO);
+            const productoResult = await this.productoDAO.agregarProducto(producto);
+            if (productoResult) {
                 LoggerAPI.info("Se ha agregado el producto correctamente")
                 return true;
-             }else{
+            } else {
                 LoggerAPI.warn("No se ha podido agregar el producto")
                 return false;
-             }
+            }
         } catch (error) {
             LoggerAPI.error("Error al agregar el producto: " + error);
             throw error;
-        } 
+        }
     }
 
     /** Elimina un producto a partir de su UUID. */
-    eliminarProdcto(productoUuid: String): Promise<Boolean> {
-            LoggerAPI.info("Se inicia el metodo para eliminar un producto");
+    async eliminarProdcto(productoUuid: String): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para eliminar un producto");
         try {
-             const producto= this.productoDAO.eliminarProdcto(productoUuid);
-                if(producto){
-                return new Promise(true);
-             }else{
+            let productoFind = await this.productoDAO.getProductoByUuid(productoUuid);
+            if (!productoFind) {
+                LoggerAPI.warn("No se ha encontrado el producto")
+                return false;
+            }
+            const producto = this.productoDAO.eliminarProductoById(productoFind.productoId);
+            if (producto) {
+                LoggerAPI.info("Se ha eliminado el producto correctamente")
+                return true;
+            } else {
                 LoggerAPI.warn("No se ha podido eliminar el producto")
                 return false;
-             }      
+            }
         } catch (error) {
             LoggerAPI.error("Error al eliminar el producto: " + error);
             throw error;
@@ -94,17 +100,17 @@ class ProductoServicio implements ProductoIService {
 
     /** Actualiza la información de un producto existente. */
     actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
-            LoggerAPI.info("Se inicia el metodo para actualizar un producto");
+        LoggerAPI.info("Se inicia el metodo para actualizar un producto");
         try {
-              let productoDTOUpdate: ProductoDTO =new ProductoDTO();
-              productoDTOUpdate=instanceToInstance(productoDTO);
-             const producto= this.productoDAO.actualizarProducto(productoDTOUpdate);
-                if(producto){ 
+            let productoDTOUpdate: ProductoDTO = new ProductoDTO();
+            productoDTOUpdate = instanceToInstance(productoDTO);
+            const producto = this.productoDAO.actualizarProducto(productoDTOUpdate);
+            if (producto) {
                 return new Boolean(true);
-             }else{
+            } else {
                 LoggerAPI.warn("No se ha podido actualizar el producto")
                 return false;
-             }  
+            }
         } catch (error) {
             LoggerAPI.error("Error al actualizar el producto: " + error);
             throw error;
