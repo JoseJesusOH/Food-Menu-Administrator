@@ -33,7 +33,7 @@ class CategoriaServicio implements CategoriaIServicio {
             } else {
                 LoggerAPI.info(`Se han encontrado un total de ${categorias.length}`)
                 let categoriasDTO=[];
-                categoriasDTO=plainToInstance(CategoriaDTO[],categorias)
+                categoriasDTO=plainToInstance(CategoriaDTO,categorias)
                 return categoriasDTO;
             }
         } catch (error) {
@@ -90,7 +90,7 @@ class CategoriaServicio implements CategoriaIServicio {
             } else {
                 LoggerAPI.info(`Se han encontrado una categoria con el UUID  ${categoriaUuid}`)
                 let categoriaDTO =new CategoriaDTO();
-                categoriaDTO=instanceToInstance(categoria)
+                categoriaDTO=plainToInstance(CategoriaDTO,categoria)
                 return categoriaDTO;
             }
         } catch (error) {
