@@ -99,14 +99,14 @@ class ProductoServicio implements ProductoIService {
     }
 
     /** Actualiza la información de un producto existente. */
-    actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia el metodo para actualizar un producto");
         try {
-            let productoDTOUpdate: ProductoDTO = new ProductoDTO();
-            productoDTOUpdate = instanceToInstance(productoDTO);
+            let productoDTOUpdate = new Producto();
             const producto = this.productoDAO.actualizarProducto(productoDTOUpdate);
             if (producto) {
-                return new Boolean(true);
+                LoggerAPI.info("Se ha actualizado el producto correctamente")
+                return true;
             } else {
                 LoggerAPI.warn("No se ha podido actualizar el producto")
                 return false;
