@@ -75,12 +75,18 @@ class AlimentoServicio implements AlimentoIServicio {
      }
 
     /** Elimina un alimento según su identificador único. */
-    eliminar(alimentoUuid: Number): Promise<Boolean> {
+    async eliminarAlimentoByUuid(alimentoUuid: String): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar un alimento del sistema.")
         try {
-            const alimentoEliminado= this.alimentoDAO.eliminarAlimentoById(alimentoUuid);
+            let alimento=await this.alimentoDAO.getAlimentByUuid(alimentoUuid);
+            if(!alimento){
+                LoggerAPI.warn(`No se pudo encontrar el alimento en el sistema.`)
+                return null;
+            }
+            const alimentoEliminado= this.alimentoDAO.eliminarAlimentoById(alimento.alimentoId);
             if(alimentoEliminado){
-                return alimentoEliminado;
+                LoggerAPI.info(`Alimento eliminado correctamente del sistema.`)
+                return true;
             }else{
                 LoggerAPI.warn(`No se pudo eliminar el alimento en el sistema.`)
                 return null;
