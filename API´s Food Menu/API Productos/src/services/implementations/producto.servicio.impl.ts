@@ -6,7 +6,7 @@ import { ProductoDTO } from "@dto/producto.dto";
 // Importación de la interfaz de servicio que define los métodos a implementar
 import { ProductoIService } from "@service.dao/producto.servicio";
 import { LoggerAPI } from "@utility/logger";
-import { instanceToInstance } from "class-transformer";
+import { instanceToInstance, plainToInstance } from "class-transformer";
 
 /**
  * Clase que implementa la interfaz ProductoIService.
@@ -23,8 +23,8 @@ class ProductoServicio implements ProductoIService {
         try {
              const productos= await this.productoDAO.getProductos();
              if(productos.length>0){
-                let productosDTO:ProductoDTO []=[]
-                productosDTO=instanceToInstance(productos);
+                let productosDTO=[]
+                productosDTO=plainToInstance(ProductoDTO,productos);
                 return productos;
              }else{
                 LoggerAPI.warn("No se han encontrado producto")
