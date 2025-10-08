@@ -33,9 +33,9 @@ interface AlimentoIServicio{
      * Servicio para actualizar un alimento
      *  @param alimentoId ID del alimento a actualizar
      * @param nuevosDatos Nuevos datos para actualizar el alimento
-     * @returns Alimento actualizado, null si no se encontró o no se pudo actualizar
+     * @returns True si el alimento fue actualizado, false en caso contrario
      */
-   actuaLizarAlimento(alimentodto :AlimentoDTO): Promise<AlimentoDTO>;
+   actualizarAlimento(alimentodto :AlimentoDTO): Promise<Boolean>;
 }
 /**
  * Exportacion de la interfaz
