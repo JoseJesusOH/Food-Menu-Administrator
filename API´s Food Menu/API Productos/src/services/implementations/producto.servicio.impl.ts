@@ -7,7 +7,7 @@ import { ProductoDTO } from "@dto/producto.dto";
 import { ProductoIService } from "@service.dao/producto.servicio";
 import { LoggerAPI } from "@utility/logger";
 import { instanceToInstance, plainToInstance } from "class-transformer";
-
+import { Producto } from "@entity/producto.entity";
 /**
  * Clase que implementa la interfaz ProductoIService.
  * Proporciona la estructura base para la gestión de productos,
@@ -56,14 +56,15 @@ class ProductoServicio implements ProductoIService {
     }
 
     /** Agrega un nuevo producto al sistema. */
-    agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
          LoggerAPI.info("Se inicia el metodo para agregar un nuevo producto");
         try {
-              let productoDTOInsert: ProductoDTO =new ProductoDTO();
-              productoDTOInsert=instanceToInstance(productoDTO);
-             const producto= this.productoDAO.agregarProducto(productoDTOInsert);
-             if(producto){
-                return new Promise(true);
+              let producto =new Producto();
+              producto=plainToInstance(Producto,productoDTO);
+             const productoResult=await this.productoDAO.agregarProducto(producto);
+             if(productoResult){
+                LoggerAPI.info("Se ha agregado el producto correctamente")
+                return true;
              }else{
                 LoggerAPI.warn("No se ha podido agregar el producto")
                 return false;
