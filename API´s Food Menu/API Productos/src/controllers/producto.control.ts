@@ -83,13 +83,28 @@ class ProductoControl {
      * Puede aceptar filtros opcionales desde req.query.
      */
     obtenerProductos = async (req, res, next) => {
+      LoggerAPI.info("Se inicio el proceso de obtener productos en control");
+      try {
+         const result = await this.productoServicio.getProductos();
+         if(result){
+            LoggerAPI.info("Se obtuvieron los productos en control"); 
+            return res.status(200).json({productos:result});
+         }
+         else{
+            LoggerAPI.error("No se pudieron obtener los productos en control"); 
+            return res.status(404).json({message:"No se encontraron productos"});
+         }
+      } catch (error) {
+         LoggerAPI.error("Error al obtener los productos en control: "+error); 
+         return res.status(500).json({message:"Error al obtener los productos"});
+      }
     }
 
         /**
      * Obtiene un producto específico por su id.
      * El id vendría en req.params.id.
      */
-    obtenerProductoById = async (req, res, next) => {
+    obtenerProductoByUuid = async (req, res, next) => {
     }
 }
 export { ProductoControl }
