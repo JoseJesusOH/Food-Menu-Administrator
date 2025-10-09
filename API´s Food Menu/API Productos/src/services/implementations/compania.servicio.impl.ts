@@ -98,8 +98,23 @@ class CompaniaServicio implements CompaniaIServicio {
   }
 
   // Método para obtener los datos de una compañía por su UUID
-  getCompaniaByUuid(companiaUuid: string): Promise<CompaniaDTO> {
-       
+ async  getCompaniaByUuid(companiaUuid: string): Promise<CompaniaDTO> {
+        LoggerAPI.info("Se inicia el proceso para obtener una compañía por UUID en servicio compañía");     
+        try {
+            let compania= await this.companiaDAO.getCompaniaByUuid(companiaUuid);
+            if(compania){
+                let companiaDTO=plainToInstance(CompaniaDTO,compania);
+                LoggerAPI.info("Compañía encontrada exitosamente en servicio compañía");
+                return companiaDTO
+            }
+            else {
+                LoggerAPI.warn("No se encontró la compañía con el UUID proporcionado en servicio compañía");
+                return null;
+            }     
+            } catch (error) {
+                  LoggerAPI.error("Error al obtener una compañía por UUID en servicio compañía", error);
+                  throw error;
+            }
   }
 }
 
