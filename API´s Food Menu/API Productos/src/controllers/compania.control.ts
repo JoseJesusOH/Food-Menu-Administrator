@@ -90,6 +90,19 @@ class CompaniaControl {
 * y los nuevos datos en req.body.
 */
   actualizarCompania = async (req, res, next) => {
+    LoggerAPI.info("Se inicia el control respectivo para actualizar una compania");
+    try {
+      let compania = plainToInstance(Compania, req.body);
+      const companiaResult = await this.companiaServicio.actualizarCompania(compania)
+      if (companiaResult) {
+        return res.status(200).send({ message: `La compania ha sido actualizada` })
+      } else {
+        return res.status(404).send({ message: "No se ha actualizado la compania" })
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Se ha presentado un error en actualizar la compania  ${error}`)
+      return res.status(500).send({ message: "Error interno del servidor" });
+    }
   }
 }
 export { CompaniaControl }
