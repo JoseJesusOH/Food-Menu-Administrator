@@ -1,6 +1,8 @@
+import { AlimentoDTO } from "@dto/alimento.dto"
 import { AlimentoIServicio } from "@service.dao/alimento.servicio"
 import { AlimentoServicio } from "@service.impl/alimento.servicio.impl"
 import { LoggerAPI } from "@utility/logger"
+import { plainToInstance } from "class-transformer"
 
 class AlimentoControl {
     alimentoServicio: AlimentoIServicio = new AlimentoServicio()
@@ -34,11 +36,10 @@ class AlimentoControl {
           
     LoggerAPI.info("Se inicia el control para actualizar un alimento del sistema.");
         try {
-            const alimentoId = req.params.id; 
-            const nuevosDatos = req.body; 
-            const alimentoActualizado = await this.alimentoServicio.(alimentoId, nuevosDatos);    
-            if (alimentoActualizado) { 
-                return res.status(200).send({ message: "Alimento actualizado exitosamente", alimento: alimentoActualizado });
+            const alimentoDTO = plainToInstance(AlimentoDTO, req.body);
+            const result = await this.alimentoServicio.actualizarAlimento(alimentoDTO);    
+            if (result) { 
+                return res.status(200).send({ message: "Alimento actualizado exitosamente" });
             } else {
                 return res.status(404).send({ message: "Alimento no encontrado" });
             }
