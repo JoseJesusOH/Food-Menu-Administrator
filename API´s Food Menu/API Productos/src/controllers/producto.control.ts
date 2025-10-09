@@ -14,7 +14,7 @@ class ProductoControl {
      * y responde con el producto creado o un mensaje de éxito.
      */
     agregarProducto = async (req, res, next) => {
-      Logger.info("Se inicio el proceso de agregar un nuevo prducto en control"); 
+      LoggerAPI.info("Se inicio el proceso de agregar un nuevo prducto en control"); 
       try {
          const producto= plainToInstance(Producto,req.body);
          const result = await this.productoServicio.agregarProducto(producto);
@@ -105,6 +105,22 @@ class ProductoControl {
      * El id vendría en req.params.id.
      */
     obtenerProductoByUuid = async (req, res, next) => {
+      LoggerAPI.info("Se inicio el proceso de obtener un producto por uuid en control");
+      try {
+         const productoUuid=req.params.productoUuid;
+         const result = await this.productoServicio.getProductoByUuid(productoUuid);
+         if(result){
+            LoggerAPI.info("Se obtuvo el producto por uuid en control"); 
+            return res.status(200).json({producto:result});
+         }
+         else{
+            LoggerAPI.error("No se pudo obtener el producto por uuid en control"); 
+            return res.status(404).json({message:"No se encontro el producto"});
+         }
+      } catch (error) {
+         LoggerAPI.error("Error al obtener el producto por uuid en control: "+error); 
+         return res.status(500).json({message:"Error al obtener el producto"});
+      }
     }
 }
 export { ProductoControl }
