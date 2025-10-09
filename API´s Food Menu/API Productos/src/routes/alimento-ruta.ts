@@ -12,10 +12,10 @@ const alimentoControl = new AlimentoControl
 
 //Manejo de Router
 router.get("/",alimentoControl.obtenerAlimentos);
-router.get("/:id",alimentoControl.obtenerAlimentoById);
-router.delete("/:id",alimentoControl.eliminarAlimento);
+router.get("/:alimentoUuid",alimentoControl.obtenerAlimentoByUuid);
+router.delete("/:alimentoUuid",alimentoControl.eliminarAlimento);
 router.post("/",alimentoControl.agregarAlimento);
-router.put("/:id",alimentoControl.actualizarAlimento);
+router.put("/:alimentoUuid",alimentoControl.actualizarAlimento);
 
 //Exportacion Router
 module.exports = router;
