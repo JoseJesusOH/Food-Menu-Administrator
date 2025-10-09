@@ -74,8 +74,27 @@ class CompaniaServicio implements CompaniaIServicio {
   }
 
   // Método para eliminar una compañía por su UUID
-  eliminarCompania(companiaUuid: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+  async eliminarCompania(companiaUuid: string): Promise<boolean> {
+      LoggerAPI.info("Se inicia el proceso para eliminar una compañía en servicio compañía");
+      try{  
+            let compania= await this.companiaDAO.getCompaniaByUuid(companiaUuid);
+            if(!compania){
+                LoggerAPI.warn("No se encontró la compañía con el UUID proporcionado en servicio compañía");
+                return false;
+            }
+            let result= await this.companiaDAO.eliminarCompaniaById(compania.companiaId);
+            if(result){
+                LoggerAPI.info("Compañía eliminada exitosamente en servicio compañía");
+                return true;
+            }else {
+                LoggerAPI.warn("No se pudo eliminar la compañía en servicio compañía");
+                return false;
+            }
+      } catch (error) {
+          LoggerAPI.error("Error al eliminar una compañía en servicio compañía", error);
+          throw error;
+      }
+            
   }
 
   // Método para obtener los datos de una compañía por su UUID
