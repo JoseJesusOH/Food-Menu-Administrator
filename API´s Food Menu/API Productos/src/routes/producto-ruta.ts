@@ -11,7 +11,7 @@ const router = express.Router();
 const productoControl = new ProductoControl()
 //Manejo de Router
 router.get("/",productoControl.obtenerProductos);
-router.get("/:id",productoControl.obtenerCompaniaById);
+router.get("/:productoUuid",productoControl.obtenerProductoByUuid);
 router.delete("/:id",productoControl.eliminarCompania);
 router.post("/",productoControl.crearCompania);
 router.put("/:id",productoControl.actualizarCompania);
