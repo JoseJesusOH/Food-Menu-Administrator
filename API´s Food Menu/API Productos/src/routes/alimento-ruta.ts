@@ -14,7 +14,7 @@ const alimentoControl = new AlimentoControl
 router.get("/",alimentoControl.obtenerAlimentos);
 router.get("/:id",alimentoControl.obtenerAlimentoById);
 router.delete("/:id",alimentoControl.eliminarAlimento);
-router.post("/",alimentoControl.crearAlimento);
+router.post("/",alimentoControl.agregarAlimento);
 router.put("/:id",alimentoControl.actualizarAlimento);
 
 //Exportacion Router
