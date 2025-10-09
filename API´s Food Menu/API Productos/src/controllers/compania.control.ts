@@ -30,6 +30,19 @@ class CompaniaControl {
    * El id de la compañía se recibe en req.params.id.
    */
     eliminarCompania = async (req, res, next) => {
+      LoggerAPI.info("Se inicia el control respectivo para eliminar una compania");
+      try {
+          const {companiaUuid} = req.params;
+          const companiaResult = await this.companiaServicio.eliminarCompania(companiaUuid)
+          if (companiaResult) {
+              return res.status(200).send({ message: `La compania ha sido eliminada` })
+          } else {
+              return res.status(404).send({ message: "No se ha eliminado la compania" })
+          } 
+      } catch (error) {
+          LoggerAPI.warn(`Se ha presentado un error en eliminar la compania  ${error}`)
+          return res.status(500).send({ message: "Error interno del servidor" });
+      }
     }
     /**
   * Obtiene todas las compañías.
