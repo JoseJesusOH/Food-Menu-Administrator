@@ -68,7 +68,21 @@ class CompaniaControl {
    * Obtiene una compañía específica por su id.
    * El id vendría en req.params.id.
    */
-  obtenerCompaniaById = async (req, res, next) => {
+  obtenerCompaniaByUuid = async (req, res, next) => {
+    LoggerAPI.info("Se inicia el control respectivo para el retorno de una compania por id");
+    try {
+      const { companiaUuid } = req.params;
+      const compania = await this.companiaServicio.getCompaniaByUuid(companiaUuid);
+      if (compania) {
+        return res.status(200).send({ compania: compania })
+      }
+      else {
+        return res.status(404).send({ message: "No se ha encontrado la compania" })
+      }
+    } catch (error) {
+      LoggerAPI.warn(`Se ha presentado un error en obtener la compania por id  ${error}`)
+      return res.status(500).send({ message: "Error interno del servidor" });
+    }
   }
   /**
 * Actualiza una compañía existente.
