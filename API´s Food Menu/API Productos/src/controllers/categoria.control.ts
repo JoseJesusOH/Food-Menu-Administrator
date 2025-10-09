@@ -97,9 +97,7 @@ class CategoriaControl {
     actualizarCategoria = async (req, res, next) => {
            LoggerAPI.info("Se inicia el control respectivo para actualizar una categoria");
         try {
-            let objeto= JSON.parse(req.body);
-            let categoria=new Categoria();
-            categoria=instanceToInstance(objeto)
+            let  categoria=plainToInstance(Categoria, req.body);
             const categoriaResult = await this.categoriaServicio.actualizarCategoria(categoria)
             if (categoriaResult) {
                 return res.status(200).send({ message: `La categoria ha sido actualizada` })
