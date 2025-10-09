@@ -2,6 +2,7 @@
 import { CompaniaIDAO } from "@data.dao/compania.dao";
 import { CompaniaDAO } from "@data.impl/compania.dao.impl";
 import { CompaniaDTO } from "@dto/compania.dto";
+import { Compania } from "@entity/compania.entity";
 
 // Importa la interfaz del servicio de compañía
 import { CompaniaIServicio } from "@service.dao/compania.servicio";
@@ -34,9 +35,23 @@ class CompaniaServicio implements CompaniaIServicio {
   }
 
   // Método para agregar una nueva compañía
-  agregarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
-        throw new Error("Method not implemented.");
-  }
+ async agregarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
+      LoggerAPI.info("Se inicia el proceso para agregar una nueva compañía en servicio compañía");
+      try {
+            let compania=plainToInstance(Compania,companiaDTO);
+            let result= await this.companiaDAO.agregarCompania(compania);
+            if(result){
+                LoggerAPI.info("Compañía agregada exitosamente en servicio compañía");
+                return true;
+            }else {
+                LoggerAPI.warn("No se pudo agregar la compañía en servicio compañía");
+                return false;
+            }
+      } catch (error) {
+          LoggerAPI.error("Error al agregar una nueva compañía en servicio compañía", error);
+          throw error;
+      }
+  } 
 
   // Método para actualizar los datos de una compañía existente
   actualizarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
