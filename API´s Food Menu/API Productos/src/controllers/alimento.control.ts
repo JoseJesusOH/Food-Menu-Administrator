@@ -14,9 +14,9 @@ class AlimentoControl {
     agregarAlimento = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control para agregar un nuevo alimento al sistema.");
         try {
-            const alimentoNuevo = req.body; 
+            const alimentoNuevo = plainToInstance(AlimentoDTO, req.body);
             const alimentoCreado = await this.alimentoServicio.agregarAlimento(alimentoNuevo);
-            if (alimentoCreado) { 
+            if (alimentoCreado) {
                 return res.status(201).send({ message: "Alimento creado exitosamente", alimento: alimentoCreado });
             } else {
                 return res.status(400).send({ message: "No se pudo crear el alimento" });
@@ -33,12 +33,11 @@ class AlimentoControl {
      * los nuevos datos en req.body.
      */
     actualizarAlimento = async (req, res, next) => {
-          
-    LoggerAPI.info("Se inicia el control para actualizar un alimento del sistema.");
+        LoggerAPI.info("Se inicia el control para actualizar un alimento del sistema.");
         try {
             const alimentoDTO = plainToInstance(AlimentoDTO, req.body);
-            const result = await this.alimentoServicio.actualizarAlimento(alimentoDTO);    
-            if (result) { 
+            const result = await this.alimentoServicio.actualizarAlimento(alimentoDTO);
+            if (result) {
                 return res.status(200).send({ message: "Alimento actualizado exitosamente" });
             } else {
                 return res.status(404).send({ message: "Alimento no encontrado" });
@@ -104,7 +103,7 @@ class AlimentoControl {
                 return res.status(200).send({ message: "Alimento eliminado exitosamente" });
             } else {
                 return res.status(404).send({ message: "Alimento no encontrado" });
-            }   
+            }
         } catch (error) {
             LoggerAPI.warn(`Se ha presentado un error al eliminar el alimento en control error; ${error}`)
             throw error;
