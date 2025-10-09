@@ -12,8 +12,8 @@ const productoControl = new ProductoControl()
 //Manejo de Router
 router.get("/",productoControl.obtenerProductos);
 router.get("/:productoUuid",productoControl.obtenerProductoByUuid);
-router.delete("/:id",productoControl.eliminarCompania);
-router.post("/",productoControl.crearCompania);
-router.put("/:id",productoControl.actualizarCompania);
+router.delete("/:productoUuid",productoControl.eliminarProducto);
+router.post("/",productoControl.agregarProducto);
+router.put("/",productoControl.actualizarProducto);
 //Exportacion Router
 module.exports = router;
