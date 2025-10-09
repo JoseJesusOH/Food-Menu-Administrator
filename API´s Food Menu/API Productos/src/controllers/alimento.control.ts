@@ -97,8 +97,8 @@ class AlimentoControl {
     eliminarAlimento = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control para eliminar un alimento del sistema.");
         try {
-            const alimentoId = req.params.id;
-            const eliminado = await this.alimentoServicio.eliminarAlimento(alimentoId);
+            const alimentoUuid = req.params.alimentoUuid;
+            const eliminado = await this.alimentoServicio.eliminarAlimentoByUuid(alimentoUuid);
             if (eliminado) {
                 return res.status(200).send({ message: "Alimento eliminado exitosamente" });
             } else {
