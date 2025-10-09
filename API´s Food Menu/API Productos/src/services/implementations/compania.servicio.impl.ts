@@ -35,7 +35,7 @@ class CompaniaServicio implements CompaniaIServicio {
   }
 
   // Método para agregar una nueva compañía
- async agregarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
+ async agregarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
       LoggerAPI.info("Se inicia el proceso para agregar una nueva compañía en servicio compañía");
       try {
             let compania=plainToInstance(Compania,companiaDTO);
@@ -54,8 +54,23 @@ class CompaniaServicio implements CompaniaIServicio {
   } 
 
   // Método para actualizar los datos de una compañía existente
-  actualizarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
-        throw new Error("Method not implemented.");
+  async actualizarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
+        LoggerAPI.info("Se inicia el proceso para actualizar una compañía en servicio compañía");
+         try {
+            let compania=plainToInstance(Compania,companiaDTO);
+            let result= await this.companiaDAO.actualizarCompania(compania);
+            if(result){
+                LoggerAPI.info("Compañía actualizada exitosamente en servicio compañía");
+                return true;
+            }
+            else {
+                LoggerAPI.warn("No se pudo actualizar la compañía en servicio compañía");
+                return false;
+            }
+            } catch (error) { 
+                  LoggerAPI.error("Error al actualizar una compañía en servicio compañía", error);
+                  throw error;
+            }     
   }
 
   // Método para eliminar una compañía por su UUID
