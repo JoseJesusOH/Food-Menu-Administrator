@@ -74,11 +74,11 @@ class AlimentoControl {
      * Obtiene un alimento específico por su id.
      * El id vendría en req.params.id.
      */
-    obtenerAlimentoById = async (req, res, next) => {
+    obtenerAlimentoByUuid = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control para obtener un alimento del sistema por su id.");
         try {
-            const alimentoId = req.params.id;
-            const alimento = await this.alimentoServicio.obtenerAlimentoById(alimentoId);
+            const alimentoUuid = req.params.alimentoUuid;
+            const alimento = await this.alimentoServicio.obtenerAlimentoByUuid(alimentoUuid);
             if (alimento) {
                 return res.status(202).send({ alimento })
             } else {
