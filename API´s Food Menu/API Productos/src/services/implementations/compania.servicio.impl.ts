@@ -54,7 +54,7 @@ class CompaniaServicio implements CompaniaIServicio {
   } 
 
   // Método para actualizar los datos de una compañía existente
-  async actualizarCompania(companiaDTO: CompaniaDTO): Promise<boolean> {
+  async actualizarCompania(companiaDTO: CompaniaDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia el proceso para actualizar una compañía en servicio compañía");
          try {
             let compania=plainToInstance(Compania,companiaDTO);
@@ -74,7 +74,7 @@ class CompaniaServicio implements CompaniaIServicio {
   }
 
   // Método para eliminar una compañía por su UUID
-  async eliminarCompania(companiaUuid: string): Promise<boolean> {
+  async eliminarCompania(companiaUuid: string): Promise<Boolean> {
       LoggerAPI.info("Se inicia el proceso para eliminar una compañía en servicio compañía");
       try{  
             let compania= await this.companiaDAO.getCompaniaByUuid(companiaUuid);
@@ -99,7 +99,7 @@ class CompaniaServicio implements CompaniaIServicio {
 
   // Método para obtener los datos de una compañía por su UUID
   getCompaniaByUuid(companiaUuid: string): Promise<CompaniaDTO> {
-        throw new Error("Method not implemented.");
+       
   }
 }
 
