@@ -14,5 +14,6 @@ router.get("/",companiaControl.obtenerCompanias);
 router.get("/:companiaUuid",companiaControl.obtenerCompaniaByUuid);
 router.delete("/:companiaUuid",companiaControl.eliminarCompania);
 router.post("/",companiaControl.agregarCompania);
+router.put("/",companiaControl.actualizarCompania);
 //Exportacion Router
 module.exports = router;
