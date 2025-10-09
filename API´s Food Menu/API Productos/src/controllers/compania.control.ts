@@ -1,10 +1,29 @@
+import { Compania } from "@entity/compania.entity"
+import { CompaniaIServicio } from "@service.dao/compania.servicio"
+import { CompaniaServicio } from "@service.impl/compania.servicio.impl"
+import { plainToInstance } from "class-transformer"
+import { LoggerAPI } from "@utility/logger"
 class CompaniaControl {
+  companiaServicio: CompaniaIServicio =new CompaniaServicio()
     /**
  * Crea una nueva compañía.
  * Normalmente toma los datos de la compañía desde req.body
  * y responde con la compañía creada o un mensaje de éxito.
  */
     agregarCompania = async (req, res, next) => {
+      LoggerAPI.info("Se inicia el control respectivo para agregar una compania");
+      try {
+         let compania= plainToInstance(Compania, req.body);
+          const companiaResult = await this.companiaServicio.agregarCompania(compania)
+          if (companiaResult) {
+              return res.status(200).send({ message: `La compania ha sido registrada` })
+          } else {
+              return res.status(404).send({ message: "No se ha ingresado la compania" })
+          }
+      } catch (error) {
+          LoggerAPI.warn(`Se ha presentado un error en agregar la compania  ${error}`)
+          return res.status(500).send({ message: "Error interno del servidor" });
+      }
     }
     /**
    * Elimina una compañía existente.
