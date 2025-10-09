@@ -12,5 +12,6 @@ const companiaControl = new CompaniaControl()
 //Manejo de Router
 router.get("/",companiaControl.obtenerCompanias);
 router.get("/:id",companiaControl.obtenerCompaniaById);
+router.delete("/:id",companiaControl.eliminarCompania);
 //Exportacion Router
 module.exports = router;
