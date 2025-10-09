@@ -13,5 +13,6 @@ const companiaControl = new CompaniaControl()
 router.get("/",companiaControl.obtenerCompanias);
 router.get("/:companiaUuid",companiaControl.obtenerCompaniaByUuid);
 router.delete("/:companiaUuid",companiaControl.eliminarCompania);
+router.post("/",companiaControl.agregarCompania);
 //Exportacion Router
 module.exports = router;
