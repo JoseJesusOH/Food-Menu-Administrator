@@ -16,11 +16,13 @@ app.use(express.json());
 const categoriaRuta = require("@route/categoria-ruta")
 const alimentoRuta=require("@route/alimento-ruta")
 const productoRuta=require("@route/producto-ruta")
+const companiaRuta=require("@route/compania-ruta")
 
 // Rutas 
 app.use("/categorias",categoriaRuta)
 app.use("/alimento",alimentoRuta  )
 app.use("/producto",productoRuta )
+app.use("/compania",companiaRuta )
 
 /**
  * Metodo que inializa el servidor express y manda a llamar la inicializacion 
