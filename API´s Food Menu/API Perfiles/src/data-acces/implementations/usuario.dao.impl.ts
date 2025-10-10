@@ -89,7 +89,7 @@ export class UsuarioDAO implements UsuarioIDAO {
             }
         } catch (error) {
             LoggerAPI.error("Error en la insercion de usuario en el sistema: " + error)
-            return false;
+            throw error;
         }
     }
 
@@ -97,7 +97,22 @@ export class UsuarioDAO implements UsuarioIDAO {
      * Metodo para eliminar un usuario del sistema por su id respectivo
      */
     async eliminarUsuarioById(usuarioID: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el metodo para eliminar usuario en UsuarioDAO")
+        try {
+            let usuarioEliminar = await this.usuarioRepositorio.findOneBy({ usuarioId: Number(usuarioID) });
+            if (usuarioEliminar) {
+                await this.usuarioRepositorio.remove(usuarioEliminar);
+                LoggerAPI.info("Se elimino el usuario en el sistema")
+                return true;
+            }   
+            else {
+                LoggerAPI.warn("No se encontro el usuario a eliminar en el sistema")
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la eliminacion de usuario en el sistema: " + error)
+            throw error;
+        }
     }
 
     /**
