@@ -36,7 +36,6 @@ export class UsuarioDAO implements UsuarioIDAO {
      * Metodo para obtener determinado usuario del sistema por ID
      */
     async getUsuarioById(usuarioId: Number): Promise<Usuario> {
-<<<<<<< HEAD
         LoggerAPI.info("Se inicia el metodo para obtener usuario por ID en UsuarioDAO")
         try {
             let usuario = await this.usuarioRepositorio.findOneBy({ usuarioId: Number(usuarioId) });
@@ -52,9 +51,6 @@ export class UsuarioDAO implements UsuarioIDAO {
             LoggerAPI.error("Error en la consulta de usuario por ID en el sistema: " + error)
             throw error;
         }
-=======
-        throw new Error("Method not implemented.");
->>>>>>> parent of 3d0210e (Implementacion del metodo GetUsuarioById en UsuarioDAO - FMA API Producto)
     }
 
     async getUsuarioByUuid(usuarioUuid: String): Promise<Usuario> {
