@@ -18,6 +18,13 @@ export interface UsuarioIDAO{
      * @returns Un objeto Usuario si se encuentra, de lo contrario retorna null
      */
     getUsuarioById(usuarioId:Number):Promise<Usuario>;
+ 
+    /**
+     *  Método para obtener un usuario por su UUID
+     * @param usuarioUuid UUID del usuario a buscar
+     * @returns Un objeto Usuario si se encuentra, de lo contrario retorna null
+     */
+    getUsuarioByUuid(usuarioUuid:String): Promise<Usuario>;
 
     /**
      *  Método para agregar un nuevo usuario
