@@ -7,40 +7,44 @@ import { UsuarioIDAO } from "@data.dao/usuario.dao";
 /**
  * Implementacion corrrespondiente del acceso a datos de usuario
  */
-export class UsuarioDAO implements UsuarioIDAO{
+export class UsuarioDAO implements UsuarioIDAO {
     /**
      * Metodo para obtener la lista de usuarios del sistema
      */
-    getUsuarios(): Usuario[] {
+    async getUsuarios():  Promise<Usuario[]> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para obtener determinado usuario del sistema por ID
      */
-    getUsuarioByID(usuarioID: Number): Usuario {
+    async getUsuarioByID(usuarioID: Number): Promise<Usuario> {
+        throw new Error("Method not implemented.");
+    }
+
+    async getUsuarioByUuid(usuarioUuid: String): Promise<Usuario> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para agregar un Usuario 
      */
-    agregarUsuario(usuario: Usuario): Boolean {
+    async agregarUsuario(usuario: Usuario): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    
+
     /**
      * Metodo para eliminar un usuario del sistema por su id respectivo
      */
-    eliminarUsuarioByID(usuarioID: Number): Boolean {
+    async eliminarUsuarioByID(usuarioID: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
 
     /**
      * Metodo para la actualización de usuario.
      */
-    actualizarUsuario(usuario: Usuario): Boolean {
+    async actualizarUsuario(usuario: Usuario): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    
+
 }
