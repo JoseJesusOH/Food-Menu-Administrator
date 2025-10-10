@@ -36,18 +36,65 @@ export class UsuarioDAO implements UsuarioIDAO {
      * Metodo para obtener determinado usuario del sistema por ID
      */
     async getUsuarioById(usuarioId: Number): Promise<Usuario> {
+<<<<<<< HEAD
+        LoggerAPI.info("Se inicia el metodo para obtener usuario por ID en UsuarioDAO")
+        try {
+            let usuario = await this.usuarioRepositorio.findOneBy({ usuarioId: Number(usuarioId) });
+            if (usuario) {
+                LoggerAPI.info("Se encontro el usuario en el sistema")
+                return usuario;
+            }
+            else {
+                LoggerAPI.warn("No se encontro el usuario en el sistema")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la consulta de usuario por ID en el sistema: " + error)
+            throw error;
+        }
+=======
         throw new Error("Method not implemented.");
+>>>>>>> parent of 3d0210e (Implementacion del metodo GetUsuarioById en UsuarioDAO - FMA API Producto)
     }
 
     async getUsuarioByUuid(usuarioUuid: String): Promise<Usuario> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el metodo para obtener usuario por UUID en UsuarioDAO")
+        try {
+            let usuario = await this.usuarioRepositorio.findOneBy({ usuarioUuid: String(usuarioUuid) });
+            if (usuario) {
+                LoggerAPI.info("Se encontro el usuario en el sistema")
+                return usuario;
+            }
+            else {
+                LoggerAPI.warn("No se encontro el usuario en el sistema")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la consulta de usuario por UUID en el sistema: " + error)
+            throw error;
+        }
     }
 
     /**
      * Metodo para agregar un Usuario 
      */
     async agregarUsuario(usuario: Usuario): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el metodo para agregar usuario en UsuarioDAO")
+        try {
+            let nuevoUsuario = this.usuarioRepositorio.create(usuario);
+             if (nuevoUsuario) {
+                await this.usuarioRepositorio.save(nuevoUsuario);
+                LoggerAPI.info("Se agrego el usuario en el sistema")
+                return true;
+            }
+            else {
+                LoggerAPI.warn("No se pudo agregar el usuario en el sistema")
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la insercion de usuario en el sistema: " + error)
+            return false;
+        }
     }
 
     /**
