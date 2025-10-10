@@ -18,7 +18,7 @@ const alimentoRuta=require("@route/alimento-ruta")
 
 // Rutas 
 app.use("/categorias",categoriaRuta)
-app.use("/alimento",categoriaRuta)
+app.use("/alimento",alimentoRuta  )
 
 /**
  * Metodo que inializa el servidor express y manda a llamar la inicializacion 
