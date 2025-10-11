@@ -20,6 +20,12 @@ export interface UsuarioCategoriaIDAO{
     getUsuarioCategoriaById(usuarioCategoriaId:Number):Promise<UsuarioCategoria>;
 
     /**
+     * Metodo para obtener una categoria de usuario por su UUID
+     * @param usuarioCategoriaUuid UUID de la categoria de usuario
+     * @return {UsuarioCategoria} Retorna la categoria de usuario que coincide con el UUID
+     */
+    getUsuarioCategoriaByUuid(usuarioCategoriaUuid:String):Promise<UsuarioCategoria>;
+    /**
      * Metodo para agregar una nueva categoria de usuario
      * @param usuarioCategoria Categoria de usuario a agregar
      * @return {Boolean} Retorna true si se agrego correctamente, false si no
@@ -30,7 +36,7 @@ export interface UsuarioCategoriaIDAO{
      * @param usuarioCategoria ID de la categoria de usuario a eliminar
      * @return {Boolean} Retorna true si se elimino correctamente, false si no
      */
-    eliminarUsuarioCategoriaByID(usuarioCategoria:Number):Promise<Boolean>;
+    eliminarUsuarioCategoriaById(usuarioCategoria:Number):Promise<Boolean>;
     /**
      * Metodo para actualizar una categoria de usuario
      * @param usuarioCategoria Categoria de usuario a actualizar
