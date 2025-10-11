@@ -35,8 +35,22 @@ export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
     /**
      * Metodo para obtener la relación con el ID identificador
      */
-    getUsuarioCategoriaByID(usuarioCategoriaID: Number): UsuarioCategoria {
-        throw new Error("Method not implemented.");
+    async getUsuarioCategoriaById(usuarioCategoriaId: Number): Promise<UsuarioCategoria> {
+        LoggerAPI.info("Se inicia el metodo getUsuarioCategoriaById de la clase UsuarioCategoriaDAO");
+        try {
+            let result = await this.usuarioCategoria.findOneBy({ usuarioCategoriaId: Number(usuarioCategoriaId) });
+            if (result) {
+                LoggerAPI.info("Se encontro la relacion de usuario con categoria con id: " + usuarioCategoriaId);
+                return result;
+            }
+            else {
+                LoggerAPI.info("No se encontro la relacion de usuario con categoria con id: " + usuarioCategoriaId);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la relacion de usuario con categoria con id: " + usuarioCategoriaId + " - " + error);
+            throw error;
+        }
     }
     /**
      * Metodo para agregar una categoria al usuario
