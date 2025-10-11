@@ -54,8 +54,21 @@ export class PermisoDAO implements PermisoIDAO {
     /**
      * Metodo para agregar un permiso al sistema
      */
-    agregarPermiso(permiso: Permiso): Boolean {
-        throw new Error("Method not implemented.");
+    async agregarPermiso(permiso: Permiso): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo agregarPermiso de la clase PermisoDAO");
+        try {
+            let permisoNuevo = await this.permisoRepositorio.insert(permiso);
+            if (permisoNuevo) {
+                LoggerAPI.info("Se agrego el permiso correctamente");
+                return true;
+            } else {
+                LoggerAPI.info("No se pudo agregar el permiso");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al agregar el permiso: " + error);
+            throw error;
+        }
     }
 
     /**
