@@ -73,9 +73,23 @@ export class PersonaDAO implements PersonaIDAO{
     /**
      * Metodo para agregar una persona al sistema
      */
-    agregarPersona(persona: Persona): Boolean {
-        throw new Error("Method not implemented.");
-    }
+    async agregarPersona(persona: Persona): Promise<Boolean> {
+           LoggerAPI.info("Se inicia el metodo para agregar persona en PersonaDAO")
+        try { 
+            let result = await this.personaRepositorio.save(persona);
+            if (result) {
+                LoggerAPI.info("Se agrego la persona en el sistema")
+                return true;
+            }
+            else {
+                LoggerAPI.warn("No se agrego la persona en el sistema")
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en el agregado de persona en el sistema: " + error)
+             throw error;
+        }   
+    } 
 
     /**
      * Metodo para eliminar una persona del sistema
