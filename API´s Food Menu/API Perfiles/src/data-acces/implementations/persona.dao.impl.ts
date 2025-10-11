@@ -50,7 +50,26 @@ export class PersonaDAO implements PersonaIDAO{
             throw error;
         }
     }
-
+    /**
+     * Metodo para obtener una persona del sistema por UUID
+     */
+    async getPersonaByUuid(personaUuid: String): Promise<Persona> {
+        LoggerAPI.info("Se inicia el metodo para obtener persona por UUID en PersonaDAO")
+        try {
+            let persona = await this.personaRepositorio.findOneBy({ personaUuid: String(personaUuid) });
+            if (persona) {
+                LoggerAPI.info("Se encontro la persona en el sistema")
+                return persona;
+            }
+            else {
+                LoggerAPI.warn("No se encontro la persona en el sistema")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la consulta de persona por UUID en el sistema: " + error)
+            throw error;
+        }   
+    }
     /**
      * Metodo para agregar una persona al sistema
      */
