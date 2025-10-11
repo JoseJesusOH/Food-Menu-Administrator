@@ -50,7 +50,27 @@ export class PermisoDAO implements PermisoIDAO {
             throw error;
         }
     }
-
+    /**
+     * Metodo para obtener el permiso del sistema por su uuid respectivo
+     */
+    async getPermisoByUuid(permisoUuid: String): Promise<Permiso> {
+        LoggerAPI.info("Se inicia el metodo getPermisoByUuid de la clase PermisoDAO");
+        try {
+            let result = await this.permisoRepositorio.findOneBy({ permisoUuid: String(permisoUuid) });
+            if (result) {
+                LoggerAPI.info("Se encontro el permiso con uuid: " + permisoUuid);
+                return result;
+            }
+            else {
+                LoggerAPI.info("No se encontro el permiso con uuid: " + permisoUuid);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el permiso con uuid: " + permisoUuid + " - " + error);
+            throw error;
+        }
+    }
+     
     /**
      * Metodo para agregar un permiso al sistema
      */
