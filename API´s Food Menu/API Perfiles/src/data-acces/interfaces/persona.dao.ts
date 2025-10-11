@@ -33,10 +33,10 @@ export interface PersonaIDAO {
 
     /**
      * Metodo para eliminar una persona por su ID
-     * @param personaID ID de la persona a eliminar
+     * @param personaId ID de la persona a eliminar
      * @return {Boolean} Retorna true si se elimino correctamente, false si no
      */
-    eliminarPersonaByID(personaID: Number): Promise<Boolean>;
+    eliminarPersonaById(personaId: Number): Promise<Boolean>;
 
     /**
      * Metodo para actualizar una persona
