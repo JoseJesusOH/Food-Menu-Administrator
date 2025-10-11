@@ -78,7 +78,7 @@ export class UsuarioDAO implements UsuarioIDAO {
         LoggerAPI.info("Se inicia el metodo para agregar usuario en UsuarioDAO")
         try {
             let nuevoUsuario = this.usuarioRepositorio.create(usuario);
-             if (nuevoUsuario) {
+            if (nuevoUsuario) {
                 await this.usuarioRepositorio.save(nuevoUsuario);
                 LoggerAPI.info("Se agrego el usuario en el sistema")
                 return true;
@@ -104,7 +104,7 @@ export class UsuarioDAO implements UsuarioIDAO {
                 await this.usuarioRepositorio.remove(usuarioEliminar);
                 LoggerAPI.info("Se elimino el usuario en el sistema")
                 return true;
-            }   
+            }
             else {
                 LoggerAPI.warn("No se encontro el usuario a eliminar en el sistema")
                 return false;
@@ -119,7 +119,21 @@ export class UsuarioDAO implements UsuarioIDAO {
      * Metodo para la actualización de usuario.
      */
     async actualizarUsuario(usuario: Usuario): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el metodo para actualizar usuario en UsuarioDAO")
+        try {
+            let usuarioActualizar = await this.usuarioRepositorio.update({ usuarioId: usuario.getUsuarioId() }, usuario);
+            if (usuarioActualizar.affected > 0) {
+                LoggerAPI.info("Se actualizo el usuario en el sistema")
+                return true;
+            }
+            else {
+                LoggerAPI.warn("No se pudo actualizar el usuario en el sistema")
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la actualizacion de usuario en el sistema: " + error)
+            throw error;
+        }
     }
 
 }
