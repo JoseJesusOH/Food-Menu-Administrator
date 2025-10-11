@@ -33,8 +33,22 @@ export class PersonaDAO implements PersonaIDAO{
     /**
      * Metodo para obtener una persona del sistema por id 
      */
-    getPersonaByID(personaID: Number): Persona {
-        throw new Error("Method not implemented.");
+   async  getPersonaById(personaId: Number): Promise<Persona> {
+        LoggerAPI.info("Se inicia el metodo para obtener persona por ID en PersonaDAO")
+        try {
+            let persona = await this.personaRepositorio.findOneBy({ personaId: Number(personaId) });
+            if (persona) {
+                LoggerAPI.info("Se encontro la persona en el sistema")
+                return persona;
+            }
+            else {
+                LoggerAPI.warn("No se encontro la persona en el sistema")
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la consulta de persona por ID en el sistema: " + error)
+            throw error;
+        }
     }
 
     /**
