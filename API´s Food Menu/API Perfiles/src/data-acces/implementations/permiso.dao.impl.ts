@@ -94,8 +94,21 @@ export class PermisoDAO implements PermisoIDAO {
     /**
      * Metodo para eliminar el permiso por id del mismo
      */
-    eliminarPermisoByID(permisoID: Number): Boolean {
-        throw new Error("Method not implemented.");
+    async eliminarPermisoById(permisoId: Number): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo eliminarPermisoById de la clase PermisoDAO");
+        try {
+            let permisoEliminar = await this.permisoRepositorio.delete({ permisoId: Number(permisoId) });
+            if (permisoEliminar.affected > 0) {
+                LoggerAPI.info("Se elimino el permiso con id: " + permisoId);
+                return true;
+            } else {
+                LoggerAPI.info("No se encontro el permiso con id: " + permisoId);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar el permiso con id: " + permisoId + " - " + error);
+            throw error;
+        }
     }
 
     /**
