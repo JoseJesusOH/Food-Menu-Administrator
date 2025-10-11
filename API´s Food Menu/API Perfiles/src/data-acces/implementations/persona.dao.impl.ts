@@ -115,8 +115,22 @@ export class PersonaDAO implements PersonaIDAO {
     /**
      * Metodo para actualizar una persona del sistema
      */
-    actualizarPersona(persona: Persona): Boolean {
-        throw new Error("Method not implemented.");
+    async actualizarPersona(persona: Persona): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para actualizar persona en PersonaDAO")
+        try {
+            let result = await this.personaRepositorio.update({ personaId: persona.getPersonaId() }, persona);
+            if (result.affected && result.affected > 0) {
+                LoggerAPI.info("Se actualizo la persona en el sistema")
+                return true;
+            }
+            else {
+                LoggerAPI.warn("No se actualizo la persona en el sistema")
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error en la actualizacion de persona en el sistema: " + error)
+            throw error;
+        }
     }
 
 }
