@@ -33,8 +33,22 @@ export class PermisoDAO implements PermisoIDAO {
     /**
      * Metodo para obtener el permiso del sistema por su id respectivo
      */
-    getPermisoByID(permisoID: Number): Permiso {
-        throw new Error("Method not implemented.");
+    async getPermisoById(permisoId: Number): Promise<Permiso> {
+        LoggerAPI.info("Se inicia el metodo getPermisoById de la clase PermisoDAO");
+        try {
+            let result = await this.permisoRepositorio.findOneBy({ permisoId: Number(permisoId) });
+            if (result) {
+                LoggerAPI.info("Se encontro el permiso con id: " + permisoId);
+                return result;
+            }
+            else {
+                LoggerAPI.info("No se encontro el permiso con id: " + permisoId);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el permiso con id: " + permisoId + " - " + error);
+            throw error;
+        }
     }
 
     /**
