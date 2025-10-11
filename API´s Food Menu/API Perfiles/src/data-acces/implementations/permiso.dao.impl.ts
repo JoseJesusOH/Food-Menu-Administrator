@@ -114,8 +114,22 @@ export class PermisoDAO implements PermisoIDAO {
     /**
      * Metodo para actualizar un permiso del sistema
      */
-    actualizarPermiso(permiso: Permiso): Boolean {
-        throw new Error("Method not implemented.");
+    async actualizarPermiso(permiso: Permiso): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo actualizarPermiso de la clase PermisoDAO");
+        try {
+            let permisoActualizar = await this.permisoRepositorio.save(permiso);    
+             if (permisoActualizar) {
+                LoggerAPI.info("Se actualizo el permiso correctamente");
+                return true;
+            }
+            else {
+                LoggerAPI.info("No se pudo actualizar el permiso");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar el permiso: " + error);
+            throw error;
+        }
     }
 
 }
