@@ -20,6 +20,12 @@ export interface CategoriaIDAO {
      */
     getCategoriaById(categoriaId: Number): Promise<Categoria>;
 
+         /**
+     * Método para obtener una categoría por su UUID.
+     * @param categoriaUuid UUID de la categoría a buscar.
+     * @return Un objeto Categoria si se encuentra, de lo contrario retorna null.
+     */
+    getCategoriaByUuid(categoriaUuid: String): Promise<Categoria>;
     /**
      * Método para agregar una nueva categoría.
      * @param categoria Objeto Categoria a agregar.
