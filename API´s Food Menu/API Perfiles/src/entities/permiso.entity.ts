@@ -6,11 +6,15 @@ import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToMany,
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importacione de Entidad PermisoCategoria
  */
-import { PermisoCategoria } from "./permiso-categoria.entity"
+import { PermisoCategoria } from "@entity/permiso-categoria.entity"
 
 /**
  * Entidad Permiso que representa la tabla permisos en la base de datos
@@ -24,6 +28,7 @@ export class Permiso {
     @PrimaryGeneratedColumn({
         name: "permiso_id"
     })
+     @Exclude()
      permisoId: Number;
 
 
