@@ -34,8 +34,22 @@ export class PermisoCategoriaDAO implements PermisoCategoriaIDAO{
     /**
      * Obtiene las relacion con respecti al id 
      */
-    getPermisoCategoriaByID(permisoCategoriaID: Number): PermisoCategoria {
-        throw new Error("Method not implemented.");
+    async getPermisoCategoriaByID(permisoCategoriaID: Number): Promise<PermisoCategoria> {
+        LoggerAPI.info("Inicio - getPermisoCategoriaByID - PermisoCategoriaDAO");
+        try {
+            let permisoCategoria: PermisoCategoria | null = await this.permisoCategoriaRepository.findOneBy({id: Number(permisoCategoriaID)});
+            if(permisoCategoria === null){
+                LoggerAPI.warn("No se encontro el permiso categoria con el id proporcionado - getPermisoCategoriaByID - PermisoCategoriaDAO");
+                return null;
+            }
+            else{
+                LoggerAPI.info("Fin - getPermisoCategoriaByID - PermisoCategoriaDAO");
+                return permisoCategoria;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error - getPermisoCategoriaByID - PermisoCategoriaDAO", error);
+            throw new Error("Error al obtener el permiso categoria con el id proporcionado");
+        }
     }
 
     /**
