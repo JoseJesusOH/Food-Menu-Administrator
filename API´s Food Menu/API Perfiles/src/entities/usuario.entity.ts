@@ -10,8 +10,12 @@ import {
 /**
  * Importacion de Entidad Persona requeridas para la relacion
  */
-import { Persona } from "./persona.entity"
-
+import { Persona } from "@entity/persona.entity"
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Entidad Usuario que mapea la tabla usuarios de la base de datos
  */
@@ -24,6 +28,7 @@ export class Usuario {
     @PrimaryGeneratedColumn({
         name: "usuario_id"
     })
+    @Exclude()
      usuarioId: Number;
 
     /**
