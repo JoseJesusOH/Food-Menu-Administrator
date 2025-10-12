@@ -22,6 +22,13 @@ export interface DireccionIDAO {
     getDireccionById(direccionId: Number): Promise<Direccion>;
 
     /** 
+         * Método para obtener una direccion por su UUID
+         * @param direccionUuid UUID de la direccion a buscar
+         * @return Un objeto Direccion si se encuentra, de lo contrario retorna null
+         */
+    getDireccionByUuid(direccionUuid: String): Promise<Direccion>;
+
+    /** 
      * Método para agregar una nueva direccion
      * @param direccion Objeto Direccion a agregar
      * @return true si la operación fue exitosa, de lo contrario false
