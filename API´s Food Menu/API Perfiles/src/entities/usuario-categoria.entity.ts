@@ -7,12 +7,16 @@ import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
      ManyToOne , JoinColumn
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importaciones de Entidades Usuario y Categoria para las relaciones
  */
-import { Categoria } from "./categoria.entity"
-import { Usuario } from "./usuario.entity"
+import { Categoria } from "@entity/categoria.entity"
+import { Usuario } from "@entity/usuario.entity"
 
 /**
  * Entidad UsuarioCategoria que representa la tabla usuario_categorias en la base de datos
@@ -26,6 +30,7 @@ export class UsuarioCategoria {
     @PrimaryGeneratedColumn({
         name: "usuario_categoria_id"
     })
+    @Exclude()
      usuarioCategoriaId: Number;
 
     /**
