@@ -52,7 +52,7 @@ export class DireccionDAO implements DireccionIDAO {
     /**
      * Metodo para obtener la direccion por UUID
      */
-    async getDireccionByUUid(direccionUuid: String): Promise<Direccion> {
+    async getDireccionByUuid(direccionUuid: String): Promise<Direccion> {
         LoggerAPI.info("Se inicia el metodo para obtener direccion por UUID")
         try {
             const resultado = await this.direccionRepiositorio.findOneBy({ direccionUuid });
@@ -71,18 +71,18 @@ export class DireccionDAO implements DireccionIDAO {
     /**
      * Metodo para agregar una direccion
      */
-async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
+    async agregarDireccion(direccion: Direccion): Promise<Boolean> {
         LoggerAPI.info("Se inicia el metodo para agregar una direccion en DB")
-        try{
-            const resultado= await this.direccionRepiositorio.insert(direccion);
-            if(resultado.identifiers.length>0){
+        try {
+            const resultado = await this.direccionRepiositorio.insert(direccion);
+            if (resultado.identifiers.length > 0) {
                 LoggerAPI.info("Se ha ingresado la direccion exitosamente.")
                 return new Boolean(true)
-            }else{
+            } else {
                 LoggerAPI.warn("No sse ha podido ingresar la direccion en DB")
                 return new Boolean(false)
             }
-        }catch(error){
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al agregar la direccion error; ${error}`)
             throw error;
         }
@@ -93,16 +93,16 @@ async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
      */
     async eliminarDireccion(direccionId: Number): Promise<Boolean> {
         LoggerAPI.info("Se inicia el metodo para eliminar una direccion en DB")
-        try{
-            const resultado= await this.direccionRepiositorio.delete({direccionId});
-            if(resultado.affected>0){
+        try {
+            const resultado = await this.direccionRepiositorio.delete({ direccionId });
+            if (resultado.affected > 0) {
                 LoggerAPI.info("Se ha eliminado la direccion exitosamente.")
                 return new Boolean(true)
-            }else{
+            } else {
                 LoggerAPI.warn("No sse ha podido eliminar la direccion en DB")
                 return new Boolean(false)
             }
-        }catch(error){
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al eliminar la direccion error; ${error}`)
             throw error;
         }
@@ -113,17 +113,17 @@ async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
      */
     async actualizarDireccion(direccion: Direccion): Promise<Boolean> {
         LoggerAPI.info("Se inicia el metodo para actualizar una direccion en DB")
-        try{
-            const resultado= await this.direccionRepiositorio.update({direccionId:direccion.direccionId},direccion);
-            if(resultado.affected>0){
+        try {
+            const resultado = await this.direccionRepiositorio.update({ direccionId: direccion.direccionId }, direccion);
+            if (resultado.affected > 0) {
                 LoggerAPI.info("Se ha actualizado la direccion exitosamente.")
                 return new Boolean(true)
             }
-            else{
+            else {
                 LoggerAPI.warn("No sse ha podido actualizar la direccion en DB")
                 return new Boolean(false)
             }
-        }catch(error){
+        } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al actualizar la direccion error; ${error}`)
             throw error;
         }
