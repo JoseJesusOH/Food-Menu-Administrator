@@ -6,12 +6,16 @@ import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
     ManyToOne, JoinColumn
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importaciones de las entidades Categoria y Permiso para las relaciones
  */
-import { Categoria } from "./categoria.entity"
-import { Permiso } from "./permiso.entity"
+import { Categoria } from "@entity/categoria.entity"
+import { Permiso } from "@entity/permiso.entity"
 /**
  * Entidad PermisoCategoria que representa la tabla intermedia entre Permiso y Categoria
  */
@@ -23,7 +27,8 @@ export class PermisoCategoria {
      */
     @PrimaryGeneratedColumn({
         name: "permiso_categoria_id"
-    })
+    }) 
+     @Exclude() 
      permisoCategoriaId: Number;
 
     /**
