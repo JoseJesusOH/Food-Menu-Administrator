@@ -10,6 +10,8 @@ import { LoggerAPI } from "@utility/logger";
  * Implementación de UsuarioCateforiaDAO 
  */
 export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
+   
+  
     usuarioCategoria=Conexion.getRepository(UsuarioCategoria);
     /**
      * Metodo para obtener las relaciones de usuario con respecto a categoria
@@ -52,6 +54,27 @@ export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
             throw error;
         }
     }
+
+    /**
+     * Metodo para obtener la relación con el UUID identificador
+     */
+    async  getUsuarioCategoriaByUuid(usuarioCategoriaUuid: String): Promise<UsuarioCategoria> {
+        LoggerAPI.info("Se inicia el metodo getUsuarioCategoriaByUuid de la clase UsuarioCategoriaDAO");
+        try {
+            let result = await this.usuarioCategoria.findOneBy({ usuarioCategoriaUuid: String(usuarioCategoriaUuid) });
+            if (result) {
+                LoggerAPI.info("Se encontro la relacion de usuario con categoria con uuid: " + usuarioCategoriaUuid);
+                return result;
+            }
+            else {
+                LoggerAPI.info("No se encontro la relacion de usuario con categoria con uuid: " + usuarioCategoriaUuid);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la relacion de usuario con categoria con uuid: " + usuarioCategoriaUuid + " - " + error);
+            throw error;
+        }  
+    }
     /**
      * Metodo para agregar una categoria al usuario
      */
@@ -75,10 +98,10 @@ export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
     /**
      * Metodo para quitar una categoria al usuario
      */
-    async eliminarUsuarioCategoriaByID(usuarioCategoria: Number): Promise<Boolean> {
+    async eliminarUsuarioCategoriaById(usuarioCategoria: Number): Promise<Boolean> {
          LoggerAPI.info("Se inicia el metodo eliminarUsuarioCategoriaByID de la clase UsuarioCategoriaDAO");
         try {
-            let result = await this.usuarioCategoria.delete(usuarioCategoria);
+            let result = await this.usuarioCategoria.delete(usuarioCategoria.valueOf());
             if (result.affected > 0) {
                 LoggerAPI.info("Se elimino la relacion de usuario con categoria correctamente");
                 return true;
