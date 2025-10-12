@@ -1,3 +1,0 @@
-class PermistoDTO{
-    nombre:String;
-}

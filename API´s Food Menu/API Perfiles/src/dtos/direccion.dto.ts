@@ -1,3 +1,0 @@
-class Direccion{
-    calle: String;
-}

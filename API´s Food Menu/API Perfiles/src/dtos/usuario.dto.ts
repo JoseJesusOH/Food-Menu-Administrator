@@ -1,3 +1,0 @@
-class UsuarioDTO{
-    usuario: String;
-}

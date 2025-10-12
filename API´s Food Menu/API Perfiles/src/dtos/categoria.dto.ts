@@ -1,3 +1,0 @@
-class CategoriaDTO{
-    nombre: String;
-}
