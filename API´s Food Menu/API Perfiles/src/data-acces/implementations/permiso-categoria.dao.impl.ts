@@ -71,7 +71,24 @@ export class PermisoCategoriaDAO implements PermisoCategoriaIDAO {
             throw new Error("Error al obtener el permiso-categoría con el ID proporcionado");
         }
     }
-
+    /**
+     * Obtiene la relación con respecto al UUID.
+     */
+    async getPermisoCategoriaByUuid(permisoCategoriaUuid: String): Promise<PermisoCategoria> {
+        LoggerAPI.info("Inicio - getPermisoCategoriaByID - PermisoCategoriaDAO");
+        try {
+            const permisoCategoria = await this.permisoCategoriaRepository.findOneBy({ permisoCategoriaUuid });
+            if (!permisoCategoria) {
+                LoggerAPI.warn("No se encontró el permiso-categoría con el ID proporcionado - getPermisoCategoriaByID - PermisoCategoriaDAO");
+                return null;
+            }
+            LoggerAPI.info("Fin - getPermisoCategoriaByID - PermisoCategoriaDAO");
+            return permisoCategoria;
+        } catch (error) {
+            LoggerAPI.error("Error - getPermisoCategoriaByID - PermisoCategoriaDAO", error);
+            throw new Error("Error al obtener el permiso-categoría con el ID proporcionado");
+        }
+    }
     /**
      * Agrega una nueva relación de permiso-categoría.
      */
