@@ -77,8 +77,22 @@ export class PermisoCategoriaDAO implements PermisoCategoriaIDAO{
     /**
      * Elimina un permiso categoria con respecto al id
      */
-    eliminarPermisoCategoriaByID(permisoCategoriaID: Number): Boolean {
-        throw new Error("Method not implemented.");
+    async eliminarPermisoCategoriaByID(permisoCategoriaID: Number): Promise<Boolean> {
+        LoggerAPI.info("Inicio - eliminarPermisoCategoriaByID - PermisoCategoriaDAO");
+        try {
+            let result = await this.permisoCategoriaRepository.delete({permisoCategoriaId: Number(permisoCategoriaID)});
+            if(result.affected && result.affected > 0){
+                LoggerAPI.info("Fin - eliminarPermisoCategoriaByID - PermisoCategoriaDAO");
+                return true;
+            }
+            else{
+                LoggerAPI.warn("No se pudo eliminar el permiso categoria con el id proporcionado - eliminarPermisoCategoriaByID - PermisoCategoriaDAO");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error - eliminarPermisoCategoriaByID - PermisoCategoriaDAO", error);
+            throw new Error("Error al eliminar el permiso categoria con el id proporcionado");
+        }
     }
 
     /**
