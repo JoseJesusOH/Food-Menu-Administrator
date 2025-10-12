@@ -36,7 +36,7 @@ export interface PermisoCategoriaIDAO {
      * @param permisoCategoriaID ID del PermisoCategoria a eliminar
      * @return true si la operación fue exitosa, de lo contrario false
      */
-    eliminarPermisoCategoriaByID(permisoCategoriaID: Number):  Promise<Boolean>;
+    eliminarPermisoCategoriaById(permisoCategoriaId: Number):  Promise<Boolean>;
 
     /** 
      * 
