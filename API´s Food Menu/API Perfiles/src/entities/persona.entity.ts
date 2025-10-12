@@ -6,11 +6,15 @@ import {
     Entity, Column, PrimaryGeneratedColumn, Generated,
      OneToMany,
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importaciones de Entidad Direccion requerida para la relación
  */
-import { Direccion } from "./direccion.entity"
+import { Direccion } from "@entity/direccion.entity"
 
 /**
  * Entidad Persona que representa la tabla personas en la base de datos
@@ -23,6 +27,7 @@ export class Persona {
     @PrimaryGeneratedColumn({
         name: "persona_id"
     })
+    @Exclude()
      personaId: Number;
 
     /**
