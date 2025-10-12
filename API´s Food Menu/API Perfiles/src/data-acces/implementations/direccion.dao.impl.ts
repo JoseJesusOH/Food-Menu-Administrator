@@ -93,7 +93,20 @@ async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
      * Metodo para eliminar una direccion
      */
     async eliminarDireccion(direccionId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+        LoggerAPI.info("Se inicia el metodo para eliminar una direccion en DB")
+        try{
+            const resultado= await this.direccionRepiositorio.delete({direccionId});
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha eliminado la direccion exitosamente.")
+                return new Boolean(true)
+            }else{
+                LoggerAPI.warn("No sse ha podido eliminar la direccion en DB")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error al eliminar la direccion error; ${error}`)
+            throw error;
+        }
     }
 
     /**
