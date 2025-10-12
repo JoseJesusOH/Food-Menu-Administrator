@@ -5,7 +5,6 @@ import { Direccion } from "@entity/direccion.entity"
 import { DireccionIDAO } from "@data.dao/direccion.dao"
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
-import { dir } from "console";
 
 /**
  * Implementación correspondiente al acceso a datos de Direccion
