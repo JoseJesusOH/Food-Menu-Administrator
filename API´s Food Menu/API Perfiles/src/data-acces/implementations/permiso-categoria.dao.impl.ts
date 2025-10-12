@@ -98,8 +98,22 @@ export class PermisoCategoriaDAO implements PermisoCategoriaIDAO{
     /**
      * Actualiza la relacion de permiso - categoria
      */
-    actualizarPermisoCategoria(permisoCategoria: PermisoCategoria): Boolean {
-        throw new Error("Method not implemented.");
+    async actualizarPermisoCategoria(permisoCategoria: PermisoCategoria): Promise<Boolean> {
+        LoggerAPI.info("Inicio - actualizarPermisoCategoria - PermisoCategoriaDAO");
+        try {
+            let result = await this.permisoCategoriaRepository.save(permisoCategoria);
+            if(result){
+                LoggerAPI.info("Fin - actualizarPermisoCategoria - PermisoCategoriaDAO");
+                return true;
+            }
+            else{
+                LoggerAPI.warn("No se pudo actualizar el permiso categoria - actualizarPermisoCategoria - PermisoCategoriaDAO");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error - actualizarPermisoCategoria - PermisoCategoriaDAO", error);
+            throw new Error("Error al actualizar el permiso categoria");
+        }
     }
     
 }
