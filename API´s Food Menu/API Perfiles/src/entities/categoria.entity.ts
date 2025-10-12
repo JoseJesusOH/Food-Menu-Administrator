@@ -1,3 +1,4 @@
+
 /**
  * Importaciones de TypeORM requeridas para la entidad
  */
@@ -5,11 +6,15 @@ import "reflect-metadata"
 import {
     Entity, Column, PrimaryGeneratedColumn, Generated, OneToMany
 } from "typeorm"
-
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Importaciones de entidades relacionadas PermisoCategoria
  */
-import { PermisoCategoria } from "./permiso-categoria.entity"
+import { PermisoCategoria  } from "@entity/permiso-categoria.entity"
 
 /**
  * Modelo de la entidad Categoria con sus respectivos campos y relaciones 
@@ -24,6 +29,7 @@ export class Categoria {
     @PrimaryGeneratedColumn({
         name: "categoria_id"
     })
+       @Exclude()
      categoriaId: Number;
 
     /**
