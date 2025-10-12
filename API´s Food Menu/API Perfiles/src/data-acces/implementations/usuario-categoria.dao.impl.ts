@@ -75,8 +75,22 @@ export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
     /**
      * Metodo para quitar una categoria al usuario
      */
-    eliminarUsuarioCategoriaByID(usuarioCategoria: Number): Boolean {
-        throw new Error("Method not implemented.");
+    async eliminarUsuarioCategoriaByID(usuarioCategoria: Number): Promise<Boolean> {
+         LoggerAPI.info("Se inicia el metodo eliminarUsuarioCategoriaByID de la clase UsuarioCategoriaDAO");
+        try {
+            let result = await this.usuarioCategoria.delete(usuarioCategoria);
+            if (result.affected > 0) {
+                LoggerAPI.info("Se elimino la relacion de usuario con categoria correctamente");
+                return true;
+            }
+            else {
+                LoggerAPI.info("No se pudo eliminar la relacion de usuario con categoria");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar la relacion de usuario con categoria: " + error);
+            throw error;
+        }
     }
 
     /**
