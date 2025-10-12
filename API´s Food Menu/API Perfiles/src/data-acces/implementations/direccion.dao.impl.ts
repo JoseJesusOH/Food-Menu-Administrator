@@ -112,8 +112,22 @@ async     agregarDireccion(direccion: Direccion): Promise<Boolean> {
     /**
      * Metodo para actualizar una direccion
      */
-    actualizarDireccion(direccion: Direccion): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarDireccion(direccion: Direccion): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para actualizar una direccion en DB")
+        try{
+            const resultado= await this.direccionRepiositorio.update({direccionId:direccion.direccionId},direccion);
+            if(resultado.affected>0){
+                LoggerAPI.info("Se ha actualizado la direccion exitosamente.")
+                return new Boolean(true)
+            }
+            else{
+                LoggerAPI.warn("No sse ha podido actualizar la direccion en DB")
+                return new Boolean(false)
+            }
+        }catch(error){
+            LoggerAPI.warn(`Se ha producido un error al actualizar la direccion error; ${error}`)
+            throw error;
+        }
     }
 
 }
