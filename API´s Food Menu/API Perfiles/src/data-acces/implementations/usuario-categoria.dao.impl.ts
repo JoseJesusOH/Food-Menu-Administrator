@@ -96,8 +96,22 @@ export class UsuarioCategoriaDAO implements UsuarioCategoriaIDAO{
     /**
      * Metodo para actualizar una categoria al usuario
      */
-    actualizarUsuarioCategoria(usuarioCategoria: UsuarioCategoria): Boolean {
-        throw new Error("Method not implemented.");
+    async actualizarUsuarioCategoria(usuarioCategoria: UsuarioCategoria): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo actualizarUsuarioCategoria de la clase UsuarioCategoriaDAO");
+        try {
+            let result = await this.usuarioCategoria.save(usuarioCategoria);
+            if (result) {
+                LoggerAPI.info("Se actualizo la relacion de usuario con categoria correctamente");
+                return true;
+            }
+            else {
+                LoggerAPI.info("No se pudo actualizar la relacion de usuario con categoria");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar la relacion de usuario con categoria: " + error);
+            throw error;
+        }
     }
 
 }
