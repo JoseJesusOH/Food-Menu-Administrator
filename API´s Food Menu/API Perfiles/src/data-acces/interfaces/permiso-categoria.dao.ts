@@ -21,6 +21,13 @@ export interface PermisoCategoriaIDAO {
      * @return Un objeto PermisoCategoria si se encuentra, de lo contrario retorna null
      */
     getPermisoCategoriaById(permisoCategoriaId: Number): Promise<PermisoCategoria>;
+    
+    /**
+     * Método para obtener un PermisoCategoria por su UUID
+     * @param permisoCategoriaUuid UUID del PermisoCategoria a buscar
+     * @return Un objeto PermisoCategoria si se encuentra, de lo contrario retorna null
+     */
+    getPermisoCategoriaByUuid(permisoCategoriaUuid: String): Promise<PermisoCategoria>;
 
     /** 
      * 
