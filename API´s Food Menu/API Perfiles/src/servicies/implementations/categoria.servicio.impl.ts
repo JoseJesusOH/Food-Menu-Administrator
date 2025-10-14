@@ -22,9 +22,25 @@ export class CategoriaServicio implements CategoriaIServicio{
             LoggerAPI.warn(`Se ha producido error al obtener categorias error; ${error}`)
         }
     }
-    getCategoriaById(categoriaId: Number): Promise<CategoriaDTO> {
-        throw new Error("Method not implemented.");
+async getCategoriaById(categoriaId: Number): Promise<CategoriaDTO> {
+    LoggerAPI.info(`Se inicia metodo para obtener categoria por ID: ${categoriaId} en ServicioCategoria`);
+    try {
+        let resultado = await this.categoriaRepositorio.findOne({
+            where: { categoriaId }
+        });
+
+        if (resultado) {
+            LoggerAPI.info(`Categoría encontrada`);
+            return resultado;
+        } else {
+            LoggerAPI.warn(`No se encontró ninguna categoría con el ID: ${categoriaId}`);
+            return new CategoriaDTO();
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Error al obtener categoría por ID (${categoriaId}): ${error}`);
+        return new CategoriaDTO(); 
     }
+}
     getCategoriaByUuid(categoriaUuid: String): Promise<CategoriaDTO> {
         throw new Error("Method not implemented.");
     }
