@@ -41,9 +41,26 @@ async getCategoriaById(categoriaId: Number): Promise<CategoriaDTO> {
         return new CategoriaDTO(); 
     }
 }
-    getCategoriaByUuid(categoriaUuid: String): Promise<CategoriaDTO> {
-        throw new Error("Method not implemented.");
+async getCategoriaByUuid(categoriaUuid: String): Promise<CategoriaDTO> {
+    LoggerAPI.info(`Se inicia metodo para obtener categoria por UUID: ${categoriaUuid} en ServicioCategoria`);
+    try {
+        let resultado = await this.categoriaRepositorio.findOne({
+            where: { categoriaUuid }
+        });
+
+        if (resultado) {
+            LoggerAPI.info(`Categoría encontrada con UUID ${categoriaUuid}: ${resultado.nombre ?? "(sin nombre)"}`);
+            return resultado;
+        } else {
+            LoggerAPI.warn(`No se encontró ninguna categoría con el UUID: ${categoriaUuid}`);
+            return new CategoriaDTO();
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Error al obtener categoría por UUID (${categoriaUuid}): ${error}`);
+        return new CategoriaDTO();
     }
+}
+
     agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
