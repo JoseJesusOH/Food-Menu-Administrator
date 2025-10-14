@@ -17,7 +17,7 @@ export class CategoriaServicio implements CategoriaIServicio{
     actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    eliminarCategoriaById(categoriaId: Number): Promise<CategoriaDTO> {
+    eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
     
