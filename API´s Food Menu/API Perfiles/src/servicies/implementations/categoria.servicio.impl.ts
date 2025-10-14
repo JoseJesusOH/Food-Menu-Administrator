@@ -8,7 +8,7 @@ import { plainToInstance } from "class-transformer";
 import { CategoriaIServicio } from "servicies/interfaces/categoria.servicio";
 
 export class CategoriaServicio implements CategoriaIServicio {
-    categoriaDAO:CategoriaIDAO=new CategoriaDAO()
+    categoriaDAO: CategoriaIDAO = new CategoriaDAO()
     async getCategorias(): Promise<CategoriaDTO[]> {
         LoggerAPI.info("Se inicia metodo para obtener categorias en ServicioCategoria")
         try {
@@ -29,7 +29,7 @@ export class CategoriaServicio implements CategoriaIServicio {
         LoggerAPI.info(`Se inicia metodo para obtener categoria por ID: ${categoriaId} en ServicioCategoria`);
         try {
             let resultado = await this.categoriaDAO.getCategoriaById(
-                categoriaId 
+                categoriaId
             );
 
             if (resultado) {
@@ -47,7 +47,7 @@ export class CategoriaServicio implements CategoriaIServicio {
     async getCategoriaByUuid(categoriaUuid: String): Promise<CategoriaDTO> {
         LoggerAPI.info(`Se inicia metodo para obtener categoria por UUID: ${categoriaUuid} en ServicioCategoria`);
         try {
-            let resultado = await this.categoriaDAO.getCategoriaByUuid( categoriaUuid );
+            let resultado = await this.categoriaDAO.getCategoriaByUuid(categoriaUuid);
 
             if (resultado) {
                 LoggerAPI.info(`Categoría encontrada con UUID ${categoriaUuid}: ${resultado.nombre ?? "(sin nombre)"}`);
@@ -65,25 +65,42 @@ export class CategoriaServicio implements CategoriaIServicio {
     async agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia el metodo para agregar una categoria en CategoriaServicio")
         try {
-            let categoria: Categoria=new Categoria();
-            categoria=plainToInstance(Categoria,categoriaDTO)
+            let categoria: Categoria = new Categoria();
+            categoria = plainToInstance(Categoria, categoriaDTO)
             let result = await this.categoriaDAO.agregarCategoria(categoria)
-            if(result){
+            if (result) {
                 LoggerAPI.info("Se ha agregado la categoria exitosamente")
                 return true
-            }else{
+            } else {
                 LoggerAPI.warn("No se ha agregado la categoria.")
                 return false
             }
-            
+
         } catch (error) {
             LoggerAPI.warn(`Se ha podrucido error al agregar categoria en categoria servicio error; ${error}`)
             throw error;
         }
     }
-    actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el metodo para actualizar una categoria en CategoriaServicio");
+        try {
+            let categoria: Categoria = new Categoria();
+            categoria = plainToInstance(Categoria, categoriaDTO);
+            let result = await this.categoriaDAO.actualizarCategoria(categoria);
+
+            if (result) {
+                LoggerAPI.info("La categoria ha sido actualizada exitosamente");
+                return true;
+            } else {
+                LoggerAPI.warn("No se ha podido actualizar la categoria");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar la categoria en CategoriaServicio; ${error}`);
+            throw error;
+        }
     }
+
     eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
