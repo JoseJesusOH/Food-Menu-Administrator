@@ -63,7 +63,23 @@ export class CategoriaServicio implements CategoriaIServicio {
     }
 
     async agregarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
-      
+        LoggerAPI.info("Se inicia el metodo para agregar una categoria en CategoriaServicio")
+        try {
+            let categoria: Categoria=new Categoria();
+            categoria=plainToInstance(Categoria,categoriaDTO)
+            let result = await this.categoriaDAO.agregarCategoria(categoria)
+            if(result){
+                LoggerAPI.info("Se ha agregado la categoria exitosamente")
+                return true
+            }else{
+                LoggerAPI.warn("No se ha agregado la categoria.")
+                return false
+            }
+            
+        } catch (error) {
+            LoggerAPI.warn(`Se ha podrucido error al agregar categoria en categoria servicio error; ${error}`)
+            throw error;
+        }
     }
     actualizarCategoria(categoriaDTO: CategoriaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
