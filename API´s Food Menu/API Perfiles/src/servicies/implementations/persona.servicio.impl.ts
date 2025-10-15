@@ -12,6 +12,7 @@ import { PersonaIServicio } from "servicies/interfaces/persona.servicio";
 
 // Importa la utilidad para el registro de logs e información del sistema
 import { LoggerAPI } from "@utility/logger";
+import { plainToInstance } from "class-transformer";
 
 /** 
  * Servicio encargado de gestionar la lógica de negocio relacionada con las personas.
@@ -41,10 +42,25 @@ export class PersonaServicio implements PersonaIServicio {
         }
     }
 
-    getPersonaById(personaId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+
+    async getPersonaById(personaId: Number): Promise<PersonaDTO> {
+        LoggerAPI.info(`Se inicia el método para obtener la persona con ID: ${personaId} en PersonaServicio`);
+        try {
+            let resultado = await this.personaDAO.getPersonaById(personaId);
+            if (resultado) {
+                LoggerAPI.info(`Se ha encontrado la persona con ID ${personaId}`);
+                return resultado;
+            } else {
+                LoggerAPI.warn(`No se ha encontrado ninguna persona con el ID ${personaId}`);
+                return new PersonaDTO();
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener la persona con ID ${personaId} en PersonaServicio; ${error}`);
+            return new PersonaDTO();
+        }
     }
-    getPersonaByUuid(personaUuid: String): Promise<Boolean> {
+
+    getPersonaByUuid(personaUuid: String): Promise<PersonaDTO> {
         throw new Error("Method not implemented.");
     }
     agregarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
@@ -56,5 +72,5 @@ export class PersonaServicio implements PersonaIServicio {
     eliminarPersonaById(personaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
-    
+
 }
