@@ -78,7 +78,7 @@ export class DireccionServicio implements DireccionIServicio {
         }
     }
     async eliminarDireccionById(direccionId: Number): Promise<Boolean> {
-        LoggerAPI.info("Se inicia metodo de agregar Direccion en DireccionServicio")
+        LoggerAPI.info("Se inicia metodo de eliminar Direccion en DireccionServicio")
         try {
              let result= await this.direcionDAO.eliminarDireccion(direccionId)
              if(result){
@@ -93,8 +93,23 @@ export class DireccionServicio implements DireccionIServicio {
             throw error;
         }
     }
-    actualizarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
+          LoggerAPI.info("Se inicia metodo de agregar Direccion en DireccionServicio")
+        try {
+            let direcion=new Direccion();
+            direcion=plainToInstance(Direccion,direccionDTO)
+             let result= await this.direcionDAO.actualizarDireccion(direcion)
+             if(result){
+                LoggerAPI.info("Se ha actualizado la direccion correctamente.")
+                return true;
+             }else{
+                LoggerAPI.warn("No se ha actualizado la direccion")
+                return false;
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido error en actualizar direccion en DireccionServicio error: ${error}`)
+            throw error;
+        }
     }
 
 }
