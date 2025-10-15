@@ -42,8 +42,21 @@ export class DireccionServicio implements DireccionIServicio {
             throw error;
         }
     }
-    getDireccionByUuid(direccionUuid: String): Promise<DireccionDTO> {
-        throw new Error("Method not implemented.");
+    async getDireccionByUuid(direccionUuid: String): Promise<DireccionDTO> {
+         LoggerAPI.info("Se ha iniciado el metodo en DireccionServicio para obtener Direccion por ID")
+        try {
+             let result=await this.direcionDAO.getDireccionByUuid(direccionUuid)
+             if(result){
+                LoggerAPI.info(`Se ha encontrado la direccion con UUID ${direccionUuid}`)
+                return result;
+             }else{
+                LoggerAPI.info(`No se ha encontrado la direccion con UUID ${direccionUuid}`)
+                return null;
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido error en DireccionServicio metodo GetDireccionByUuid error; ${error}`)
+            throw error;
+        }
     }
     agregarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
