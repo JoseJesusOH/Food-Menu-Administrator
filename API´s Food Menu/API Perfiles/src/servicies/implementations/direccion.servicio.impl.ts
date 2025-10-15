@@ -7,6 +7,7 @@ import { DireccionDAO } from "@data.impl/direccion.dao.impl";
 
 import { DireccionIDAO } from "@data.dao/direccion.dao";
 import { dir } from "console";
+import { Direccion } from "@entity/direccion.entity";
 export class DireccionServicio implements DireccionIServicio {
     direcionDAO: DireccionIDAO = new DireccionDAO
     async getDirecciones(): Promise<DireccionDTO[]> {
@@ -58,8 +59,23 @@ export class DireccionServicio implements DireccionIServicio {
             throw error;
         }
     }
-    agregarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async agregarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia metodo de agregar Direccion en DireccionServicio")
+        try {
+            let direcion=new Direccion();
+            direcion=plainToInstance(Direccion,direccionDTO)
+             let result= await this.direcionDAO.agregarDireccion(direcion)
+             if(result){
+                LoggerAPI.info("Se ha agregado la direccion correctamente.")
+                return true;
+             }else{
+                LoggerAPI.warn("No se ha agregado la direccion")
+                return false;
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido error en agregar DireccionServicio error: ${error}`)
+            throw error;
+        }
     }
     eliminarDireccionById(direccionId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
