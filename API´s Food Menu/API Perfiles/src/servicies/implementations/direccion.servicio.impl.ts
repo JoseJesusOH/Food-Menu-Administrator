@@ -1,10 +1,31 @@
 import { DireccionDTO } from "@dto/direccion.dto";
 import { DireccionIServicio } from "servicies/interfaces/direccion.servicio";
+import { Conexion } from "@utility/conexion";
+import { LoggerAPI } from "@utility/logger";
+import { plainToInstance } from "class-transformer";
+import { DireccionDAO } from "@data.impl/direccion.dao.impl";
 
+import { DireccionIDAO } from "@data.dao/direccion.dao";
 export class DireccionServicio implements DireccionIServicio{
-    getDirecciones(): Promise<DireccionDTO[]> {
-        throw new Error("Method not implemented.");
+
+async getDirecciones(): Promise<DireccionDTO[]> {
+    direcionDAO: DireccionIDAO =new DireccionDAO
+    LoggerAPI.info("Se inicia el metodo para obtener las direcciones en DireccionServicio");
+    try {
+        let resultado = await this.direccionDAO.getDirecciones();
+        if (resultado.length > 0) {
+            LoggerAPI.info(`Se han encontrado un total de ${resultado.length} direcciones`);
+            return resultado;
+        } else {
+            LoggerAPI.warn("No se han encontrado direcciones.");
+            return [];
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Se ha producido un error al obtener las direcciones en DireccionServicio; ${error}`);
+        return [];
     }
+}
+
     getDireccionById(direcionId: Number): Promise<DireccionDTO> {
         throw new Error("Method not implemented.");
     }
