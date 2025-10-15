@@ -73,12 +73,25 @@ export class DireccionServicio implements DireccionIServicio {
                 return false;
              }
         } catch (error) {
-            LoggerAPI.warn(`Se ha producido error en agregar DireccionServicio error: ${error}`)
+            LoggerAPI.warn(`Se ha producido error en agregar direccion en DireccionServicio error: ${error}`)
             throw error;
         }
     }
-    eliminarDireccionById(direccionId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async eliminarDireccionById(direccionId: Number): Promise<Boolean> {
+        LoggerAPI.info("Se inicia metodo de agregar Direccion en DireccionServicio")
+        try {
+             let result= await this.direcionDAO.eliminarDireccion(direccionId)
+             if(result){
+                LoggerAPI.info("Se ha eliminado la direccion correctamente.")
+                return true;
+             }else{
+                LoggerAPI.warn("No se ha eliminado la direccion")
+                return false;
+             }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido error en eliminar direccion en DireccionServicio error: ${error}`)
+            throw error;
+        }
     }
     actualizarDireccion(direccionDTO: DireccionDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
