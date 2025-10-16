@@ -59,10 +59,24 @@ export class PersonaServicio implements PersonaIServicio {
             return new PersonaDTO();
         }
     }
+    async getPersonaByUuid(personaUuid: String): Promise<PersonaDTO> {
+        LoggerAPI.info(`Se inicia el método para obtener la persona con UUID: ${personaUuid} en PersonaServicio`);
+        try {
+            let resultado = await this.personaDAO.getPersonaByUuid(personaUuid);
 
-    getPersonaByUuid(personaUuid: String): Promise<PersonaDTO> {
-        throw new Error("Method not implemented.");
+            if (resultado) {
+                LoggerAPI.info(`Se ha encontrado la persona con UUID ${personaUuid}`);
+                return resultado;
+            } else {
+                LoggerAPI.warn(`No se ha encontrado ninguna persona con el UUID ${personaUuid}`);
+                return new PersonaDTO();
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener la persona con UUID ${personaUuid} en PersonaServicio; ${error}`);
+            return new PersonaDTO();
+        }
     }
+
     agregarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
