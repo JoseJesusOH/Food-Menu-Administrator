@@ -1,16 +1,29 @@
+// Interfaz del DAO para operaciones de usuario
 import { UsuarioIDAO } from "@data.dao/usuario.dao";
+// Implementación concreta del DAO de usuario
 import { UsuarioDAO } from "@data.impl/usuario.dao.impl";
+// DTO que representa los datos de un usuario
 import { UsuarioDTO } from "@dto/usuario.dto";
+// Interfaz de servicio que define los métodos del servicio de usuario
 import { UsuarioIServicio } from "servicies/interfaces/usuario.servicio";
+// Logger para registrar información, advertencias y errores
 import { LoggerAPI } from "@utility/logger";
+// Entidad Usuario para persistencia en base de datos
 import { Usuario } from "@entity/usuario.entity";
+// Utilidad para convertir objetos planos en instancias de clase
 import { plainToInstance } from "class-transformer";
+
+/**
+ * Servicio que implementa las operaciones del sistema para la gestión de usuarios
+ */
 export class UsuarioServicio implements UsuarioIServicio {
+    // DAO encargado de la persistencia de usuarios
     usuarioDAO: UsuarioIDAO = new UsuarioDAO();
+
+    // Obtiene todos los usuarios registrados en el sistema
     async getUsuarios(): Promise<UsuarioDTO[]> {
         LoggerAPI.info("Se inicia el método para obtener los usuarios en UsuarioServicio");
         try {
-            // Se llama al DAO para obtener la lista de usuarios
             let resultado = await this.usuarioDAO.getUsuarios();
 
             if (resultado.length > 0) {
@@ -25,10 +38,11 @@ export class UsuarioServicio implements UsuarioIServicio {
             return [];
         }
     }
+
+    // Obtiene un usuario por su ID
     async getUsuarioById(usuarioId: Number): Promise<UsuarioDTO> {
         LoggerAPI.info(`Se inicia el método para obtener el usuario con ID: ${usuarioId} en UsuarioServicio`);
         try {
-            // Se llama al DAO para obtener el usuario por su ID
             let resultado = await this.usuarioDAO.getUsuarioById(usuarioId);
 
             if (resultado) {
@@ -43,10 +57,11 @@ export class UsuarioServicio implements UsuarioIServicio {
             return new UsuarioDTO();
         }
     }
+
+    // Obtiene un usuario por su UUID
     async getUsuarioByUuid(usuarioUuid: String): Promise<UsuarioDTO> {
         LoggerAPI.info(`Se inicia el método para obtener el usuario con UUID: ${usuarioUuid} en UsuarioServicio`);
         try {
-            // Se llama al DAO para obtener el usuario por su UUID
             let resultado = await this.usuarioDAO.getUsuarioByUuid(usuarioUuid);
 
             if (resultado) {
@@ -61,13 +76,12 @@ export class UsuarioServicio implements UsuarioIServicio {
             return new UsuarioDTO();
         }
     }
+
+    // Agrega un nuevo usuario al sistema
     async agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia el método para agregar un usuario en UsuarioServicio");
         try {
-            // Convertimos el DTO en la entidad Usuario para persistencia
             let usuario = plainToInstance(Usuario, usuarioDTO);
-
-            // Llamada al DAO para agregar el usuario
             let resultado = await this.usuarioDAO.agregarUsuario(usuario);
 
             if (resultado) {
@@ -82,10 +96,11 @@ export class UsuarioServicio implements UsuarioIServicio {
             throw error;
         }
     }
+
+    // Elimina un usuario por su ID
     async eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
         LoggerAPI.info(`Se inicia el método para eliminar el usuario con ID: ${usuarioId} en UsuarioServicio`);
         try {
-            // Llamada al DAO para eliminar el usuario por su ID
             let resultado = await this.usuarioDAO.eliminarUsuarioById(usuarioId);
 
             if (resultado) {
@@ -100,13 +115,12 @@ export class UsuarioServicio implements UsuarioIServicio {
             throw error;
         }
     }
+
+    // Actualiza la información de un usuario
     async actualizarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia el método para actualizar un usuario en UsuarioServicio");
         try {
-            // Convertimos el DTO en la entidad Usuario para persistencia
             let usuario = plainToInstance(Usuario, usuarioDTO);
-
-            // Llamada al DAO para actualizar el usuario
             let resultado = await this.usuarioDAO.actualizarUsuario(usuario);
 
             if (resultado) {
@@ -121,5 +135,4 @@ export class UsuarioServicio implements UsuarioIServicio {
             throw error;
         }
     }
-
 }
