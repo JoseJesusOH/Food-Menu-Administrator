@@ -3,6 +3,8 @@ import { UsuarioDAO } from "@data.impl/usuario.dao.impl";
 import { UsuarioDTO } from "@dto/usuario.dto";
 import { UsuarioIServicio } from "servicies/interfaces/usuario.servicio";
 import { LoggerAPI } from "@utility/logger";
+import { Usuario } from "@entity/usuario.entity";
+import { plainToInstance } from "class-transformer";
 export class UsuarioServicio implements UsuarioIServicio {
     usuarioDAO: UsuarioIDAO = new UsuarioDAO();
     async getUsuarios(): Promise<UsuarioDTO[]> {
@@ -41,45 +43,45 @@ export class UsuarioServicio implements UsuarioIServicio {
             return new UsuarioDTO();
         }
     }
- async getUsuarioByUuid(usuarioUuid: String): Promise<UsuarioDTO> {
-    LoggerAPI.info(`Se inicia el método para obtener el usuario con UUID: ${usuarioUuid} en UsuarioServicio`);
-    try {
-        // Se llama al DAO para obtener el usuario por su UUID
-        let resultado = await this.usuarioDAO.getUsuarioByUuid(usuarioUuid);
+    async getUsuarioByUuid(usuarioUuid: String): Promise<UsuarioDTO> {
+        LoggerAPI.info(`Se inicia el método para obtener el usuario con UUID: ${usuarioUuid} en UsuarioServicio`);
+        try {
+            // Se llama al DAO para obtener el usuario por su UUID
+            let resultado = await this.usuarioDAO.getUsuarioByUuid(usuarioUuid);
 
-        if (resultado) {
-            LoggerAPI.info(`Se ha encontrado el usuario con UUID ${usuarioUuid}`);
-            return resultado;
-        } else {
-            LoggerAPI.warn(`No se ha encontrado ningún usuario con el UUID ${usuarioUuid}`);
+            if (resultado) {
+                LoggerAPI.info(`Se ha encontrado el usuario con UUID ${usuarioUuid}`);
+                return resultado;
+            } else {
+                LoggerAPI.warn(`No se ha encontrado ningún usuario con el UUID ${usuarioUuid}`);
+                return new UsuarioDTO();
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener el usuario con UUID ${usuarioUuid} en UsuarioServicio; ${error}`);
             return new UsuarioDTO();
         }
-    } catch (error) {
-        LoggerAPI.warn(`Se ha producido un error al obtener el usuario con UUID ${usuarioUuid} en UsuarioServicio; ${error}`);
-        return new UsuarioDTO();
     }
-}
-async agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
-    LoggerAPI.info("Se inicia el método para agregar un usuario en UsuarioServicio");
-    try {
-        // Convertimos el DTO en la entidad Usuario para persistencia
-        let usuario = plainToInstance(Usuario, usuarioDTO);
+    async agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el método para agregar un usuario en UsuarioServicio");
+        try {
+            // Convertimos el DTO en la entidad Usuario para persistencia
+            let usuario = plainToInstance(Usuario, usuarioDTO);
 
-        // Llamada al DAO para agregar el usuario
-        let resultado = await this.usuarioDAO.agregarUsuario(usuario);
+            // Llamada al DAO para agregar el usuario
+            let resultado = await this.usuarioDAO.agregarUsuario(usuario);
 
-        if (resultado) {
-            LoggerAPI.info("El usuario ha sido agregado exitosamente");
-            return true;
-        } else {
-            LoggerAPI.warn("No se ha podido agregar el usuario");
-            return false;
+            if (resultado) {
+                LoggerAPI.info("El usuario ha sido agregado exitosamente");
+                return true;
+            } else {
+                LoggerAPI.warn("No se ha podido agregar el usuario");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al agregar el usuario en UsuarioServicio; ${error}`);
+            throw error;
         }
-    } catch (error) {
-        LoggerAPI.warn(`Se ha producido un error al agregar el usuario en UsuarioServicio; ${error}`);
-        throw error;
     }
-}
     eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
