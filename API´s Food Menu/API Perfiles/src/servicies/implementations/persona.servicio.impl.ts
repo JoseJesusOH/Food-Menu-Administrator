@@ -100,8 +100,27 @@ export class PersonaServicio implements PersonaIServicio {
             throw error;
         }
     }
-    actualizarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el método para actualizar una persona en PersonaServicio");
+        try {
+            // Convertimos el DTO a la entidad Persona
+            let persona = plainToInstance(Persona, personaDTO);
+
+            // Llamamos al DAO para actualizar la persona
+            let resultado = await this.personaDAO.actualizarPersona(persona);
+
+            if (resultado) {
+                LoggerAPI.info("La persona ha sido actualizada exitosamente");
+                return true;
+            } else {
+                LoggerAPI.warn("No se ha podido actualizar la persona");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar la persona en PersonaServicio; ${error}`);
+            throw error;
+        }
     }
     eliminarPersonaById(personaId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
