@@ -49,7 +49,26 @@ class CategoriaControl {
         }
     }
 
-   
+    /**
+     * Obtiene una categoría específica por su UUID.
+     * El uuid vendría en req.params.uuid.
+     */
+    obtenerCategoriaByUuid = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para el retorno de categoria por uuid");
+        try {
+            const { categoriaUuid } = req.params;
+            const categoria = await this.categoriaServicio.getCategoriaByUuid(categoriaUuid);
+            if (!categoria) {
+                return res.status(200).send({ categoria })
+            } else {
+                return res.status(4004).send({ message: "No hay categoria con ese  uuid" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en la obtencion de categoria por UUID ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+
 }
 
 export { CategoriaControl }
