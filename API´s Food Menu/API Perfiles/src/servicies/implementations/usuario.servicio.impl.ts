@@ -41,9 +41,24 @@ export class UsuarioServicio implements UsuarioIServicio {
             return new UsuarioDTO();
         }
     }
-    getUsuarioByUuid(usuarioUuid: String): Promise<UsuarioDTO> {
-        throw new Error("Method not implemented.");
+ async getUsuarioByUuid(usuarioUuid: String): Promise<UsuarioDTO> {
+    LoggerAPI.info(`Se inicia el método para obtener el usuario con UUID: ${usuarioUuid} en UsuarioServicio`);
+    try {
+        // Se llama al DAO para obtener el usuario por su UUID
+        let resultado = await this.usuarioDAO.getUsuarioByUuid(usuarioUuid);
+
+        if (resultado) {
+            LoggerAPI.info(`Se ha encontrado el usuario con UUID ${usuarioUuid}`);
+            return resultado;
+        } else {
+            LoggerAPI.warn(`No se ha encontrado ningún usuario con el UUID ${usuarioUuid}`);
+            return new UsuarioDTO();
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Se ha producido un error al obtener el usuario con UUID ${usuarioUuid} en UsuarioServicio; ${error}`);
+        return new UsuarioDTO();
     }
+}
     agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
