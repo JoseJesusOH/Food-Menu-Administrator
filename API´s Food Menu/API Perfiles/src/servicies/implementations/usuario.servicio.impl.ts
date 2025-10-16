@@ -59,9 +59,27 @@ export class UsuarioServicio implements UsuarioIServicio {
         return new UsuarioDTO();
     }
 }
-    agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async agregarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
+    LoggerAPI.info("Se inicia el método para agregar un usuario en UsuarioServicio");
+    try {
+        // Convertimos el DTO en la entidad Usuario para persistencia
+        let usuario = plainToInstance(Usuario, usuarioDTO);
+
+        // Llamada al DAO para agregar el usuario
+        let resultado = await this.usuarioDAO.agregarUsuario(usuario);
+
+        if (resultado) {
+            LoggerAPI.info("El usuario ha sido agregado exitosamente");
+            return true;
+        } else {
+            LoggerAPI.warn("No se ha podido agregar el usuario");
+            return false;
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Se ha producido un error al agregar el usuario en UsuarioServicio; ${error}`);
+        throw error;
     }
+}
     eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
