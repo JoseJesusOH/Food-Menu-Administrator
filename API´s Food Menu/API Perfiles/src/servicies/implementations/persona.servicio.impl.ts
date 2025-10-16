@@ -13,6 +13,7 @@ import { PersonaIServicio } from "servicies/interfaces/persona.servicio";
 // Importa la utilidad para el registro de logs e información del sistema
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
+import { Persona } from "@entity/persona.entity";
 
 /** 
  * Servicio encargado de gestionar la lógica de negocio relacionada con las personas.
@@ -77,8 +78,27 @@ export class PersonaServicio implements PersonaIServicio {
         }
     }
 
-    agregarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async agregarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el método para agregar una persona en PersonaServicio");
+        try {
+            // Convertimos el DTO en una entidad Persona para su persistencia
+            let persona = plainToInstance(Persona, personaDTO);
+
+            // Llamada al DAO para agregar la persona en la base de datos
+            let resultado = await this.personaDAO.agregarPersona(persona);
+
+            if (resultado) {
+                LoggerAPI.info("La persona ha sido agregada exitosamente");
+                return true;
+            } else {
+                LoggerAPI.warn("No se ha podido agregar la persona");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al agregar la persona en PersonaServicio; ${error}`);
+            throw error;
+        }
     }
     actualizarPersona(personaDTO: PersonaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
