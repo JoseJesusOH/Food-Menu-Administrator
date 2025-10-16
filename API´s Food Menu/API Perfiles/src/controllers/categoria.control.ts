@@ -28,6 +28,28 @@ class CategoriaControl {
         }
     }
 
+
+    /**
+     * Obtiene todas las categorías.
+     * Suele responder con un array de categorías.
+     * Puede aceptar filtros opcionales desde req.query.
+     */
+    obtenerCategorias = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para el retorno de categorias");
+        try {
+            const categorias = await this.categoriaServicio.getCategorias();
+            if (categorias.length > 0) {
+                return res.status(200).send({ categorias })
+            } else {
+                return res.status(404).send({ message: "No hay categorias existentes" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en la obtencion de categorias ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+
+   
 }
 
 export { CategoriaControl }
