@@ -122,8 +122,22 @@ export class PersonaServicio implements PersonaIServicio {
             throw error;
         }
     }
-    eliminarPersonaById(personaId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
-    }
+async eliminarPersonaById(personaId: Number): Promise<Boolean> {
+    LoggerAPI.info(`Se inicia el método para eliminar la persona con ID: ${personaId} en PersonaServicio`);
+    try {
+        // Se invoca el DAO para eliminar la persona por su ID
+        let resultado = await this.personaDAO.eliminarPersonaById(personaId);
 
+        if (resultado) {
+            LoggerAPI.info(`La persona con ID ${personaId} ha sido eliminada correctamente.`);
+            return true;
+        } else {
+            LoggerAPI.warn(`No se encontró o no se pudo eliminar la persona con ID ${personaId}.`);
+            return false;
+        }
+    } catch (error) {
+        LoggerAPI.warn(`Se produjo un error al eliminar la persona con ID ${personaId} en PersonaServicio: ${error}`);
+        throw error;
+    }
+}
 }
