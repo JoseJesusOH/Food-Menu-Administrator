@@ -82,8 +82,23 @@ export class UsuarioServicio implements UsuarioIServicio {
             throw error;
         }
     }
-    eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia el método para eliminar el usuario con ID: ${usuarioId} en UsuarioServicio`);
+        try {
+            // Llamada al DAO para eliminar el usuario por su ID
+            let resultado = await this.usuarioDAO.eliminarUsuarioById(usuarioId);
+
+            if (resultado) {
+                LoggerAPI.info(`El usuario con ID ${usuarioId} ha sido eliminado exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo eliminar el usuario con ID ${usuarioId}`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al eliminar el usuario con ID ${usuarioId} en UsuarioServicio; ${error}`);
+            throw error;
+        }
     }
     actualizarUsuario(usuarioDTO: UsuarioDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
