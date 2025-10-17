@@ -78,16 +78,16 @@ class DireccionControl {
         }
     }
 
-      eliminarDireccionById = async (req, res, next) => {
+      eliminarDireccionByUuid = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control respectivo para eliminar una dirección")
         try {
-            const { direccionId } = req.params
-            const resultado = await this.direccionServicio.eliminarDireccionById(Number(direccionId))
+            const { direccionUuid } = req.params
+            const resultado = await this.direccionServicio.eliminarDireccionByUuid(direccionUuid)
 
             if (resultado) {
-                return res.status(200).send({ message: `La dirección con ID ${direccionId} ha sido eliminada correctamente` })
+                return res.status(200).send({ message: `La dirección con UUID ${direccionUuid} ha sido eliminada correctamente` })
             } else {
-                return res.status(404).send({ message: `No se encontró o no se pudo eliminar la dirección con ID ${direccionId}` })
+                return res.status(404).send({ message: `No se encontró o no se pudo eliminar la dirección con UUID ${direccionUuid}` })
             }
 
         } catch (error) {
