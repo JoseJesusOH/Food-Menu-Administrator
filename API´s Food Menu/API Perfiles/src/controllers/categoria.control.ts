@@ -69,6 +69,46 @@ class CategoriaControl {
         }
     }
 
+    /**
+     * Elimina una categoría existente.
+     * El id de la categoría se recibe en req.params.id.
+     */
+    eliminarCategoria = async (req, res, next) => {
+                    LoggerAPI.info("Se inicia el control respectivo para eliminar una categoria");
+        try {
+            const {categoriaUuid} = req.params;
+
+            const categoriaResult = await this.categoriaServicio.eliminarCategoria(categoriaUuid)
+            if (categoriaResult) {
+                return res.status(200).send({ message: `La categoria ha sido eliminada` })
+            } else {
+                return res.status(404).send({ message: "No se ha eliminado la categoria" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en eliminar la categoria  ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+    /**
+     * Actualiza una categoría existente.
+     * Suele recibir el id de la categoría en req.params.id
+     * y los nuevos datos en req.body.
+     */
+    actualizarCategoria = async (req, res, next) => {
+           LoggerAPI.info("Se inicia el control respectivo para actualizar una categoria");
+        try {
+            let  categoria=plainToInstance(Categoria, req.body);
+            const categoriaResult = await this.categoriaServicio.actualizarCategoria(categoria)
+            if (categoriaResult) {
+                return res.status(200).send({ message: `La categoria ha sido actualizada` })
+            } else {
+                return res.status(404).send({ message: "No se ha actualizado la categoria" })
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en actualizar la categoria  ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
 }
 
 export { CategoriaControl }
