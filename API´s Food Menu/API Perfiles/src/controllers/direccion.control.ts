@@ -22,7 +22,7 @@ class DireccionControl {
             return res.status(500).send({ message: "Error interno del servidor" })
         }
     }
-    
+
     obtenerDirecciones = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control respectivo para obtener las direcciones")
         try {
@@ -36,6 +36,25 @@ class DireccionControl {
 
         } catch (error) {
             LoggerAPI.warn(`Se ha presentado un error al obtener las direcciones: ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" })
+        }
+    }
+
+    
+ obtenerDireccionByUuid = async (req, res, next) => {
+        const { uuid } = req.params
+        LoggerAPI.info(`Se inicia el control respectivo para obtener la dirección con UUID: ${uuid}`)
+        try {
+            const direccion = await this.direccionServicio.getDireccionByUuid(uuid)
+
+            if (direccion) {
+                return res.status(200).send(direccion)
+            } else {
+                return res.status(404).send({ message: `No se ha encontrado la dirección con UUID ${uuid}` })
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al obtener la dirección con UUID ${uuid}: ${error}`)
             return res.status(500).send({ message: "Error interno del servidor" })
         }
     }
