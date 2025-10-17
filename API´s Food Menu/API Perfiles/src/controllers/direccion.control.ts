@@ -40,8 +40,8 @@ class DireccionControl {
         }
     }
 
-    
- obtenerDireccionByUuid = async (req, res, next) => {
+
+    obtenerDireccionByUuid = async (req, res, next) => {
         const { uuid } = req.params
         LoggerAPI.info(`Se inicia el control respectivo para obtener la dirección con UUID: ${uuid}`)
         try {
@@ -59,5 +59,23 @@ class DireccionControl {
         }
     }
 
+    
+    actualizarDireccion = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para actualizar una dirección")
+        try {
+            let direccion = plainToInstance(Direccion, req.body)
+            const direccionResult = await this.direccionServicio.actualizarDireccion(direccion)
+
+            if (direccionResult) {
+                return res.status(200).send({ message: "La dirección ha sido actualizada correctamente" })
+            } else {
+                return res.status(404).send({ message: "No se ha podido actualizar la dirección" })
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al actualizar la dirección: ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" })
+        }
+    }
 }
 export default { DireccionControl }
