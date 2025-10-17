@@ -37,10 +37,10 @@ export interface DireccionIServicio {
 
     /**
      * Elimina una dirección del sistema mediante su identificador numérico.
-     * @param {Number} direccionId - Identificador único de la dirección a eliminar.
+     * @param {String} direccionUuid - Identificador único de la dirección a eliminar.
      * @returns {Promise<Boolean>} Verdadero si la eliminación fue exitosa, falso si no se pudo eliminar.
      */
-    eliminarDireccionById(direccionId: Number): Promise<Boolean>;
+    eliminarDireccionByUuid(direccionUuid: String): Promise<Boolean>;
 
     /**
      * Actualiza los datos de una dirección existente.
