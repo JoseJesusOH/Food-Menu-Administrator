@@ -124,19 +124,24 @@ export class CategoriaServicio implements CategoriaIServicio {
     }
 
     /** Elimina una categoría por su ID */
-    async eliminarCategoriaById(categoriaId: Number): Promise<Boolean> {
-        LoggerAPI.info(`Se inicia el metodo para eliminar la categoria con ID: ${categoriaId} en CategoriaServicio`);
+    async eliminarCategoriaByUuid(categoriaUuid: String): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia el metodo para eliminar la categoria con UUID: ${categoriaUuid} en CategoriaServicio`);
         try {
-            let result = await this.categoriaDAO.eliminarCategoriaById(categoriaId);
+            let categoria = await this.categoriaDAO.getCategoriaByUuid(categoriaUuid)
+            if(categoria===null){
+                LoggerAPI.warn(`No se ha encontrado la categoria con UUID ${categoriaUuid}`)
+               return false
+            }
+            let result = await this.categoriaDAO.eliminarCategoriaById(categoria.categoriaId);
             if (result) {
-                LoggerAPI.info(`La categoria con ID ${categoriaId} ha sido eliminada exitosamente`);
+                LoggerAPI.info(`La categoria con UUID ${categoriaUuid} ha sido eliminada exitosamente`);
                 return true;
             } else {
-                LoggerAPI.warn(`No se ha podido eliminar la categoria con ID ${categoriaId}`);
+                LoggerAPI.warn(`No se ha podido eliminar la categoria con UUID ${categoriaUuid}`);
                 return false;
             }
         } catch (error) {
-            LoggerAPI.warn(`Se ha producido un error al eliminar la categoria con ID ${categoriaId} en CategoriaServicio; ${error}`);
+            LoggerAPI.warn(`Se ha producido un error al eliminar la categoria con UUID ${categoriaUuid} en CategoriaServicio; ${error}`);
             throw error;
         }
     }
