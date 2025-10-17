@@ -59,7 +59,7 @@ class DireccionControl {
         }
     }
 
-    
+
     actualizarDireccion = async (req, res, next) => {
         LoggerAPI.info("Se inicia el control respectivo para actualizar una dirección")
         try {
@@ -74,6 +74,24 @@ class DireccionControl {
 
         } catch (error) {
             LoggerAPI.warn(`Se ha presentado un error al actualizar la dirección: ${error}`)
+            return res.status(500).send({ message: "Error interno del servidor" })
+        }
+    }
+
+      eliminarDireccionById = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para eliminar una dirección")
+        try {
+            const { direccionId } = req.params
+            const resultado = await this.direccionServicio.eliminarDireccionById(Number(direccionId))
+
+            if (resultado) {
+                return res.status(200).send({ message: `La dirección con ID ${direccionId} ha sido eliminada correctamente` })
+            } else {
+                return res.status(404).send({ message: `No se encontró o no se pudo eliminar la dirección con ID ${direccionId}` })
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error al eliminar la dirección: ${error}`)
             return res.status(500).send({ message: "Error interno del servidor" })
         }
     }
