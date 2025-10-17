@@ -102,11 +102,16 @@ export class DireccionServicio implements DireccionIServicio {
         }
     }
 
-    /** Elimina una dirección por su ID */
-    async eliminarDireccionById(direccionId: Number): Promise<Boolean> {
+    /** Elimina una dirección por su UUID */
+    async eliminarDireccionByUuid(direccionUuid: String): Promise<Boolean> {
         LoggerAPI.info("Se inicia metodo de eliminar Direccion en DireccionServicio");
         try {
-            let result = await this.direcionDAO.eliminarDireccion(direccionId);
+            let direccion = await this.direcionDAO.getDireccionByUuid(direccionUuid);
+            if (direccion === null) {
+                LoggerAPI.warn(`No se ha encontrado la direcicon con UUID ${direccionUuid}`)
+                return null;
+            }
+            let result = await this.direcionDAO.eliminarDireccion(direccion.direccionId);
             if (result) {
                 LoggerAPI.info("Se ha eliminado la direccion correctamente.");
                 return true;
