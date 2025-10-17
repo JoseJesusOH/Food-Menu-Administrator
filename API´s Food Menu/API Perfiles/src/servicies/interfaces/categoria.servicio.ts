@@ -56,9 +56,9 @@ export interface CategoriaIServicio {
     /**
      * Elimina una categoría del sistema usando su identificador numérico.
      *
-     * @param {Number} categoriaId - Identificador único de la categoría que se desea eliminar.
+     * @param {Number} categoriaUuid - Identificador único de la categoría que se desea eliminar.
      * @returns {Promise<Boolean>} 
      * Promesa que se resuelve con `true` si la eliminación fue exitosa, o `false` si no se pudo eliminar.
      */
-    eliminarCategoriaById(categoriaId: Number): Promise<Boolean>;
+    eliminarCategoriaByUuid(categoriaUuid: String): Promise<Boolean>;
 }
