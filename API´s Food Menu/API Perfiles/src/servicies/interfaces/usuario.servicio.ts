@@ -37,10 +37,10 @@ export interface UsuarioIServicio {
 
     /**
      * Elimina un usuario del sistema mediante su identificador numérico.
-     * @param {Number} usuarioId - Identificador único del usuario a eliminar.
+     * @param {String} usuarioUuid - Identificador único del usuario a eliminar.
      * @returns {Promise<Boolean>} Verdadero si la eliminación fue exitosa, falso si no se pudo eliminar.
      */
-    eliminarUsuarioById(usuarioId: Number): Promise<Boolean>;
+    eliminarUsuarioByUuid(usuarioUuid: String): Promise<Boolean>;
 
     /**
      * Actualiza los datos de un usuario existente.
