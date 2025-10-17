@@ -44,8 +44,8 @@ export interface PersonaIServicio {
 
     /**
      * Elimina una persona del sistema mediante su identificador numérico.
-     * @param {Number} personaId - Identificador único de la persona a eliminar.
+     * @param {String} personaUuid - Identificador único de la persona a eliminar.
      * @returns {Promise<Boolean>} Verdadero si la eliminación fue exitosa, falso si no se pudo eliminar.
      */
-    eliminarPersonaById(personaId: Number): Promise<Boolean>;
+    eliminarPersonaByUuid(personaUuid: String): Promise<Boolean>;
 }
