@@ -78,7 +78,7 @@ class CategoriaControl {
         try {
             const {categoriaUuid} = req.params;
 
-            const categoriaResult = await this.categoriaServicio.eliminarCategoria(categoriaUuid)
+            const categoriaResult = await this.categoriaServicio.eliminarCategoriaByUuid(categoriaUuid)
             if (categoriaResult) {
                 return res.status(200).send({ message: `La categoria ha sido eliminada` })
             } else {
