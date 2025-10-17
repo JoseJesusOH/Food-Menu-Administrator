@@ -97,21 +97,26 @@ export class UsuarioServicio implements UsuarioIServicio {
         }
     }
 
-    // Elimina un usuario por su ID
-    async eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
-        LoggerAPI.info(`Se inicia el método para eliminar el usuario con ID: ${usuarioId} en UsuarioServicio`);
+    // Elimina un usuario por su UUID
+    async eliminarUsuarioByUuid(usuarioUuid: String): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia el método para eliminar el usuario con UUID: ${usuarioUuid} en UsuarioServicio`);
         try {
-            let resultado = await this.usuarioDAO.eliminarUsuarioById(usuarioId);
+             let usuario = await this.usuarioDAO.getUsuarioByUuid(usuarioUuid);
+             if(usuario===null){
+                LoggerAPI.warn(`No se ha encontrado un usuario con UUID ${usuarioUuid}`)
+                return null;
+             }
+            let resultado = await this.usuarioDAO.eliminarUsuarioById(usuario.usuarioId);
 
             if (resultado) {
-                LoggerAPI.info(`El usuario con ID ${usuarioId} ha sido eliminado exitosamente`);
+                LoggerAPI.info(`El usuario con UUID ${usuarioUuid} ha sido eliminado exitosamente`);
                 return true;
             } else {
-                LoggerAPI.warn(`No se pudo eliminar el usuario con ID ${usuarioId}`);
+                LoggerAPI.warn(`No se pudo eliminar el usuario con UUID ${usuarioUuid}`);
                 return false;
             }
         } catch (error) {
-            LoggerAPI.warn(`Se produjo un error al eliminar el usuario con ID ${usuarioId} en UsuarioServicio; ${error}`);
+            LoggerAPI.warn(`Se produjo un error al eliminar el usuario con UUID ${usuarioUuid} en UsuarioServicio; ${error}`);
             throw error;
         }
     }
