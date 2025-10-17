@@ -126,21 +126,26 @@ export class PersonaServicio implements PersonaIServicio {
         }
     }
 
-    // Elimina una persona por su ID
-    async eliminarPersonaById(personaId: Number): Promise<Boolean> {
-        LoggerAPI.info(`Se inicia el método para eliminar la persona con ID: ${personaId} en PersonaServicio`);
+    // Elimina una persona por su UUID
+    async eliminarPersonaByUuid(personaUuid: String): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia el método para eliminar la persona con UUID: ${personaUuid} en PersonaServicio`);
         try {
-            let resultado = await this.personaDAO.eliminarPersonaById(personaId);
+            let result = await this.personaDAO.getPersonaByUuid(personaUuid);
+            if (result === null) {
+                LoggerAPI.warn(`No se ha encontrado persona UUID ${personaUuid}`)
+                return null;
+            }
+            let resultado = await this.personaDAO.eliminarPersonaById(result.personaId);
 
             if (resultado) {
-                LoggerAPI.info(`La persona con ID ${personaId} ha sido eliminada correctamente.`);
+                LoggerAPI.info(`La persona con UUID ${personaUuid} ha sido eliminada correctamente.`);
                 return true;
             } else {
-                LoggerAPI.warn(`No se encontró o no se pudo eliminar la persona con ID ${personaId}.`);
+                LoggerAPI.warn(`No se encontró o no se pudo eliminar la persona con UUID ${personaUuid}.`);
                 return false;
             }
         } catch (error) {
-            LoggerAPI.warn(`Se produjo un error al eliminar la persona con ID ${personaId} en PersonaServicio: ${error}`);
+            LoggerAPI.warn(`Se produjo un error al eliminar la persona con UUID ${personaUuid} en PersonaServicio: ${error}`);
             throw error;
         }
     }
