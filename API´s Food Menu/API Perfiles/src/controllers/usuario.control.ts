@@ -91,7 +91,7 @@ class UsuarioControl {
             if (resultado) {
                 return res.status(200).send({ message: `El usuario con UUID ${usuarioUuid} ha sido eliminado correctamente` });
             } else {
-                return res.status(404).send({ message: `No se encontró o no se pudo eliminar el usuario con UUID ${uuid}` });
+                return res.status(404).send({ message: `No se encontró o no se pudo eliminar el usuario con UUID ${usuarioUuid}` });
             }
         } catch (error) {
             LoggerAPI.warn(`Se ha producido un error al eliminar el usuario con UUID ${usuarioUuid}: ${error}`);
