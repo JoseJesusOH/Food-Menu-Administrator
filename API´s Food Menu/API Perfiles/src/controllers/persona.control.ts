@@ -40,6 +40,28 @@ class PersonaControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
+
+    /**
+      * Obtiene una persona específica por su UUID.
+      * El UUID se recibe desde los parámetros de la solicitud (req.params).
+    */
+    getPersonaByUuid = async (req, res, next) => {
+        const { uuid } = req.params;
+        LoggerAPI.info(`Se inicia control para obtener la persona con UUID: ${uuid}`);
+        try {
+            const persona = await this.personaServicio.getPersonaByUuid(uuid);
+
+            if (persona) {
+                return res.status(200).send(persona);
+            } else {
+                return res.status(404).send({ message: `No se encontró la persona con UUID ${uuid}` });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en getPersonaByUuid en PersonaControl; ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+
 }
 
 export default { PersonaControl }
