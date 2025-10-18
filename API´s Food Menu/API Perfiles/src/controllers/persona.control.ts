@@ -103,6 +103,27 @@ class PersonaControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
+        /**
+     * Elimina una persona existente a partir de su UUID.
+     * El UUID se recibe desde los parámetros de la solicitud (req.params).
+     */
+    eliminarPersonaByUuid = async (req, res, next) => {
+        LoggerAPI.info("Se inicia control para eliminar una persona por UUID");
+        try {
+            const { personaUuid } = req.params;
+            const resultado = await this.personaServicio.eliminarPersonaByUuid(personaUuid);
+
+            if (resultado) {
+                return res.status(200).send({ message: `La persona con UUID ${personaUuid} ha sido eliminada correctamente` });
+            } else {
+                return res.status(404).send({ message: `No se ha encontrado o no se pudo eliminar la persona con UUID ${personaUuid}` });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en eliminarPersonaByUuid en PersonaControl; ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+
 
 }
 
