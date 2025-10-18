@@ -83,6 +83,26 @@ class PersonaControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
+    
+       /**
+     * Actualiza la información de una persona existente.
+     * Los datos actualizados se reciben desde el cuerpo de la solicitud (req.body).
+     */
+    actualizarPersona = async (req, res, next) => {
+        LoggerAPI.info("Se inicia control para actualizar una persona");
+        try {
+            const persona = plainToInstance(Persona, req.body);
+            const resultado = await this.personaServicio.actualizarPersona(persona);
+            if (resultado) {
+                return res.status(200).send({ message: "La persona ha sido actualizada correctamente" });
+            } else {
+                return res.status(404).send({ message: "No se ha podido actualizar la persona" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en actualizarPersona en PersonaControl; ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
 
 }
 
