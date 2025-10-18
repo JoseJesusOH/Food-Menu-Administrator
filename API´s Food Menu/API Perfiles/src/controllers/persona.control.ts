@@ -1,7 +1,9 @@
 /**
  * Importa la utilidad para el registro de logs y mensajes del sistema.
  */
+import { Persona } from "@entity/persona.entity";
 import { LoggerAPI } from "@utility/logger"
+import { plainToInstance } from "class-transformer";
 
 /**
  * Importa la implementación del servicio encargado de la lógica de negocio de personas.
@@ -58,6 +60,26 @@ class PersonaControl {
             }
         } catch (error) {
             LoggerAPI.warn(`Se ha presentado un error en getPersonaByUuid en PersonaControl; ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    }
+        /**
+     * Agrega una nueva persona.
+     * Los datos de la persona se reciben desde el cuerpo de la solicitud (req.body).
+     */
+    agregarPersona = async (req, res, next) => {
+        LoggerAPI.info("Se inicia control para agregar una persona");
+        try {
+            const persona = plainToInstance(Persona, req.body);
+            const resultado = await this.personaServicio.agregarPersona(persona);
+
+            if (resultado) {
+                return res.status(200).send({ message: "La persona ha sido registrada correctamente" });
+            } else {
+                return res.status(404).send({ message: "No se ha podido registrar la persona" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha presentado un error en agregarPersona en PersonaControl; ${error}`);
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     }
