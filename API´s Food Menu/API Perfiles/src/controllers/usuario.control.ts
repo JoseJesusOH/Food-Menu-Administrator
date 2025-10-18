@@ -38,6 +38,27 @@ class UsuarioControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     };
+    /**
+ * Obtiene un usuario específico a partir de su UUID.
+ * El UUID se recibe desde los parámetros de la solicitud (req.params).
+ */
+    getUsuarioByUuid = async (req, res, next) => {
+        const { uuid } = req.params;
+        LoggerAPI.info(`Se inicia el control respectivo para obtener el usuario con UUID: ${uuid}`);
+        try {
+            const usuario = await this.usuarioServicio.getUsuarioByUuid(uuid);
+
+            if (usuario) {
+                return res.status(200).send(usuario);
+            } else {
+                return res.status(404).send({ message: `No se ha encontrado el usuario con UUID ${uuid}` });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al obtener el usuario con UUID ${uuid}: ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    };
+
 }
 
 export default { UsuarioControl };
