@@ -58,6 +58,26 @@ class UsuarioControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     };
+    /**
+     * Agrega un nuevo usuario al sistema.
+     * Toma los datos del usuario desde req.body y llama al servicio para registrarlo.
+     */
+    agregarUsuario = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para agregar un usuario");
+        try {
+            const usuarioDTO = req.body;
+            const resultado = await this.usuarioServicio.agregarUsuario(usuarioDTO);
+
+            if (resultado) {
+                return res.status(200).send({ message: "El usuario ha sido registrado correctamente" });
+            } else {
+                return res.status(404).send({ message: "No se ha podido registrar el usuario" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al agregar el usuario: ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    };
 
 }
 
