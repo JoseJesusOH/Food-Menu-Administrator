@@ -139,4 +139,4 @@ class DireccionControl {
 }
 
 // Exporta la clase DireccionControl como parte del módulo
-export default { DireccionControl }
+export  { DireccionControl }

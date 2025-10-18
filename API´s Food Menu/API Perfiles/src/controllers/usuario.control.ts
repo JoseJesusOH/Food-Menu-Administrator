@@ -121,4 +121,4 @@ class UsuarioControl {
 
 }
 
-export default { UsuarioControl };
+export  { UsuarioControl };

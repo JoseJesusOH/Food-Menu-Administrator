@@ -127,4 +127,4 @@ class PersonaControl {
 
 }
 
-export default { PersonaControl }
+export  { PersonaControl }
