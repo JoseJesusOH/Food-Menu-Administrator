@@ -98,6 +98,26 @@ class UsuarioControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     };
+    /**
+     * Actualiza los datos de un usuario existente.
+     * Toma los nuevos datos desde req.body y llama al servicio para realizar la actualización.
+     */
+    actualizarUsuario = async (req, res, next) => {
+        LoggerAPI.info("Se inicia el control respectivo para actualizar un usuario");
+        try {
+            const usuarioDTO = req.body;
+            const resultado = await this.usuarioServicio.actualizarUsuario(usuarioDTO);
+
+            if (resultado) {
+                return res.status(200).send({ message: "El usuario ha sido actualizado correctamente" });
+            } else {
+                return res.status(404).send({ message: "No se ha podido actualizar el usuario" });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al actualizar el usuario: ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    };
 
 }
 
