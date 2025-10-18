@@ -78,6 +78,26 @@ class UsuarioControl {
             return res.status(500).send({ message: "Error interno del servidor" });
         }
     };
+    /**
+     * Elimina un usuario del sistema a partir de su UUID.
+     * El UUID se recibe desde los parámetros de la solicitud (req.params).
+     */
+    eliminarUsuarioByUuid = async (req, res, next) => {
+        const { usuarioUuid } = req.params;
+        LoggerAPI.info(`Se inicia el control respectivo para eliminar el usuario con UUID: ${usuarioUuid}`);
+        try {
+            const resultado = await this.usuarioServicio.eliminarUsuarioByUuid(usuarioUuid);
+
+            if (resultado) {
+                return res.status(200).send({ message: `El usuario con UUID ${usuarioUuid} ha sido eliminado correctamente` });
+            } else {
+                return res.status(404).send({ message: `No se encontró o no se pudo eliminar el usuario con UUID ${uuid}` });
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se ha producido un error al eliminar el usuario con UUID ${usuarioUuid}: ${error}`);
+            return res.status(500).send({ message: "Error interno del servidor" });
+        }
+    };
 
 }
 
