@@ -4,42 +4,65 @@
  */
 
 import { Producto } from "@entity/producto.entity";
+/**
+ * Importaciones TypeORM 
+ */
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn
+} from "typeorm"
 
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Representa la información de stock o inventario asociada a un producto.
  * 
  * Esta clase define los valores mínimos, máximos y actuales de existencias 
  * para un producto en particular, permitiendo gestionar su disponibilidad.
  */
+@Entity("producto_stock")
 export class ProductoStock {
     /**
      * Identificador numérico del registro de stock del producto.
      */
+    @PrimaryGeneratedColumn({ name: "producto_stock_id" })
+    @Exclude()
     productoStockId: Number;
 
     /**
      * Identificador único universal (UUID) del registro de stock.
      */
+    @Column({ name: "producto_stock_uuid" })
+    @Generated("uuid")
     productoStockUuid: String;
 
     /**
      * Cantidad mínima permitida antes de requerir reposición.
      */
+    @Column({ name: "cantidad_minima" })
     cantidadMinima: Number;
 
     /**
      * Cantidad máxima que puede almacenarse del producto.
      */
+    @Column({ name: "cantidad_maxima" })
     cantidadMaxima: Number;
 
     /**
      * Cantidad actual disponible en el inventario.
      */
+    @Column({ name: "stock_actual" })
     stockActual: Number;
 
     /**
      * Producto asociado al registro de stock.
      */
+    @OneToOne(() => Producto)
+    @JoinColumn({ name: "producto_id", foreignKeyConstraintName: "producto_stock_producto_IDFK" })
     producto: Producto;
 
     /**
