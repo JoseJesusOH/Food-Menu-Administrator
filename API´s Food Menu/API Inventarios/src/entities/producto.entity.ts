@@ -4,25 +4,46 @@
  */
 
 /**
+ * Importaciones TypeORM 
+ */
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn
+} from "typeorm"
+
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
+
+/**
  * Representa un producto dentro del sistema.
  * 
  * Esta clase contiene los datos básicos del producto, incluyendo 
  * su identificador, código único y nombre descriptivo.
  */
+@Entity("productos")
 export class Producto {
     /**
      * Identificador numérico del producto.
      */
+    @PrimaryGeneratedColumn({ name: "producto_id" })
+    @Exclude()
     productoId: Number;
 
     /**
      * Identificador único universal (UUID) del producto.
      */
+    @Column({ name: "producto_uuid" })
+    @Generated("uuid")
     productoUuid: String;
 
     /**
      * Nombre o descripción del producto.
      */
+    @Column({ name: "nombre" })
     nombre: String;
 
     /**
