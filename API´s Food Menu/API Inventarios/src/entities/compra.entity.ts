@@ -4,7 +4,20 @@
  */
 
 import { Sucursal } from "@entity/sucursal.entity";
+/**
+ * Importaciones TypeORM 
+ */
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn
+} from "typeorm"
 
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Representa una compra realizada en una sucursal.
  * 
@@ -12,35 +25,47 @@ import { Sucursal } from "@entity/sucursal.entity";
  * incluyendo su identificador, fecha, hora, monto total y la sucursal 
  * donde fue efectuada.
  */
+@Entity("compras")
 export class Compra {
     /**
      * Identificador numérico de la compra.
      */
+    @PrimaryGeneratedColumn({ name: "compra_id" })
+    @Exclude()
     compraId: Number;
 
     /**
      * Identificador único universal (UUID) de la compra.
      */
+    @Column({ name: "compra_uuid" })
+    @Generated("uuid")
     compraUuid: String;
 
     /**
      * Fecha en que se realizó la compra.
      */
+    @Column({ name: "fecha" })
     fecha: Date;
 
     /**
      * Hora exacta en que se realizó la compra.
      */
+
+    @Column({ name: "hora" })
     hora: Date;
 
     /**
      * Monto total de la compra.
      */
+
+    @Column({ name: "hora" })
     total: Number;
 
     /**
      * Sucursal donde se realizó la compra.
      */
+    @OneToOne(() => Sucursal)
+    @JoinColumn({ name: "sucursal_id", foreignKeyConstraintName: "sucursal_compra_IDFK" })
     sucursal: Sucursal;
 
     /**
