@@ -2,37 +2,61 @@
  * @file sucursal.entity.ts
  * @description Define la entidad `Sucursal`, que representa una sucursal o punto de venta dentro del sistema.
  */
+/**
+ * Importaciones TypeORM 
+ */
+import "reflect-metadata"
+import {
+    Entity, Column, PrimaryGeneratedColumn, Generated, OneToOne, OneToMany,
+    JoinColumn
+} from "typeorm"
 
+/**
+ * Expose expe las propiedades para la transformacion en classs transformer mientras
+ * Exclude excluye esos parametros.
+ */
+import { Exclude, Expose, ClassTransformOptions } from "class-transformer";
 /**
  * Representa una sucursal o punto de venta.
  * 
  * Esta clase contiene los datos de identificación y contacto de una sucursal, 
  * incluyendo su dirección y número telefónico.
  */
+@Entity("sucursales")
+
 export class Sucursal {
     /**
      * Identificador numérico de la sucursal.
      */
+
+    @PrimaryGeneratedColumn({ name: "sucursal_id" })
+    @Exclude()
     sucursalId: Number;
 
     /**
      * Identificador único universal (UUID) de la sucursal.
      */
+    @Column({ name: "sucursal_uuid" })
+    @Generated("uuid")
     sucursalUuid: String;
 
     /**
      * Nombre o razón social de la sucursal.
      */
+    @Column({ name: "nombre" })
     nombre: String;
 
     /**
      * Dirección física de la sucursal.
      */
+    @Column({ name: "direccion" })
     direccion: String;
 
     /**
      * Número telefónico de contacto de la sucursal.
      */
+
+    @Column({ name: "telefono" })
     telefono: String;
 
     /**
