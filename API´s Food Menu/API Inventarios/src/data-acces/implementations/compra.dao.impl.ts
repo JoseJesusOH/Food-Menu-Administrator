@@ -20,9 +20,26 @@ class CompraDAO implements CompraIDAO {
             throw error;
         }
     }
-    getCompraById(compraId: Number): Promise<Compra> {
-        throw new Error("Method not implemented.");
+    async getCompraById(compraId: Number): Promise<Compra> {
+        try {
+            const compra = await this.compraRepositorio.findOne({
+                where: { compraId: compraId },
+                relations: ["sucursal"]
+            });
+
+            if (compra) {
+                LoggerAPI.info("Compra encontrada por ID", { id: compraId });
+                return compra;
+            } else {
+                LoggerAPI.info("No se encontró la compra con el ID especificado", { id: compraId });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la compra por ID", error);
+            throw error;
+        }
     }
+
     getCompraByUuid(compraUuid: String): Promise<Compra> {
         throw new Error("Method not implemented.");
     }
