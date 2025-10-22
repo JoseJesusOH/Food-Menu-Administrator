@@ -77,9 +77,24 @@ async eliminarCompraById(compraId: Number): Promise<Boolean> {
     }
 }
 
-    actualizarCompra(compra: Compra): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async actualizarCompra(compra: Compra): Promise<Boolean> {
+    try {
+        const existe = await this.compraRepositorio.findOne({ where: { compraId: compra.compraId } });
+
+        if (!existe) {
+            LoggerAPI.info("No se encontró la compra para actualizar", { id: compra.compraId });
+            return false;
+        }
+
+        await this.compraRepositorio.save(compra);
+        LoggerAPI.info("Compra actualizada correctamente", { id: compra.compraId });
+        return true;
+    } catch (error) {
+        LoggerAPI.error("Error al actualizar la compra", error);
+        throw error;
     }
+}
+
     agregarCompra(compra: Compra): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
