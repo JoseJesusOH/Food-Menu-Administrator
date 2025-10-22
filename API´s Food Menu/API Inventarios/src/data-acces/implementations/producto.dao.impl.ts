@@ -20,26 +20,40 @@ class ProductoDAO implements ProductoIDAO {
             throw error;
         }
     }
- async getProductoById(productoId: Number): Promise<Producto> {
-    try {
-        const producto = await this.productoRepositorio.findOne({ where: { productoId } });
+    async getProductoById(productoId: Number): Promise<Producto> {
+        try {
+            const producto = await this.productoRepositorio.findOne({ where: { productoId } });
 
-        if (producto) {
-            LoggerAPI.info("Producto encontrado por ID", { id: productoId });
-            return producto;
-        } else {
-            LoggerAPI.info("No se encontró el producto con el ID especificado", { id: productoId });
-            return null;
+            if (producto) {
+                LoggerAPI.info("Producto encontrado por ID", { id: productoId });
+                return producto;
+            } else {
+                LoggerAPI.info("No se encontró el producto con el ID especificado", { id: productoId });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el producto por ID", error);
+            throw error;
         }
-    } catch (error) {
-        LoggerAPI.error("Error al obtener el producto por ID", error);
-        throw error;
     }
-}
 
-    getProductoByUuid(productoUuid: String): Promise<Producto> {
-        throw new Error("Method not implemented.");
+    async getProductoByUuid(productoUuid: String): Promise<Producto> {
+        try {
+            const producto = await this.productoRepositorio.findOne({ where: { productoUuid } });
+
+            if (producto) {
+                LoggerAPI.info("Producto encontrado por UUID", { uuid: productoUuid });
+                return producto;
+            } else {
+                LoggerAPI.info("No se encontró el producto con el UUID especificado", { uuid: productoUuid });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el producto por UUID", error);
+            throw error;
+        }
     }
+
     eliminarProductoById(productoId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
