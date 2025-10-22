@@ -58,9 +58,23 @@ class SucursalDAO implements SucursalIDAO {
         }
     }
 
-    eliminarSucursalById(sucursalId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async eliminarSucursalById(sucursalId: Number): Promise<Boolean> {
+    try {
+        const resultado = await this.sucursalRepositorio.delete({ sucursalId });
+
+        if (resultado.affected && resultado.affected > 0) {
+            LoggerAPI.info("Sucursal eliminada correctamente", { id: sucursalId });
+            return true;
+        } else {
+            LoggerAPI.info("No se encontró la sucursal para eliminar", { id: sucursalId });
+            return false;
+        }
+    } catch (error) {
+        LoggerAPI.error("Error al eliminar la sucursal por ID", error);
+        throw error;
     }
+}
+
     actualizarSucursal(sucursal: Sucursal): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
