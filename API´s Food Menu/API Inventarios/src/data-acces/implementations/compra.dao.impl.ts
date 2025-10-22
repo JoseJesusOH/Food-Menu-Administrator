@@ -60,9 +60,23 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
-    eliminarCompraById(compraId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async eliminarCompraById(compraId: Number): Promise<Boolean> {
+    try {
+        const resultado = await this.compraRepositorio.delete({ compraId: compraId });
+
+        if (resultado.affected && resultado.affected > 0) {
+            LoggerAPI.info("Compra eliminada correctamente", { id: compraId });
+            return true;
+        } else {
+            LoggerAPI.info("No se encontró la compra para eliminar", { id: compraId });
+            return false;
+        }
+    } catch (error) {
+        LoggerAPI.error("Error al eliminar la compra por ID", error);
+        throw error;
     }
+}
+
     actualizarCompra(compra: Compra): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
