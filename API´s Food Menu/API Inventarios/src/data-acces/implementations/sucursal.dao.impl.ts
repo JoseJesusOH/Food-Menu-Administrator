@@ -93,8 +93,15 @@ class SucursalDAO implements SucursalIDAO {
         }
     }
 
-    agregarSucursal(sucursal: Sucursal): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async agregarSucursal(sucursal: Sucursal): Promise<Boolean> {
+        try {
+            const nuevaSucursal = await this.sucursalRepositorio.save(sucursal);
+            LoggerAPI.info("Sucursal agregada correctamente", { id: nuevaSucursal.sucursalId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al agregar la sucursal", error);
+            throw error;
+        }
     }
 
 }
