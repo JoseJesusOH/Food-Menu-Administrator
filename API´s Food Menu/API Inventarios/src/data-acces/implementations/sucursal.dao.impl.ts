@@ -58,26 +58,41 @@ class SucursalDAO implements SucursalIDAO {
         }
     }
 
-async eliminarSucursalById(sucursalId: Number): Promise<Boolean> {
-    try {
-        const resultado = await this.sucursalRepositorio.delete({ sucursalId });
+    async eliminarSucursalById(sucursalId: Number): Promise<Boolean> {
+        try {
+            const resultado = await this.sucursalRepositorio.delete({ sucursalId });
 
-        if (resultado.affected && resultado.affected > 0) {
-            LoggerAPI.info("Sucursal eliminada correctamente", { id: sucursalId });
-            return true;
-        } else {
-            LoggerAPI.info("No se encontró la sucursal para eliminar", { id: sucursalId });
-            return false;
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info("Sucursal eliminada correctamente", { id: sucursalId });
+                return true;
+            } else {
+                LoggerAPI.info("No se encontró la sucursal para eliminar", { id: sucursalId });
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar la sucursal por ID", error);
+            throw error;
         }
-    } catch (error) {
-        LoggerAPI.error("Error al eliminar la sucursal por ID", error);
-        throw error;
     }
-}
 
-    actualizarSucursal(sucursal: Sucursal): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarSucursal(sucursal: Sucursal): Promise<Boolean> {
+        try {
+            const existe = await this.sucursalRepositorio.findOne({ where: { sucursalId: sucursal.sucursalId } });
+
+            if (!existe) {
+                LoggerAPI.info("No se encontró la sucursal para actualizar", { id: sucursal.sucursalId });
+                return false;
+            }
+
+            await this.sucursalRepositorio.save(sucursal);
+            LoggerAPI.info("Sucursal actualizada correctamente", { id: sucursal.sucursalId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar la sucursal", error);
+            throw error;
+        }
     }
+
     agregarSucursal(sucursal: Sucursal): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
