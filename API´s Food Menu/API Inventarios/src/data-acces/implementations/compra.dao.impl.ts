@@ -60,43 +60,51 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
-async eliminarCompraById(compraId: Number): Promise<Boolean> {
-    try {
-        const resultado = await this.compraRepositorio.delete({ compraId: compraId });
+    async eliminarCompraById(compraId: Number): Promise<Boolean> {
+        try {
+            const resultado = await this.compraRepositorio.delete({ compraId: compraId });
 
-        if (resultado.affected && resultado.affected > 0) {
-            LoggerAPI.info("Compra eliminada correctamente", { id: compraId });
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info("Compra eliminada correctamente", { id: compraId });
+                return true;
+            } else {
+                LoggerAPI.info("No se encontró la compra para eliminar", { id: compraId });
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar la compra por ID", error);
+            throw error;
+        }
+    }
+
+    async actualizarCompra(compra: Compra): Promise<Boolean> {
+        try {
+            const existe = await this.compraRepositorio.findOne({ where: { compraId: compra.compraId } });
+
+            if (!existe) {
+                LoggerAPI.info("No se encontró la compra para actualizar", { id: compra.compraId });
+                return false;
+            }
+
+            await this.compraRepositorio.save(compra);
+            LoggerAPI.info("Compra actualizada correctamente", { id: compra.compraId });
             return true;
-        } else {
-            LoggerAPI.info("No se encontró la compra para eliminar", { id: compraId });
-            return false;
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar la compra", error);
+            throw error;
         }
-    } catch (error) {
-        LoggerAPI.error("Error al eliminar la compra por ID", error);
-        throw error;
     }
-}
 
-async actualizarCompra(compra: Compra): Promise<Boolean> {
-    try {
-        const existe = await this.compraRepositorio.findOne({ where: { compraId: compra.compraId } });
-
-        if (!existe) {
-            LoggerAPI.info("No se encontró la compra para actualizar", { id: compra.compraId });
-            return false;
+    async agregarCompra(compra: Compra): Promise<Boolean> {
+        try {
+            const nuevaCompra = await this.compraRepositorio.save(compra);
+            LoggerAPI.info("Compra agregada correctamente", { id: nuevaCompra.compraId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al agregar la compra", error);
+            throw error;
         }
-
-        await this.compraRepositorio.save(compra);
-        LoggerAPI.info("Compra actualizada correctamente", { id: compra.compraId });
-        return true;
-    } catch (error) {
-        LoggerAPI.error("Error al actualizar la compra", error);
-        throw error;
     }
-}
 
-    agregarCompra(compra: Compra): Promise<Boolean> {
-        throw new Error("Method not implemented.");
-    }
 
 }
