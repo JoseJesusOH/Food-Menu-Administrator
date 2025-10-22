@@ -3,11 +3,27 @@ import { Compra } from "@entity/compra.entity";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 
+/**
+ * @class CompraDAO
+ * @implements {CompraIDAO}
+ * @description
+ * Clase responsable de manejar todas las operaciones CRUD relacionadas con la entidad `Compra`
+ * mediante el repositorio proporcionado por TypeORM.
+ */
 class CompraDAO implements CompraIDAO {
-    compraRepositorio = Conexion.getRepository(Compra)
+
+    /** @private Repositorio de la entidad Compra */
+    compraRepositorio = Conexion.getRepository(Compra);
+
+    /**
+     * Obtiene todas las compras registradas en la base de datos.
+     * Incluye la relación con la entidad `Sucursal`.
+     * 
+     * @returns {Promise<Compra[]>} Lista de compras.
+     */
     async getCompras(): Promise<Compra[]> {
         try {
-            let compras = await this.compraRepositorio.find({ relations: ["sucursal"] });
+            const compras = await this.compraRepositorio.find({ relations: ["sucursal"] });
             if (compras.length > 0) {
                 LoggerAPI.info("Se obtuvieron todas las compras", { total: compras.length });
                 return compras;
@@ -20,10 +36,17 @@ class CompraDAO implements CompraIDAO {
             throw error;
         }
     }
+
+    /**
+     * Obtiene una compra específica mediante su ID.
+     * 
+     * @param {Number} compraId - Identificador numérico de la compra.
+     * @returns {Promise<Compra | null>} Objeto de tipo `Compra` o `null` si no existe.
+     */
     async getCompraById(compraId: Number): Promise<Compra> {
         try {
             const compra = await this.compraRepositorio.findOne({
-                where: { compraId: compraId },
+                where: { compraId },
                 relations: ["sucursal"]
             });
 
@@ -40,10 +63,16 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
+    /**
+     * Obtiene una compra mediante su UUID.
+     * 
+     * @param {String} compraUuid - UUID de la compra.
+     * @returns {Promise<Compra | null>} Objeto de tipo `Compra` o `null` si no existe.
+     */
     async getCompraByUuid(compraUuid: String): Promise<Compra> {
         try {
             const compra = await this.compraRepositorio.findOne({
-                where: { compraUuid: compraUuid },
+                where: { compraUuid },
                 relations: ["sucursal"]
             });
 
@@ -60,9 +89,15 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
+    /**
+     * Elimina una compra existente a partir de su ID.
+     * 
+     * @param {Number} compraId - Identificador numérico de la compra.
+     * @returns {Promise<Boolean>} `true` si la compra fue eliminada, `false` si no se encontró.
+     */
     async eliminarCompraById(compraId: Number): Promise<Boolean> {
         try {
-            const resultado = await this.compraRepositorio.delete({ compraId: compraId });
+            const resultado = await this.compraRepositorio.delete({ compraId });
 
             if (resultado.affected && resultado.affected > 0) {
                 LoggerAPI.info("Compra eliminada correctamente", { id: compraId });
@@ -77,6 +112,12 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
+    /**
+     * Actualiza una compra existente.
+     * 
+     * @param {Compra} compra - Objeto de tipo `Compra` con los nuevos datos.
+     * @returns {Promise<Boolean>} `true` si la compra fue actualizada, `false` si no existe.
+     */
     async actualizarCompra(compra: Compra): Promise<Boolean> {
         try {
             const existe = await this.compraRepositorio.findOne({ where: { compraId: compra.compraId } });
@@ -95,6 +136,12 @@ class CompraDAO implements CompraIDAO {
         }
     }
 
+    /**
+     * Agrega una nueva compra a la base de datos.
+     * 
+     * @param {Compra} compra - Objeto `Compra` que se desea registrar.
+     * @returns {Promise<Boolean>} `true` si la compra fue agregada correctamente.
+     */
     async agregarCompra(compra: Compra): Promise<Boolean> {
         try {
             const nuevaCompra = await this.compraRepositorio.save(compra);
@@ -105,6 +152,6 @@ class CompraDAO implements CompraIDAO {
             throw error;
         }
     }
-
-
 }
+
+export { CompraDAO };
