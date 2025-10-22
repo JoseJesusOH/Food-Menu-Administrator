@@ -20,28 +20,44 @@ class SucursalDAO implements SucursalIDAO {
             throw error;
         }
     }
- async getSucursalById(sucursalId: Number): Promise<Sucursal> {
-    try {
-        const sucursal = await this.sucursalRepositorio.findOne({ 
-            where: { sucursalId } 
-        });
+    async getSucursalById(sucursalId: Number): Promise<Sucursal> {
+        try {
+            const sucursal = await this.sucursalRepositorio.findOne({
+                where: { sucursalId }
+            });
 
-        if (sucursal) {
-            LoggerAPI.info("Sucursal encontrada por ID", { id: sucursalId });
-            return sucursal;
-        } else {
-            LoggerAPI.info("No se encontró la sucursal con el ID especificado", { id: sucursalId });
-            return null;
+            if (sucursal) {
+                LoggerAPI.info("Sucursal encontrada por ID", { id: sucursalId });
+                return sucursal;
+            } else {
+                LoggerAPI.info("No se encontró la sucursal con el ID especificado", { id: sucursalId });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la sucursal por ID", error);
+            throw error;
         }
-    } catch (error) {
-        LoggerAPI.error("Error al obtener la sucursal por ID", error);
-        throw error;
     }
-}
 
-    getSucursalByUuid(sucursalUuid: String): Promise<Sucursal> {
-        throw new Error("Method not implemented.");
+    async getSucursalByUuid(sucursalUuid: String): Promise<Sucursal> {
+        try {
+            const sucursal = await this.sucursalRepositorio.findOne({
+                where: { sucursalUuid }
+            });
+
+            if (sucursal) {
+                LoggerAPI.info("Sucursal encontrada por UUID", { uuid: sucursalUuid });
+                return sucursal;
+            } else {
+                LoggerAPI.info("No se encontró la sucursal con el UUID especificado", { uuid: sucursalUuid });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la sucursal por UUID", error);
+            throw error;
+        }
     }
+
     eliminarSucursalById(sucursalId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
