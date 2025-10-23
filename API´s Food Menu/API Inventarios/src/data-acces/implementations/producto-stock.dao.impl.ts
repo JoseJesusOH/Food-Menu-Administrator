@@ -94,8 +94,15 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
-    
-    agregarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+
+    async agregarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
+        try {
+            const nuevoRegistro = await this.productoStockRepositorio.save(productoStock);
+            LoggerAPI.info("Registro de stock agregado correctamente", { id: nuevoRegistro.productoStockId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al agregar el registro de stock", error);
+            throw error;
+        }
     }
 }
