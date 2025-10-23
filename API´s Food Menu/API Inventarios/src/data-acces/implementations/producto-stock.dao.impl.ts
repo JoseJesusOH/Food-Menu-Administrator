@@ -60,8 +60,21 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
-    eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+ async eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
+        try {
+            const resultado = await this.productoStockRepositorio.delete({ productoStockId });
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info("Registro de stock eliminado correctamente", { id: productoStockId });
+                return true;
+            } else {
+                LoggerAPI.info("No se encontró el registro de stock para eliminar", { id: productoStockId });
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar el registro de stock por ID", error);
+            throw error;
+        }
     }
     actualizarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
         throw new Error("Method not implemented.");
