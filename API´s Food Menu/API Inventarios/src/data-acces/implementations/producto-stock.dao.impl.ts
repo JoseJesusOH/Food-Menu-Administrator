@@ -22,7 +22,7 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
- async getProductoStockById(productoStockId: Number): Promise<ProductoStock> {
+    async getProductoStockById(productoStockId: Number): Promise<ProductoStock> {
         try {
             const productoStock = await this.productoStockRepositorio.findOne({
                 where: { productoStockId },
@@ -41,8 +41,24 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
-    getProductoStockByUuid(productoStockUuid: String): Promise<ProductoStock> {
-        throw new Error("Method not implemented.");
+    async getProductoStockByUuid(productoStockUuid: String): Promise<ProductoStock> {
+        try {
+            const productoStock = await this.productoStockRepositorio.findOne({
+                where: { productoStockUuid },
+                relations: ["producto", "sucursal"]
+            });
+
+            if (productoStock) {
+                LoggerAPI.info("Producto en stock encontrado por UUID", { uuid: productoStockUuid });
+                return productoStock;
+            } else {
+                LoggerAPI.info("No se encontró el producto en stock con el UUID especificado", { uuid: productoStockUuid });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el producto en stock por UUID", error);
+            throw error;
+        }
     }
     eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
