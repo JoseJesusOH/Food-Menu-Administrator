@@ -76,9 +76,23 @@ class ProductoCompraDAO implements ProductoCompraIDAO {
             throw error;
         }
     }
-    
-    actualizarProductoCompra(productoCompra: ProductoCompra): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+
+    async actualizarProductoCompra(productoCompra: ProductoCompra): Promise<Boolean> {
+        try {
+            const existe = await this.productoCompraRepositorio.findOne({ where: { productoCompraId: productoCompra.productoCompraId } });
+
+            if (!existe) {
+                LoggerAPI.info("No se encontró el producto de compra para actualizar", { id: productoCompra.productoCompraId });
+                return false;
+            }
+
+            await this.productoCompraRepositorio.save(productoCompra);
+            LoggerAPI.info("Producto de compra actualizado correctamente", { id: productoCompra.productoCompraId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar el producto de compra", error);
+            throw error;
+        }
     }
     agregarProductoCompra(productoCompra: ProductoCompra): Promise<Boolean> {
         throw new Error("Method not implemented.");
