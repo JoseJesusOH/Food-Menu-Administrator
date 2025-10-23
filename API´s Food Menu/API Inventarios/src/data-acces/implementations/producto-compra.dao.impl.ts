@@ -40,9 +40,26 @@ class ProductoCompraDAO implements ProductoCompraIDAO {
             throw error;
         }
     }
-    getProductoCompraByUuid(productoCompraUuid: String): Promise<ProductoCompra> {
-        throw new Error("Method not implemented.");
+    async getProductoCompraByUuid(productoCompraUuid: String): Promise<ProductoCompra> {
+        try {
+            const productoCompra = await this.productoCompraRepositorio.findOne({
+                where: { productoCompraUuid },
+                relations: ["producto", "compra"]
+            });
+
+            if (productoCompra) {
+                LoggerAPI.info("Producto de compra encontrado por UUID", { uuid: productoCompraUuid });
+                return productoCompra;
+            } else {
+                LoggerAPI.info("No se encontró el producto de compra con el UUID especificado", { uuid: productoCompraUuid });
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener el producto de compra por UUID", error);
+            throw error;
+        }
     }
+
     eliminarProductoCompraById(productoCompraId: Number): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
