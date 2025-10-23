@@ -60,9 +60,23 @@ class ProductoCompraDAO implements ProductoCompraIDAO {
         }
     }
 
-    eliminarProductoCompraById(productoCompraId: Number): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async eliminarProductoCompraById(productoCompraId: Number): Promise<Boolean> {
+        try {
+            const resultado = await this.productoCompraRepositorio.delete({ productoCompraId });
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info("Producto de compra eliminado correctamente", { id: productoCompraId });
+                return true;
+            } else {
+                LoggerAPI.info("No se encontró el producto de compra para eliminar", { id: productoCompraId });
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar el producto de compra por ID", error);
+            throw error;
+        }
     }
+    
     actualizarProductoCompra(productoCompra: ProductoCompra): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
