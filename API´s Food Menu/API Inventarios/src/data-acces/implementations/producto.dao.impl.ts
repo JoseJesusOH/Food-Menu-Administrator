@@ -89,8 +89,16 @@ class ProductoDAO implements ProductoIDAO {
         }
     }
 
-    agregarProducto(producto: Producto): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async agregarProducto(producto: Producto): Promise<Boolean> {
+        try {
+            const nuevoProducto = await this.productoRepositorio.save(producto);
+            LoggerAPI.info("Producto agregado correctamente", { id: nuevoProducto.productoId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al agregar el producto", error);
+            throw error;
+        }
     }
+
 
 }
