@@ -3,9 +3,21 @@ import { ProductoStock } from "@entity/producto-stock.entity";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 
+/**
+ * Implementación del DAO para manejar las operaciones relacionadas con el stock de productos.
+ * Proporciona métodos CRUD que interactúan con la base de datos utilizando el repositorio de TypeORM.
+ */
 class ProductoStockDAO implements ProductoStockIDAO {
+
+    /** Repositorio principal para interactuar con la entidad ProductoStock. */
     productoStockRepositorio = Conexion.getRepository(ProductoStock);
 
+    /**
+     * Obtiene todos los registros de productos con su stock, incluyendo relaciones con producto y sucursal.
+     * 
+     * @returns {Promise<ProductoStock[]>} Lista de productos con stock.
+     * @throws {Error} Si ocurre algún error al consultar la base de datos.
+     */
     async getProductosStock(): Promise<ProductoStock[]> {
         try {
             const productosStock = await this.productoStockRepositorio.find({ relations: ["producto", "sucursal"] });
@@ -22,6 +34,14 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
+
+    /**
+     * Obtiene un producto en stock por su ID, incluyendo las relaciones con producto y sucursal.
+     * 
+     * @param {Number} productoStockId - ID del registro de stock a buscar.
+     * @returns {Promise<ProductoStock | null>} El registro encontrado o `null` si no existe.
+     * @throws {Error} Si ocurre algún error durante la búsqueda.
+     */
     async getProductoStockById(productoStockId: Number): Promise<ProductoStock> {
         try {
             const productoStock = await this.productoStockRepositorio.findOne({
@@ -41,6 +61,14 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
+
+    /**
+     * Obtiene un producto en stock por su UUID, incluyendo las relaciones con producto y sucursal.
+     * 
+     * @param {String} productoStockUuid - UUID del registro de stock a buscar.
+     * @returns {Promise<ProductoStock | null>} El registro encontrado o `null` si no existe.
+     * @throws {Error} Si ocurre algún error durante la búsqueda.
+     */
     async getProductoStockByUuid(productoStockUuid: String): Promise<ProductoStock> {
         try {
             const productoStock = await this.productoStockRepositorio.findOne({
@@ -60,6 +88,14 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
+
+    /**
+     * Elimina un registro de stock a partir de su ID.
+     * 
+     * @param {Number} productoStockId - ID del registro a eliminar.
+     * @returns {Promise<Boolean>} `true` si el registro fue eliminado correctamente, `false` si no se encontró.
+     * @throws {Error} Si ocurre algún error durante la eliminación.
+     */
     async eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
         try {
             const resultado = await this.productoStockRepositorio.delete({ productoStockId });
@@ -77,6 +113,13 @@ class ProductoStockDAO implements ProductoStockIDAO {
         }
     }
 
+    /**
+     * Actualiza un registro existente del stock de un producto.
+     * 
+     * @param {ProductoStock} productoStock - Objeto con los datos actualizados del stock.
+     * @returns {Promise<Boolean>} `true` si se actualizó correctamente, `false` si no se encontró el registro.
+     * @throws {Error} Si ocurre algún error durante la actualización.
+     */
     async actualizarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
         try {
             const existe = await this.productoStockRepositorio.findOne({ where: { productoStockId: productoStock.productoStockId } });
@@ -95,6 +138,13 @@ class ProductoStockDAO implements ProductoStockIDAO {
         }
     }
 
+    /**
+     * Agrega un nuevo registro de stock para un producto.
+     * 
+     * @param {ProductoStock} productoStock - Objeto con los datos del nuevo registro de stock.
+     * @returns {Promise<Boolean>} `true` si el registro se agregó correctamente.
+     * @throws {Error} Si ocurre algún error durante la inserción.
+     */
     async agregarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
         try {
             const nuevoRegistro = await this.productoStockRepositorio.save(productoStock);
@@ -106,3 +156,5 @@ class ProductoStockDAO implements ProductoStockIDAO {
         }
     }
 }
+
+export { ProductoStockDAO };
