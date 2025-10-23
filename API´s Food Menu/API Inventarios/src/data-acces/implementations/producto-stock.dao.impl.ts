@@ -60,7 +60,7 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
- async eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
+    async eliminarProductoStockById(productoStockId: Number): Promise<Boolean> {
         try {
             const resultado = await this.productoStockRepositorio.delete({ productoStockId });
 
@@ -76,9 +76,25 @@ class ProductoStockDAO implements ProductoStockIDAO {
             throw error;
         }
     }
-    actualizarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+
+    async actualizarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
+        try {
+            const existe = await this.productoStockRepositorio.findOne({ where: { productoStockId: productoStock.productoStockId } });
+
+            if (!existe) {
+                LoggerAPI.info("No se encontró el registro de stock para actualizar", { id: productoStock.productoStockId });
+                return false;
+            }
+
+            await this.productoStockRepositorio.save(productoStock);
+            LoggerAPI.info("Registro de stock actualizado correctamente", { id: productoStock.productoStockId });
+            return true;
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar el registro de stock", error);
+            throw error;
+        }
     }
+    
     agregarProductoStock(productoStock: ProductoStock): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
