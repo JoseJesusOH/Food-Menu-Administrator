@@ -24,8 +24,21 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
-    agregarCompra(compra: CompraDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async agregarCompra(compraDTO: CompraDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para agregar una nueva compra al sistema.");
+        try {
+            let compra = plainToInstance(Compra, compraDTO);
+            const compraCreada = await this.compraDAO.agregarCompra(compra);
+            if (compraCreada) {
+                return true;
+            } else {
+                LoggerAPI.warn("No se pudo crear la compra en el sistema.");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al agregar una nueva compra: ${error}`);
+            throw error;
+        }
     }
     actualizarCompra(compra: CompraDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
