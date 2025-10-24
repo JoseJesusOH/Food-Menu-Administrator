@@ -64,7 +64,7 @@ class CompraServicio implements CompraIServicio {
                 LoggerAPI.warn("No se pudo encontrar la compra en el sistema.");
                 return false;
             }
-            const compraEliminada = await this.compraDAO.eliminarCompra(compra.compraId);
+            const compraEliminada = await this.compraDAO.eliminarCompraById(compra.compraId);
             if (compraEliminada) {
                 LoggerAPI.info("Compra eliminada correctamente del sistema.");
                 return true;
@@ -78,8 +78,19 @@ class CompraServicio implements CompraIServicio {
         }
     }
 
-    getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
-        throw new Error("Method not implemented.");
+async getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
+        LoggerAPI.info("Se inicia servicio para obtener una compra del sistema.");
+        try {
+            const compra = await this.compraDAO.getCompraByUuid(compraUuid);
+            if (compra) {
+                return plainToInstance(CompraDTO, compra);
+            } else {
+                LoggerAPI.warn("No se pudo encontrar la compra en el sistema.");
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al obtener la compra: ${error}`);
+            throw error;
+        }
     }
-    
 }
