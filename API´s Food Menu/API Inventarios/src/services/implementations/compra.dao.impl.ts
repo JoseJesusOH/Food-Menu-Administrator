@@ -40,7 +40,7 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
-  async actualizarCompra(compraDTO: CompraDTO): Promise<Boolean> {
+    async actualizarCompra(compraDTO: CompraDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar una compra del sistema.");
         try {
             const compra = plainToInstance(Compra, compraDTO);
@@ -56,7 +56,7 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
- async eliminarCompra(compraUuid: string): Promise<Boolean> {
+    async eliminarCompra(compraUuid: string): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar una compra del sistema.");
         try {
             const compra = await this.compraDAO.getCompraByUuid(compraUuid);
@@ -78,7 +78,7 @@ class CompraServicio implements CompraIServicio {
         }
     }
 
-async getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
+    async getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
         LoggerAPI.info("Se inicia servicio para obtener una compra del sistema.");
         try {
             const compra = await this.compraDAO.getCompraByUuid(compraUuid);
