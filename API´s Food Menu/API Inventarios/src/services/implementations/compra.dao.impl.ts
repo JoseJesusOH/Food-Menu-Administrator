@@ -6,8 +6,19 @@ import { CompraIServicio } from "@service.dao/compra.dao";
 import { LoggerAPI } from "@utility/logger";
 import { instanceToInstance, instanceToPlain, plainToInstance } from "class-transformer";
 
+/**
+ * Clase que implementa la interfaz CompraIServicio.
+ * Contiene los métodos necesarios para la gestión de compras,
+ * incluyendo operaciones de consulta, inserción, actualización, eliminación y búsqueda.
+ */
 class CompraServicio implements CompraIServicio {
+    /** Instancia del DAO para acceder a la base de datos de Compras. */
     compraDAO: CompraIDAO = new CompraDAO();
+
+    /**
+     * Obtiene la lista de todas las compras registradas en el sistema.
+     * @returns Arreglo de objetos CompraDTO que representan todas las compras.
+     */
     async getCompras(): Promise<CompraDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener las compras");
         try {
@@ -24,6 +35,12 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
+
+    /**
+     * Agrega una nueva compra al sistema.
+     * @param compraDTO Datos de la compra a registrar.
+     * @returns Boolean indicando si la operación fue exitosa.
+     */
     async agregarCompra(compraDTO: CompraDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para agregar una nueva compra al sistema.");
         try {
@@ -40,6 +57,12 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
+
+    /**
+     * Actualiza una compra existente en el sistema.
+     * @param compraDTO Datos de la compra a actualizar.
+     * @returns Boolean indicando si la operación fue exitosa.
+     */
     async actualizarCompra(compraDTO: CompraDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar una compra del sistema.");
         try {
@@ -56,6 +79,12 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
+
+    /**
+     * Elimina una compra según su identificador único (UUID).
+     * @param compraUuid UUID de la compra a eliminar.
+     * @returns Boolean indicando si la operación fue exitosa.
+     */
     async eliminarCompra(compraUuid: string): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar una compra del sistema.");
         try {
@@ -78,6 +107,11 @@ class CompraServicio implements CompraIServicio {
         }
     }
 
+    /**
+     * Obtiene una compra específica a partir de su UUID.
+     * @param compraUuid UUID de la compra a consultar.
+     * @returns Objeto CompraDTO correspondiente a la compra encontrada, o null si no existe.
+     */
     async getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
         LoggerAPI.info("Se inicia servicio para obtener una compra del sistema.");
         try {
@@ -94,3 +128,5 @@ class CompraServicio implements CompraIServicio {
         }
     }
 }
+
+export { CompraServicio };
