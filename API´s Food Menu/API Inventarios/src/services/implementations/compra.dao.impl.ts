@@ -56,9 +56,28 @@ class CompraServicio implements CompraIServicio {
             throw error;
         }
     }
-    eliminarCompra(compraUuid: string): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+ async eliminarCompra(compraUuid: string): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para eliminar una compra del sistema.");
+        try {
+            const compra = await this.compraDAO.getCompraByUuid(compraUuid);
+            if (!compra) {
+                LoggerAPI.warn("No se pudo encontrar la compra en el sistema.");
+                return false;
+            }
+            const compraEliminada = await this.compraDAO.eliminarCompra(compra.compraId);
+            if (compraEliminada) {
+                LoggerAPI.info("Compra eliminada correctamente del sistema.");
+                return true;
+            } else {
+                LoggerAPI.warn("No se pudo eliminar la compra en el sistema.");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Se produjo un error al eliminar la compra: ${error}`);
+            throw error;
+        }
     }
+
     getCompraByUuid(compraUuid: string): Promise<CompraDTO> {
         throw new Error("Method not implemented.");
     }
