@@ -1,8 +1,9 @@
 import { ProductoStockIDAO } from "@data.dao/producto-stock.dao";
 import { ProductoStockDAO } from "@data.impl/producto-stock.dao.impl";
+import { ProductoStockDTO } from "@dto/producto-stock.dto";
 import { ProductoDTO } from "@dto/producto.dto";
 import { ProductoStock } from "@entity/producto-stock.entity";
-import { ProductoIServicio } from "@service.dao/producto.dao";
+import { ProductoStockIServicio } from "@service.dao/producto-stock.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
@@ -21,7 +22,7 @@ import { plainToInstance } from "class-transformer";
  * 
  * Cada operación se registra mediante {@link LoggerAPI} para permitir trazabilidad y depuración.
  */
-class ProductoStockService implements ProductoIServicio {
+class ProductoStockService implements ProductoStockIServicio {
 
     /** Instancia del DAO responsable del acceso a los datos de productos con stock. */
     productoStockDAO: ProductoStockIDAO = new ProductoStockDAO();
@@ -34,7 +35,7 @@ class ProductoStockService implements ProductoIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error al acceder a la base de datos.
      */
-    async getProductos(): Promise<ProductoDTO[]> {
+    async getProductoStocks(): Promise<ProductoDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener los productos con su información de stock.");
         try {
             const productos = await this.productoStockDAO.getProductosStock();
@@ -60,7 +61,7 @@ class ProductoStockService implements ProductoIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error durante el proceso de inserción.
      */
-    async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    async agregarProductoStock(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
         try {
             const productoStock = plainToInstance(ProductoStock, productoDTO);
@@ -87,7 +88,7 @@ class ProductoStockService implements ProductoIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error durante la operación de actualización.
      */
-    async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    async actualizarProductoStock(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar un producto del sistema.");
         try {
             const producto = plainToInstance(ProductoStock, productoDTO);
@@ -114,7 +115,7 @@ class ProductoStockService implements ProductoIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error durante la operación de eliminación.
      */
-    async eliminarProducto(productoUuid: String): Promise<Boolean> {
+    async eliminarProductoStock(productoUuid: String): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar un producto del sistema.");
         try {
             const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
@@ -148,7 +149,7 @@ class ProductoStockService implements ProductoIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error al acceder a los datos.
      */
-    async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
+    async getProductoStockByUuid(productoUuid: String): Promise<ProductoDTO> {
         LoggerAPI.info("Se inicia servicio para obtener un producto del sistema por su UUID.");
         try {
             const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
