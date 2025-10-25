@@ -1,6 +1,7 @@
 import { ProductoIDAO } from "@data.dao/producto.dao";
 import { ProductoDAO } from "@data.impl/producto.dao.impl";
 import { ProductoDTO } from "@dto/producto.dto";
+import { Producto } from "@entity/producto.entity";
 import { ProductoIServicio } from "@service.dao/producto.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
