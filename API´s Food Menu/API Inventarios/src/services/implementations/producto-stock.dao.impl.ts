@@ -5,10 +5,35 @@ import { ProductoStock } from "@entity/producto-stock.entity";
 import { ProductoIServicio } from "@service.dao/producto.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
+
+/**
+ * Clase que implementa la interfaz {@link ProductoIServicio}.
+ * 
+ * Gestiona las operaciones relacionadas con los productos y su stock en el sistema,
+ * sirviendo como intermediario entre la capa de acceso a datos (DAO) y la capa de presentación.
+ * 
+ * Incluye métodos para:
+ * - Obtener todos los productos registrados.
+ * - Registrar un nuevo producto.
+ * - Actualizar información de un producto.
+ * - Eliminar un producto por su UUID.
+ * - Consultar un producto específico por su UUID.
+ * 
+ * Cada operación se registra mediante {@link LoggerAPI} para permitir trazabilidad y depuración.
+ */
 class ProductoStockService implements ProductoIServicio {
 
-    productoStockDAO: ProductoStockIDAO = new ProductoStockDAO()
+    /** Instancia del DAO responsable del acceso a los datos de productos con stock. */
+    productoStockDAO: ProductoStockIDAO = new ProductoStockDAO();
 
+    /**
+     * Obtiene la lista completa de productos registrados con su información de stock.
+     * 
+     * @returns {Promise<ProductoDTO[]>} Promesa que resuelve con un arreglo de objetos {@link ProductoDTO}.
+     * Si no existen productos, devuelve un arreglo vacío.
+     * 
+     * @throws Lanza una excepción si ocurre un error al acceder a la base de datos.
+     */
     async getProductos(): Promise<ProductoDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener los productos con su información de stock.");
         try {
@@ -27,13 +52,18 @@ class ProductoStockService implements ProductoIServicio {
         }
     }
 
+    /**
+     * Registra un nuevo producto en el sistema junto con su información de stock.
+     * 
+     * @param {ProductoDTO} productoDTO Objeto que contiene los datos del producto a registrar.
+     * @returns {Promise<Boolean>} Promesa que indica si la operación fue exitosa (`true`) o fallida (`false`).
+     * 
+     * @throws Lanza una excepción si ocurre un error durante el proceso de inserción.
+     */
     async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
         try {
-            // Convertimos el DTO a una entidad de Producto
             const productoStock = plainToInstance(ProductoStock, productoDTO);
-
-            // Llamamos al DAO para realizar el registro
             const productoCreado = await this.productoStockDAO.agregarProductoStock(productoStock);
 
             if (productoCreado) {
@@ -49,21 +79,25 @@ class ProductoStockService implements ProductoIServicio {
         }
     }
 
-
- async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    /**
+     * Actualiza la información de un producto existente en el sistema.
+     * 
+     * @param {ProductoDTO} productoDTO Objeto con los datos actualizados del producto.
+     * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o no (`false`).
+     * 
+     * @throws Lanza una excepción si ocurre un error durante la operación de actualización.
+     */
+    async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar un producto del sistema.");
         try {
-            // Convertir el DTO en entidad de Producto
             const producto = plainToInstance(ProductoStock, productoDTO);
-
-            // Llamar al DAO para realizar la actualización
             const productoActualizado = await this.productoStockDAO.actualizarProductoStock(producto);
 
             if (productoActualizado) {
-                LoggerAPI.info(`El producto fue actualizado correctamente.`);
+                LoggerAPI.info("El producto fue actualizado correctamente.");
                 return true;
             } else {
-                LoggerAPI.warn(`No se pudo actualizar el producto .`);
+                LoggerAPI.warn("No se pudo actualizar el producto.");
                 return false;
             }
         } catch (error) {
@@ -72,10 +106,17 @@ class ProductoStockService implements ProductoIServicio {
         }
     }
 
-  async eliminarProducto(productoUuid: String): Promise<Boolean> {
+    /**
+     * Elimina un producto del sistema utilizando su identificador único (UUID).
+     * 
+     * @param {String} productoUuid Identificador único del producto a eliminar.
+     * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o no (`false`).
+     * 
+     * @throws Lanza una excepción si ocurre un error durante la operación de eliminación.
+     */
+    async eliminarProducto(productoUuid: String): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para eliminar un producto del sistema.");
         try {
-            // Buscar el producto por su UUID antes de intentar eliminarlo
             const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
 
             if (!producto) {
@@ -83,7 +124,6 @@ class ProductoStockService implements ProductoIServicio {
                 return false;
             }
 
-            // Intentar eliminar el producto por su ID interno
             const productoEliminado = await this.productoStockDAO.eliminarProductoStockById(producto.productoStockId);
 
             if (productoEliminado) {
@@ -98,10 +138,19 @@ class ProductoStockService implements ProductoIServicio {
             throw error;
         }
     }
-  async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
+
+    /**
+     * Obtiene un producto específico a partir de su identificador único (UUID).
+     * 
+     * @param {String} productoUuid Identificador único del producto a consultar.
+     * @returns {Promise<ProductoDTO>} Promesa que resuelve con un objeto {@link ProductoDTO} si el producto existe,
+     * o `null` si no se encontró.
+     * 
+     * @throws Lanza una excepción si ocurre un error al acceder a los datos.
+     */
+    async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
         LoggerAPI.info("Se inicia servicio para obtener un producto del sistema por su UUID.");
         try {
-            // Consultar el producto en la base de datos
             const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
 
             if (producto) {
@@ -117,5 +166,6 @@ class ProductoStockService implements ProductoIServicio {
             throw error;
         }
     }
-
 }
+
+export { ProductoStockService };
