@@ -152,3 +152,4 @@ class ProductoDAO implements ProductoIDAO {
     }
 
 }
+export { ProductoDAO };
