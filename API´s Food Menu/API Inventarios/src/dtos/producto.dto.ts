@@ -1,5 +1,5 @@
-class ProductoDTO {
 
+export class ProductoDTO {
+    productoUuid: String;
+    nombre: String;
 }
-
-export {ProductoDTO}
