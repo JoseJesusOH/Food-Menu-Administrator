@@ -50,8 +50,26 @@ class ProductoStockService implements ProductoIServicio {
     }
 
 
-    actualizarProducto(producto: ProductoDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+ async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para actualizar un producto del sistema.");
+        try {
+            // Convertir el DTO en entidad de Producto
+            const producto = plainToInstance(ProductoStock, productoDTO);
+
+            // Llamar al DAO para realizar la actualización
+            const productoActualizado = await this.productoStockDAO.actualizarProductoStock(producto);
+
+            if (productoActualizado) {
+                LoggerAPI.info(`El producto fue actualizado correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo actualizar el producto .`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al actualizar el producto: ${error}`);
+            throw error;
+        }
     }
 
     eliminarProducto(productoUuid: string): Promise<Boolean> {
