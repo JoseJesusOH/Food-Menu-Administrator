@@ -71,9 +71,34 @@ class ProductoService implements ProductoIServicio {
             throw error;
         }
     }
-    eliminarProducto(productoUuid: string): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+
+    async eliminarProducto(productoUuid: string): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia servicio para eliminar el producto con UUID: ${productoUuid}`);
+        try {
+            // Verificar si el producto existe
+            const producto = await this.productoDAO.getProductoByUuid(productoUuid);
+
+            if (!producto) {
+                LoggerAPI.warn(`No se encontró ningún producto con UUID: ${productoUuid}`);
+                return false;
+            }
+
+            // Llamar al DAO para eliminar el producto
+            const productoEliminado = await this.productoDAO.eliminarProductoById(producto.productoId);
+
+            if (productoEliminado) {
+                LoggerAPI.info(`El producto con UUID ${productoUuid} fue eliminado correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo eliminar el producto con UUID ${productoUuid}.`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al eliminar el producto con UUID ${productoUuid}: ${error}`);
+            throw error;
+        }
     }
+
     getProductoByUuid(productoUuid: string): Promise<ProductoDTO> {
         throw new Error("Method not implemented.");
     }
