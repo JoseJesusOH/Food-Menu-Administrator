@@ -6,16 +6,32 @@ import { ProductoIServicio } from "@service.dao/producto.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
+/**
+ * Clase que implementa la interfaz {@link ProductoIServicio}.
+ * 
+ * Gestiona las operaciones CRUD de productos dentro del sistema,
+ * sirviendo como capa de servicio entre los controladores y el DAO.
+ * 
+ * Utiliza {@link LoggerAPI} para registrar la actividad de cada operación.
+ */
 class ProductoService implements ProductoIServicio {
+
+    /** Instancia del DAO que maneja el acceso a los datos de productos. */
     productoDAO: ProductoIDAO = new ProductoDAO();
+
+    /**
+     * Obtiene todos los productos registrados en el sistema.
+     * 
+     * @returns {Promise<ProductoDTO[]>} Promesa que devuelve un arreglo de objetos {@link ProductoDTO}.
+     * Devuelve un arreglo vacío si no hay productos registrados.
+     * @throws {Error} Lanza una excepción si ocurre un error al consultar la base de datos.
+     */
     async getProductos(): Promise<ProductoDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener los productos registrados en el sistema.");
         try {
-            // Se obtiene la lista de productos desde el DAO
             const productos = await this.productoDAO.getProductos();
 
             if (productos.length > 0) {
-                // Se transforman las entidades en objetos DTO
                 const productosDTO = plainToInstance(ProductoDTO, productos);
                 LoggerAPI.info(`Se han obtenido ${productosDTO.length} productos del sistema.`);
                 return productosDTO;
@@ -28,13 +44,18 @@ class ProductoService implements ProductoIServicio {
             throw error;
         }
     }
+
+    /**
+     * Registra un nuevo producto en el sistema.
+     * 
+     * @param {ProductoDTO} productoDTO Objeto con los datos del producto a registrar.
+     * @returns {Promise<Boolean>} Promesa que indica si el registro fue exitoso (`true`) o fallido (`false`).
+     * @throws {Error} Lanza una excepción si ocurre un error durante la inserción en la base de datos.
+     */
     async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
         try {
-            // Conversión del DTO a entidad Producto
             const producto = plainToInstance(Producto, productoDTO);
-
-            // Se invoca al DAO para registrar el nuevo producto
             const productoCreado = await this.productoDAO.agregarProducto(producto);
 
             if (productoCreado) {
@@ -50,13 +71,17 @@ class ProductoService implements ProductoIServicio {
         }
     }
 
+    /**
+     * Actualiza la información de un producto existente.
+     * 
+     * @param {ProductoDTO} productoDTO Objeto con los datos actualizados del producto.
+     * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o fallida (`false`).
+     * @throws {Error} Lanza una excepción si ocurre un error durante la actualización.
+     */
     async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar un producto en el sistema.");
         try {
-            // Convertir el DTO en entidad de Producto
             const producto = plainToInstance(Producto, productoDTO);
-
-            // Llamar al DAO para realizar la actualización
             const productoActualizado = await this.productoDAO.actualizarProducto(producto);
 
             if (productoActualizado) {
@@ -72,10 +97,16 @@ class ProductoService implements ProductoIServicio {
         }
     }
 
+    /**
+     * Elimina un producto del sistema a partir de su UUID.
+     * 
+     * @param {string} productoUuid Identificador único del producto a eliminar.
+     * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o fallida (`false`).
+     * @throws {Error} Lanza una excepción si ocurre un error durante la eliminación.
+     */
     async eliminarProducto(productoUuid: string): Promise<Boolean> {
         LoggerAPI.info(`Se inicia servicio para eliminar el producto con UUID: ${productoUuid}`);
         try {
-            // Verificar si el producto existe
             const producto = await this.productoDAO.getProductoByUuid(productoUuid);
 
             if (!producto) {
@@ -83,7 +114,6 @@ class ProductoService implements ProductoIServicio {
                 return false;
             }
 
-            // Llamar al DAO para eliminar el producto
             const productoEliminado = await this.productoDAO.eliminarProductoById(producto.productoId);
 
             if (productoEliminado) {
@@ -99,10 +129,17 @@ class ProductoService implements ProductoIServicio {
         }
     }
 
+    /**
+     * Obtiene un producto específico por su UUID.
+     * 
+     * @param {string} productoUuid Identificador único del producto a consultar.
+     * @returns {Promise<ProductoDTO>} Promesa que devuelve un objeto {@link ProductoDTO} si existe,
+     * o `null` si no se encuentra.
+     * @throws {Error} Lanza una excepción si ocurre un error durante la consulta.
+     */
     async getProductoByUuid(productoUuid: string): Promise<ProductoDTO> {
         LoggerAPI.info(`Se inicia servicio para obtener el producto con UUID: ${productoUuid}`);
         try {
-            // Consultar el producto en la base de datos
             const producto = await this.productoDAO.getProductoByUuid(productoUuid);
 
             if (producto) {
@@ -118,5 +155,6 @@ class ProductoService implements ProductoIServicio {
             throw error;
         }
     }
-
 }
+
+export { ProductoService };
