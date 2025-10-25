@@ -98,8 +98,24 @@ class ProductoStockService implements ProductoIServicio {
             throw error;
         }
     }
-    getProductoByUuid(productoUuid: string): Promise<ProductoDTO> {
-        throw new Error("Method not implemented.");
+  async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
+        LoggerAPI.info("Se inicia servicio para obtener un producto del sistema por su UUID.");
+        try {
+            // Consultar el producto en la base de datos
+            const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
+
+            if (producto) {
+                const productoDTO = plainToInstance(ProductoDTO, producto);
+                LoggerAPI.info(`Producto con UUID ${productoUuid} obtenido correctamente.`);
+                return productoDTO;
+            } else {
+                LoggerAPI.warn(`No se encontró ningún producto con el UUID ${productoUuid}.`);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al obtener el producto con UUID ${productoUuid}: ${error}`);
+            throw error;
+        }
     }
 
 }
