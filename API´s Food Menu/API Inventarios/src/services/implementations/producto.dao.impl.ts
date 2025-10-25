@@ -27,9 +27,28 @@ async getProductos(): Promise<ProductoDTO[]> {
             throw error;
         }
     }
-    agregarProducto(producto: ProductoDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
+        try {
+            // Conversión del DTO a entidad Producto
+            const producto = plainToInstance(Producto, productoDTO);
+
+            // Se invoca al DAO para registrar el nuevo producto
+            const productoCreado = await this.productoDAO.agregarProducto(producto);
+
+            if (productoCreado) {
+                LoggerAPI.info(`El producto "${producto.nombre}" fue registrado correctamente en el sistema.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo registrar el producto "${producto.nombre}" en el sistema.`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al agregar un nuevo producto: ${error}`);
+            throw error;
+        }
     }
+
     actualizarProducto(producto: ProductoDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
     }
