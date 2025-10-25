@@ -6,9 +6,9 @@ import { ProductoIServicio } from "@service.dao/producto.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
-class ProductoService implements ProductoIServicio{
+class ProductoService implements ProductoIServicio {
     productoDAO: ProductoIDAO = new ProductoDAO();
-async getProductos(): Promise<ProductoDTO[]> {
+    async getProductos(): Promise<ProductoDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener los productos registrados en el sistema.");
         try {
             // Se obtiene la lista de productos desde el DAO
@@ -28,7 +28,7 @@ async getProductos(): Promise<ProductoDTO[]> {
             throw error;
         }
     }
-async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+    async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
         try {
             // Conversión del DTO a entidad Producto
@@ -50,8 +50,26 @@ async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
         }
     }
 
-    actualizarProducto(producto: ProductoDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para actualizar un producto en el sistema.");
+        try {
+            // Convertir el DTO en entidad de Producto
+            const producto = plainToInstance(Producto, productoDTO);
+
+            // Llamar al DAO para realizar la actualización
+            const productoActualizado = await this.productoDAO.actualizarProducto(producto);
+
+            if (productoActualizado) {
+                LoggerAPI.info(`El producto "${producto.nombre}" fue actualizado correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo actualizar el producto "${producto.nombre}".`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al actualizar el producto: ${error}`);
+            throw error;
+        }
     }
     eliminarProducto(productoUuid: string): Promise<Boolean> {
         throw new Error("Method not implemented.");
@@ -59,5 +77,5 @@ async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
     getProductoByUuid(productoUuid: string): Promise<ProductoDTO> {
         throw new Error("Method not implemented.");
     }
-    
+
 }
