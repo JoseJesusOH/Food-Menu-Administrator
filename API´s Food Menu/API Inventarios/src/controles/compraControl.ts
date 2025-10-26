@@ -43,5 +43,21 @@ class CompraControl {
         }
     };
 
+    obtenerCompras = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de obtener las compras en control.");
+        try {
+            const result = await this.compraServicio.getCompras();
 
+            if (result && result.length > 0) {
+                LoggerAPI.info("Se obtuvieron las compras correctamente en control.");
+                return res.status(200).json({ compras: result });
+            } else {
+                LoggerAPI.warn("No se encontraron compras en control.");
+                return res.status(404).json({ message: "No se encontraron compras" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al obtener las compras en control: ${error}`);
+            return res.status(500).json({ message: "Error al obtener las compras" });
+        }
+    };
 }
