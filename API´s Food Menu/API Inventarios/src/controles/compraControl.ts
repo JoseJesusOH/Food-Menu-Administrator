@@ -24,5 +24,24 @@ class CompraControl {
             return res.status(500).json({ message: "Error al registrar la compra" });
         }
     }
+    eliminarCompra = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de eliminar una compra en control.");
+        try {
+            const compraUuid = req.params.compraUuid;
+            const result = await this.compraServicio.eliminarCompra(compraUuid);
+
+            if (result) {
+                LoggerAPI.info("La compra fue eliminada correctamente.");
+                return res.status(200).json({ message: "Compra eliminada correctamente" });
+            } else {
+                LoggerAPI.warn("No se pudo eliminar la compra.");
+                return res.status(400).json({ message: "No se pudo eliminar la compra" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al eliminar la compra: ${error}`);
+            return res.status(500).json({ message: "Error al eliminar la compra" });
+        }
+    };
+
 
 }
