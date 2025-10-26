@@ -143,27 +143,27 @@ class ProductoStockService implements ProductoStockIServicio {
     /**
      * Obtiene un producto específico a partir de su identificador único (UUID).
      * 
-     * @param {String} productoUuid Identificador único del producto a consultar.
-     * @returns {Promise<ProductoDTO>} Promesa que resuelve con un objeto {@link ProductoDTO} si el producto existe,
+     * @param {String} productoStockUuid Identificador único del producto a consultar.
+     * @returns {Promise<ProductoDTO>} Promesa que resuelve con un objeto {@link ProductoStockDTO} si el producto existe,
      * o `null` si no se encontró.
      * 
      * @throws Lanza una excepción si ocurre un error al acceder a los datos.
      */
-    async getProductoStockByUuid(productoUuid: String): Promise<ProductoDTO> {
+    async getProductoStockByUuid(productoStockUuid: String): Promise<ProductoStockDTO> {
         LoggerAPI.info("Se inicia servicio para obtener un producto del sistema por su UUID.");
         try {
-            const producto = await this.productoStockDAO.getProductoStockByUuid(productoUuid);
+            const producto = await this.productoStockDAO.getProductoStockByUuid(productoStockUuid);
 
             if (producto) {
-                const productoDTO = plainToInstance(ProductoDTO, producto);
-                LoggerAPI.info(`Producto con UUID ${productoUuid} obtenido correctamente.`);
+                const productoDTO = plainToInstance(ProductoStockDTO, producto);
+                LoggerAPI.info(`ProductoStock con UUID ${productoStockUuid} obtenido correctamente.`);
                 return productoDTO;
             } else {
-                LoggerAPI.warn(`No se encontró ningún producto con el UUID ${productoUuid}.`);
+                LoggerAPI.warn(`No se encontró ningún ProductoStock con el UUID ${productoStockUuid}.`);
                 return null;
             }
         } catch (error) {
-            LoggerAPI.error(`Error al obtener el producto con UUID ${productoUuid}: ${error}`);
+            LoggerAPI.error(`Error al obtener el ProductoStock con UUID ${productoStockUuid}: ${error}`);
             throw error;
         }
     }
