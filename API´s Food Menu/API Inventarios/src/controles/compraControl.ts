@@ -79,4 +79,22 @@ class CompraControl {
             return res.status(500).json({ message: "Error al obtener la compra por UUID" });
         }
     };
+    actualizarCompra = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de actualizar una compra en control.");
+        try {
+            const compra = plainToInstance(Compra, req.body);
+            const result = await this.compraServicio.actualizarCompra(compra);
+
+            if (result) {
+                LoggerAPI.info("La compra fue actualizada correctamente en control.");
+                return res.status(200).json({ message: "Compra actualizada correctamente", compra: result });
+            } else {
+                LoggerAPI.warn("No se pudo actualizar la compra en control.");
+                return res.status(400).json({ message: "No se pudo actualizar la compra" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al actualizar la compra en control: ${error}`);
+            return res.status(500).json({ message: "Error al actualizar la compra" });
+        }
+    };
 }
