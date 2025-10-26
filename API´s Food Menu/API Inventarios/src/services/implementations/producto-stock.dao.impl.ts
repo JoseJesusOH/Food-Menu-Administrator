@@ -61,11 +61,11 @@ class ProductoStockService implements ProductoStockIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error durante el proceso de inserción.
      */
-    async agregarProductoStock(productoDTO: ProductoDTO): Promise<Boolean> {
+    async agregarProductoStock(productoStockDTO: ProductoStockDTO): Promise<boolean> {
         LoggerAPI.info("Se inicia servicio para registrar un nuevo producto en el sistema.");
         try {
-            const productoStock = plainToInstance(ProductoStock, productoDTO);
-            const productoCreado = await this.productoStockDAO.agregarProductoStock(productoStock);
+            const producto = plainToInstance(ProductoStock, productoStockDTO);
+            const productoCreado = await this.productoStockDAO.agregarProductoStock(producto);
 
             if (productoCreado) {
                 LoggerAPI.info("El producto fue registrado correctamente en el sistema.");
