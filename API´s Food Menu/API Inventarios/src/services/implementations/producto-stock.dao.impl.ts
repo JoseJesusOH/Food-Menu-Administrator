@@ -30,7 +30,7 @@ class ProductoStockService implements ProductoStockIServicio {
     /**
      * Obtiene la lista completa de productos registrados con su información de stock.
      * 
-     * @returns {Promise<ProductoDTO[]>} Promesa que resuelve con un arreglo de objetos {@link ProductoDTO}.
+     * @returns {Promise<ProductoStockDTO[]>} Promesa que resuelve con un arreglo de objetos {@link ProductoStockDTO}.
      * Si no existen productos, devuelve un arreglo vacío.
      * 
      * @throws Lanza una excepción si ocurre un error al acceder a la base de datos.
@@ -56,7 +56,7 @@ class ProductoStockService implements ProductoStockIServicio {
     /**
      * Registra un nuevo producto en el sistema junto con su información de stock.
      * 
-     * @param {ProductoDTO} productoDTO Objeto que contiene los datos del producto a registrar.
+     * @param {ProductoStockDTO} productoStockDTO Objeto que contiene los datos del producto a registrar.
      * @returns {Promise<Boolean>} Promesa que indica si la operación fue exitosa (`true`) o fallida (`false`).
      * 
      * @throws Lanza una excepción si ocurre un error durante el proceso de inserción.
@@ -83,15 +83,15 @@ class ProductoStockService implements ProductoStockIServicio {
     /**
      * Actualiza la información de un producto existente en el sistema.
      * 
-     * @param {ProductoDTO} productoDTO Objeto con los datos actualizados del producto.
+     * @param {ProductoStockDTO} productoDTO Objeto con los datos actualizados del producto.
      * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o no (`false`).
      * 
      * @throws Lanza una excepción si ocurre un error durante la operación de actualización.
      */
-    async actualizarProductoStock(productoDTO: ProductoDTO): Promise<Boolean> {
+    async actualizarProductoStock(productoStockDTO: ProductoStockDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para actualizar un producto del sistema.");
         try {
-            const producto = plainToInstance(ProductoStock, productoDTO);
+            const producto = plainToInstance(ProductoStock, productoStockDTO);
             const productoActualizado = await this.productoStockDAO.actualizarProductoStock(producto);
 
             if (productoActualizado) {
