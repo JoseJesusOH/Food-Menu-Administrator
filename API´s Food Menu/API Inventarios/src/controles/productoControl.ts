@@ -37,7 +37,7 @@ class ProductoControl {
        LoggerAPI.info("Se inicio el proceso de eliminar un producto en control"); 
        try {
           const productoUuid=req.params.productoUuid;
-            const result = await this.productoServicio.eliminarProdcto(productoUuid);
+            const result = await this.productoServicio.eliminarProducto(productoUuid);
             if(result){
                LoggerAPI.info("Se elimino el producto en control"); 
                return res.status(200).json({message:"Producto Eliminado"});
