@@ -1,4 +1,4 @@
-import { SucursalDTO } from "@dto/sucursal.entity";
+import { SucursalDTO } from "@dto/sucursal.dto";
 
 export class CompraDTO {
     compraUuid: String;
