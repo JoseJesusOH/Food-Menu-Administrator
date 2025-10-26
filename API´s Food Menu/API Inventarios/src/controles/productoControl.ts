@@ -29,5 +29,31 @@ class ProductoControl {
 
     }
 
+            /**
+     * Elimina un producto existente.
+     * El id del producto se recibe en req.params.id.
+     */
+    eliminarProducto = async (req, res, next) => {
+       LoggerAPI.info("Se inicio el proceso de eliminar un producto en control"); 
+       try {
+          const productoUuid=req.params.productoUuid;
+            const result = await this.productoServicio.eliminarProdcto(productoUuid);
+            if(result){
+               LoggerAPI.info("Se elimino el producto en control"); 
+               return res.status(200).json({message:"Producto Eliminado"});
+            }
+            else{
+               LoggerAPI.error("No se pudo eliminar el producto en control"); 
+               return res.status(400).json({message:"No se pudo eliminar el producto"});
+            }
+         } catch (error) {
+            LoggerAPI.error("Error al eliminar el producto en control: "+error); 
+            return res.status(500).json({message:"Error al eliminar el producto"});
+         }
+    }
+
+  
+  
+
 }
 export { ProductoControl }
