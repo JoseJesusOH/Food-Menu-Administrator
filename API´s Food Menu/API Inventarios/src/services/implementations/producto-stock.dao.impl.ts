@@ -35,12 +35,12 @@ class ProductoStockService implements ProductoStockIServicio {
      * 
      * @throws Lanza una excepción si ocurre un error al acceder a la base de datos.
      */
-    async getProductoStocks(): Promise<ProductoDTO[]> {
+    async getProductoStocks(): Promise<ProductoStockDTO[]> {
         LoggerAPI.info("Se inicia servicio para obtener los productos con su información de stock.");
         try {
             const productos = await this.productoStockDAO.getProductosStock();
             if (productos.length > 0) {
-                const productosDTO = plainToInstance(ProductoDTO, productos);
+                const productosDTO = plainToInstance(ProductoStockDTO, productos);
                 LoggerAPI.info(`Se han obtenido ${productosDTO.length} productos del sistema.`);
                 return productosDTO;
             } else {
