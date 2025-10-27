@@ -145,3 +145,5 @@ class ProductoStockControl {
         }
     };
 }
+
+export {ProductoStockControl}
