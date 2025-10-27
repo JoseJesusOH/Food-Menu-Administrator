@@ -15,7 +15,7 @@ const compraControl = new CompraControl
 //Manejo de Router
 router.get("/",compraControl.obtenerCompras)
 router.get("/:compraUuid",compraControl.obtenerCompraByUuid);
-
+router.delete("/:compraUuid",compraControl.eliminarCompra);
 
 //Exportacion Router
 module.exports = router;
