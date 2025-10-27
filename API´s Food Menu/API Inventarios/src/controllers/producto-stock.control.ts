@@ -144,6 +144,24 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al obtener el producto con stock" });
         }
     };
+     actualizarProductoStock = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso para actualizar un producto con stock en control.");
+        try {
+            const producto = plainToInstance(ProductoStock, req.body);
+            const result = await this.productoStockServicio.actualizarProductoStock(producto);
+
+            if (result) {
+                LoggerAPI.info("El producto con stock fue actualizado correctamente.");
+                return res.status(200).json({ message: "Producto actualizado correctamente", producto: result });
+            } else {
+                LoggerAPI.warn("No se pudo actualizar el producto con stock.");
+                return res.status(400).json({ message: "No se pudo actualizar el producto" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al actualizar el producto con stock: ${error}`);
+            return res.status(500).json({ message: "Error al actualizar el producto con stock" });
+        }
+    };
 }
 
 export {ProductoStockControl}
