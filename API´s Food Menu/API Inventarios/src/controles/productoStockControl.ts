@@ -4,9 +4,9 @@ import { ProductoStockService } from "@service.impl/producto-stock.dao.impl";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
-class ProductoStockControl{
+class ProductoStockControl {
     productoStockServicio: ProductoStockIServicio = new ProductoStockService();
-        agregarProductoStock = async (req, res, next) => {
+    agregarProductoStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para registrar un nuevo producto con stock en el sistema.");
         try {
             const producto = plainToInstance(ProductoStock, req.body);
@@ -22,6 +22,24 @@ class ProductoStockControl{
         } catch (error) {
             LoggerAPI.error(`Error al registrar el producto: ${error}`);
             return res.status(500).json({ message: "Error al registrar el producto" });
+        }
+    };
+    eliminarProductoStock = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso para eliminar un producto con stock en control.");
+        try {
+            const productoStockUuid = req.params.productoStockUuid;
+            const result = await this.productoStockServicio.eliminarProductoStock(productoStockUuid);
+
+            if (result) {
+                LoggerAPI.info(`El producto con UUID ${productoStockUuid} fue eliminado correctamente.`);
+                return res.status(200).json({ message: "Producto eliminado correctamente" });
+            } else {
+                LoggerAPI.warn(`No se pudo eliminar el producto con UUID ${productoStockUuid}.`);
+                return res.status(400).json({ message: "No se pudo eliminar el producto" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al eliminar el producto con stock: ${error}`);
+            return res.status(500).json({ message: "Error al eliminar el producto" });
         }
     };
 }
