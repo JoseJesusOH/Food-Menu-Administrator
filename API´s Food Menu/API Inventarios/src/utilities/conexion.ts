@@ -1,4 +1,9 @@
 
+import { Compra } from "@entity/compra.entity";
+import { ProductoCompra } from "@entity/producto-compra.entity";
+import { ProductoStock } from "@entity/producto-stock.entity";
+import { Producto } from "@entity/producto.entity";
+import { Sucursal } from "@entity/sucursal.entity";
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 
@@ -12,7 +17,7 @@ const Conexion = new DataSource({
     synchronize: true,
     logging: false,
     entities: [
-        
+         Compra,Producto,Sucursal,ProductoCompra,ProductoStock
     ],
     subscribers: [],
     migrations: [],
