@@ -144,6 +144,19 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al obtener el producto con stock" });
         }
     };
+        /**
+     * Controlador para actualizar la información de un producto con stock existente.
+     * 
+     * Convierte los datos recibidos en una instancia de `ProductoStock` y llama al servicio correspondiente
+     * para realizar la actualización. Devuelve una respuesta HTTP según el resultado del proceso.
+     * 
+     * @async
+     * @function actualizarProductoStock
+     * @param {Request} req - Solicitud HTTP que contiene los datos actualizados del producto en `req.body`.
+     * @param {Response} res - Respuesta HTTP enviada al cliente.
+     * @param {NextFunction} next - Middleware siguiente.
+     * @returns {Promise<Response>} Respuesta con mensaje y datos del producto actualizado.
+     */
      actualizarProductoStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para actualizar un producto con stock en control.");
         try {
