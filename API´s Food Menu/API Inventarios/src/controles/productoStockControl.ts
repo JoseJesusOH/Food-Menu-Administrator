@@ -1,3 +1,14 @@
+/**
+ * Controlador encargado de gestionar las operaciones relacionadas con los productos que tienen stock.
+ * 
+ * Esta clase actúa como intermediario entre las peticiones HTTP y la capa de servicios (`ProductoStockService`),
+ * gestionando la creación, eliminación, consulta y obtención individual de productos con stock.
+ * 
+ * Se registran logs en cada etapa del proceso para asegurar trazabilidad y facilitar el diagnóstico
+ * de posibles errores o fallas durante las operaciones.
+ * 
+ * @class ProductoStockControl
+ */
 import { ProductoStock } from "@entity/producto-stock.entity";
 import { ProductoStockIServicio } from "@service.dao/producto-stock.dao";
 import { ProductoStockService } from "@service.impl/producto-stock.dao.impl";
@@ -5,7 +16,22 @@ import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
 class ProductoStockControl {
+    /** Instancia del servicio de producto con stock que maneja la lógica de negocio. */
     productoStockServicio: ProductoStockIServicio = new ProductoStockService();
+
+    /**
+     * Controlador para registrar un nuevo producto con stock en el sistema.
+     * 
+     * Convierte los datos recibidos en una instancia de `ProductoStock` y delega la creación
+     * al servicio correspondiente. Devuelve una respuesta HTTP acorde al resultado.
+     * 
+     * @async
+     * @function agregarProductoStock
+     * @param {Request} req - Solicitud HTTP que contiene los datos del producto en `req.body`.
+     * @param {Response} res - Respuesta HTTP enviada al cliente.
+     * @param {NextFunction} next - Middleware siguiente.
+     * @returns {Promise<Response>} Respuesta con mensaje y datos del producto registrado.
+     */
     agregarProductoStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para registrar un nuevo producto con stock en el sistema.");
         try {
@@ -24,6 +50,20 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al registrar el producto" });
         }
     };
+
+    /**
+     * Controlador para eliminar un producto con stock identificado por su UUID.
+     * 
+     * Valida el identificador, solicita la eliminación mediante el servicio correspondiente
+     * y devuelve una respuesta HTTP con el resultado del proceso.
+     * 
+     * @async
+     * @function eliminarProductoStock
+     * @param {Request} req - Solicitud HTTP que contiene el UUID del producto en `req.params`.
+     * @param {Response} res - Respuesta HTTP enviada al cliente.
+     * @param {NextFunction} next - Middleware siguiente.
+     * @returns {Promise<Response>} Respuesta con mensaje sobre el resultado de la eliminación.
+     */
     eliminarProductoStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para eliminar un producto con stock en control.");
         try {
@@ -42,6 +82,20 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al eliminar el producto" });
         }
     };
+
+    /**
+     * Controlador para obtener todos los productos con stock registrados en el sistema.
+     * 
+     * Llama al servicio correspondiente para recuperar los registros y devuelve la lista
+     * al cliente junto con un mensaje de estado. También gestiona casos donde no se encuentran productos.
+     * 
+     * @async
+     * @function obtenerProductosStock
+     * @param {Request} req - Solicitud HTTP entrante.
+     * @param {Response} res - Respuesta HTTP enviada al cliente.
+     * @param {NextFunction} next - Middleware siguiente.
+     * @returns {Promise<Response>} Lista de productos con stock o mensaje de error.
+     */
     obtenerProductosStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para obtener los productos con stock en control.");
         try {
@@ -58,6 +112,20 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al obtener los productos con stock" });
         }
     };
+
+    /**
+     * Controlador para obtener un producto con stock específico mediante su UUID.
+     * 
+     * Valida el parámetro recibido, solicita la información al servicio correspondiente
+     * y devuelve el producto encontrado o un mensaje si no existe.
+     * 
+     * @async
+     * @function obtenerProductoStockByUuid
+     * @param {Request} req - Solicitud HTTP con el UUID del producto en `req.params`.
+     * @param {Response} res - Respuesta HTTP enviada al cliente.
+     * @param {NextFunction} next - Middleware siguiente.
+     * @returns {Promise<Response>} Producto encontrado o mensaje indicando que no existe.
+     */
     obtenerProductoStockByUuid = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para obtener un producto con stock por UUID en control.");
         try {
