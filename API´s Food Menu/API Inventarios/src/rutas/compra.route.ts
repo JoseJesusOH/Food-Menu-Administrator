@@ -14,5 +14,9 @@ const compraControl = new CompraControl
 
 //Manejo de Router
 router.get("/",compraControl.obtenerCompras)
+router.get("/:compraUuid",compraControl.obtenerCompraByUuid);
+
+
 //Exportacion Router
 module.exports = router;
+
