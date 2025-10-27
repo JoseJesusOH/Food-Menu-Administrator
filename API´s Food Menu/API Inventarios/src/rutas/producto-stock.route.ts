@@ -17,6 +17,7 @@ router.get("/",productoStockControl.obtenerProductosStock)
 router.get("/:productoStockUuid",productoStockControl.obtenerProductoStockByUuid);
 router.delete("/:productoStockUuid",productoStockControl.eliminarProductoStock);
 router.post("/",productoStockControl.agregarProductoStock);
+router.put("/:productoStockUuid",productoStockControl.actualizarProductoStock);
 
 //Exportacion Router
 module.exports = router;
