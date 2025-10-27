@@ -14,6 +14,7 @@ const productoStockControl = new ProductoStockControl()
 
 //Manejo de Router
 router.get("/",productoStockControl.obtenerProductosStock)
+router.get("/:productoStockUuid",productoStockControl.obtenerProductoStockByUuid);
 
 //Exportacion Router
 module.exports = router;
