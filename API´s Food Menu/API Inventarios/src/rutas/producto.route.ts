@@ -15,6 +15,7 @@ const productoControl = new ProductoControl
 //Manejo de Router
 router.get("/",productoControl.obtenerProductos)
 router.get("/:productoUuid",productoControl.obtenerProductoByUuid);
+router.delete("/:productoUuid",productoControl.eliminarProducto);
 
 //Exportacion Router
 module.exports = router;
