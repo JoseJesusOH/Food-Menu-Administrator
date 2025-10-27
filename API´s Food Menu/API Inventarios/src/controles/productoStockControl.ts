@@ -42,7 +42,7 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al eliminar el producto" });
         }
     };
-      obtenerProductosStock = async (req, res, next) => {
+    obtenerProductosStock = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso para obtener los productos con stock en control.");
         try {
             const result = await this.productoStockServicio.getProductoStocks();
@@ -56,6 +56,24 @@ class ProductoStockControl {
         } catch (error) {
             LoggerAPI.error(`Error al obtener los productos con stock: ${error}`);
             return res.status(500).json({ message: "Error al obtener los productos con stock" });
+        }
+    };
+    obtenerProductoStockByUuid = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso para obtener un producto con stock por UUID en control.");
+        try {
+            const productoStockUuid = req.params.productoStockUuid;
+            const result = await this.productoStockServicio.getProductoStockByUuid(productoStockUuid);
+
+            if (result) {
+                LoggerAPI.info(`Producto con UUID ${productoStockUuid} obtenido correctamente.`);
+                return res.status(200).json({ producto: result });
+            } else {
+                LoggerAPI.warn(`No se encontró ningún producto con el UUID ${productoStockUuid}.`);
+                return res.status(404).json({ message: "Producto no encontrado" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al obtener el producto con stock por UUID: ${error}`);
+            return res.status(500).json({ message: "Error al obtener el producto con stock" });
         }
     };
 }
