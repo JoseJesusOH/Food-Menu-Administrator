@@ -42,4 +42,20 @@ class ProductoStockControl {
             return res.status(500).json({ message: "Error al eliminar el producto" });
         }
     };
+      obtenerProductosStock = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso para obtener los productos con stock en control.");
+        try {
+            const result = await this.productoStockServicio.getProductoStocks();
+            if (result && result.length > 0) {
+                LoggerAPI.info("Se obtuvieron los productos con stock correctamente.");
+                return res.status(200).json({ productos: result });
+            } else {
+                LoggerAPI.warn("No se encontraron productos con stock en el sistema.");
+                return res.status(404).json({ message: "No se encontraron productos con stock" });
+            }
+        } catch (error) {
+            LoggerAPI.error(`Error al obtener los productos con stock: ${error}`);
+            return res.status(500).json({ message: "Error al obtener los productos con stock" });
+        }
+    };
 }
