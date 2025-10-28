@@ -1,4 +1,4 @@
-export class Venta{
+ class Venta{
     private ventaID: Number;
     private ventaUUID: String;
     private fecha: Date;
