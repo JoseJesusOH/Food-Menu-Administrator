@@ -1,4 +1,5 @@
-import {Usuario} from "../../modelos/usuario";
+import { Usuario } from "@entity/usuario.entity";
+
 export interface UsuarioIDAO{
     getUsuarios():Usuario[];
     getUsuarioByID(usuarioID:Number):Usuario;
