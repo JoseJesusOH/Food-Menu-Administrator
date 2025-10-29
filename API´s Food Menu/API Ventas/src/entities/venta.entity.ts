@@ -6,22 +6,22 @@
      hora: String;
     
     /** Obtiene el ID de la venta. */
-    getVentaID(): number {
+    getVentaID(): Number {
         return this.ventaID;
     }
 
     /** Establece el ID de la venta. */
-    setVentaID(value: number): void {
+    setVentaID(value: Number): void {
         this.ventaID = value;
     }
 
     /** Obtiene el UUID de la venta. */
-    getVentaUUID(): string {
+    getVentaUUID(): String {
         return this.ventaUUID;
     }
 
     /** Establece el UUID de la venta. */
-    setVentaUUID(value: string): void {
+    setVentaUUID(value: String): void {
         this.ventaUUID = value;
     }
 
@@ -36,22 +36,22 @@
     }
 
     /** Obtiene el total de la venta. */
-    getTotal(): number {
+    getTotal(): Number {
         return this.total;
     }
 
     /** Establece el total de la venta. */
-    setTotal(value: number): void {
+    setTotal(value: Number): void {
         this.total = value;
     }
 
     /** Obtiene la hora en que se realizó la venta. */
-    getHora(): string {
+    getHora(): String {
         return this.hora;
     }
 
     /** Establece la hora en que se realizó la venta. */
-    setHora(value: string): void {
+    setHora(value: String): void {
         this.hora = value;
     }
 }
