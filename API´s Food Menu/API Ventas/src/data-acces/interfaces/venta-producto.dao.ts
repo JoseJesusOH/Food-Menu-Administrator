@@ -1,4 +1,5 @@
-import {VentaProducto} from "../../modelos/ventaProducto";
+import { VentaProducto } from "@entity/venta-producto.entity";
+
 export interface VentaProductoIDAO{
     getVentaProductoByID(ventaProductoID:Number):VentaProducto;
     getVentaProductoByUUID(ventaProductoUUID:String):VentaProducto;
