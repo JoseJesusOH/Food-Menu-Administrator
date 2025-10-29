@@ -7,62 +7,62 @@
     iva: Number;
     total: Number;    
       /** Obtiene el ID del detalle de venta. */
-    getVentaProductoID(): number {
+    getVentaProductoID(): Number {
         return this.ventaProductoID;
     }
 
     /** Establece el ID del detalle de venta. */
-    setVentaProductoID(value: number): void {
+    setVentaProductoID(value: Number): void {
         this.ventaProductoID = value;
     }
 
     /** Obtiene el UUID del detalle de venta. */
-    getVentaProductoUUID(): string {
+    getVentaProductoUUID(): String {
         return this.ventaProductoUUID;
     }
 
     /** Establece el UUID del detalle de venta. */
-    setVentaProductoUUID(value: string): void {
+    setVentaProductoUUID(value: String): void {
         this.ventaProductoUUID = value;
     }
 
     /** Obtiene la cantidad vendida del producto. */
-    getCantidad(): number {
+    getCantidad(): Number {
         return this.cantidad;
     }
 
     /** Establece la cantidad vendida del producto. */
-    setCantidad(value: number): void {
+    setCantidad(value: Number): void {
         this.cantidad = value;
     }
 
     /** Obtiene el subtotal de la venta del producto. */
-    getSubtotal(): number {
+    getSubtotal(): Number {
         return this.subtotal;
     }
 
     /** Establece el subtotal de la venta del producto. */
-    setSubtotal(value: number): void {
+    setSubtotal(value: Number): void {
         this.subtotal = value;
     }
 
     /** Obtiene el IVA aplicado al producto. */
-    getIva(): number {
+    getIva(): Number {
         return this.iva;
     }
 
     /** Establece el IVA aplicado al producto. */
-    setIva(value: number): void {
+    setIva(value: Number): void {
         this.iva = value;
     }
 
     /** Obtiene el total correspondiente al producto vendido. */
-    getTotal(): number {
+    getTotal(): Number {
         return this.total;
     }
 
     /** Establece el total correspondiente al producto vendido. */
-    setTotal(value: number): void {
+    setTotal(value: Number): void {
         this.total = value;
     }
 }
