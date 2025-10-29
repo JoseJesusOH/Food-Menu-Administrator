@@ -1,4 +1,4 @@
-import {Venta} from "../../modelos/venta";
+import { Venta } from "@entity/venta.entity";
 
 export interface VentaIDAO{
     getVentas():Venta[];
