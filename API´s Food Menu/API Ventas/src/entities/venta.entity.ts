@@ -1,28 +1,28 @@
  class Venta{
-     ventaID: Number;
-     ventaUUID: String;
+     ventaId: Number;
+     ventaUuid: String;
      fecha: Date;
      total: Number;
      hora: String;
     
     /** Obtiene el ID de la venta. */
-    getVentaID(): Number {
-        return this.ventaID;
+    getVentaId(): Number {
+        return this.ventaId;
     }
 
     /** Establece el ID de la venta. */
-    setVentaID(value: Number): void {
-        this.ventaID = value;
+    setVentaId(value: Number): void {
+        this.ventaId = value;
     }
 
     /** Obtiene el UUID de la venta. */
-    getVentaUUID(): String {
-        return this.ventaUUID;
+    getVentaUuid(): String {
+        return this.ventaUuid;
     }
 
     /** Establece el UUID de la venta. */
-    setVentaUUID(value: String): void {
-        this.ventaUUID = value;
+    setVentaUuid(value: String): void {
+        this.ventaUuid = value;
     }
 
     /** Obtiene la fecha de la venta. */
