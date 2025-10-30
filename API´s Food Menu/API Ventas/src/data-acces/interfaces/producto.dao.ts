@@ -39,10 +39,10 @@ export interface ProductoIDAO {
   /**
    * Busca y devuelve un producto específico según su identificador numérico.
    * 
-   * @param {number} productoID - Identificador único del producto.
+   * @param {Number} productoId - Identificador único del producto.
    * @returns {Producto} El producto correspondiente al ID especificado.
    */
-  getProductoByID(productoID: number): Producto;
+  getProductoById(productoId: Number): Promise<Producto>;
 
   /**
    * Busca y devuelve un producto según su UUID.
