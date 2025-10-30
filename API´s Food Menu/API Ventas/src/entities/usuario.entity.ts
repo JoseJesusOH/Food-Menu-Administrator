@@ -1,27 +1,27 @@
  class Usuario {
-     usuarioID: Number;
-     usuarioUUID: String;
+     usuarioId: Number;
+     usuarioUuid: String;
      nombre: String;
 
     
     /** Obtiene el ID del usuario. */
-    getUsuarioID(): Number {
-        return this.usuarioID;
+    getUsuarioId(): Number {
+        return this.usuarioId;
     }
 
     /** Establece el ID del usuario. */
-    setUsuarioID(value: Number): void {
-        this.usuarioID = value;
+    setUsuarioId(value: Number): void {
+        this.usuarioId = value;
     }
 
     /** Obtiene el UUID del usuario. */
-    getUsuarioUUID(): String {
-        return this.usuarioUUID;
+    getUsuarioUuid(): String {
+        return this.usuarioUuid;
     }
 
     /** Establece el UUID del usuario. */
-    setUsuarioUUID(value: String): void {
-        this.usuarioUUID = value;
+    setUsuarioUuid(value: String): void {
+        this.usuarioUuid = value;
     }
 
     /** Obtiene el nombre del usuario. */
