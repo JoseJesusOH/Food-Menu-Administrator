@@ -34,7 +34,7 @@ export interface ProductoIDAO {
    * 
    * @returns {Producto[]} Arreglo que contiene todos los productos existentes.
    */
-  getProductos(): Producto[];
+  getProductos(): Promise<Producto[]>;
 
   /**
    * Busca y devuelve un producto específico según su identificador numérico.
