@@ -1,29 +1,29 @@
 
  class VentaProducto{
-     ventaProductoID: Number;
-     ventaProductoUUID: String;
+     ventaProductoId: Number;
+     ventaProductoUuid: String;
     cantidad: Number;
     subtotal:Number;
     iva: Number;
     total: Number;    
       /** Obtiene el ID del detalle de venta. */
-    getVentaProductoID(): Number {
-        return this.ventaProductoID;
+    getVentaProductoId(): Number {
+        return this.ventaProductoId;
     }
 
     /** Establece el ID del detalle de venta. */
-    setVentaProductoID(value: Number): void {
-        this.ventaProductoID = value;
+    setVentaProductoId(value: Number): void {
+        this.ventaProductoId = value;
     }
 
     /** Obtiene el UUID del detalle de venta. */
-    getVentaProductoUUID(): String {
-        return this.ventaProductoUUID;
+    getVentaProductoUuid(): String {
+        return this.ventaProductoUuid;
     }
 
     /** Establece el UUID del detalle de venta. */
-    setVentaProductoUUID(value: String): void {
-        this.ventaProductoUUID = value;
+    setVentaProductoUuid(value: String): void {
+        this.ventaProductoUuid = value;
     }
 
     /** Obtiene la cantidad vendida del producto. */
