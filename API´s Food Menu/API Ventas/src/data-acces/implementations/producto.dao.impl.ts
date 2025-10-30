@@ -44,9 +44,25 @@ async getProductoById(productoId: Number): Promise<Producto> {
     throw error;
   }
 }
-    getProductoByUUID(productoUUID: string): Producto {
-        throw new Error("Method not implemented.");
+async getProductoByUuid(productoUuid: String): Promise<Producto> {
+  LoggerAPI.info(`Se inicia la obtención del producto con UUID: ${productoUuid}`);
+
+  try {
+    const producto = await this.productoRepositorio.findOneBy({ productoUuid: productoUuid.toString() });
+
+    if (producto !== null) {
+      LoggerAPI.info(`Se ha obtenido correctamente el producto con UUID ${productoUuid}`);
+      return producto;
+    } else {
+      LoggerAPI.warn(`No se encontró un producto con el UUID ${productoUuid}`);
+      return null;
     }
+
+  } catch (error) {
+    LoggerAPI.warn(`Error al buscar el producto por UUID. Detalle del error: ${error}`);
+    throw error;
+  }
+}
     agregarProducto(producto: Producto): boolean {
         throw new Error("Method not implemented.");
     }
