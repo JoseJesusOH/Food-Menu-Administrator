@@ -1,27 +1,27 @@
 class Producto{
-     productoID: Number;
-     productoUUID: String;
+     productoId: Number;
+     productoUuid: String;
      nombre:String;
      precio: Number;
 
        /** Obtiene el ID del producto. */
-    getProductoID(): Number {
-        return this.productoID;
+    getProductoId(): Number {
+        return this.productoId;
     }
 
     /** Establece el ID del producto. */
-    setProductoID(value: Number): void {
-        this.productoID = value;
+    setProductoId(value: Number): void {
+        this.productoId = value;
     }
 
     /** Obtiene el UUID del producto. */
-    getProductoUUID(): String {
-        return this.productoUUID;
+    getProductoUuuid(): String {
+        return this.productoUuid;
     }
 
     /** Establece el UUID del producto. */
-    setProductoUUID(value: String): void {
-        this.productoUUID = value;
+    setProductoUuid(value: String): void {
+        this.productoUuid = value;
     }
 
     /** Obtiene el nombre del producto. */
