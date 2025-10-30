@@ -47,10 +47,10 @@ export interface ProductoIDAO {
   /**
    * Busca y devuelve un producto según su UUID.
    * 
-   * @param {string} productoUUID - Identificador único universal (UUID) del producto.
+   * @param {string} productoUuid - Identificador único universal (UUID) del producto.
    * @returns {Producto} El producto correspondiente al UUID proporcionado.
    */
-  getProductoByUUID(productoUUID: string): Producto;
+  getProductoByUuid(productoUuid: string): Producto;
 
   /**
    * Inserta un nuevo producto en la fuente de datos.
