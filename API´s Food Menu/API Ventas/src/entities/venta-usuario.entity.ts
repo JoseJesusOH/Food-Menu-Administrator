@@ -1,28 +1,28 @@
 import { Venta } from "@entity/venta.entity"
 import { Usuario } from "@entity/usuario.entity"
  class VentaUsuario {
-     ventaUsuarioID: Number;
-     ventaUsuarioUUID: String;
+     ventaUsuarioId: Number;
+     ventaUsuarioUuid: String;
      venta: Venta;
      usuario: Usuario;
      /** Obtiene el ID de la relación venta-usuario. */
-    getVentaUsuarioID(): Number {
-        return this.ventaUsuarioID;
+    getVentaUsuarioId(): Number {
+        return this.ventaUsuarioId;
     }
 
     /** Establece el ID de la relación venta-usuario. */
-    setVentaUsuarioID(value: Number): void {
-        this.ventaUsuarioID = value;
+    setVentaUsuarioId(value: Number): void {
+        this.ventaUsuarioId = value;
     }
 
     /** Obtiene el UUID de la relación venta-usuario. */
-    getVentaUsuarioUUID(): String {
-        return this.ventaUsuarioUUID;
+    getVentaUsuarioUuid(): String {
+        return this.ventaUsuarioUuid;
     }
 
     /** Establece el UUID de la relación venta-usuario. */
-    setVentaUsuarioUUID(value: String): void {
-        this.ventaUsuarioUUID = value;
+    setVentaUsuarioUuid(value: String): void {
+        this.ventaUsuarioUuid = value;
     }
 
     /** Obtiene la venta asociada. */
