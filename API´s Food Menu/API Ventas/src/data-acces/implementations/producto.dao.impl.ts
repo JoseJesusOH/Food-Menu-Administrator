@@ -82,8 +82,24 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
-  actualizarProducto(producto: Producto): boolean {
-    throw new Error("Method not implemented.");
+  async actualizarProducto(producto: Producto): Promise<Boolean> {
+    LoggerAPI.info(`Se inicia la actualización del producto con ID ${producto['id'] ?? 'desconocido'}`);
+
+    try {
+      const resultado = await this.productoRepositorio.update(producto['id'], producto);
+
+      if (resultado.affected && resultado.affected > 0) {
+        LoggerAPI.info(`El producto con ID ${producto['id']} fue actualizado exitosamente`);
+        return true;
+      } else {
+        LoggerAPI.warn(`No se actualizó ningún producto con ID ${producto['id']}`);
+        return false;
+      }
+
+    } catch (error) {
+      LoggerAPI.warn(`Error al actualizar el producto en la base de datos: ${error}`);
+      throw error;
+    }
   }
   eliminarProductoByID(productoID: number): boolean {
     throw new Error("Method not implemented.");
