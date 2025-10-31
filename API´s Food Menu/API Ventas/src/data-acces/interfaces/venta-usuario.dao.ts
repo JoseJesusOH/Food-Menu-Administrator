@@ -19,7 +19,7 @@ import { VentaUsuario } from "@entity/venta-usuario.entity";
  * 
  * Proporciona métodos para:
  * - Consultar usuarios asociados a una venta
- * - Buscar asociaciones por ID o UUID
+ * - Buscar asociaciones por Id o UUID
  * - Agregar nuevas relaciones entre ventas y usuarios
  * - Eliminar registros de relaciones existentes
  * 
@@ -31,48 +31,48 @@ export interface VentaUsuarioIDAO {
   /**
    * Obtiene todas las relaciones {@link VentaUsuario} asociadas a una venta específica.
    * 
-   * @param {number} ventaID - Identificador único de la venta.
-   * @returns {VentaUsuario[]} Arreglo con todos los usuarios relacionados a la venta indicada.
+   * @param {Number} ventaId - Identificador único de la venta.
+   * @returns {Promise<VentaUsuario[]>} Promesa que resuelve con todos los usuarios relacionados a la venta indicada.
    */
-  getVentasUsuarioByIDVenta(ventaID: number): VentaUsuario[];
+  getVentasUsuarioByIdVenta(ventaId: Number): Promise<VentaUsuario[]>;
 
   /**
    * Obtiene una única relación {@link VentaUsuario} asociada a una venta específica.
    * 
-   * @param {number} ventaID - Identificador único de la venta.
-   * @returns {VentaUsuario} La relación correspondiente a la venta especificada.
+   * @param {Number} ventaId - Identificador único de la venta.
+   * @returns {Promise<VentaUsuario>} Promesa que resuelve con la relación correspondiente a la venta especificada.
    */
-  getVentaUsuarioByIDVenta(ventaID: number): VentaUsuario;
+  getVentaUsuarioByIdVenta(ventaId: Number): Promise<VentaUsuario>;
 
   /**
    * Busca una relación {@link VentaUsuario} por su identificador numérico.
    * 
-   * @param {number} ventaUsuarioID - Identificador único del registro venta-usuario.
-   * @returns {VentaUsuario} El registro correspondiente al ID especificado.
+   * @param {Number} ventaUsuarioId - Identificador único del registro venta-usuario.
+   * @returns {Promise<VentaUsuario>} Promesa que resuelve con el registro correspondiente al Id especificado.
    */
-  getVentaUsuarioByID(ventaUsuarioID: number): VentaUsuario;
+  getVentaUsuarioById(ventaUsuarioId: Number): Promise<VentaUsuario>;
 
   /**
    * Busca una relación {@link VentaUsuario} por su UUID.
    * 
-   * @param {string} ventaUsuarioUUID - Identificador único universal (UUID) del registro.
-   * @returns {VentaUsuario} El registro correspondiente al UUID proporcionado.
+   * @param {String} ventaUsuarioUuid - Identificador único universal (UUID) del registro.
+   * @returns {Promise<VentaUsuario>} Promesa que resuelve con el registro correspondiente al UUID proporcionado.
    */
-  getVentaUsuarioByUUID(ventaUsuarioUUID: string): VentaUsuario;
+  getVentaUsuarioByUuid(ventaUsuarioUuid: String): Promise<VentaUsuario>;
 
   /**
    * Agrega una nueva relación {@link VentaUsuario} a la fuente de datos.
    * 
    * @param {VentaUsuario} ventaUsuario - Objeto con los datos de la relación venta-usuario a registrar.
-   * @returns {boolean} `true` si la inserción fue exitosa, `false` en caso contrario.
+   * @returns {Promise<Boolean>} Promesa que indica si la inserción fue exitosa (`true`) o falló (`false`).
    */
-  agregarVentaUsuario(ventaUsuario: VentaUsuario): boolean;
+  agregarVentaUsuario(ventaUsuario: VentaUsuario): Promise<Boolean>;
 
   /**
    * Elimina una relación {@link VentaUsuario} de la fuente de datos usando su identificador numérico.
    * 
-   * @param {number} ventaUsuarioID - Identificador único del registro venta-usuario a eliminar.
-   * @returns {boolean} `true` si la eliminación fue exitosa, `false` si falló.
+   * @param {Number} ventaUsuarioId - Identificador único del registro venta-usuario a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarVentaUsuarioByID(ventaUsuarioID: number): boolean;
+  eliminarVentaUsuarioById(ventaUsuarioId: Number): Promise<Boolean>;
 }
