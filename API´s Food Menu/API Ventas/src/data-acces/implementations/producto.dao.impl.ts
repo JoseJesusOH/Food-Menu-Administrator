@@ -1,11 +1,38 @@
+/**
+ * Importaciones necesarias para el DAO de Producto:
+ * - {@link ProductoIDAO}: interfaz que define los métodos del DAO.
+ * - {@link Producto}: entidad que representa la tabla o colección de productos.
+ * - {@link Conexion}: utilidad para obtener el repositorio de TypeORM.
+ * - {@link LoggerAPI}: utilidad para registrar logs de información, advertencia y error.
+ */
 import { ProductoIDAO } from "@data.dao/producto.dao";
 import { Producto } from "@entity/producto.entity";
 import { Conexion } from "@utility/conexion";
 import { LoggerAPI } from "@utility/logger";
 
-class ProductoDAO implements ProductoIDAO {
+/**
+ * Clase que implementa la interfaz {@link ProductoIDAO} para gestionar
+ * la persistencia de productos en la base de datos.
+ * 
+ * Proporciona métodos para:
+ * - Consultar todos los productos
+ * - Buscar productos por Id o UUID
+ * - Registrar nuevos productos
+ * - Actualizar productos existentes
+ * - Eliminar productos por su Id
+ */
+export class ProductoDAO implements ProductoIDAO {
+
+  /** Repositorio de productos obtenido a través de la conexión */
   productoRepositorio = Conexion.getRepository(Producto);
 
+  /**
+   * Obtiene todos los productos registrados en la base de datos.
+   * 
+   * @returns {Promise<Producto[]>} Promesa que resuelve con un arreglo de productos.
+   * 
+   * Registra logs de inicio, éxito o advertencia en caso de no encontrar productos.
+   */
   async getProductos(): Promise<Producto[]> {
     LoggerAPI.info("Se inicia la búsqueda de productos en la base de datos.");
 
@@ -25,6 +52,13 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
+
+  /**
+   * Busca un producto por su identificador numérico.
+   * 
+   * @param {Number} productoId - Id del producto a buscar.
+   * @returns {Promise<Producto>} Promesa que resuelve con el producto o null si no se encuentra.
+   */
   async getProductoById(productoId: Number): Promise<Producto> {
     LoggerAPI.info(`Se inicia la obtención del producto con ID: ${productoId}`);
 
@@ -44,6 +78,13 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
+
+  /**
+   * Busca un producto por su UUID.
+   * 
+   * @param {String} productoUuid - UUID del producto a buscar.
+   * @returns {Promise<Producto>} Promesa que resuelve con el producto o null si no se encuentra.
+   */
   async getProductoByUuid(productoUuid: String): Promise<Producto> {
     LoggerAPI.info(`Se inicia la obtención del producto con UUID: ${productoUuid}`);
 
@@ -63,6 +104,13 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
+
+  /**
+   * Inserta un nuevo producto en la base de datos.
+   * 
+   * @param {Producto} producto - Objeto con los datos del producto a registrar.
+   * @returns {Promise<Boolean>} Promesa que indica si la operación fue exitosa (`true`) o falló (`false`).
+   */
   async agregarProducto(producto: Producto): Promise<Boolean> {
     LoggerAPI.info("Se inicia el proceso de registro de un nuevo producto en la base de datos");
 
@@ -82,6 +130,13 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
+
+  /**
+   * Actualiza un producto existente en la base de datos.
+   * 
+   * @param {Producto} producto - Objeto con los datos actualizados del producto.
+   * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o falló (`false`).
+   */
   async actualizarProducto(producto: Producto): Promise<Boolean> {
     LoggerAPI.info(`Se inicia la actualización del producto con ID ${producto['id'] ?? 'desconocido'}`);
 
@@ -101,6 +156,13 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
+
+  /**
+   * Elimina un producto de la base de datos usando su identificador numérico.
+   * 
+   * @param {Number} productoId - Id del producto a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
+   */
   async eliminarProductoById(productoId: Number): Promise<Boolean> {
     LoggerAPI.info(`Se inicia la eliminación del producto con ID ${productoId}`);
 
