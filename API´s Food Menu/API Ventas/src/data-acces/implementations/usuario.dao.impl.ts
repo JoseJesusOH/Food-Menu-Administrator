@@ -22,18 +22,17 @@ class UsuarioDAO implements UsuarioIDAO {
             LoggerAPI.warn(`Error al obtener los usuarios. Detalle del error: ${error}`);
             throw error;
         }
-    }
-    async getUsuarioByID(usuarioID: Number): Promise<Usuario> {
-        LoggerAPI.info(`Se inicia la búsqueda del usuario con ID: ${usuarioID}`);
+    } async getUsuarioById(usuarioId: Number): Promise<Usuario> {
+        LoggerAPI.info(`Se inicia la búsqueda del usuario con ID: ${usuarioId}`);
 
         try {
-            const usuario = await this.usuarioRepositorio.findOneBy({ usuarioID: usuarioID.valueOf() });
+            const usuario = await this.usuarioRepositorio.findOneBy({ usuarioId: usuarioId.valueOf() });
 
             if (usuario !== null) {
-                LoggerAPI.info(`Se ha obtenido correctamente el usuario con ID ${usuarioID}`);
+                LoggerAPI.info(`Se ha obtenido correctamente el usuario con ID ${usuarioId}`);
                 return usuario;
             } else {
-                LoggerAPI.warn(`No se encontró un usuario con el ID ${usuarioID}`);
+                LoggerAPI.warn(`No se encontró un usuario con el ID ${usuarioId}`);
                 return null;
             }
 
