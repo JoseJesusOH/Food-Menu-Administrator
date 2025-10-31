@@ -60,8 +60,24 @@ class UsuarioDAO implements UsuarioIDAO {
             throw error;
         }
     }
-    agregarUsuario(usuario: Usuario): boolean {
-        throw new Error("Method not implemented.");
+    async agregarUsuario(usuario: Usuario): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el proceso de registro de un nuevo usuario en la base de datos");
+
+        try {
+            const resultado = await this.usuarioRepositorio.insert(usuario);
+
+            if (resultado.identifiers.length > 0) {
+                LoggerAPI.info(`El usuario '${usuario['nombre'] ?? 'sin nombre'}' fue registrado exitosamente con ID ${resultado.identifiers[0].id}`);
+                return true;
+            } else {
+                LoggerAPI.warn("La inserción del usuario no devolvió un identificador, podría no haberse completado correctamente");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al registrar el usuario en la base de datos: ${error}`);
+            throw error;
+        }
     }
     actualizarUsuario(usuario: Usuario): boolean {
         throw new Error("Method not implemented.");
