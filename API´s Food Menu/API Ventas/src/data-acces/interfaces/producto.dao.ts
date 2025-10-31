@@ -18,10 +18,10 @@ import { Producto } from "@entity/producto.entity";
  * 
  * Proporciona los métodos básicos para:
  * - Consultar productos
- * - Buscar productos por ID o UUID
+ * - Buscar productos por Id o UUID
  * - Agregar nuevos productos
  * - Actualizar productos existentes
- * - Eliminar productos por su ID
+ * - Eliminar productos por su Id
  * 
  * Esta interfaz establece el contrato que deben cumplir todas las
  * implementaciones del acceso a datos (por ejemplo: acceso a una base
@@ -40,18 +40,18 @@ export interface ProductoIDAO {
   /**
    * Busca y devuelve un producto específico según su identificador numérico.
    * 
-   * @param {Number} productoID - Identificador único del producto.
-   * @returns {Promise<Producto>} Promesa que resuelve con el producto correspondiente al ID especificado.
+   * @param {Number} productoId - Identificador único del producto.
+   * @returns {Promise<Producto>} Promesa que resuelve con el producto correspondiente al Id especificado.
    */
-  getProductoByID(productoID: Number): Promise<Producto>;
+  getProductoById(productoId: Number): Promise<Producto>;
 
   /**
    * Busca y devuelve un producto según su UUID.
    * 
-   * @param {String} productoUUID - Identificador único universal (UUID) del producto.
+   * @param {String} productoUuid - Identificador único universal (UUID) del producto.
    * @returns {Promise<Producto>} Promesa que resuelve con el producto correspondiente al UUID proporcionado.
    */
-  getProductoByUUID(productoUUID: String): Promise<Producto>;
+  getProductoByUuid(productoUuid: String): Promise<Producto>;
 
   /**
    * Inserta un nuevo producto en la fuente de datos.
@@ -72,8 +72,9 @@ export interface ProductoIDAO {
   /**
    * Elimina un producto de la fuente de datos usando su identificador numérico.
    * 
-   * @param {Number} productoID - Identificador único del producto a eliminar.
+   * @param {Number} productoId - Identificador único del producto a eliminar.
    * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarProductoByID(productoID: Number): Promise<Boolean>;
+  eliminarProductoById(productoId: Number): Promise<Boolean>;
 }
+
