@@ -101,8 +101,24 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
-  eliminarProductoByID(productoID: number): boolean {
-    throw new Error("Method not implemented.");
+  async eliminarProductoById(productoId: Number): Promise<Boolean> {
+    LoggerAPI.info(`Se inicia la eliminación del producto con ID ${productoId}`);
+
+    try {
+      const resultado = await this.productoRepositorio.delete(productoId.valueOf());
+
+      if (resultado.affected && resultado.affected > 0) {
+        LoggerAPI.info(`El producto con ID ${productoId} fue eliminado exitosamente`);
+        return true;
+      } else {
+        LoggerAPI.warn(`No se encontró ningún producto con ID ${productoId} para eliminar`);
+        return false;
+      }
+
+    } catch (error) {
+      LoggerAPI.warn(`Error al eliminar el producto en la base de datos: ${error}`);
+      throw error;
+    }
   }
 
 }
