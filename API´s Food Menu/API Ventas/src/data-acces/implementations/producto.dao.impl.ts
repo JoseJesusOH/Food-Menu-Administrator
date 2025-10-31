@@ -63,8 +63,24 @@ class ProductoDAO implements ProductoIDAO {
       throw error;
     }
   }
-  agregarProducto(producto: Producto): boolean {
-    throw new Error("Method not implemented.");
+  async agregarProducto(producto: Producto): Promise<Boolean> {
+    LoggerAPI.info("Se inicia el proceso de registro de un nuevo producto en la base de datos");
+
+    try {
+      const resultado = await this.productoRepositorio.insert(producto);
+
+      if (resultado.identifiers.length > 0) {
+        LoggerAPI.info(`El producto '${producto['nombre'] ?? 'sin nombre'}' fue registrado exitosamente con ID ${resultado.identifiers[0].id}`);
+        return true;
+      } else {
+        LoggerAPI.warn("La inserción del producto no devolvió un identificador, podría no haberse completado correctamente");
+        return false;
+      }
+
+    } catch (error) {
+      LoggerAPI.warn(`Error al registrar el producto en la base de datos: ${error}`);
+      throw error;
+    }
   }
   actualizarProducto(producto: Producto): boolean {
     throw new Error("Method not implemented.");
