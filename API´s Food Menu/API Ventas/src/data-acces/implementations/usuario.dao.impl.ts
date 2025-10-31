@@ -79,9 +79,28 @@ class UsuarioDAO implements UsuarioIDAO {
             throw error;
         }
     }
-    actualizarUsuario(usuario: Usuario): boolean {
-        throw new Error("Method not implemented.");
+    async actualizarUsuario(usuario: Usuario): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia la actualización del usuario con ID ${usuario['id'] ?? 'desconocido'}`);
+
+        try {
+            const resultado = await this.usuarioRepositorio.update(usuario['id'], usuario);
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`El usuario con ID ${usuario['id']} fue actualizado exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se actualizó ningún usuario con ID ${usuario['id']}`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al actualizar el usuario en la base de datos: ${error}`);
+            throw error;
+        }
     }
+
+
+
     eliminarUsuarioByID(usuarioID: number): boolean {
         throw new Error("Method not implemented.");
     }
