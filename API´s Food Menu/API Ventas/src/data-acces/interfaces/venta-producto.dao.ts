@@ -19,7 +19,7 @@ import { VentaProducto } from "@entity/venta-producto.entity";
  * 
  * Proporciona métodos para:
  * - Consultar productos asociados a una venta
- * - Buscar relaciones por ID o UUID
+ * - Buscar relaciones por Id o UUID
  * - Registrar nuevos productos en una venta
  * - Actualizar información de productos en una venta
  * - Eliminar registros de productos asociados a una venta
@@ -33,49 +33,49 @@ export interface VentaProductoIDAO {
   /**
    * Busca una relación {@link VentaProducto} por su identificador numérico.
    * 
-   * @param {number} ventaProductoID - Identificador único del registro venta-producto.
-   * @returns {VentaProducto} El registro correspondiente al ID especificado.
+   * @param {Number} ventaProductoId - Identificador único del registro venta-producto.
+   * @returns {Promise<VentaProducto>} Promesa que resuelve con el registro correspondiente al Id especificado.
    */
-  getVentaProductoByID(ventaProductoID: number): VentaProducto;
+  getVentaProductoById(ventaProductoId: Number): Promise<VentaProducto>;
 
   /**
    * Busca una relación {@link VentaProducto} por su UUID.
    * 
-   * @param {string} ventaProductoUUID - Identificador único universal (UUID) del registro.
-   * @returns {VentaProducto} El registro correspondiente al UUID proporcionado.
+   * @param {String} ventaProductoUuid - Identificador único universal (UUID) del registro.
+   * @returns {Promise<VentaProducto>} Promesa que resuelve con el registro correspondiente al UUID proporcionado.
    */
-  getVentaProductoByUUID(ventaProductoUUID: string): VentaProducto;
+  getVentaProductoByUuid(ventaProductoUuid: String): Promise<VentaProducto>;
 
   /**
    * Obtiene todos los productos asociados a una venta específica.
    * 
-   * @param {number} ventaID - Identificador único de la venta.
-   * @returns {VentaProducto[]} Arreglo con todos los productos asociados a la venta.
+   * @param {Number} ventaId - Identificador único de la venta.
+   * @returns {Promise<VentaProducto[]>} Promesa que resuelve con todos los productos asociados a la venta.
    */
-  getVentaProductoByIDVenta(ventaID: number): VentaProducto[];
+  getVentaProductoByIdVenta(ventaId: Number): Promise<VentaProducto[]>;
 
   /**
    * Registra un nuevo producto dentro de una venta en la fuente de datos.
    * 
    * @param {VentaProducto} ventaProducto - Objeto con los datos del producto vendido.
-   * @returns {boolean} `true` si la inserción fue exitosa, `false` en caso contrario.
+   * @returns {Promise<Boolean>} Promesa que indica si la inserción fue exitosa (`true`) o falló (`false`).
    */
-  agregarVentaProducto(ventaProducto: VentaProducto): boolean;
+  agregarVentaProducto(ventaProducto: VentaProducto): Promise<Boolean>;
 
   /**
    * Actualiza la información de un producto asociado a una venta.
    * 
    * @param {VentaProducto} ventaProducto - Objeto con los datos actualizados del producto vendido.
-   * @returns {boolean} `true` si la actualización fue exitosa, `false` si falló.
+   * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o no (`false`).
    */
-  actualizarVentaProducto(ventaProducto: VentaProducto): boolean;
+  actualizarVentaProducto(ventaProducto: VentaProducto): Promise<Boolean>;
 
   /**
    * Elimina una relación {@link VentaProducto} de la fuente de datos
    * usando su identificador numérico.
    * 
-   * @param {number} ventaProductoID - Identificador único del registro venta-producto a eliminar.
-   * @returns {boolean} `true` si la eliminación fue exitosa, `false` en caso contrario.
+   * @param {Number} ventaProductoId - Identificador único del registro venta-producto a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarVentaProductoByID(ventaProductoID: number): boolean;
+  eliminarVentaProductoById(ventaProductoId: Number): Promise<Boolean>;
 }
