@@ -18,10 +18,10 @@ import { Usuario } from "@entity/usuario.entity";
  * 
  * Proporciona los métodos necesarios para:
  * - Consultar todos los usuarios
- * - Buscar usuarios por ID o UUID
+ * - Buscar usuarios por Id o UUID
  * - Agregar nuevos usuarios
  * - Actualizar la información de usuarios existentes
- * - Eliminar usuarios por su ID
+ * - Eliminar usuarios por su Id
  * 
  * Esta interfaz actúa como un contrato que deben implementar
  * las clases encargadas de interactuar con la fuente de datos,
@@ -32,47 +32,48 @@ export interface UsuarioIDAO {
   /**
    * Obtiene todos los usuarios registrados en la fuente de datos.
    * 
-   * @returns {Usuario[]} Arreglo con todos los usuarios disponibles.
+   * @returns {Promise<Usuario[]>} Promesa que resuelve con un arreglo
+   * que contiene todos los usuarios disponibles.
    */
-  getUsuarios(): Usuario[];
+  getUsuarios(): Promise<Usuario[]>;
 
   /**
    * Busca y devuelve un usuario específico según su identificador numérico.
    * 
-   * @param {number} usuarioID - Identificador único del usuario.
-   * @returns {Usuario} El usuario correspondiente al ID especificado.
+   * @param {Number} usuarioId - Identificador único del usuario.
+   * @returns {Promise<Usuario>} Promesa que resuelve con el usuario correspondiente al Id especificado.
    */
-  getUsuarioByID(usuarioID: number): Usuario;
+  getUsuarioById(usuarioId: Number): Promise<Usuario>;
 
   /**
    * Busca y devuelve un usuario según su UUID.
    * 
-   * @param {string} usuarioUUID - Identificador único universal (UUID) del usuario.
-   * @returns {Usuario} El usuario correspondiente al UUID proporcionado.
+   * @param {String} usuarioUuid - Identificador único universal (UUID) del usuario.
+   * @returns {Promise<Usuario>} Promesa que resuelve con el usuario correspondiente al UUID proporcionado.
    */
-  getUsuarioByUUID(usuarioUUID: string): Usuario;
+  getUsuarioByUuid(usuarioUuid: String): Promise<Usuario>;
 
   /**
    * Agrega un nuevo usuario a la fuente de datos.
    * 
    * @param {Usuario} usuario - Objeto con los datos del usuario a registrar.
-   * @returns {boolean} `true` si la inserción fue exitosa, `false` si ocurrió un error.
+   * @returns {Promise<Boolean>} Promesa que indica si la inserción fue exitosa (`true`) o falló (`false`).
    */
-  agregarUsuario(usuario: Usuario): boolean;
+  agregarUsuario(usuario: Usuario): Promise<Boolean>;
 
   /**
    * Actualiza la información de un usuario existente.
    * 
    * @param {Usuario} usuario - Objeto con los datos actualizados del usuario.
-   * @returns {boolean} `true` si la actualización fue exitosa, `false` si falló.
+   * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o no (`false`).
    */
-  actualizarUsuario(usuario: Usuario): boolean;
+  actualizarUsuario(usuario: Usuario): Promise<Boolean>;
 
   /**
    * Elimina un usuario de la fuente de datos usando su identificador numérico.
    * 
-   * @param {number} usuarioID - Identificador único del usuario a eliminar.
-   * @returns {boolean} `true` si la eliminación fue exitosa, `false` en caso contrario.
+   * @param {Number} usuarioId - Identificador único del usuario a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarUsuarioByID(usuarioID: number): boolean;
+  eliminarUsuarioById(usuarioId: Number): Promise<Boolean>;
 }
