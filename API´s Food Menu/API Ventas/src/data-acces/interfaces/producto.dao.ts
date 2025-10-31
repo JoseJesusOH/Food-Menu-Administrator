@@ -1,6 +1,6 @@
 /**
- * Importa la clase o entidad {@link Producto}, la cual representa
- * el modelo de datos de un producto dentro del sistema.
+ * Importación de la entidad {@link Producto}, que representa
+ * los datos y estructura de los productos en el sistema.
  * 
  * Esta entidad suele contener atributos como:
  * - ID numérico del producto
@@ -32,47 +32,48 @@ export interface ProductoIDAO {
   /**
    * Obtiene todos los productos registrados en la fuente de datos.
    * 
-   * @returns {Producto[]} Arreglo que contiene todos los productos existentes.
+   * @returns {Promise<Producto[]>} Promesa que resuelve con un arreglo
+   * de todos los productos existentes.
    */
   getProductos(): Promise<Producto[]>;
 
   /**
    * Busca y devuelve un producto específico según su identificador numérico.
    * 
-   * @param {Number} productoId - Identificador único del producto.
-   * @returns {Producto} El producto correspondiente al ID especificado.
+   * @param {Number} productoID - Identificador único del producto.
+   * @returns {Promise<Producto>} Promesa que resuelve con el producto correspondiente al ID especificado.
    */
-  getProductoById(productoId: Number): Promise<Producto>;
+  getProductoByID(productoID: Number): Promise<Producto>;
 
   /**
    * Busca y devuelve un producto según su UUID.
    * 
-   * @param {String} productoUuid - Identificador único universal (UUID) del producto.
-   * @returns {Producto} El producto correspondiente al UUID proporcionado.
+   * @param {String} productoUUID - Identificador único universal (UUID) del producto.
+   * @returns {Promise<Producto>} Promesa que resuelve con el producto correspondiente al UUID proporcionado.
    */
-  getProductoByUuid(productoUuid: String): Promise<Producto>;
+  getProductoByUUID(productoUUID: String): Promise<Producto>;
 
   /**
    * Inserta un nuevo producto en la fuente de datos.
    * 
    * @param {Producto} producto - Objeto con los datos del producto a registrar.
-   * @returns {boolean} `true` si la operación fue exitosa, `false` si falló.
+   * @returns {Promise<Boolean>} Promesa que indica si la operación fue exitosa (`true`) o falló (`false`).
    */
-  agregarProducto(producto: Producto): boolean;
+  agregarProducto(producto: Producto): Promise<Boolean>;
 
   /**
    * Actualiza la información de un producto existente.
    * 
    * @param {Producto} producto - Objeto con los datos actualizados del producto.
-   * @returns {boolean} `true` si la actualización fue exitosa, `false` en caso contrario.
+   * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o no (`false`).
    */
-  actualizarProducto(producto: Producto): boolean;
+  actualizarProducto(producto: Producto): Promise<Boolean>;
 
   /**
    * Elimina un producto de la fuente de datos usando su identificador numérico.
    * 
-   * @param {number} productoID - Identificador único del producto a eliminar.
-   * @returns {boolean} `true` si la eliminación fue exitosa, `false` si falló.
+   * @param {Number} productoID - Identificador único del producto a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarProductoByID(productoID: number): boolean;
+  eliminarProductoByID(productoID: Number): Promise<Boolean>;
 }
