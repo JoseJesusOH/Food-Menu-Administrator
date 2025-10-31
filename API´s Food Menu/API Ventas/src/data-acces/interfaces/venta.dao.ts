@@ -19,10 +19,10 @@ import { Venta } from "@entity/venta.entity";
  * 
  * Proporciona métodos para:
  * - Consultar todas las ventas
- * - Buscar ventas por ID o UUID
+ * - Buscar ventas por Id o UUID
  * - Registrar nuevas ventas
  * - Actualizar ventas existentes
- * - Eliminar ventas por su ID
+ * - Eliminar ventas por su Id
  * 
  * Esta interfaz establece el contrato que deben cumplir las
  * implementaciones concretas encargadas de interactuar con la
@@ -33,47 +33,48 @@ export interface VentaIDAO {
   /**
    * Obtiene todas las ventas registradas en la fuente de datos.
    * 
-   * @returns {Venta[]} Arreglo con todas las ventas disponibles.
+   * @returns {Promise<Venta[]>} Promesa que resuelve con un arreglo
+   * que contiene todas las ventas disponibles.
    */
-  getVentas(): Venta[];
+  getVentas(): Promise<Venta[]>;
 
   /**
    * Busca y devuelve una venta específica según su identificador numérico.
    * 
-   * @param {number} ventaID - Identificador único de la venta.
-   * @returns {Venta} La venta correspondiente al ID especificado.
+   * @param {Number} ventaId - Identificador único de la venta.
+   * @returns {Promise<Venta>} Promesa que resuelve con la venta correspondiente al Id especificado.
    */
-  getVentaByID(ventaID: number): Venta;
+  getVentaById(ventaId: Number): Promise<Venta>;
 
   /**
    * Busca y devuelve una venta según su UUID.
    * 
-   * @param {string} ventaUUID - Identificador único universal (UUID) de la venta.
-   * @returns {Venta} La venta correspondiente al UUID proporcionado.
+   * @param {String} ventaUuid - Identificador único universal (UUID) de la venta.
+   * @returns {Promise<Venta>} Promesa que resuelve con la venta correspondiente al UUID proporcionado.
    */
-  getVentaByUUID(ventaUUID: string): Venta;
+  getVentaByUuid(ventaUuid: String): Promise<Venta>;
 
   /**
    * Registra una nueva venta en la fuente de datos.
    * 
    * @param {Venta} venta - Objeto que contiene los datos de la venta a registrar.
-   * @returns {boolean} `true` si la operación fue exitosa, `false` en caso contrario.
+   * @returns {Promise<Boolean>} Promesa que indica si la operación fue exitosa (`true`) o falló (`false`).
    */
-  agregarVenta(venta: Venta): boolean;
+  agregarVenta(venta: Venta): Promise<Boolean>;
 
   /**
    * Actualiza la información de una venta existente.
    * 
    * @param {Venta} venta - Objeto con los datos actualizados de la venta.
-   * @returns {boolean} `true` si la actualización fue exitosa, `false` si falló.
+   * @returns {Promise<Boolean>} Promesa que indica si la actualización fue exitosa (`true`) o falló (`false`).
    */
-  actualizarVenta(venta: Venta): boolean;
+  actualizarVenta(venta: Venta): Promise<Boolean>;
 
   /**
    * Elimina una venta de la fuente de datos usando su identificador numérico.
    * 
-   * @param {number} ventaID - Identificador único de la venta a eliminar.
-   * @returns {boolean} `true` si la eliminación fue exitosa, `false` en caso contrario.
+   * @param {Number} ventaId - Identificador único de la venta a eliminar.
+   * @returns {Promise<Boolean>} Promesa que indica si la eliminación fue exitosa (`true`) o falló (`false`).
    */
-  eliminarVentaByID(ventaID: number): boolean;
+  eliminarVentaById(ventaId: Number): Promise<Boolean>;
 }
