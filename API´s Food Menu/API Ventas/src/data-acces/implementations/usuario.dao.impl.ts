@@ -23,8 +23,24 @@ class UsuarioDAO implements UsuarioIDAO {
             throw error;
         }
     }
-    getUsuarioByID(usuarioID: number): Usuario {
-        throw new Error("Method not implemented.");
+    async getUsuarioByID(usuarioID: Number): Promise<Usuario> {
+        LoggerAPI.info(`Se inicia la búsqueda del usuario con ID: ${usuarioID}`);
+
+        try {
+            const usuario = await this.usuarioRepositorio.findOneBy({ usuarioID: usuarioID.valueOf() });
+
+            if (usuario !== null) {
+                LoggerAPI.info(`Se ha obtenido correctamente el usuario con ID ${usuarioID}`);
+                return usuario;
+            } else {
+                LoggerAPI.warn(`No se encontró un usuario con el ID ${usuarioID}`);
+                return null;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al buscar el usuario por ID. Detalle del error: ${error}`);
+            throw error;
+        }
     }
     getUsuarioByUUID(usuarioUUID: string): Usuario {
         throw new Error("Method not implemented.");
