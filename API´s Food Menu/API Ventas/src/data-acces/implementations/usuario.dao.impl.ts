@@ -98,11 +98,24 @@ class UsuarioDAO implements UsuarioIDAO {
             throw error;
         }
     }
+    async eliminarUsuarioById(usuarioId: Number): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia la eliminación del usuario con ID ${usuarioId}`);
 
+        try {
+            const resultado = await this.usuarioRepositorio.delete(usuarioId.valueOf());
 
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`El usuario con ID ${usuarioId} fue eliminado exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se encontró ningún usuario con ID ${usuarioId} para eliminar`);
+                return false;
+            }
 
-    eliminarUsuarioByID(usuarioID: number): boolean {
-        throw new Error("Method not implemented.");
+        } catch (error) {
+            LoggerAPI.warn(`Error al eliminar el usuario en la base de datos: ${error}`);
+            throw error;
+        }
     }
 
 }
