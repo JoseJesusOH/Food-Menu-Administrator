@@ -6,6 +6,7 @@ import { LoggerAPI } from "@utility/logger";
 class VentaUsuarioDAO implements VentaUsuarioIDAO {
     ventaUsuarioRepositorio = Conexion.getRepository(VentaUsuario)
     async getVentasUsuarioByIdVenta(ventaId: number): Promise<VentaUsuario[]> {
+        return null;
         /* LoggerAPI.info(`Se inicia la búsqueda de usuarios asociados a la venta con ID: ${ventaId}`);
  
          try {
