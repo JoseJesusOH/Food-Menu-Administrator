@@ -51,9 +51,28 @@ class VentaUsuarioDAO implements VentaUsuarioIDAO {
         }
     }
 
-    getVentaUsuarioByUUID(ventaUsuarioUUID: string): VentaUsuario {
-        throw new Error("Method not implemented.");
+    async getVentaUsuarioByUuid(ventaUsuarioUuid: string): Promise<VentaUsuario> {
+        LoggerAPI.info(`Se inicia la búsqueda de VentaUsuario con UUID: ${ventaUsuarioUuid}`);
+
+        try {
+            const ventaUsuario = await this.ventaUsuarioRepositorio.findOneBy({
+                ventaUsuarioUuid: ventaUsuarioUuid,
+            });
+
+            if (ventaUsuario !== null) {
+                LoggerAPI.info(`Se obtuvo correctamente el registro VentaUsuario con UUID ${ventaUsuarioUuid}`);
+                return ventaUsuario;
+            } else {
+                LoggerAPI.warn(`No se encontró un registro VentaUsuario con UUID ${ventaUsuarioUuid}`);
+                return null;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al buscar VentaUsuario por UUID ${ventaUsuarioUuid}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
     agregarVentaUsuario(ventaUsuario: VentaUsuario): boolean {
         throw new Error("Method not implemented.");
     }
