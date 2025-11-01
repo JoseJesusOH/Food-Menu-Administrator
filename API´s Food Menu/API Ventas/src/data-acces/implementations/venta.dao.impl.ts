@@ -26,9 +26,26 @@ class VentaDAO implements VentaIDAO {
         }
     }
 
-    getVentaByID(ventaID: number): Venta {
-        throw new Error("Method not implemented.");
+    async getVentaById(ventaId: number): Promise<Venta> {
+        LoggerAPI.info(`Se inicia la búsqueda de la venta con ID: ${ventaId}`);
+
+        try {
+            const venta = await this.ventaRepositorio.findOneBy({ ventaId });
+
+            if (venta !== null) {
+                LoggerAPI.info(`Se obtuvo correctamente la venta con ID ${ventaId}`);
+                return venta;
+            } else {
+                LoggerAPI.warn(`No se encontró ninguna venta con ID ${ventaId}`);
+                return null;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al buscar la venta por ID ${ventaId}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
     getVentaByUUID(ventaUUID: string): Venta {
         throw new Error("Method not implemented.");
     }
