@@ -48,8 +48,28 @@ class VentaProductoDAO implements VentaProductoIDAO {
             throw error;
         }
     }
-    getVentaProductoByIDVenta(ventaID: number): VentaProducto[] {
-        throw new Error("Method not implemented.");
+    async getVentaProductoByIdVenta(ventaId: Number): Promise<VentaProducto[]> {
+        /*
+        LoggerAPI.info(`Se inicia la búsqueda de productos asociados a la venta con ID: ${ventaId}`);
+
+        try {
+            const ventaProductos = await this.ventaProductoRepositorio.findBy({
+                ventaId: ventaId.valueOf(),
+            });
+
+            if (!ventaProductos || ventaProductos.length === 0) {
+                LoggerAPI.warn(`No se encontraron productos asociados a la venta con ID ${ventaId}`);
+                return [];
+            } else {
+                LoggerAPI.info(`Se obtuvieron correctamente ${ventaProductos.length} productos asociados a la venta con ID ${ventaId}`);
+                return ventaProductos;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al obtener los productos asociados a la venta con ID ${ventaId}. Detalle del error: ${error}`);
+            throw error;
+        }
+        */
     }
     agregarVentaProducto(ventaProducto: VentaProducto): boolean {
         throw new Error("Method not implemented.");
