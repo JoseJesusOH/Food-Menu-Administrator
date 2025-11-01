@@ -72,10 +72,26 @@ class VentaUsuarioDAO implements VentaUsuarioIDAO {
             throw error;
         }
     }
+    async agregarVentaUsuario(ventaUsuario: VentaUsuario): Promise<boolean> {
+        LoggerAPI.info("Se inicia el proceso de registro de un nuevo VentaUsuario en la base de datos");
 
-    agregarVentaUsuario(ventaUsuario: VentaUsuario): boolean {
-        throw new Error("Method not implemented.");
+        try {
+            const resultado = await this.ventaUsuarioRepositorio.insert(ventaUsuario);
+
+            if (resultado.identifiers.length > 0) {
+                LoggerAPI.info(`El registro VentaUsuario fue insertado exitosamente con ID ${resultado.identifiers[0].id}`);
+                return true;
+            } else {
+                LoggerAPI.warn("La inserción de VentaUsuario no devolvió un identificador, podría no haberse completado correctamente");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al registrar VentaUsuario en la base de datos: ${error}`);
+            throw error;
+        }
     }
+
     eliminarVentaUsuarioByID(ventaUsuarioID: number): boolean {
         throw new Error("Method not implemented.");
     }
