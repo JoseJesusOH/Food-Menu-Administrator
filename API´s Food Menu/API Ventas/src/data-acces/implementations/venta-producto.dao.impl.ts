@@ -115,8 +115,27 @@ class VentaProductoDAO implements VentaProductoIDAO {
         }
     }
 
-    eliminarVentaProductoByID(ventaProductoID: number): boolean {
-        throw new Error("Method not implemented.");
+    async eliminarVentaProductoById(ventaProductoId: Number): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia la eliminación del registro VentaProducto con ID: ${ventaProductoId}`);
+
+        try {
+            const resultado = await this.ventaProductoRepositorio.delete({
+                ventaProductoId: ventaProductoId.valueOf(),
+            });
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`El registro VentaProducto con ID ${ventaProductoId} fue eliminado exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se encontró un registro VentaProducto con ID ${ventaProductoId} para eliminar`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al eliminar el registro VentaProducto con ID ${ventaProductoId}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
 
 }
