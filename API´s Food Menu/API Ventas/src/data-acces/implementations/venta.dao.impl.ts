@@ -66,9 +66,26 @@ class VentaDAO implements VentaIDAO {
         }
     }
 
-    agregarVenta(venta: Venta): boolean {
-        throw new Error("Method not implemented.");
+async agregarVenta(venta: Venta): Promise<boolean> {
+  LoggerAPI.info("Se inicia el proceso de registro de una nueva venta en la base de datos");
+
+  try {
+    const resultado = await this.ventaRepositorio.insert(venta);
+
+    if (resultado.identifiers.length > 0) {
+      LoggerAPI.info(`La venta fue registrada exitosamente con ID ${resultado.identifiers[0].id}`);
+      return true;
+    } else {
+      LoggerAPI.warn("La inserción de la venta no devolvió un identificador, podría no haberse completado correctamente");
+      return false;
     }
+
+  } catch (error) {
+    LoggerAPI.warn(`Error al registrar la venta en la base de datos: ${error}`);
+    throw error;
+  }
+}
+
     actualizarVenta(venta: Venta): boolean {
         throw new Error("Method not implemented.");
     }
