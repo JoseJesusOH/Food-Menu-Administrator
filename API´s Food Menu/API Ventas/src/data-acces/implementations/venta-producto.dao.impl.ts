@@ -72,9 +72,26 @@ class VentaProductoDAO implements VentaProductoIDAO {
         }
         */
     }
-    agregarVentaProducto(ventaProducto: VentaProducto): boolean {
-        throw new Error("Method not implemented.");
+    async agregarVentaProducto(ventaProducto: VentaProducto): Promise<Boolean> {
+        LoggerAPI.info("Se inicia el proceso de registro de un nuevo VentaProducto en la base de datos");
+
+        try {
+            const resultado = await this.ventaProductoRepositorio.insert(ventaProducto);
+
+            if (resultado.identifiers.length > 0) {
+                LoggerAPI.info(`El registro VentaProducto fue insertado exitosamente con ID ${resultado.identifiers[0].id}`);
+                return true;
+            } else {
+                LoggerAPI.warn("La inserción de VentaProducto no devolvió un identificador, podría no haberse completado correctamente");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al registrar VentaProducto en la base de datos: ${error}`);
+            throw error;
+        }
     }
+
     actualizarVentaProducto(ventaProducto: VentaProducto): boolean {
         throw new Error("Method not implemented.");
     }
