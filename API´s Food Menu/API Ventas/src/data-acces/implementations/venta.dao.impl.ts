@@ -66,29 +66,49 @@ class VentaDAO implements VentaIDAO {
         }
     }
 
-async agregarVenta(venta: Venta): Promise<boolean> {
-  LoggerAPI.info("Se inicia el proceso de registro de una nueva venta en la base de datos");
+    async agregarVenta(venta: Venta): Promise<boolean> {
+        LoggerAPI.info("Se inicia el proceso de registro de una nueva venta en la base de datos");
 
-  try {
-    const resultado = await this.ventaRepositorio.insert(venta);
+        try {
+            const resultado = await this.ventaRepositorio.insert(venta);
 
-    if (resultado.identifiers.length > 0) {
-      LoggerAPI.info(`La venta fue registrada exitosamente con ID ${resultado.identifiers[0].id}`);
-      return true;
-    } else {
-      LoggerAPI.warn("La inserción de la venta no devolvió un identificador, podría no haberse completado correctamente");
-      return false;
+            if (resultado.identifiers.length > 0) {
+                LoggerAPI.info(`La venta fue registrada exitosamente con ID ${resultado.identifiers[0].id}`);
+                return true;
+            } else {
+                LoggerAPI.warn("La inserción de la venta no devolvió un identificador, podría no haberse completado correctamente");
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al registrar la venta en la base de datos: ${error}`);
+            throw error;
+        }
     }
 
-  } catch (error) {
-    LoggerAPI.warn(`Error al registrar la venta en la base de datos: ${error}`);
-    throw error;
-  }
-}
+    async actualizarVenta(venta: Venta): Promise<boolean> {
+        LoggerAPI.info(`Se inicia la actualización de la venta con ID: ${venta.ventaId}`);
 
-    actualizarVenta(venta: Venta): boolean {
-        throw new Error("Method not implemented.");
+        try {
+            const resultado = await this.ventaRepositorio.update(
+                { ventaId: venta.ventaId },
+                venta
+            );
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`La venta con ID ${venta.ventaId} fue actualizada exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se encontró una venta con ID ${venta.ventaId} para actualizar`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al actualizar la venta con ID ${venta.ventaId}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
     eliminarVentaByID(ventaID: number): boolean {
         throw new Error("Method not implemented.");
     }
