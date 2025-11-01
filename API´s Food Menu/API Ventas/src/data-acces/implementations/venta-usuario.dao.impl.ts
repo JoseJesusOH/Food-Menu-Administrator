@@ -92,8 +92,27 @@ class VentaUsuarioDAO implements VentaUsuarioIDAO {
         }
     }
 
-    eliminarVentaUsuarioByID(ventaUsuarioID: number): boolean {
-        throw new Error("Method not implemented.");
+    async eliminarVentaUsuarioById(ventaUsuarioId: number): Promise<boolean> {
+        LoggerAPI.info(`Se inicia la eliminación del registro VentaUsuario con ID: ${ventaUsuarioId}`);
+
+        try {
+            const resultado = await this.ventaUsuarioRepositorio.delete({
+                ventaUsuarioId: ventaUsuarioId,
+            });
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`El registro VentaUsuario con ID ${ventaUsuarioId} fue eliminado exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se encontró un registro VentaUsuario con ID ${ventaUsuarioId} para eliminar`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al eliminar el registro VentaUsuario con ID ${ventaUsuarioId}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
 
 }
