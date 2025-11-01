@@ -49,6 +49,7 @@ class VentaProductoDAO implements VentaProductoIDAO {
         }
     }
     async getVentaProductoByIdVenta(ventaId: Number): Promise<VentaProducto[]> {
+        return null;
         /*
         LoggerAPI.info(`Se inicia la búsqueda de productos asociados a la venta con ID: ${ventaId}`);
 
