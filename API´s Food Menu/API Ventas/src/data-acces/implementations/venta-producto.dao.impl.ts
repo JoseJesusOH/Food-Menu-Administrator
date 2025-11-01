@@ -27,8 +27,26 @@ class VentaProductoDAO implements VentaProductoIDAO {
             throw error;
         }
     }
-    getVentaProductoByUUID(ventaProductoUUID: string): VentaProducto {
-        throw new Error("Method not implemented.");
+    async getVentaProductoByUuid(ventaProductoUuid: String): Promise<VentaProducto> {
+        LoggerAPI.info(`Se inicia la búsqueda de VentaProducto con UUID: ${ventaProductoUuid}`);
+
+        try {
+            const ventaProducto = await this.ventaProductoRepositorio.findOneBy({
+                ventaProductoUuid: ventaProductoUuid.toString(),
+            });
+
+            if (ventaProducto !== null) {
+                LoggerAPI.info(`Se obtuvo correctamente el registro VentaProducto con UUID ${ventaProductoUuid}`);
+                return ventaProducto;
+            } else {
+                LoggerAPI.warn(`No se encontró un registro VentaProducto con UUID ${ventaProductoUuid}`);
+                return null;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al buscar VentaProducto por UUID. Detalle del error: ${error}`);
+            throw error;
+        }
     }
     getVentaProductoByIDVenta(ventaID: number): VentaProducto[] {
         throw new Error("Method not implemented.");
