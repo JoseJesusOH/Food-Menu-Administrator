@@ -1,9 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { VentaUsuario } from "@entity/venta-usuario.entity";
 import { VentaProducto } from "@entity/venta-producto.entity";
+  import { Exclude } from "class-transformer";
 
 @Entity("venta")
 class Venta {
+
+  @Exclude()
   @PrimaryGeneratedColumn({ name: "venta_id" })
   ventaId: Number;
 
