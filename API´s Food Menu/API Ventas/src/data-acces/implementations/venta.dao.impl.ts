@@ -109,8 +109,25 @@ class VentaDAO implements VentaIDAO {
         }
     }
 
-    eliminarVentaByID(ventaID: number): boolean {
-        throw new Error("Method not implemented.");
+    async eliminarVentaById(ventaId: number): Promise<boolean> {
+        LoggerAPI.info(`Se inicia la eliminación de la venta con ID: ${ventaId}`);
+
+        try {
+            const resultado = await this.ventaRepositorio.delete({ ventaId });
+
+            if (resultado.affected && resultado.affected > 0) {
+                LoggerAPI.info(`La venta con ID ${ventaId} fue eliminada exitosamente`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se encontró una venta con ID ${ventaId} para eliminar`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al eliminar la venta con ID ${ventaId}. Detalle del error: ${error}`);
+            throw error;
+        }
     }
+
 
 }
