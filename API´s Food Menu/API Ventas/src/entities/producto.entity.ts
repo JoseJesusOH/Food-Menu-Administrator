@@ -1,48 +1,62 @@
-class Producto{
-     productoId: Number;
-     productoUuid: String;
-     nombre:String;
-     precio: Number;
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { VentaProducto } from "@entity/venta-producto.entity";
 
-       /** Obtiene el ID del producto. */
-    getProductoId(): Number {
-        return this.productoId;
-    }
+@Entity("producto")
+class Producto {
+  @PrimaryGeneratedColumn({ name: "producto_id" })
+  productoId: Number;
 
-    /** Establece el ID del producto. */
-    setProductoId(value: Number): void {
-        this.productoId = value;
-    }
+  @Column({ name: "producto_uuid", type: "uuid", unique: true })
+  productoUuid: String;
 
-    /** Obtiene el UUID del producto. */
-    getProductoUuuid(): String {
-        return this.productoUuid;
-    }
+  @Column({ name: "nombre", type: "varchar", length: 100 })
+  nombre: String;
 
-    /** Establece el UUID del producto. */
-    setProductoUuid(value: String): void {
-        this.productoUuid = value;
-    }
+  @Column({ name: "precio", type: "decimal", precision: 10, scale: 2 })
+  precio: Number;
 
-    /** Obtiene el nombre del producto. */
-    getNombre(): String {
-        return this.nombre;
-    }
+  @OneToMany(() => VentaProducto, (ventaProducto) => ventaProducto.producto)
+  ventaProductos: VentaProducto[];
 
-    /** Establece el nombre del producto. */
-    setNombre(value: String): void {
-        this.nombre = value;
-    }
+  /** Obtiene el ID del producto. */
+  getProductoId(): Number {
+    return this.productoId;
+  }
 
-    /** Obtiene el precio del producto. */
-    getPrecio(): Number {
-        return this.precio;
-    }
+  /** Establece el ID del producto. */
+  setProductoId(value: Number): void {
+    this.productoId = value;
+  }
 
-    /** Establece el precio del producto. */
-    setPrecio(value: Number): void {
-        this.precio = value;
-    }
+  /** Obtiene el UUID del producto. */
+  getProductoUuid(): String {
+    return this.productoUuid;
+  }
+
+  /** Establece el UUID del producto. */
+  setProductoUuid(value: String): void {
+    this.productoUuid = value;
+  }
+
+  /** Obtiene el nombre del producto. */
+  getNombre(): String {
+    return this.nombre;
+  }
+
+  /** Establece el nombre del producto. */
+  setNombre(value: String): void {
+    this.nombre = value;
+  }
+
+  /** Obtiene el precio del producto. */
+  getPrecio(): Number {
+    return this.precio;
+  }
+
+  /** Establece el precio del producto. */
+  setPrecio(value: Number): void {
+    this.precio = value;
+  }
 }
 
-export {Producto}
+export { Producto };
