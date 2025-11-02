@@ -1,14 +1,33 @@
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Producto } from "@entity/producto.entity";
 import { Venta } from "@entity/venta.entity";
 
+@Entity("venta_producto")
 class VentaProducto {
+  @PrimaryGeneratedColumn({ name: "venta_producto_id" })
   ventaProductoId: Number;
+
+  @Column({ name: "venta_producto_uuid", type: "uuid", unique: true })
   ventaProductoUuid: String;
+
+  @Column({ name: "cantidad", type: "int" })
   cantidad: Number;
+
+  @Column({ name: "subtotal", type: "decimal", precision: 10, scale: 2 })
   subtotal: Number;
+
+  @Column({ name: "iva", type: "decimal", precision: 10, scale: 2 })
   iva: Number;
+
+  @Column({ name: "total", type: "decimal", precision: 10, scale: 2 })
   total: Number;
+
+  @ManyToOne(() => Producto, (producto) => producto.ventaProductos, { eager: true })
+  @JoinColumn({ name: "producto_id" })
   producto: Producto;
+
+  @ManyToOne(() => Venta, (venta) => venta.ventaProductos, { eager: true })
+  @JoinColumn({ name: "venta_id" })
   venta: Venta;
 
   /** Obtiene el ID del detalle de venta. */
