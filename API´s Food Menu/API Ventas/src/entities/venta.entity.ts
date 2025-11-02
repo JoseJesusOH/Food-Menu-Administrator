@@ -1,59 +1,79 @@
- class Venta{
-     ventaId: Number;
-     ventaUuid: String;
-     fecha: Date;
-     total: Number;
-     hora: String;
-    
-    /** Obtiene el ID de la venta. */
-    getVentaId(): Number {
-        return this.ventaId;
-    }
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { VentaUsuario } from "@entity/venta-usuario.entity";
+import { VentaProducto } from "@entity/venta-producto.entity";
 
-    /** Establece el ID de la venta. */
-    setVentaId(value: Number): void {
-        this.ventaId = value;
-    }
+@Entity("venta")
+class Venta {
+  @PrimaryGeneratedColumn({ name: "venta_id" })
+  ventaId: Number;
 
-    /** Obtiene el UUID de la venta. */
-    getVentaUuid(): String {
-        return this.ventaUuid;
-    }
+  @Column({ name: "venta_uuid", type: "uuid", unique: true })
+  ventaUuid: String;
 
-    /** Establece el UUID de la venta. */
-    setVentaUuid(value: String): void {
-        this.ventaUuid = value;
-    }
+  @Column({ name: "fecha", type: "date" })
+  fecha: Date;
 
-    /** Obtiene la fecha de la venta. */
-    getFecha(): Date {
-        return this.fecha;
-    }
+  @Column({ name: "total", type: "decimal", precision: 10, scale: 2 })
+  total: Number;
 
-    /** Establece la fecha de la venta. */
-    setFecha(value: Date): void {
-        this.fecha = value;
-    }
+  @Column({ name: "hora", type: "time" })
+  hora: String;
 
-    /** Obtiene el total de la venta. */
-    getTotal(): Number {
-        return this.total;
-    }
+  @OneToMany(() => VentaUsuario, (ventaUsuario) => ventaUsuario.venta)
+  ventaUsuarios: VentaUsuario[];
 
-    /** Establece el total de la venta. */
-    setTotal(value: Number): void {
-        this.total = value;
-    }
+  @OneToMany(() => VentaProducto, (ventaProducto) => ventaProducto.venta)
+  ventaProductos: VentaProducto[];
 
-    /** Obtiene la hora en que se realizó la venta. */
-    getHora(): String {
-        return this.hora;
-    }
+  /** Obtiene el ID de la venta. */
+  getVentaId(): Number {
+    return this.ventaId;
+  }
 
-    /** Establece la hora en que se realizó la venta. */
-    setHora(value: String): void {
-        this.hora = value;
-    }
+  /** Establece el ID de la venta. */
+  setVentaId(value: Number): void {
+    this.ventaId = value;
+  }
+
+  /** Obtiene el UUID de la venta. */
+  getVentaUuid(): String {
+    return this.ventaUuid;
+  }
+
+  /** Establece el UUID de la venta. */
+  setVentaUuid(value: String): void {
+    this.ventaUuid = value;
+  }
+
+  /** Obtiene la fecha de la venta. */
+  getFecha(): Date {
+    return this.fecha;
+  }
+
+  /** Establece la fecha de la venta. */
+  setFecha(value: Date): void {
+    this.fecha = value;
+  }
+
+  /** Obtiene el total de la venta. */
+  getTotal(): Number {
+    return this.total;
+  }
+
+  /** Establece el total de la venta. */
+  setTotal(value: Number): void {
+    this.total = value;
+  }
+
+  /** Obtiene la hora en que se realizó la venta. */
+  getHora(): String {
+    return this.hora;
+  }
+
+  /** Establece la hora en que se realizó la venta. */
+  setHora(value: String): void {
+    this.hora = value;
+  }
 }
 
-export {Venta}
+export { Venta };
