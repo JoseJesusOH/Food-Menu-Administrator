@@ -1,6 +1,7 @@
 import { ProductoIDAO } from "@data.dao/producto.dao";
 import { ProductoDAO } from "@data.impl/producto.dao.impl";
 import { ProductoDTO } from "@dto/producto.dto";
+import { Producto } from "@entity/producto.entity";
 import { ProductoIService } from "@service.dao/producto.dao";
 import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
@@ -45,8 +46,23 @@ async getProductoByUuid(productoUuid: String): Promise<ProductoDTO> {
             throw error;
         }
     }
-    agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+  async agregarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para agregar un nuevo producto al sistema.");
+        try {
+            let producto = plainToInstance(Producto, productoDTO);
+            const productoCreado = await this.productoDAO.agregarProducto(producto);
+
+            if (productoCreado) {
+                LoggerAPI.info(`Producto agregado correctamente: ${productoDTO.nombre ?? "sin nombre"}`);
+                return true;
+            } else {
+                LoggerAPI.warn("No se pudo crear el producto en el sistema.");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error al agregar un nuevo producto en el servicio: ${error}`);
+            throw error;
+        }
     }
     eliminarProducto(productoUuid: String): Promise<Boolean> {
         throw new Error("Method not implemented.");
