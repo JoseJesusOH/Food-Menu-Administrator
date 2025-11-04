@@ -91,8 +91,38 @@ class ProductoService implements ProductoIService {
             throw error;
         }
     }
-    actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+  async actualizarProducto(productoDTO: ProductoDTO): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia servicio para actualizar el producto con UUID: ${productoDTO.productoUuid}`);
+        try {
+            // Buscar producto existente por UUID para obtener su ID
+            const productoExistente = await this.productoDAO.getProductoByUuid(productoDTO.productoUuid);
+            
+            if (!productoExistente || !productoExistente.productoId) {
+                LoggerAPI.warn(`No se encontró el producto con UUID: ${productoDTO.productoUuid} para actualizar.`);
+                return false;
+            }
+
+            // Asignar el ID encontrado al DTO antes de actualizar
+            productoDTO.productoUuid = productoExistente.productoUuid;
+
+            // Convertir el DTO a entidad
+            const producto = plainToInstance(Producto, productoDTO);
+
+            // Actualizar en base de datos
+            const productoActualizado = await this.productoDAO.actualizarProducto(producto);
+
+            if (productoActualizado) {
+                LoggerAPI.info(`Producto con ID ${producto.productoId} (UUID: ${productoDTO.productoUuid}) actualizado correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo actualizar el producto con ID ${producto.productoId} (UUID: ${productoDTO.productoUuid}).`);
+                return false;
+            }
+
+        } catch (error) {
+            LoggerAPI.warn(`Error al actualizar el producto con UUID ${productoDTO.productoUuid}: ${error}`);
+            throw error;
+        }
     }
 
 }
