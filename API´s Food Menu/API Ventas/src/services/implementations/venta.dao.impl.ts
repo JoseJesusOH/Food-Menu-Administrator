@@ -27,7 +27,7 @@ class VentaService implements VentaIService {
             throw error;
         }
     }
- async getVentaByUuid(ventaUuid: String): Promise<VentaDTO> {
+    async getVentaByUuid(ventaUuid: String): Promise<VentaDTO> {
         LoggerAPI.info(`Se inicia servicio para obtener la venta con UUID: ${ventaUuid}`);
         try {
             const venta = await this.ventaDAO.getVentaByUuid(ventaUuid);
@@ -45,7 +45,7 @@ class VentaService implements VentaIService {
             throw error;
         }
     }
-async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
+    async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
         LoggerAPI.info("Se inicia servicio para agregar una nueva venta al sistema.");
         try {
             const venta = plainToInstance(Venta, ventaDTO);
@@ -63,7 +63,7 @@ async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
             throw error;
         }
     }
-   async eliminarVenta(ventaUuid: String): Promise<Boolean> {
+    async eliminarVenta(ventaUuid: String): Promise<Boolean> {
         LoggerAPI.info(`Se inicia servicio para eliminar la venta con UUID: ${ventaUuid}`);
         try {
             // Obtener la venta por UUID para identificar su ID interno
@@ -89,8 +89,44 @@ async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
             throw error;
         }
     }
-    actualizarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+    async actualizarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia servicio para actualizar la venta con UUID: ${ventaDTO.ventaUuid}`);
+        try {
+            // Buscar venta existente por UUID para obtener su ID interno
+            const ventaExistente = await this.ventaDAO.getVentaByUuid(ventaDTO.ventaUuid);
+
+            if (!ventaExistente || !ventaExistente.ventaId) {
+                LoggerAPI.warn(`No se encontró la venta con UUID: ${ventaDTO.ventaUuid} para actualizar.`);
+                return false;
+            }
+
+            // Asignar el ID encontrado al DTO antes de la conversión
+            ventaDTO.ventaUuid = ventaExistente.ventaUuid;
+
+            // Convertir el DTO a entidad
+            const venta = plainToInstance(Venta, ventaDTO);
+
+            // Actualizar en base de datos
+            const ventaActualizada = await this.ventaDAO.actualizarVenta(venta);
+
+            if (ventaActualizada) {
+                LoggerAPI.info(`Venta con ID ${venta.ventaId} (UUID: ${ventaDTO.ventaUuid}) actualizada correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo actualizar la venta con ID ${venta.ventaId} (UUID: ${ventaDTO.ventaUuid}).`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error al actualizar la venta con UUID ${ventaDTO.ventaUuid}: ${error}`);
+            throw error;
+        }
     }
-    
+
+
+
+
+
+
+
+
 }
