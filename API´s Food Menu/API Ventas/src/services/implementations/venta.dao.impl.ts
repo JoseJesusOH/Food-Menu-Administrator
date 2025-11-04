@@ -27,8 +27,23 @@ class VentaService implements VentaIService {
             throw error;
         }
     }
-    getVentaByUuid(ventaUuid: String): Promise<VentaDTO> {
-        throw new Error("Method not implemented.");
+ async getVentaByUuid(ventaUuid: String): Promise<VentaDTO> {
+        LoggerAPI.info(`Se inicia servicio para obtener la venta con UUID: ${ventaUuid}`);
+        try {
+            const venta = await this.ventaDAO.getVentaByUuid(ventaUuid);
+
+            if (venta) {
+                const ventaDTO = plainToInstance(VentaDTO, venta);
+                LoggerAPI.info(`Venta encontrada con UUID: ${ventaUuid}`);
+                return ventaDTO;
+            } else {
+                LoggerAPI.warn(`No se encontró una venta con UUID: ${ventaUuid}`);
+                return null;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error al obtener la venta con UUID ${ventaUuid}: ${error}`);
+            throw error;
+        }
     }
     agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
