@@ -175,3 +175,5 @@ class VentaDAO implements VentaIDAO {
     }
   }
 }
+
+export {VentaDAO}
