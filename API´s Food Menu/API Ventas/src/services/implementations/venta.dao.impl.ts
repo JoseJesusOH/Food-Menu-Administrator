@@ -45,8 +45,23 @@ class VentaService implements VentaIService {
             throw error;
         }
     }
-    agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
+        LoggerAPI.info("Se inicia servicio para agregar una nueva venta al sistema.");
+        try {
+            const venta = plainToInstance(Venta, ventaDTO);
+            const ventaCreada = await this.ventaDAO.agregarVenta(venta);
+
+            if (ventaCreada) {
+                LoggerAPI.info(`Venta agregada correctamente con UUID: ${ventaDTO.ventaUuid}`);
+                return true;
+            } else {
+                LoggerAPI.warn("No se pudo registrar la venta en el sistema.");
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error al agregar la venta en el servicio: ${error}`);
+            throw error;
+        }
     }
     eliminarVenta(ventaUuid: String): Promise<Boolean> {
         throw new Error("Method not implemented.");
