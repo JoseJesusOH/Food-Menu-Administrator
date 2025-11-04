@@ -63,8 +63,31 @@ async agregarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
             throw error;
         }
     }
-    eliminarVenta(ventaUuid: String): Promise<Boolean> {
-        throw new Error("Method not implemented.");
+   async eliminarVenta(ventaUuid: String): Promise<Boolean> {
+        LoggerAPI.info(`Se inicia servicio para eliminar la venta con UUID: ${ventaUuid}`);
+        try {
+            // Obtener la venta por UUID para identificar su ID interno
+            const venta = await this.ventaDAO.getVentaByUuid(ventaUuid);
+
+            if (!venta || !venta.ventaId) {
+                LoggerAPI.warn(`No se encontró una venta con UUID: ${ventaUuid}`);
+                return false;
+            }
+
+            // Eliminar la venta por su ID
+            const ventaEliminada = await this.ventaDAO.eliminarVentaById(venta.ventaId);
+
+            if (ventaEliminada) {
+                LoggerAPI.info(`Venta con ID ${venta.ventaId} (UUID: ${ventaUuid}) eliminada correctamente.`);
+                return true;
+            } else {
+                LoggerAPI.warn(`No se pudo eliminar la venta con ID ${venta.ventaId} (UUID: ${ventaUuid}).`);
+                return false;
+            }
+        } catch (error) {
+            LoggerAPI.warn(`Error al eliminar la venta con UUID ${ventaUuid}: ${error}`);
+            throw error;
+        }
     }
     actualizarVenta(ventaDTO: VentaDTO): Promise<Boolean> {
         throw new Error("Method not implemented.");
