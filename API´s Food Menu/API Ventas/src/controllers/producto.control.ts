@@ -45,5 +45,24 @@ class ProductoControl {
             return res.status(500).json({message:"Error al eliminar el producto"});
          }
     }
+
+     actualizarProducto = async (req, res, next) => {
+         LoggerAPI.info("Se inicio el proceso de actualizar un producto en control");
+         try { 
+            const producto= plainToInstance(Producto,req.body);
+            const result = await this.productoServicio.actualizarProducto(producto);
+            if(result){
+               LoggerAPI.info("Se actualizo el producto en control"); 
+               return res.status(200).json({message:"Producto Actualizado",producto:result});
+            }
+            else{
+               LoggerAPI.error("No se pudo actualizar el producto en control"); 
+               return res.status(400).json({message:"No se pudo actualizar el producto"});
+            }
+         } catch (error) {
+            LoggerAPI.error("Error al actualizar el producto en control: "+error); 
+            return res.status(500).json({message:"Error al actualizar el producto"});
+         }
+    }
 }
 export { ProductoControl }
