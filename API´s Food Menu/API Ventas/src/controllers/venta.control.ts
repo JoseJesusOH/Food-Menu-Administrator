@@ -24,7 +24,22 @@ class VentaControl {
             return res.status(500).json({ message: "Error al agregar la venta" });
         }
     };
-
+    /**
+     * Obtiene todas las ventas registradas en el sistema.
+     *
+     * Este método procesa una solicitud HTTP que busca recuperar el listado completo
+     * de ventas disponibles. Llama al servicio `ventaServicio.getVentas()` para
+     * obtener los datos y devuelve la lista en formato JSON.
+     *
+     * Si existen ventas registradas, se devuelve un código **200** junto con la lista.  
+     * Si no hay registros, se devuelve un código **204** con un mensaje indicativo.  
+     * En caso de error inesperado, responde con un código **500** y un mensaje de error.
+     *
+     * @param req Solicitud HTTP recibida.
+     * @param res Objeto de respuesta HTTP utilizado para enviar el resultado al cliente.
+     * @param next Middleware siguiente en la cadena de ejecución.
+     * @returns Respuesta JSON con la lista de ventas o un mensaje de error.
+     */
     obtenerVentas = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de obtener todas las ventas en control.");
         try {
