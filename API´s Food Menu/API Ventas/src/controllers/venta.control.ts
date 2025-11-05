@@ -5,7 +5,7 @@ import { LoggerAPI } from "@utility/logger";
 import { plainToInstance } from "class-transformer";
 
 class VentaControl {
-     ventaServicio: VentaIService = new VentaService();
+    ventaServicio: VentaIService = new VentaService();
     agregarVenta = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de agregar una nueva venta en control.");
         try {
@@ -25,7 +25,7 @@ class VentaControl {
         }
     };
 
-     obtenerVentas = async (req, res, next) => {
+    obtenerVentas = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de obtener todas las ventas en control.");
         try {
             const ventas = await this.ventaServicio.getVentas();
@@ -43,20 +43,38 @@ class VentaControl {
         }
     };
     obtenerVentaByUuid = async (req, res, next) => {
-    LoggerAPI.info("Se inició el proceso de obtener una venta por ID en control.");
-    try {
-        const venta = await this.ventaServicio.getVentaByUuid(req.params.ventaUuid);
+        LoggerAPI.info("Se inició el proceso de obtener una venta por ID en control.");
+        try {
+            const venta = await this.ventaServicio.getVentaByUuid(req.params.ventaUuid);
 
-        if (venta) {
-            LoggerAPI.info("Se obtuvo la venta correctamente en control.");
-            return res.status(200).json(venta);
-        } else {
-            LoggerAPI.warn("No se encontró la venta con el ID especificado en control.");
-            return res.status(404).json({ message: "Venta no encontrada" });
+            if (venta) {
+                LoggerAPI.info("Se obtuvo la venta correctamente en control.");
+                return res.status(200).json(venta);
+            } else {
+                LoggerAPI.warn("No se encontró la venta con el ID especificado en control.");
+                return res.status(404).json({ message: "Venta no encontrada" });
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener la venta por ID en control: " + error);
+            return res.status(500).json({ message: "Error al obtener la venta" });
         }
-    } catch (error) {
-        LoggerAPI.error("Error al obtener la venta por ID en control: " + error);
-        return res.status(500).json({ message: "Error al obtener la venta" });
-    }
-};
+    };
+    actualizarVenta = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de actualizar una venta en control.");
+        try {
+            const venta = plainToInstance(Venta, req.body);
+            const result = await this.ventaServicio.actualizarVenta( venta);
+
+            if (result) {
+                LoggerAPI.info("Se actualizó la venta correctamente en control.");
+                return res.status(200).json({ message: "Venta actualizada correctamente", venta: result });
+            } else {
+                LoggerAPI.warn("No se encontró la venta a actualizar en control.");
+                return res.status(404).json({ message: "Venta no encontrada" });
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al actualizar la venta en control: " + error);
+            return res.status(500).json({ message: "Error al actualizar la venta" });
+        }
+    };
 }
