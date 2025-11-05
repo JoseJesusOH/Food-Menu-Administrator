@@ -42,4 +42,21 @@ class VentaControl {
             return res.status(500).json({ message: "Error al obtener las ventas" });
         }
     };
+    obtenerVentaByUuid = async (req, res, next) => {
+    LoggerAPI.info("Se inició el proceso de obtener una venta por ID en control.");
+    try {
+        const venta = await this.ventaServicio.getVentaByUuid(req.params.ventaUuid);
+
+        if (venta) {
+            LoggerAPI.info("Se obtuvo la venta correctamente en control.");
+            return res.status(200).json(venta);
+        } else {
+            LoggerAPI.warn("No se encontró la venta con el ID especificado en control.");
+            return res.status(404).json({ message: "Venta no encontrada" });
+        }
+    } catch (error) {
+        LoggerAPI.error("Error al obtener la venta por ID en control: " + error);
+        return res.status(500).json({ message: "Error al obtener la venta" });
+    }
+};
 }
