@@ -6,6 +6,23 @@ import { plainToInstance } from "class-transformer";
 
 class VentaControl {
     ventaServicio: VentaIService = new VentaService();
+    /**
+ * Agrega una nueva venta al sistema.
+ *
+ * Este método procesa una solicitud HTTP que contiene en el cuerpo (`req.body`)
+ * los datos de la venta a registrar. Convierte dichos datos en una instancia
+ * de la entidad `Venta` mediante `plainToInstance` y delega la operación de
+ * inserción al servicio `ventaServicio.agregarVenta()`.
+ *
+ * Si la operación es exitosa, devuelve un código **201** con la información
+ * de la venta recién creada. Si ocurre un error controlado, responde con **400**.  
+ * En caso de error inesperado, devuelve un código **500** con un mensaje genérico.
+ *
+ * @param req Solicitud HTTP que contiene los datos de la venta en el cuerpo.
+ * @param res Objeto de respuesta HTTP utilizado para enviar el resultado al cliente.
+ * @param next Middleware siguiente en la cadena de ejecución.
+ * @returns Respuesta JSON con el estado de la operación y, si aplica, la venta agregada.
+ */
     agregarVenta = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de agregar una nueva venta en control.");
         try {
@@ -24,6 +41,7 @@ class VentaControl {
             return res.status(500).json({ message: "Error al agregar la venta" });
         }
     };
+
     /**
      * Obtiene todas las ventas registradas en el sistema.
      *
