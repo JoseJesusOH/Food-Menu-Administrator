@@ -59,6 +59,23 @@ class VentaControl {
             return res.status(500).json({ message: "Error al obtener la venta" });
         }
     };
+
+
+    /**
+     * Actualiza una venta existente en el sistema.
+     *
+     * Este método procesa una solicitud HTTP que contiene en el cuerpo (`req.body`)
+     * los datos actualizados de una venta. Convierte los datos recibidos en una
+     * instancia de la clase `Venta` y delega la operación de actualización al
+     * servicio `ventaServicio`. Si la venta existe, se actualiza y se devuelve
+     * una respuesta con el nuevo estado; en caso contrario, se devuelve un mensaje
+     * indicando que no se encontró la venta.
+     *
+     * @param req Solicitud HTTP que contiene los datos actualizados de la venta en el cuerpo.
+     * @param res Objeto de respuesta HTTP utilizado para enviar el resultado al cliente.
+     * @param next Middleware siguiente en la cadena de ejecución.
+     * @returns Respuesta JSON con el estado de la operación y, si aplica, la venta actualizada.
+     */
     actualizarVenta = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de actualizar una venta en control.");
         try {
@@ -77,6 +94,8 @@ class VentaControl {
             return res.status(500).json({ message: "Error al actualizar la venta" });
         }
     };
+
+
     /**
      * Elimina una venta del sistema utilizando su UUID.
      *
