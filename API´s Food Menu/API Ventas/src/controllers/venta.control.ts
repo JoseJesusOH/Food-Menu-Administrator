@@ -24,4 +24,22 @@ class VentaControl {
             return res.status(500).json({ message: "Error al agregar la venta" });
         }
     };
+
+     obtenerVentas = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de obtener todas las ventas en control.");
+        try {
+            const ventas = await this.ventaServicio.getVentas();
+
+            if (ventas && ventas.length > 0) {
+                LoggerAPI.info("Se obtuvieron las ventas correctamente en control.");
+                return res.status(200).json(ventas);
+            } else {
+                LoggerAPI.warn("No se encontraron ventas registradas en control.");
+                return res.status(204).json({ message: "No hay ventas registradas" });
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al obtener las ventas en control: " + error);
+            return res.status(500).json({ message: "Error al obtener las ventas" });
+        }
+    };
 }
