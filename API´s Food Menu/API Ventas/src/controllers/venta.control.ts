@@ -63,7 +63,7 @@ class VentaControl {
         LoggerAPI.info("Se inició el proceso de actualizar una venta en control.");
         try {
             const venta = plainToInstance(Venta, req.body);
-            const result = await this.ventaServicio.actualizarVenta( venta);
+            const result = await this.ventaServicio.actualizarVenta(venta);
 
             if (result) {
                 LoggerAPI.info("Se actualizó la venta correctamente en control.");
@@ -77,4 +77,24 @@ class VentaControl {
             return res.status(500).json({ message: "Error al actualizar la venta" });
         }
     };
+
+    eliminarVenta = async (req, res, next) => {
+        LoggerAPI.info("Se inició el proceso de eliminar una venta en control.");
+        try {
+            const result = await this.ventaServicio.eliminarVenta(req.params.ventaUuidntaId);
+
+            if (result) {
+                LoggerAPI.info("Se eliminó la venta correctamente en control.");
+                return res.status(200).json({ message: "Venta eliminada correctamente" });
+            } else {
+                LoggerAPI.warn("No se encontró la venta a eliminar en control.");
+                return res.status(404).json({ message: "Venta no encontrada" });
+            }
+        } catch (error) {
+            LoggerAPI.error("Error al eliminar la venta en control: " + error);
+            return res.status(500).json({ message: "Error al eliminar la venta" });
+        }
+    };
+
+
 }
