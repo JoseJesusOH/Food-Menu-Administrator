@@ -1,10 +1,34 @@
-import { Venta } from "@entity/venta.entity";
-import { VentaIService } from "@service.dao/venta.dao";
-import { VentaService } from "@service.impl/venta.dao.impl";
-import { LoggerAPI } from "@utility/logger";
-import { plainToInstance } from "class-transformer";
+/**
+ * Importación de la entidad `Venta`, la interfaz del servicio y su implementación,
+ * así como las utilidades necesarias para el control de ventas.
+ */
+import { Venta } from "@entity/venta.entity"; // Entidad que representa la estructura de una venta.
+import { VentaIService } from "@service.dao/venta.dao"; // Interfaz que define el contrato del servicio de ventas.
+import { VentaService } from "@service.impl/venta.dao.impl"; // Implementación concreta del servicio de ventas.
+import { LoggerAPI } from "@utility/logger"; // Utilidad para el manejo centralizado de logs en la aplicación.
+import { plainToInstance } from "class-transformer"; // Librería usada para convertir objetos planos a instancias de clase.
 
+/**
+ * Clase encargada de gestionar las operaciones de control relacionadas con la entidad `Venta`.
+ *
+ * `VentaControl` sirve como punto intermedio entre las peticiones HTTP (desde el controlador o router)
+ * y la capa de servicios (`VentaService`). Se encarga de orquestar las operaciones de negocio
+ * y manejar la lógica previa o posterior a la ejecución del servicio.
+ *
+ * @class VentaControl
+ * @see Venta
+ * @see VentaService
+ * @see VentaIService
+ */
 class VentaControl {
+    /**
+     * Instancia del servicio de ventas utilizada para ejecutar la lógica de negocio.
+     *
+     * Implementa la interfaz `VentaIService`, lo que garantiza el cumplimiento
+     * del contrato definido para las operaciones sobre ventas (crear, obtener, actualizar, eliminar, etc.).
+     *
+     * @type {VentaIService}
+     */
     ventaServicio: VentaIService = new VentaService();
     /**
  * Agrega una nueva venta al sistema.
