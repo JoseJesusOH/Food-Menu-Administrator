@@ -77,11 +77,25 @@ class VentaControl {
             return res.status(500).json({ message: "Error al actualizar la venta" });
         }
     };
-
+    /**
+     * Elimina una venta del sistema utilizando su UUID.
+     *
+     * Este método se encarga de recibir una solicitud HTTP con el UUID de la venta
+     * que se desea eliminar. Invoca al servicio correspondiente para realizar la
+     * eliminación en la base de datos. En caso de éxito, devuelve un mensaje de
+     * confirmación; si la venta no existe o ocurre un error, devuelve el mensaje
+     * y código de estado apropiados.
+     *
+     * @param req Solicitud HTTP que contiene el parámetro `ventaUuid` en la ruta.
+     * @param res Objeto de respuesta HTTP utilizado para enviar el resultado al cliente.
+     * @param next Middleware siguiente en la cadena de ejecución.
+     * @returns Respuesta JSON con el estado de la operación.
+     */
     eliminarVenta = async (req, res, next) => {
         LoggerAPI.info("Se inició el proceso de eliminar una venta en control.");
         try {
-            const result = await this.ventaServicio.eliminarVenta(req.params.ventaUuidntaId);
+            const { ventaUuid } = req.params;
+            const result = await this.ventaServicio.eliminarVenta(ventaUuid);
 
             if (result) {
                 LoggerAPI.info("Se eliminó la venta correctamente en control.");
@@ -95,6 +109,5 @@ class VentaControl {
             return res.status(500).json({ message: "Error al eliminar la venta" });
         }
     };
-
 
 }
