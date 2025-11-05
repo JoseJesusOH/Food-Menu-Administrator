@@ -42,8 +42,27 @@ class VentaControl {
             return res.status(500).json({ message: "Error al obtener las ventas" });
         }
     };
+
+
+    /**
+ * Obtiene una venta específica utilizando su UUID.
+ *
+ * Este método procesa una solicitud HTTP que contiene en los parámetros de la ruta
+ * el identificador único (`ventaUuid`) de la venta que se desea consultar.  
+ * Llama al servicio `ventaServicio.getVentaByUuid()` para obtener la información
+ * correspondiente y devuelve el resultado al cliente.
+ *
+ * Si la venta existe, se retorna con un código **200** y los datos de la venta.  
+ * Si no se encuentra, se devuelve un código **404** con un mensaje indicativo.  
+ * En caso de error inesperado, responde con código **500** y un mensaje de error genérico.
+ *
+ * @param req Solicitud HTTP que contiene el parámetro `ventaUuid` en la URL.
+ * @param res Objeto de respuesta HTTP utilizado para enviar el resultado al cliente.
+ * @param next Middleware siguiente en la cadena de ejecución.
+ * @returns Respuesta JSON con la venta encontrada o mensaje de error.
+ */
     obtenerVentaByUuid = async (req, res, next) => {
-        LoggerAPI.info("Se inició el proceso de obtener una venta por ID en control.");
+        LoggerAPI.info("Se inició el proceso de obtener una venta por UUID en control.");
         try {
             const venta = await this.ventaServicio.getVentaByUuid(req.params.ventaUuid);
 
@@ -51,11 +70,11 @@ class VentaControl {
                 LoggerAPI.info("Se obtuvo la venta correctamente en control.");
                 return res.status(200).json(venta);
             } else {
-                LoggerAPI.warn("No se encontró la venta con el ID especificado en control.");
+                LoggerAPI.warn("No se encontró la venta con el UUID especificado en control.");
                 return res.status(404).json({ message: "Venta no encontrada" });
             }
         } catch (error) {
-            LoggerAPI.error("Error al obtener la venta por ID en control: " + error);
+            LoggerAPI.error("Error al obtener la venta por UUID en control: " + error);
             return res.status(500).json({ message: "Error al obtener la venta" });
         }
     };
