@@ -13,6 +13,7 @@ const productoControl = new ProductoControl()
 router.get("/",productoControl.obtenerProductos);
 router.get("/:productoUuid", productoControl.obtenerProductoByUuid);
 router.post("/", productoControl.agregarProducto);
+router.put("/:productoUuid", productoControl.actualizarProducto);
 
 
 //Exportacion Router
