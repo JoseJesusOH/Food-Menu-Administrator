@@ -86,6 +86,13 @@ router.post("/", productoControl.agregarProducto);
  */
 router.put("/:productoUuid", productoControl.actualizarProducto);
 
+/**
+ * @route DELETE /:productoUuid
+ * @description Elimina un producto del sistema utilizando su UUID.
+ * @param {string} productoUuid - Identificador único del producto.
+ * @access Público
+ */
+router.delete("/:productoUuid", productoControl.eliminarProducto);
 // -----------------------------------------------------------------------------
 // Exportación del enrutador
 // -----------------------------------------------------------------------------
