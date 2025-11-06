@@ -206,3 +206,6 @@ class VentaControl {
     };
 
 }
+
+
+export {VentaControl}
