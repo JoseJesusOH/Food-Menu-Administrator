@@ -12,6 +12,8 @@ const productoControl = new ProductoControl()
 //Manejo de Router
 router.get("/",productoControl.obtenerProductos);
 router.get("/:productoUuid", productoControl.obtenerProductoByUuid);
+router.post("/", productoControl.agregarProducto);
+
 
 //Exportacion Router
 module.exports = router;
